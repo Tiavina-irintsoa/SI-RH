@@ -8,19 +8,19 @@
     "net7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Tita\\.nuget\\packages\\": {}
+    "C:\\Users\\Ralph\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "F:\\S5\\SI\\RH\\RH.csproj",
+      "projectUniqueName": "D:\\ralph\\s5\\Mr_Tovo\\gestion_projet\\test-git\\SI-RH\\RH.csproj",
       "projectName": "RH",
-      "projectPath": "F:\\S5\\SI\\RH\\RH.csproj",
-      "packagesPath": "C:\\Users\\Tita\\.nuget\\packages\\",
-      "outputPath": "F:\\S5\\SI\\RH\\obj\\",
+      "projectPath": "D:\\ralph\\s5\\Mr_Tovo\\gestion_projet\\test-git\\SI-RH\\RH.csproj",
+      "packagesPath": "C:\\Users\\Ralph\\.nuget\\packages\\",
+      "outputPath": "D:\\ralph\\s5\\Mr_Tovo\\gestion_projet\\test-git\\SI-RH\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Tita\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\Ralph\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net7.0"
@@ -62,7 +62,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.102\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.202\\RuntimeIdentifierGraph.json"
       }
     }
   }
