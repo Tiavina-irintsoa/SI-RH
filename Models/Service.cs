@@ -5,15 +5,19 @@ using Npgsql;
 
 public class Service
 {
-    private string _nomService ;
-    private string _iconeService;
+    int _idService;
+    string _nomService ;
+    string _iconeService;
 
     public Service() {}
 
     public Service(int id, string nom, string icone) {
-        this.IdService = id;
+        this._idService = id;
         this._nomService = nom;
         this._iconeService = icone;
+    } 
+    public Service(int id) {
+        this._idService = id;
     }    
 
     public static Service[] GetAll(NpgsqlConnection npg) {

@@ -24,6 +24,12 @@ public class HomeController : Controller
         return View("~/Views/Home/Index.cshtml", services);
     }
 
+    public ActionResult test2()
+    {
+        Besoin[] besoins = Besoin.GetAll(null, 1);
+        return View("~/Views/Home/Index.cshtml", besoins);
+    }
+
     public IActionResult Privacy()
     {
         return View();
