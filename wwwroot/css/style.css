@@ -44,7 +44,9 @@ a {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  height: 20vh;
+  height: 25vh;
+  padding-top: 3vh;
+  padding-bottom: 5vh;
 }
 .liste_carre img{
   height: 100%;
