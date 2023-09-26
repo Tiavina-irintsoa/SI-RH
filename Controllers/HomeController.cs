@@ -18,6 +18,12 @@ public class HomeController : Controller
         return View();
     }
 
+    public ActionResult Test()
+    {
+        Service[] services = Service.GetAll(null);
+        return View("~/Views/Home/Index.cshtml", services);
+    }
+
     public IActionResult Privacy()
     {
         return View();
