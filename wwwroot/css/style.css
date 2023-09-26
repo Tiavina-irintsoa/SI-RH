@@ -411,8 +411,9 @@ body {
   display: flex;
   flex-wrap: wrap;
   grid-gap: 24px;
+  margin: auto;
   margin-top: 24px;
-  width: 100%;
+  width: 50%;
   color: var(--dark);
 }
 #content main .table-data > div {
@@ -493,7 +494,7 @@ body {
   width: 100%;
 }
 #content main .table-data .todo .todo-list li {
-  width: 100%;
+  width: 50%;
   margin-bottom: 16px;
   background: var(--grey);
   border-radius: 10px;
