@@ -1,4 +1,4 @@
-<!-- MAIN -->
+@model Service[]
       <main>
         <div class="head-title">
           <div class="left">
@@ -16,45 +16,20 @@
         </div>
 
         <ul class="box-info" id="liste_carre_container">
+          @foreach (var service in Model)
+        {
           <li>
             <a href="">
               <div class="liste_carre">
-                <img src="~/images/rh.png" alt="" />
+                <img src="~/images/@service.IconeService" alt="" />
                 <span class="text liste_carre_text liste_carre_text">
-                  <h4>Ressources humaines</h4>
+                  <h4>@service.NomService</h4>
                 </span>
               </div>
             </a>
           </li>
-          <li>
-            <a href="">
-              <div class="liste_carre">
-                <img src="~/images/IT.png" alt="" />
-                <span class="text liste_carre_text">
-                  <h4>Service Informatique</h4>
-                </span>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <div class="liste_carre">
-                <img src="~/images/finance.png" alt="" />
-                <span class="text liste_carre_text">
-                  <h4>Service Financier</h4>
-                </span>
-              </div>
-            </a>
-          </li>
-          <li>
-            <a href="">
-              <div class="liste_carre">
-                <img src="~/images/logistique.png" alt="" />
-                <span class="text liste_carre_text">
-                  <h4>Service Logistique</h4>
-                </span>
-              </div>
-            </a>
-          </li>
+            
+    
+        }
         </ul>
       </main>

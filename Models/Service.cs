@@ -5,14 +5,13 @@ using Npgsql;
 
 public class Service
 {
-    private int _idService;
-    private string _nomService;
+    private string _nomService ;
     private string _iconeService;
 
     public Service() {}
 
     public Service(int id, string nom, string icone) {
-        this._idService = id;
+        this.IdService = id;
         this._nomService = nom;
         this._iconeService = icone;
     }    
@@ -55,10 +54,7 @@ public class Service
     }
 
 
-    public int IdService {
-        get { return _idService; }
-        set { _idService = value; }
-    }
+    public int IdService { get; set; }
 
     public string NomService {
         get { return _nomService; }
