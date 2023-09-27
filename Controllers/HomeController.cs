@@ -24,10 +24,10 @@ public class HomeController : Controller
         return View("~/Views/Home/Index.cshtml", services);
     }
 
-    public ActionResult test2()
+    public ActionResult BesoinGet()
     {
         Besoin[] besoins = Besoin.GetAll(null, 1);
-        return View("~/Views/Home/Index.cshtml", besoins);
+        return View("~/Views/Home/listeBesoin.cshtml", besoins);
     }
 
     public IActionResult Privacy()

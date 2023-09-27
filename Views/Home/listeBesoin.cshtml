@@ -1,0 +1,21 @@
+@model Besoin[]
+
+<div class="table-data">
+    <div class="todo">
+        <div class="head">
+            <h3>Liste des besoins</h3>
+            <a href="#">Ajouter <i class='bx bx-plus' ></i> </a>
+            <!-- <i class='bx bx-filter' ></i> -->
+        </div>
+        <ul class="todo-list">
+        @foreach (var b in Model)
+        {
+             <li class="@b.stringaccompli">
+                <p>@b.poste.nomPoste</p>
+                <p>Olona @b.nbpersonne</p>
+                <i class='bx bx-dots-vertical-rounded' ></i>
+            </li> 
+        }
+        </ul>
+    </div>
+</div>

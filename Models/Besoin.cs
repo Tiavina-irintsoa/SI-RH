@@ -10,6 +10,18 @@ public class Besoin{
     double _heurePersonne;
     double _accompli;
 
+    string _stringaccompli;
+
+    int _nbpersonne;
+    public int nbpersonne {
+        get { return _nbpersonne; }
+        set { _nbpersonne = value; }
+    }
+    public string stringaccompli {
+        get { return _stringaccompli; }
+        set { _stringaccompli = value; }
+    }
+
     public int idBesoin {
         get { return _idBesoin; }
         set { _idBesoin = value; }
@@ -33,12 +45,14 @@ public class Besoin{
 
     public Besoin() {}
 
-    public Besoin(int id, Poste post, double hs, double hp, double ac) {
+    public Besoin(int id, Poste post, double hs, double hp, double ac , string sac , int nbp ) {
         this._idBesoin = id;
         this._poste = post;
         this._heureSemaine = hs;
         this._heurePersonne = hp;
         this._accompli = ac;
+        this.stringaccompli = sac;
+        this.nbpersonne = nbp;
     }   
 
     public static Besoin[] GetAll(NpgsqlConnection npg, int ids) {
@@ -53,17 +67,22 @@ public class Besoin{
         try        {
             string sql = "SELECT * FROM v_poste_besoin where idservice=" + ids;
             Console.WriteLine(sql);         
-            Service service = new Service(ids);
+            Service service = new(ids);
             using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))            {
                 using (NpgsqlDataReader reader = command.ExecuteReader())                {
                     List<Besoin> besoinList = new List<Besoin>();
                     while (reader.Read())                    {
                         int idBesoin = reader.GetInt32(3);
-                        Poste poste = new Poste(reader.GetInt32(0), service, reader.GetString(2));
+                        Poste poste = new(reader.GetInt32(0), service, reader.GetString(2));
                         double heureSemaine = reader.GetInt32(4);
                         double heurePersonne = reader.GetInt32(5);
                         double accompli = reader.GetInt32(6);
-                        Besoin besoin = new Besoin(idBesoin, poste, heureSemaine, heurePersonne, accompli);
+                        int nbp = reader.GetInt32(7);
+                        string stringaccompli = "completed";
+                        if( accompli == 0 ){
+                            stringaccompli = "not-completed";
+                        }
+                        Besoin besoin = new Besoin(idBesoin, poste, heureSemaine, heurePersonne, accompli , stringaccompli , nbp );
                         besoinList.Add(besoin);
                     }
                     besoins = besoinList.ToArray();
@@ -77,7 +96,8 @@ public class Besoin{
             if (estOuvert)            {
                 npg.Close();
             }
-        }        
+        }      
+        Console.WriteLine(besoins);  
         return besoins;
     }
 }
