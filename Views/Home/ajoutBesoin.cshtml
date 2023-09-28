@@ -1,0 +1,78 @@
+@model Poste[]
+      <main>
+        <div class="head-title">
+          <div class="left">
+            <h1>Services</h1>
+            <ul class="breadcrumb">
+              <li>
+                <a href="#">Besoin</a>
+              </li>
+              <li><i class="bx bx-chevron-right"></i></li>
+              <li>
+                <a class="active" href="#">Ajout</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <ul class="box-info" id="liste_carre_container">
+          @foreach (var service in Model)
+        {
+          <li>
+            <h4>@service.nomPoste</h4>
+          </li>
+            
+    
+        }
+        </ul>
+      </main>
+
+      <div id="div">
+        <div>
+            <h1>
+                Ajouter un besoin
+            </h1>
+        </div>
+        <form action="#">
+          <div class="">
+           <div class="my-input-group">
+             <label for="">
+                Poste : 
+            </label>
+            <select style="">
+                <option value="">Poste</option>
+            </select>
+           </div>
+           <div class="my-input-group">
+             <label for="">
+                Nombre d'heures/semaine : 
+            </label>
+            <input type="number" >
+           </div>
+           <div class="my-input-group">
+             <label for="">
+                Nombre d'heures/employé : 
+            </label>
+            <input type="number" >
+           </div>
+            <div class="my-input-group">
+                <input type="submit" value="Ajouter">
+            </div>
+          </div>
+        </form>        
+      </div>
+
+      @* <nav>
+        <form action="#">
+          <div class="form-input">
+            <select style="flex-grow: 1;padding: 0 16px;height: 100%;border: none;background: var(--grey);border-radius: 36px 0 0 36px;outline: none;width: 100%;color: var(--dark);">
+                <option value="">Poste</option>
+            </select>
+            <input type="number" placeholder="Search..." />
+            <input type="number" placeholder="Search..." />
+            <button type="submit" class="search-btn">
+              <i class="bx bx-search"></i>
+            </button>
+          </div>
+        </form>        
+      </nav> *@

@@ -1,0 +1,42 @@
+#div{
+  /* height: 56px; */
+  background: var(--light);
+  padding: 5vh;
+  margin: auto;
+  width: 100%;
+  /* display: flex; */
+  /* align-items: center;
+  grid-gap: 24px; */
+  font-family: var(--lato);
+  /* position: sticky; */
+  /* top: 0;
+  left: 0;
+  z-index: 1000; */
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-direction: column;
+  background-color: white;
+  border-radius: 10px;
+  height: 70vh;
+}
+select, input[type=number],input[type=submit]{
+    width: 8O%;
+    height:5vh;
+    border-radius:10px;
+    border:none; 
+    background-color:var(--grey);
+    padding-left:1vw;
+}
+input:focus-visible{
+    outline:none;
+}
+input[type=submit]{
+background-color: var(--pink);
+}
+.my-input-group{
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    height: 12vh;
+}
