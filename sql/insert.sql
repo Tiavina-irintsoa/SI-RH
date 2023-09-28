@@ -29,22 +29,41 @@ VALUES
 
 -- ito ny vaovao
 -- Insertion dans la table typecritere
+delete from choix;
+delete from typecritere;
+
+
+alter sequence typecritere_idtypecritere_seq  restart with 1;
+alter sequence choix_idchoix_seq restart with 1;
+
 INSERT INTO typecritere (nomtypecritere)
 VALUES
-    ('Type 1'),
-    ('Type 2'),
-    ('Type 3');
+    ('genre'),
+    ('nationalite'),
+    ('diplome'),
+    ('experience'),
+    ('situation matrimoniale')
+    ;
 
 -- Insertion dans la table choix
 INSERT INTO choix (idtypecritere, intitulechoix)
 VALUES
-    (1, 'Choix 1A'),
-    (1, 'Choix 1B'),
-    (1, 'Choix 1C'),
-    (2, 'Choix 2A'),
-    (2, 'Choix 2B'),
-    (3, 'Choix 3A'),
-    (3, 'Choix 3B');
+    (1, 'homme'),
+    (1, 'femme'),
+    (2, 'gasy'),
+    (2, 'tsy gasy'),
+    (3, 'CEPE'),
+    (3, 'BEPEC'),
+    (3, 'BACC'),
+    (3, 'Licence'),
+    (3, 'Master'),    
+    (3, 'Doctorat'),
+    (3, 'Master'), 
+    (4, '1' ) , (4, '2' ) , (4, '3' ), (4, '4' ), (4, '5' ), (4, '6' ) , (4, '7 ou +' ),
+    (5, 'marie(e)' ),
+    (5, 'divorce(e)' ),
+    (5, 'en couple' )
+    ;
 
 
 
