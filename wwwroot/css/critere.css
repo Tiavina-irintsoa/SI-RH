@@ -66,3 +66,6 @@
     border: 1px solid var(--pink);
     color: var(--pink);
 }
+.upper{
+    text-transform: capitalize;
+}
