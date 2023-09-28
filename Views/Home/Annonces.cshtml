@@ -1,3 +1,31 @@
 @{
     Layout = "_Layout2"; 
 }
+@model Annonce[]
+<div
+        class="container-fluid wow fadeIn"
+        data-wow-duration="1s"
+        data-wow-delay="0.7s"
+      >
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="loop owl-carousel">
+              @foreach (var annonce in Model){
+                <div class="item">
+                  <a href="#">
+                    <div class="offers-item">
+                      <div class="thumb">
+                        <img src="/images/@annonce.Besoin.poste.service.IconeService" alt="" />
+                      </div>
+                      <div class="down-content">
+                        <h4>@annonce.Besoin.poste.nomPoste</h4>
+                        <span>@annonce.Besoin.poste.service.NomService</span>
+                      </div>
+                    </div>
+                  </a>
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+      </div>

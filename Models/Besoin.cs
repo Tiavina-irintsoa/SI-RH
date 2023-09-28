@@ -9,10 +9,9 @@ public class Besoin{
     double _heureSemaine;
     double _heurePersonne;
     double _accompli;
-
     string _stringaccompli;
-
     int _nbpersonne;
+    
     public int nbpersonne {
         get { return _nbpersonne; }
         set { _nbpersonne = value; }
@@ -54,6 +53,10 @@ public class Besoin{
         this.stringaccompli = sac;
         this.nbpersonne = nbp;
     }   
+    public Besoin(int idbesoin, Poste poste){
+        _idBesoin = idbesoin;
+        this._poste = poste;
+    }
 
     public static Besoin[] GetAll(NpgsqlConnection npg, int ids) {
         Besoin[] besoins = null;
