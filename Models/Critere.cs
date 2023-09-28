@@ -1,6 +1,3 @@
-
-
-
 using Npgsql;
 
 namespace RH.Models
@@ -10,11 +7,6 @@ namespace RH.Models
         public int? idcritere {
             get { return _idcritere; }
             set { _idcritere = value; }
-        }
-        Besoin _besoin; 
-        public Besoin besoin {
-            get { return _besoin; }
-            set { _besoin = value; }
         }
         TypeCritere _typeCritere;
         public TypeCritere typeCritere {
@@ -27,9 +19,5 @@ namespace RH.Models
             get { return _listeChoix; }
             set { _listeChoix = value; }
         }
-
-
-        
-
     }
 }
