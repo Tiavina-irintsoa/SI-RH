@@ -8,7 +8,7 @@ public class Besoin{
     Poste _poste;
     double _heureSemaine;
     double _heurePersonne;
-    double _accompli;
+    string _accompli;
     string _stringaccompli;
     int _nbpersonne;
     
@@ -37,7 +37,7 @@ public class Besoin{
         get { return _heurePersonne; }
         set { _heurePersonne = value; }
     }
-    public double accompli {
+    public string accompli {
         get { return _accompli; }
         set { _accompli = value; }
     }
@@ -102,5 +102,47 @@ public class Besoin{
         }      
         Console.WriteLine(besoins);  
         return besoins;
+    }
+
+    public void Insert(NpgsqlConnection npg) {
+        bool estOuvert = false;
+        
+        if (npg == null)        {
+            estOuvert = true;
+            Connection connexion = new Connection();
+            npg = connexion.ConnectSante();
+        }        
+        try        {
+            string sql = 
+            "INSERT INTO besoin (idposte, heurepersonne, heuresemaine, accompli) VALUES (@idPoste, @heurePersonne, @heureSemaine, @accompli)";
+            Console.WriteLine(sql);
+            
+             using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))
+            {
+                command.Parameters.AddWithValue("@idPoste", poste.idPoste);
+                command.Parameters.AddWithValue("@heurePersonne", heurePersonne);
+                command.Parameters.AddWithValue("@heureSemaine", heureSemaine);
+                command.Parameters.AddWithValue("@accompli", accompli);
+
+                int rowsAffected = command.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
+                {
+                    Console.WriteLine("Insertion réussie.");
+                }
+                else
+                {
+                    Console.WriteLine("Aucune ligne insérée.");
+                }
+            }
+        }
+        catch (Exception e)        {
+            Console.WriteLine(e.ToString());
+        }
+        finally        {
+            if (estOuvert)            {
+                npg.Close();
+            }
+        }      
     }
 }
