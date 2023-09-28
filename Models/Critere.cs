@@ -13,7 +13,6 @@ namespace RH.Models
             get { return _typeCritere; }
             set { _typeCritere = value; }
         }
-        int _coefficient; 
         List<Choix> _listeChoix;
         public List<Choix> listeChoix {
             get { return _listeChoix; }

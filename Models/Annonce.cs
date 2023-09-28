@@ -15,7 +15,6 @@ namespace RH.Models
         public static Annonce[] GetAllAnnonces(NpgsqlConnection npg){
             Annonce[] annonces = null;
             bool estOuvert = false;
-            
             if (npg == null)        {
                 estOuvert = true;
                 Connection connexion = new Connection();
