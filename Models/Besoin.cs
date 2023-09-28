@@ -44,13 +44,13 @@ public class Besoin{
 
     public Besoin() {}
 
-    public Besoin(int id, Poste post, double hs, double hp, double ac , string sac , int nbp ) {
+    public Besoin(int id, Poste post, double hs, double hp, string ac , string sac , int nbp ) {
         this._idBesoin = id;
         this._poste = post;
         this._heureSemaine = hs;
         this._heurePersonne = hp;
         this._accompli = ac;
-        this.stringaccompli = sac;
+        this._stringaccompli = sac;
         this.nbpersonne = nbp;
     }   
     public Besoin(int idbesoin, Poste poste){
@@ -79,10 +79,10 @@ public class Besoin{
                         Poste poste = new(reader.GetInt32(0), service, reader.GetString(2));
                         double heureSemaine = reader.GetInt32(4);
                         double heurePersonne = reader.GetInt32(5);
-                        double accompli = reader.GetInt32(6);
+                        string accompli = reader.GetString(6);
                         int nbp = reader.GetInt32(7);
                         string stringaccompli = "completed";
-                        if( accompli == 0 ){
+                        if( accompli == null ){
                             stringaccompli = "not-completed";
                         }
                         Besoin besoin = new Besoin(idBesoin, poste, heureSemaine, heurePersonne, accompli , stringaccompli , nbp );
@@ -103,7 +103,7 @@ public class Besoin{
         Console.WriteLine(besoins);  
         return besoins;
     }
-
+    
     public void Insert(NpgsqlConnection npg) {
         bool estOuvert = false;
         

@@ -11,6 +11,7 @@ namespace RH.Models
             _nombre = nb_personne;
         }
 
+        
         public static Annonce[] GetAllAnnonces(NpgsqlConnection npg){
             Annonce[] annonces = null;
             bool estOuvert = false;
