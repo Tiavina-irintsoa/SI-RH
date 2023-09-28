@@ -1,3 +1,8 @@
+
+
+
+using Npgsql;
+
 namespace RH.Models
 {
     public class Critere{
@@ -22,6 +27,9 @@ namespace RH.Models
             get { return _listeChoix; }
             set { _listeChoix = value; }
         }
+
+
+        
 
     }
 }
