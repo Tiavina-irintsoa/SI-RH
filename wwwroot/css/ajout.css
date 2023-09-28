@@ -1,7 +1,11 @@
+#main_form{
+    display: grid;
+    grid-template-columns: 1fr 1fr
+}
 #div{
   /* height: 56px; */
   background: var(--light);
-  padding: 5vh;
+  padding: 20vh 30vh 20vh 20vh;
   margin: auto;
   width: 100%;
   /* display: flex; */
@@ -14,29 +18,41 @@
   z-index: 1000; */
   display: flex;
   justify-content: space-around;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: column;
-  background-color: white;
   border-radius: 10px;
-  height: 70vh;
+  height: 100vh;
+}
+#div form{
+    width: 100%;
 }
 select, input[type=number],input[type=submit]{
-    width: 8O%;
-    height:5vh;
+    width: 100%;
+    height:6vh;
     border-radius:10px;
     border:none; 
     background-color:var(--grey);
     padding-left:1vw;
+    padding-right:1vw;
+
 }
-input:focus-visible{
+#form-title{
+    color: var(--pink);
+}
+select,input:focus-visible{
     outline:none;
 }
 input[type=submit]{
 background-color: var(--pink);
+color: white;
 }
 .my-input-group{
     display: flex;
     justify-content: space-around;
     flex-direction: column;
     height: 12vh;
+    margin-top: 3vh;
+}
+#img-form{
+    background-image: url('/images/curved1.jpg');
 }

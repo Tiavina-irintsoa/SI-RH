@@ -1,21 +1,11 @@
-@model Poste[]
-      <main>
-        <div class="head-title">
-          <div class="left">
-            <h1>Services</h1>
-            <ul class="breadcrumb">
-              <li>
-                <a href="#">Besoin</a>
-              </li>
-              <li><i class="bx bx-chevron-right"></i></li>
-              <li>
-                <a class="active" href="#">Ajout</a>
-              </li>
-            </ul>
-          </div>
-        </div>
+@{
+    Layout = "_form"; 
+}
 
-        <ul class="box-info" id="liste_carre_container">
+@model Poste[]
+      
+
+        @* <ul class="box-info" id="liste_carre_container">
           @foreach (var service in Model)
         {
           <li>
@@ -24,11 +14,10 @@
             
     
         }
-        </ul>
-      </main>
+        </ul> *@
 
       <div id="div">
-        <div>
+        <div id="form-title">
             <h1>
                 Ajouter un besoin
             </h1>
