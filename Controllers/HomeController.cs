@@ -24,9 +24,9 @@ public class HomeController : Controller
         return View("~/Views/Home/Index.cshtml", services);
     }
 
-    public ActionResult BesoinGet()
+    public ActionResult GetBesoin(int IdService)
     {
-        Besoin[] besoins = Besoin.GetAll(null, 1);
+        Besoin[] besoins = Besoin.GetAll(null, IdService);
         return View("~/Views/Home/listeBesoin.cshtml", besoins);
     }
 

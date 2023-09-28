@@ -58,7 +58,10 @@ public class Service
     }
 
 
-    public int IdService { get; set; }
+    public int IdService {
+        get { return _idService; }
+        set { _idService = value; }
+     }
 
     public string NomService {
         get { return _nomService; }
