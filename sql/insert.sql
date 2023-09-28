@@ -10,8 +10,6 @@ insert into service (nomService, iconeService) values
 ('Maintenance et Reparation', 'maintenance.png'),
 ('Marketing', 'marketing.png');
 
--- ito ny vaovao 
-
 -- Insertion de données dans la table "poste"
 INSERT INTO poste (idservice, nomposte)
 VALUES
@@ -29,6 +27,24 @@ VALUES
     (3, 30.0, 80.0, 1);
 
 
+-- ito ny vaovao
+-- Insertion dans la table typecritere
+INSERT INTO typecritere (nomtypecritere)
+VALUES
+    ('Type 1'),
+    ('Type 2'),
+    ('Type 3');
+
+-- Insertion dans la table choix
+INSERT INTO choix (idtypecritere, intitulechoix)
+VALUES
+    (1, 'Choix 1A'),
+    (1, 'Choix 1B'),
+    (1, 'Choix 1C'),
+    (2, 'Choix 2A'),
+    (2, 'Choix 2B'),
+    (3, 'Choix 3A'),
+    (3, 'Choix 3B');
 
 
 
