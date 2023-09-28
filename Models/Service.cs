@@ -16,6 +16,10 @@ public class Service
         this._nomService = nom;
         this._iconeService = icone;
     } 
+    public Service(string nom, string icone) {
+        this._nomService = nom;
+        this._iconeService = icone;
+    } 
     public Service(int id) {
         this._idService = id;
     }    

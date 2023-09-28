@@ -1,0 +1,4 @@
+public Poste(Service serv, string np){
+    this._service = serv;
+    this._nomPoste = np;
+} 
