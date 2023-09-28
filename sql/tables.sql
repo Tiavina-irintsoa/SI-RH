@@ -32,7 +32,7 @@ create table besoin (
     idposte integer references poste(idposte) ,
     heuresemaine numeric,
     heurepersonne numeric,
-    accompli int
+    accompli date
 );
 
 create table critere(
