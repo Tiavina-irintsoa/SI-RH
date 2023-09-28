@@ -114,15 +114,14 @@ public class Besoin{
         }        
         try        {
             string sql = 
-            "INSERT INTO besoin (idposte, heurepersonne, heuresemaine, accompli) VALUES (@idPoste, @heurePersonne, @heureSemaine, @accompli)";
+            "INSERT INTO besoin (idposte, heurepersonne, heuresemaine) VALUES (@idPoste, @heurePersonne, @heureSemaine)";
             Console.WriteLine(sql);
             
-             using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))
+            using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))
             {
                 command.Parameters.AddWithValue("@idPoste", poste.idPoste);
                 command.Parameters.AddWithValue("@heurePersonne", heurePersonne);
                 command.Parameters.AddWithValue("@heureSemaine", heureSemaine);
-                command.Parameters.AddWithValue("@accompli", accompli);
 
                 int rowsAffected = command.ExecuteNonQuery();
 

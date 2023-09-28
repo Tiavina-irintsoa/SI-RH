@@ -3,19 +3,11 @@
     grid-template-columns: 1fr 1fr
 }
 #div{
-  /* height: 56px; */
   background: var(--light);
   padding: 20vh 30vh 20vh 20vh;
   margin: auto;
   width: 100%;
-  /* display: flex; */
-  /* align-items: center;
-  grid-gap: 24px; */
   font-family: var(--lato);
-  /* position: sticky; */
-  /* top: 0;
-  left: 0;
-  z-index: 1000; */
   display: flex;
   justify-content: space-around;
   align-items: flex-start;
