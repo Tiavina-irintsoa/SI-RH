@@ -16,10 +16,7 @@ public class Besoin{
         get { return _nbpersonne; }
         set { _nbpersonne = value; }
     }
-    public string stringaccompli {
-        get { return _stringaccompli; }
-        set { _stringaccompli = value; }
-    }
+
 
     public int idBesoin {
         get { return _idBesoin; }
@@ -89,7 +86,7 @@ public class Besoin{
                         DateTime? accompli = reader.IsDBNull(6) ? (DateTime?)null : reader.GetDateTime(6);
                         int nbp = reader.GetInt32(7);
                        
-                        Besoin besoin = new Besoin(idBesoin, poste, heureSemaine, heurePersonne, accompli , stringaccompli , nbp );
+                        Besoin besoin = new Besoin(idBesoin, poste, heureSemaine, heurePersonne, accompli , nbp );
                         besoinList.Add(besoin);
                         Console.WriteLine("vita");
                     }
