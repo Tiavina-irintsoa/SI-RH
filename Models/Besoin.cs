@@ -8,7 +8,7 @@ public class Besoin{
     Poste _poste;
     double _heureSemaine;
     double _heurePersonne;
-    string _accompli;
+    DateTime? _accompli;
     string _stringaccompli;
     int _nbpersonne;
     
@@ -37,14 +37,14 @@ public class Besoin{
         get { return _heurePersonne; }
         set { _heurePersonne = value; }
     }
-    public string accompli {
+    public DateTime? accompli {
         get { return _accompli; }
         set { _accompli = value; }
     }
 
     public Besoin() {}
 
-    public Besoin(int id, Poste post, double hs, double hp, string ac , string sac , int nbp ) {
+    public Besoin(int id, Poste post, double hs, double hp, DateTime? ac , string sac , int nbp ) {
         this._idBesoin = id;
         this._poste = post;
         this._heureSemaine = hs;
@@ -79,7 +79,7 @@ public class Besoin{
                         Poste poste = new(reader.GetInt32(0), service, reader.GetString(2));
                         double heureSemaine = reader.GetInt32(4);
                         double heurePersonne = reader.GetInt32(5);
-                        string accompli = reader.GetString(6);
+                        DateTime? accompli = reader.IsDBNull(6) ? (DateTime?)null : reader.GetDateTime(6);
                         int nbp = reader.GetInt32(7);
                         string stringaccompli = "completed";
                         if( accompli == null ){
@@ -87,12 +87,15 @@ public class Besoin{
                         }
                         Besoin besoin = new Besoin(idBesoin, poste, heureSemaine, heurePersonne, accompli , stringaccompli , nbp );
                         besoinList.Add(besoin);
+                        Console.WriteLine("vita");
                     }
                     besoins = besoinList.ToArray();
+                        Console.WriteLine("vita1");
                 }
             }
         }
         catch (Exception e)        {
+        Console.WriteLine("erreurrrr");
             Console.WriteLine(e.ToString());
         }
         finally        {
@@ -100,7 +103,7 @@ public class Besoin{
                 npg.Close();
             }
         }      
-        Console.WriteLine(besoins);  
+       Console.WriteLine(besoins.Length); 
         return besoins;
     }
     

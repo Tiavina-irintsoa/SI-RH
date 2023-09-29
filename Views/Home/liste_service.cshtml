@@ -19,7 +19,7 @@
           @foreach (var service in Model)
         {
           <li>
-            <a href="@Url.Action("GetBesoin","Home",new{idService=service.IdService})">
+            <a href='@Url.Action("GetBesoin","Home",new{idService=service.IdService})'>
               <div class="liste_carre">
                 <img src="~/images/@service.IconeService" alt="" />
                 <span class="text liste_carre_text liste_carre_text">
