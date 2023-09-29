@@ -7,7 +7,8 @@ namespace RH.Controllers{
             Annonce[] annonces = Annonce.GetAllAnnonces(null);
             return View("~/Views/Home/Annonces.cshtml", annonces);
         }
+        public ActionResult DetailsOffre(){
+            return View("~/Views/Home/DetailsOffre.cshtml");
+        }
     }
-
-
 }

@@ -1633,6 +1633,9 @@ Free Quote
 offers
 --------------------------------------------- 
 */
+#critere{
+  font-weight: bold;
+}
 
 .our-offers {
   padding-top: 130px;
