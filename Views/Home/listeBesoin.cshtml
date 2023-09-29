@@ -10,7 +10,7 @@
         <ul class="todo-list">
         @foreach (var b in @ViewBag.besoins)
         {
-             <li class="@b.stringaccompli">
+             <li class="@b.StringAccompli()">
                 <p>@b.poste.nomPoste (@b.nbpersonne)</p>
                 <i class='bx bx-dots-vertical-rounded' ></i>
             </li> 
