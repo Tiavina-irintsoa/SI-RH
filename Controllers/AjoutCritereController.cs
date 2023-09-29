@@ -10,13 +10,19 @@ public class AjoutCritereController : Controller
 {
     public IActionResult save()
     {
-        int id = 1;
         Connection connexion = new Connection();
         NpgsqlConnection npg = connexion.ConnectSante();
         List<CritereBesoin> l_c = new List<CritereBesoin>();
         var idposte = Request.Cookies["idposte"];
         var heuresemaine = Request.Cookies["heuresemaine"];
         var heuremploye = Request.Cookies["heuremploye"];
+        Besoin  ajoutBesoin = new Besoin{
+            idBesoin = Utilitaire.GetNextSerialValue( npg , "besoin_idbesoin_seq" ),
+            poste = new Poste{ idPoste = int.Parse(idposte) },
+            heurePersonne = int.Parse(heuremploye),
+            heureSemaine = int.Parse(heuresemaine)
+        };
+        ajoutBesoin.Insert(npg);
         Console.WriteLine(" idposte : "+idposte);
         try{
             List<TypeCritere> liste = TypeCritere.GetAll(npg);
@@ -24,10 +30,9 @@ public class AjoutCritereController : Controller
             {   
                 CritereBesoin c = new CritereBesoin{
                     idcritere = Utilitaire.GetNextSerialValue( npg , "critere_idcritere_seq" ),
-                    Besoin = new Besoin{
-                        idBesoin =  id
-                    },
-                    _coefficient = int.Parse(HttpContext.Request.Form[@t.idTypeCritere+"-coeff"])
+                    Besoin = ajoutBesoin,
+                    _coefficient = int.Parse(HttpContext.Request.Form[@t.idTypeCritere+"-coeff"]),
+                    typeCritere = new TypeCritere{ idTypeCritere = t.idTypeCritere  }
                 };  
                 var choix = Request.Form[@t.idTypeCritere+"-choix"];
                 List<Choix> lchoix = new();
@@ -40,6 +45,11 @@ public class AjoutCritereController : Controller
                 c.listeChoix = lchoix;
                 Console.WriteLine( "value = "+string.Join(", ", c.listeChoix) );
                 l_c.Add(c);
+            }
+            foreach( var critere in l_c  ){
+                critere.Insert( npg );
+                critere.InsertChoixCritere(npg);
+                Console.WriteLine( "new" );
             }
         }
         catch (Exception e)        {

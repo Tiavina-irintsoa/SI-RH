@@ -107,44 +107,45 @@ public class Besoin{
         return besoins;
     }
     
-    public void Insert(NpgsqlConnection npg) {
-        bool estOuvert = false;
+public void Insert(NpgsqlConnection npg) {
+    bool estOuvert = false;
+    
+    if (npg == null) {
+        estOuvert = true;
+        Connection connexion = new Connection();
+        npg = connexion.ConnectSante();
+    }        
+
+    try {
+        string sql = "INSERT INTO besoin (idposte, heurepersonne, heuresemaine";
+        if (this.idBesoin != 0) {
+            sql += ", idbesoin";
+        }
+        sql += ") VALUES (@idPoste, @heurePersonne, @heureSemaine";
+        if (this.idBesoin != 0) {
+            sql += ", @idBesoin";
+        }
+        sql += ")";
+        Console.WriteLine("ajout besoin");
         
-        if (npg == null)        {
-            estOuvert = true;
-            Connection connexion = new Connection();
-            npg = connexion.ConnectSante();
-        }        
-        try        {
-            string sql = 
-            "INSERT INTO besoin (idposte, heurepersonne, heuresemaine) VALUES (@idPoste, @heurePersonne, @heureSemaine)";
-            Console.WriteLine(sql);
-            
-            using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))
-            {
-                command.Parameters.AddWithValue("@idPoste", poste.idPoste);
-                command.Parameters.AddWithValue("@heurePersonne", heurePersonne);
-                command.Parameters.AddWithValue("@heureSemaine", heureSemaine);
+        using (NpgsqlCommand command = new NpgsqlCommand(sql, npg)) {
+            command.Parameters.AddWithValue("@idPoste", poste.idPoste);
+            command.Parameters.AddWithValue("@heurePersonne", heurePersonne);
+            command.Parameters.AddWithValue("@heureSemaine", heureSemaine);
 
-                int rowsAffected = command.ExecuteNonQuery();
+            if (this.idBesoin != 0) {
+                command.Parameters.AddWithValue("@idBesoin", this.idBesoin);
+            }
 
-                if (rowsAffected > 0)
-                {
-                    Console.WriteLine("Insertion réussie.");
-                }
-                else
-                {
-                    Console.WriteLine("Aucune ligne insérée.");
-                }
+            int rowsAffected = command.ExecuteNonQuery();
+
+            if (rowsAffected > 0) {
+                Console.WriteLine("Insertion réussie.");
+            } else {
+                Console.WriteLine("Aucune ligne insérée.");
             }
         }
-        catch (Exception e)        {
-            Console.WriteLine(e.ToString());
-        }
-        finally        {
-            if (estOuvert)            {
-                npg.Close();
-            }
-        }      
-    }
+    } catch (Exception e) {
+        Console.WriteLine
+
 }

@@ -3,20 +3,32 @@ insert into service (nomService, iconeService) values
 ('Finance', 'finance.png'),
 ('Informatique', 'IT.png'),
 ('Logistique', 'logistique.png'),
+
 ('Maintenance et Reparation', 'maintenance.png'),
 ('Production industrielle', 'production.png'),
 ('Recherche et developpement', 'recherche.png'),
 ('Ressources humaines', 'rh.png'),
+
 ('Maintenance et Reparation', 'maintenance.png'),
-('Marketing', 'marketing.png');
+('Marketing', 'marketing.png')
+;
 
 -- Insertion de données dans la table "poste"
 INSERT INTO poste (idservice, nomposte)
-VALUES
-    (1, 'Poste 1'),
-    (1, 'Poste 2'),
-    (2, 'Poste 3'),
-    (2, 'Poste 4');
+
+    (8, 'Technicien de Maintenance Industrielle'),
+    (8, 'Electricien de Batiment'),
+    (8, 'Plombier'),
+    (8, 'Mecanicien Automobile'),
+    (8, 'Technicien en Climatisation et Chauffage'),
+    (8, 'Technicien en Informatique et Réseaux'),
+    (8, 'Chef d''Equipe de Maintenance'),
+    (9, 'Specialiste en Marketing Numerique'),
+    (9, 'Responsable des Medias Sociaux'),
+    (9, 'Chef de Produit'),
+    (9, 'Analyste Marketing'),
+    (9, 'Responsable du Marketing Produit')
+    ;
 
 
 
@@ -44,25 +56,17 @@ INSERT INTO choix (idtypecritere, intitulechoix)
 VALUES
     (1, 'homme'),
     (1, 'femme'),
-    (2, 'gasy'),
-    (2, 'tsy gasy'),
+    (2, 'Malagasy'),
+    (2, 'Etranger'),
     (3, 'CEPE'),
-    (3, 'BEPEC'),
+    (3, 'BEPC'),
     (3, 'BACC'),
     (3, 'Licence'),
     (3, 'Master'),    
     (3, 'Doctorat'),
     (3, 'Master'), 
-    (4, '1' ) , (4, '2' ) , (4, '3' ), (4, '4' ), (4, '5' ), (4, '6' ) , (4, '7 ou +' ),
-    (5, 'marie(e)' ),
+    (4, 'moins de 2 ans' ) , (4, 'entre 2 a 4 ans' ) , (4, 'entre 4 a 7 ans' ), (4, '7ans et plus' ),
+    (5, 'marie(e)' ),           
     (5, 'divorce(e)' ),
-    (5, 'en couple' )
+    (5, 'celibataire' )
     ;
-
--- Insertion de données dans la table "besoin"
-INSERT INTO besoin (idposte, heurepersonne , heuresemaine , accompli)
-VALUES
-    (1, 40.0, 100.0, now()),
-    (1, 35.0, 90.0, now()),
-    (2, 38.0, 110.0, null),
-    (3, 30.0, 80.0, null);
