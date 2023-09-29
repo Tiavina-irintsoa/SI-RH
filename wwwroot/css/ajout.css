@@ -48,3 +48,7 @@ color: white;
 #img-form{
     background-image: url('/images/curved1.jpg');
 }
+
+#content main .table-data .todo .todo-list li {
+    width: 100%;
+}

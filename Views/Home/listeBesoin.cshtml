@@ -11,8 +11,7 @@
         @foreach (var b in @ViewBag.besoins)
         {
              <li class="@b.stringaccompli">
-                <p>@b.poste.nomPoste</p>
-                <p>Olona @b.nbpersonne</p>
+                <p>@b.poste.nomPoste (@b.nbpersonne)</p>
                 <i class='bx bx-dots-vertical-rounded' ></i>
             </li> 
         }
