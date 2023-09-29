@@ -24,12 +24,12 @@ public class HomeController : Controller
         return View("~/Views/Home/Index.cshtml", services);
     }
 
-    public ActionResult GetBesoin(int IdService)
+    public ActionResult GetBesoin(int idService)
     {
         Console.WriteLine("vit");
-        Besoin[] besoins = Besoin.GetAll(null, IdService);
+        Besoin[] besoins = Besoin.GetAll(null, idService);
         // Console.WriteLine(besoins[0].accompli + " ok");
-        ViewBag.IdService = IdService;
+        ViewBag.IdService = idService;
         ViewBag.besoins = besoins;
         return View("~/Views/Home/listeBesoin.cshtml",besoins);
     }
