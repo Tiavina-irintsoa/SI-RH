@@ -2,13 +2,13 @@
 <form  class="content-critere" method="post" action="@Url.Action("save", "ajoutCritere")" >
     <div class="critere-list" >
         <div class="title-critere  element-critere ">
-            Liste critères:
+            Liste des  critères:
         </div>
         <div class="title-critere element-critere">
             coefficients:
         </div>
         <div class="title-critere element-critere">
-            <input type="submit" value="valider">
+            Choix
             </div>
         @foreach( var type in Model ){
             <label class="critere-name element-critere upper" >
@@ -26,6 +26,10 @@
                 }              
             </div>
         }
+        <div></div>
+        <div  class="submit-critere">           
+              <input type="submit" value="valider">
+        </div>
         </div>
     </div>
 </form>
