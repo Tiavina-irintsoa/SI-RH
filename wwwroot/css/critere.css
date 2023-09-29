@@ -69,3 +69,8 @@
 .upper{
     text-transform: capitalize;
 }
+.submit-critere{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}

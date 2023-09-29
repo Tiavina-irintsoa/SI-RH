@@ -107,7 +107,7 @@ public class Besoin{
         return besoins;
     }
     
-public void Insert(NpgsqlConnection npg) {
+    public void Insert(NpgsqlConnection npg) {
     bool estOuvert = false;
     
     if (npg == null) {
@@ -118,11 +118,11 @@ public void Insert(NpgsqlConnection npg) {
 
     try {
         string sql = "INSERT INTO besoin (idposte, heurepersonne, heuresemaine";
-        if (this.idBesoin != 0) {
+        if (this.idBesoin != 0) { // Vérifiez si idbesoin n'est pas égal à la valeur par défaut (0 pour int)
             sql += ", idbesoin";
         }
         sql += ") VALUES (@idPoste, @heurePersonne, @heureSemaine";
-        if (this.idBesoin != 0) {
+        if (this.idBesoin != 0) { // Vérifiez à nouveau ici
             sql += ", @idBesoin";
         }
         sql += ")";
@@ -136,7 +136,6 @@ public void Insert(NpgsqlConnection npg) {
             if (this.idBesoin != 0) {
                 command.Parameters.AddWithValue("@idBesoin", this.idBesoin);
             }
-
             int rowsAffected = command.ExecuteNonQuery();
 
             if (rowsAffected > 0) {
@@ -146,6 +145,13 @@ public void Insert(NpgsqlConnection npg) {
             }
         }
     } catch (Exception e) {
-        Console.WriteLine
+        Console.WriteLine(e.ToString());
+    } finally {
+        if (estOuvert) {
+            npg.Close();
+        }
+    }      
+}
+
 
 }
