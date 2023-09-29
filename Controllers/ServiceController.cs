@@ -3,14 +3,14 @@ using RH.Models;
 
 namespace RH.Controllers{
     public class ServiceController : Controller{
-    public IActionResult Liste()
-    {
-        Service[] liste = Service.GetAll(null);
-        foreach (var s in liste)
+        public IActionResult Liste()
         {
-            Console.WriteLine(s.IconeService);
+            Service[] liste = Service.GetAll(null);
+            foreach (var s in liste)
+            {
+                Console.WriteLine(s.IconeService);
+            }
+            return View("Views/Home/liste_service.cshtml",liste);
         }
-        return View("Views/Home/liste_service.cshtml",liste);
     }
-}
 }

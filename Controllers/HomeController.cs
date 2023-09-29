@@ -26,8 +26,12 @@ public class HomeController : Controller
 
     public ActionResult GetBesoin(int IdService)
     {
+        Console.WriteLine("vit");
         Besoin[] besoins = Besoin.GetAll(null, IdService);
-        return View("~/Views/Home/listeBesoin.cshtml", besoins);
+        // Console.WriteLine(besoins[0].accompli + " ok");
+        ViewBag.IdService = IdService;
+        ViewBag.besoins = besoins;
+        return View("~/Views/Home/listeBesoin.cshtml");
     }
 
     public IActionResult Privacy()
