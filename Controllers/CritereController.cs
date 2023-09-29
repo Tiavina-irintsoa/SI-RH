@@ -15,6 +15,7 @@ public class CritereController : Controller
         var idposte = Request.Cookies["idposte"];
         var heuresemaine = Request.Cookies["heuresemaine"];
         var heuremploye = Request.Cookies["heuremploye"];
+        List<TypeCritere> liste = TypeCritere.GetAll(null);
 
         //  foreach (var cookie in Request.Cookies.Keys)
         // {
@@ -25,6 +26,6 @@ public class CritereController : Controller
         ViewBag.Idposte=idposte;
         ViewBag.heuresemaine=heuresemaine;
         ViewBag.heuremploye=heuremploye;
-        return View("Views/Home/Critere.cshtml");        
+        return View("Views/Home/Critere.cshtml",liste);        
     }
 }

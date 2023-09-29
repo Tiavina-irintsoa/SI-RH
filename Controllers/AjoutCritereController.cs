@@ -14,6 +14,10 @@ public class AjoutCritereController : Controller
         Connection connexion = new Connection();
         NpgsqlConnection npg = connexion.ConnectSante();
         List<CritereBesoin> l_c = new List<CritereBesoin>();
+        var idposte = Request.Cookies["idposte"];
+        var heuresemaine = Request.Cookies["heuresemaine"];
+        var heuremploye = Request.Cookies["heuremploye"];
+        Console.WriteLine(" idposte : "+idposte);
         try{
             List<TypeCritere> liste = TypeCritere.GetAll(npg);
             foreach (var t in liste)
