@@ -25,7 +25,6 @@ namespace RH.Controllers{
                 heurePersonne = heuremploye
             };
 
-            besoin.Insert(null);
             var cookieOptions = new CookieOptions
             {
                 Expires = DateTime.Now.AddDays(7)
