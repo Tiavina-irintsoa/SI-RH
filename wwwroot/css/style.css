@@ -14,7 +14,6 @@ a {
 :root {
   --poppins: "Poppins", sans-serif;
   --lato: "Lato", sans-serif;
-
   --light: #f9f9f9;
   --pink: #e63cad;
   --light-pink: #ffcff9;
@@ -520,10 +519,10 @@ body {
   cursor: pointer;
 }
 #content main .table-data .todo .todo-list li.completed {
-  border-left: 10px solid var(--pink);
+  border-left: 10px solid var(--blue);
 }
 #content main .table-data .todo .todo-list li.not-completed {
-  border-left: 10px solid var(--blue);
+  border-left: 10px solid var(--red);
 }
 #content main .table-data .todo .todo-list li:last-child {
   margin-bottom: 0;
