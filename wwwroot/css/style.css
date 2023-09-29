@@ -245,11 +245,13 @@ body {
   width: 100%;
   margin-right: auto;
 }
+
 #content nav form .form-input {
   display: flex;
   align-items: center;
   height: 36px;
 }
+
 #content nav form .form-input input {
   flex-grow: 1;
   padding: 0 16px;
@@ -261,6 +263,7 @@ body {
   width: 100%;
   color: var(--dark);
 }
+
 #content nav form .form-input button {
   width: 36px;
   height: 100%;

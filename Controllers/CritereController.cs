@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc;
 using RH.Models;
 using System.Collections.Generic;
 
-
 namespace RH.Controllers;
 
 public class CritereController : Controller

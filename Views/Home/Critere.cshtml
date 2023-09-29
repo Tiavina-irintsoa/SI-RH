@@ -1,0 +1,31 @@
+@model List<TypeCritere>
+<form  class="content-critere" method="post" action="http://localhost:5285/ajoutCritere/save" >
+    <div class="critere-list" >
+        <div class="title-critere  element-critere ">
+            Liste critères:
+        </div>
+        <div class="title-critere element-critere">
+            coefficients:
+        </div>
+        <div class="title-critere element-critere">
+            <input type="submit" value="valider">
+        </div>
+        @foreach( var type in Model ){
+            <label class="critere-name element-critere upper" >
+                @type.nomcritere    
+            </label>
+            <input type="number" value="1" name="@type.idTypeCritere-coeff" class="element-critere coefficient">
+            <div  class="choix element-critere" >
+                @foreach( var choix in type.listeChoix ){
+                    <div class="choice">
+                        <input type="checkbox" name="@type.idTypeCritere-choix" value="@choix.idChoix" >
+                        <label for=""class="upper">
+                            @choix.intitule
+                        </label>
+                    </div> 
+                }              
+            </div>
+        }
+        </div>
+    </div>
+</form>
