@@ -44,15 +44,22 @@ public class Besoin{
 
     public Besoin() {}
 
-    public Besoin(int id, Poste post, double hs, double hp, DateTime? ac , string sac , int nbp ) {
+
+    public Besoin(int id, Poste post, double hs, double hp, DateTime? ac , int nbp ) {
         this._idBesoin = id;
         this._poste = post;
         this._heureSemaine = hs;
         this._heurePersonne = hp;
         this._accompli = ac;
-        this._stringaccompli = sac;
         this.nbpersonne = nbp;
     }   
+    public string StringAccompli(){
+        if (accompli == null)
+        {
+            return "completed";
+        }
+        return "not-completed";
+    }
     public Besoin(int idbesoin, Poste poste){
         _idBesoin = idbesoin;
         this._poste = poste;
@@ -81,10 +88,7 @@ public class Besoin{
                         double heurePersonne = reader.GetInt32(5);
                         DateTime? accompli = reader.IsDBNull(6) ? (DateTime?)null : reader.GetDateTime(6);
                         int nbp = reader.GetInt32(7);
-                        string stringaccompli = "completed";
-                        if( accompli == null ){
-                            stringaccompli = "not-completed";
-                        }
+                       
                         Besoin besoin = new Besoin(idBesoin, poste, heureSemaine, heurePersonne, accompli , stringaccompli , nbp );
                         besoinList.Add(besoin);
                         Console.WriteLine("vita");
