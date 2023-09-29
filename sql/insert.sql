@@ -107,3 +107,73 @@ insert into service (nomService, iconeService) values
 ('Ressources humaines', 'rh.png'),
 ('Maintenance et Reparation', 'maintenance.png'),
 ('Marketing', 'marketing.png');
+
+INSERT INTO poste (idservice, nomposte) VALUES
+    (1, 'Responsable des achats'),
+    (1, 'Analyste'),
+    (1, 'Approvisionneur'),
+    (1, 'Gestionnaire de la chaine d''approvisionnement'),
+    (1, 'Specialiste des contrats'),
+    (1, 'Responsable des relations avec les fournisseurs'),
+    (1, 'Responsable des achats durables');
+
+INSERT INTO poste (idservice, nomposte) VALUES
+    (2, 'Analyste financier'),
+    (2, 'Comptable'),
+    (2, 'Controleur financier'),
+    (2, 'Responsable financier'),
+    (2, 'Analyste de credit'),
+    (2, 'Gestionnaire de portefeuille'),
+    (2, 'Analyste de risque financier'),
+    (2, 'Gestionnaire de tresorerie'),
+    (2, 'Analyste en fusion-acquisition'),
+    (2, 'Auditeur financier'),
+    (2, 'Planificateur financier'),
+    (2, 'Specialiste des marches financiers'),
+    (2, 'Analyste des operations bancaires'),
+    (2, 'Specialiste en fiscalite'),
+    (2, 'Actuaire');
+
+INSERT INTO poste (idservice, nomposte) VALUES
+    (3, 'Developpeur de logiciels'),
+    (3, 'Ingenieur en securite informatique'),
+    (3, 'Administrateur systeme'),
+    (3, 'Analyste de donnees'),
+    (3, 'Ingenieur en reseau'),
+    (3, 'Developpeur web'),
+    (3, 'Architecte de solutions cloud'),
+    (3, 'Analyste en intelligence artificielle'),
+    (3, 'Chef de projet informatique'),
+    (3, 'Developpeur d''applications mobiles'),
+    (3, 'Architecte de donnees'),
+    (3, 'Testeur de logiciels'),
+    (3, 'Specialiste en cybersecurite'),
+    (3, 'Administrateur de bases de donnees'),
+    (3, 'Analyste en assurance qualite logicielle'),
+    (3, 'Developpeur DevOps'),
+    (3, 'Consultant en technologies de l''information'),
+    (3, 'Expert en analyse de donnees'),
+    (3, 'Administrateur de systemes de gestion de contenu (CMS)'),
+    (3, 'Developpeur de jeux video');
+
+INSERT INTO poste (idservice, nomposte) VALUES
+    (4, 'Gestionnaire de la chaine d''approvisionnement'),
+    (4, 'Responsable logistique'),
+    (4, 'Gestionnaire d''entrepot'),
+    (4, 'Planificateur de la demande'),
+    (4, 'Responsable des operations de transport'),
+    (4, 'Coordinateur de la chaine d''approvisionnement'),
+    (4, 'Analyste de la chaine d''approvisionnement'),
+    (4, 'Planificateur de la production'),
+    (4, 'Specialiste en gestion des stocks'),
+    (4, 'Analyste en logistique internationale'),
+    (4, 'Gestionnaire de la qualite logistique'),
+    (4, 'Coordonnateur de la distribution'),
+    (4, 'Expert en gestion des retours'),
+    (4, 'Responsable de la logistique inversee'),
+    (4, 'Analyste en optimisation des itineraires'),
+    (4, 'Coordonnateur des operations de transport international'),
+    (4, 'Planificateur de la logistique e-commerce'),
+    (4, 'Gestionnaire de la logistique de la sante'),
+    (4, 'Responsable de la gestion des fournisseurs'),
+    (4, 'Analyste en coûts logistiques');
