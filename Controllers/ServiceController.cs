@@ -10,6 +10,7 @@ namespace RH.Controllers{
             {
                 Console.WriteLine(s.IconeService);
             }
+            ViewData["page"] = "service";
             return View("Views/Home/liste_service.cshtml",liste);
         }
     }

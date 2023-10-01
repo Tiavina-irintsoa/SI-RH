@@ -21,7 +21,7 @@ public class CritereController : Controller
         // {
         //     Response.Cookies.Delete(cookie);
         // }
-
+        ViewData["page"] = "service";
         Console.WriteLine(idposte);
         ViewBag.Idposte=idposte;
         ViewBag.heuresemaine=heuresemaine;

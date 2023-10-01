@@ -31,6 +31,7 @@ public class HomeController : Controller
         // Console.WriteLine(besoins[0].accompli + " ok");
         ViewBag.IdService = idService;
         ViewBag.besoins = besoins;
+        ViewData["page"] = "service";
         return View("~/Views/Home/listeBesoin.cshtml",besoins);
     }
 
