@@ -201,7 +201,9 @@ img {
   width: 100%;
   overflow: hidden;
 }
-
+#logo-container{
+  width: 10vw;
+}
 /* 
 ---------------------------------------------
 global styles
@@ -468,6 +470,9 @@ header
   box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.03);
 }
 
+.logo{
+  width: 20vw;
+}
 .background-header .logo,
 .background-header .main-nav .nav li a {
   color: #fff;
@@ -1466,8 +1471,8 @@ Services Style
 .services .naccs .menu div .thumb {
   display: inline-block;
   width: 100%;
-  padding: 30px 0px;
   background-color: #fff;
+  margin-left: 100px;
 }
 
 .services .naccs .menu div.active {
@@ -2257,7 +2262,7 @@ responsive
     margin-bottom: 30px;
   }
   .post-item .thumb img {
-    max-width: 140px;
+    max-width: 240px;
   }
   .post-item .right-content p {
     display: none;
