@@ -419,6 +419,75 @@ body {
   color: var(--dark);
 }
 
+#content main .detail-cv{
+  border-radius: 20px;
+  background: var(--light);
+  padding: 24px;
+  overflow-x: auto;
+}
+#content main .detail-cv .head{
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+  margin-left: 40%;
+  color: var(--pink);
+}
+#content main .detail-cv .a_propos{
+  display: flex;
+  flex-direction: row;
+}
+#content main .detail-cv .a_propos label{
+  font-weight: bold;
+}
+#content main .detail-cv .a_propos .gauche{
+  width: 67%;
+}
+.infos .inf{
+  margin-top: 24px;
+}
+.inf div{
+  display: flex;
+  flex-direction: row;
+}
+.inf span{
+  text-decoration: underline;
+}
+.inf div label{
+  font-weight: bold;
+  width: 67%;
+}
+.inf .btn-download{
+  color: black;
+}
+.inf .btn-download:hover{
+  font-weight: bold;
+}
+.inf .btn-download i:hover{
+  font-weight: bold;
+  transform: rotate(360deg);
+  transition: all 500ms ease-in-out;
+}
+.info_ li{
+  margin-left: 50pt;
+}
+.retour{
+  text-align: center;
+}
+.retour a{
+  text-decoration: none;
+  color: var(--pink);
+}
+.retour a:hover{
+  font-weight: bold;
+}
+
+#content main .table-data a {
+  color: var(--pink);
+  text-decoration: none;
+}
+#content main .table-data a:hover {
+  font-weight: bold;
+}
 #content main .table-data {
   display: flex;
   flex-wrap: wrap;
