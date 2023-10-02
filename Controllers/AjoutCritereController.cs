@@ -58,6 +58,6 @@ public class AjoutCritereController : Controller
         finally        {
             npg.Close();
         }
-        return RedirectToAction("service/liste");
+        return RedirectToAction("liste", "service");
     }
 }
