@@ -24,7 +24,7 @@ create view v_choix_type as
     from choix as c 
         natural join typecritere as t;
 
-create view v_critere_choix_type 
+create view v_critere_choix_type as
     select * 
     from v_choix_type as vct 
         natural join criterechoix  as cc ; 
