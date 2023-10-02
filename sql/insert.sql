@@ -1,3 +1,4 @@
+
 -- ito ny vaovao
 -- Insertion dans la table typecritere
 INSERT INTO typecritere (nomtypecritere)
@@ -12,20 +13,20 @@ VALUES
 -- Insertion dans la table choix
 INSERT INTO choix (idtypecritere, intitulechoix)
 VALUES
-    (1, 'homme'),
-    (1, 'femme'),
-    (2, 'Malagasy'),
-    (2, 'Etranger'),
-    (3, 'CEPE'),
-    (3, 'BEPC'),
-    (3, 'BACC'),
-    (3, 'Licence'),
-    (3, 'Master'),    
-    (3, 'Doctorat'),
-    (4, 'moins de 2 ans' ) , (4, 'entre 2 a 4 ans' ) , (4, 'entre 4 a 7 ans' ), (4, '7ans et plus' ),
-    (5, 'marie(e)' ),           
-    (5, 'divorce(e)' ),
-    (5, 'en couple' )
+    (1, 'homme' , 1),
+    (1, 'femme' , 1),
+    (2, 'Malagasy' , 1),
+    (2, 'Etranger' , 1),
+    (3, 'CEPE' , 1),
+    (3, 'BEPC' , 2),
+    (3, 'BACC' , 3),
+    (3, 'Licence', 4 ),
+    (3, 'Master' , 5),    
+    (3, 'Doctorat' , 6),
+    (4, 'moins de 2 ans' , 1 ) , (4, 'entre 2 a 4 ans' , 2  ) , (4, 'entre 4 a 7 ans' , 3 ), (4, '7ans et plus', 4 ),
+    (5, 'marie(e)',1 ),           
+    (5, 'divorce(e)',1 ),
+    (5, 'en couple',1 )
     ;
 
 insert into service (nomService, iconeService) values

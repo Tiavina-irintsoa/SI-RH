@@ -11,5 +11,12 @@ namespace RH.Models
             get { return _intitule; }
             set { _intitule = value; }
         }
+
+        int? _valeurchoix;
+        public int? valeurchoix {
+            get { return _valeurchoix; }
+            set { _valeurchoix = value; }
+        }
+        
     }
 }

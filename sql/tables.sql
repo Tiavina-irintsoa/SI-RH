@@ -21,6 +21,9 @@ create table choix(
     intitulechoix varchar
 );
 
+alter table  choix 
+add column valeurchoix int;
+
 create table poste(
     idposte serial primary key,
     idservice integer,
@@ -46,4 +49,3 @@ create table criterechoix(
     idcritere int references critere(idcritere),
     idchoix int references choix(idchoix)
 );
-
