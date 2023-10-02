@@ -36,7 +36,7 @@ public class CritereBesoin : Critere {
                     if (rowsAffected > 0)
                     {
                         Console.WriteLine("Insertion réussie.");
-                    }
+                    }                                
                     else
                     {
                         Console.WriteLine("Aucune ligne insérée.");

@@ -2,8 +2,15 @@
         <i class="bx bxs-smile"></i>
         <span class="text">RH - DIMPEX </span>
       </a>
+
       <ul class="side-menu top">
-        <li class="active">
+        <li class="@(ViewData["page"] != null && ViewData["page"] == "service" ? "active" : "")">
+            <a href="@Url.Action("liste","service")">
+                <i class="bx bxs-dashboard"></i>
+                <span class="text">Service</span>
+            </a>
+        </li>
+        <li class="">
           <a href="#">
             <i class="bx bxs-dashboard"></i>
             <span class="text">Dashboard</span>

@@ -58,6 +58,6 @@ public class AjoutCritereController : Controller
         finally        {
             npg.Close();
         }
-        return View("Views/Home/Critere.cshtml",new List<TypeCritere>() );
+        return RedirectToAction("service/liste");
     }
 }

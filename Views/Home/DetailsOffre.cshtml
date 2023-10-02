@@ -1,6 +1,8 @@
 @{
-    Layout = "_NoLayout"; 
+    Layout = "_NoLayout";
 }
+@using RH.Models; 
+@model Dictionary<string, Critere>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -51,37 +53,37 @@
               >
                 <div class="about-right-content">
                   <div class="section-heading">
-                    <h6>Service Informatique</h6>
-                    <h4>Développeur</h4>
+                    <h6>Service @Model["genre"].Besoin.poste.service.nomService</h6>
+                    <h4>@Model["genre"].Besoin.poste.nomPoste</h4>
                     <div class="line-dec"></div>
                   </div>
                   <p>
-                    Dimpex est à la recherche d'un homme/femme pour assurer le poste de <a
+                    Dimpex est à la recherche d'un @Model["genre"].getStringDetails() pour assurer le poste de <a
                       rel="nofollow"
                       target="_blank"
-                      > Développeur </a
+                      > @Model["genre"].Besoin.poste.nomPoste </a
                     >. Ces critères seront requis:
                   </p>
                   <ul>
                     <li>
                         <span id="critere">
                             Diplome:
-                        </span> Licence
+                        </span> @Model["diplome"].getStringDetails()
                     </li>
                     <li>
                         <span id="critere">
                             Expérience:
-                        </span> +5 ans
+                        </span> @Model["experience"].getStringDetails()
                     </li>
                     <li>
                         <span id="critere">
                             Situation matrimoniale:
-                        </span> marié
+                        </span> @Model["situation matrimoniale"].getStringDetails()
                     </li>
                     <li>
                         <span id="critere">
                             Nationalité:
-                        </span> Malagasy
+                        </span>  @Model["nationalite"].getStringDetails()
                     </li>
                   </ul>
                 </div>

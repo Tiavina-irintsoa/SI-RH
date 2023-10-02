@@ -15,15 +15,137 @@ namespace RH.Models
             set { _typeCritere = value; }
         }
         List<Choix> _listeChoix;
-        
+
         public List<Choix> listeChoix {
             get { return _listeChoix; }
             set { _listeChoix = value; }
         }
 
-
-
         public Besoin Besoin { get => besoin; set => besoin = value; }
+
+        public virtual  string getStringDetails(){
+            return "huhu";
+        }
+
+
+    public static Dictionary<string, Critere> InstantiateCritereObjects(Dictionary<string, Critere> data)
+    {
+        Dictionary<string, Critere> critereDictionary = new Dictionary<string, Critere>();
+        foreach (var entry in data)
+        {
+            string critereType = entry.Key;
+            Critere critereData = entry.Value;
+            Critere critere = CreateCritereInstance(critereType);
+            critere._idcritere = critereData.idcritere;
+            critere._listeChoix = critereData.listeChoix;
+            critere._typeCritere = critereData._typeCritere;
+            critere.besoin = critereData.besoin;
+            critereDictionary[critereType] = critere;
+            Console.WriteLine( "type : "+critereDictionary[critereType].GetType()+"  "+critereDictionary[critereType].getStringDetails()   );
+        }
+
+        return critereDictionary;
+    }
+
+    public static Critere CreateCritereInstance(string critereType)
+    {
+        switch (critereType.ToLower())
+        {
+            case "genre":
+                return new Genre();
+            case "diplome":
+                return new Diplome();
+            case "situation matrimoniale":
+                return new SM();
+            case "experience":
+                return new Experience();
+            case "nationalite":
+                return new Nationalite();
+            default:
+                throw new ArgumentException("Type de critère non pris en charge : " + critereType);
+        }
+    }
+    public static Dictionary<string, Critere> GetCritereMapByBesoinId(NpgsqlConnection npg, int besoinId)
+    {
+        Dictionary<string, Critere> critereMap = new Dictionary<string, Critere>();
+        bool estOuvert = false;
+
+        if (npg == null)
+        {
+            estOuvert = true;
+            Connection connexion = new Connection();
+            npg = connexion.ConnectSante();
+        }
+
+        try
+        {
+            string sql = "SELECT * FROM v_critere_service WHERE idbesoin = @idbesoin";
+            using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))
+            {
+                command.Parameters.AddWithValue("@idbesoin", besoinId);
+
+                using (NpgsqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        int idCritere = reader.GetInt32(4);
+                        string intituleTypeCritere = reader.GetString(7);
+
+                        if (!critereMap.ContainsKey(intituleTypeCritere))
+                        {
+                            Critere critere = new Critere
+                            {
+                                idcritere = idCritere,
+                                besoin = new Besoin
+                                {
+                                    idBesoin = reader.GetInt32(8),
+                                    poste = new Poste{
+                                        nomPoste = reader.GetString(10),
+                                        service = new Service{
+                                            nomService = reader.GetString(1)
+                                        }
+                                    }
+                                },
+                                typeCritere = new TypeCritere
+                                {
+                                    idTypeCritere = reader.GetInt32(3),
+                                    nomcritere = reader.GetString(7),
+                                    listeChoix = new List<Choix>()
+                                },
+                                listeChoix = new List<Choix>()
+                            };
+
+                            critereMap[intituleTypeCritere] = critere;
+                        }
+
+                        // Ajoutez le choix actuel à la liste des choix du type de critère.
+                        Critere critereExist = critereMap[intituleTypeCritere];
+                        critereExist.listeChoix.Add(new Choix
+                        {
+                            idChoix = reader.GetInt32(5),
+                            intitule = reader.GetString(6)
+                        });
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.ToString());
+        }
+        finally
+        {
+            if (estOuvert)
+            {
+                npg.Close();
+            }
+        }
+
+        //instanciation
+        return InstantiateCritereObjects(critereMap);
+    }
+
+
 
     }
 }

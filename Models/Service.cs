@@ -9,6 +9,11 @@ public class Service
     string _nomService ;
     string _iconeService;
 
+    public string nomService{
+        get { return _nomService; }
+        set{ _nomService = value; }
+    }
+
     public Service() {}
 
     public Service(int id, string nom, string icone) {
@@ -22,7 +27,9 @@ public class Service
     } 
     public Service(int id) {
         this._idService = id;
-    }    
+    }  
+    
+      
 
     public static Service[] GetAll(NpgsqlConnection npg) {
         Service[] services = null;
@@ -76,4 +83,7 @@ public class Service
         get { return _iconeService; }
         set { _iconeService = value; }
     }
+
+    public string NomService1 { get => _nomService; set => _nomService = value; }
+
 }
