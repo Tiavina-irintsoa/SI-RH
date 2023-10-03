@@ -18,7 +18,7 @@
             <div  class="choix element-critere" >
                 @foreach( var choix in type.listeChoix ){
                     <div class="choice">
-                        <input type="checkbox" name="@type.idTypeCritere-choix" value="@choix.idChoix" >
+                        <input type="checkbox" class="@choix.valeurchoix" name="@type.idTypeCritere-choix" value="@choix.idChoix" >
                         <label for=""class="upper">
                             @choix.intitule
                         </label>
@@ -33,3 +33,45 @@
         </div>
     </div>
 </form>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        function trouverObjetParTypeCritere(liste, typeCritereRecherche) {
+            for (var i = 0; i < liste.length; i++) {
+                if (liste[i].idTypeCritere == typeCritereRecherche) {
+                    return liste[i];
+                }
+            }
+            return null; 
+        }
+
+        var listeJson = @Html.Raw(ViewBag.ListeJson);
+        console.log( listeJson );
+        
+        for (var i = 0; i < listeJson.length; i++) {
+            var type = listeJson[i];
+            var coeffName = type.idTypeCritere + '-choix'; 
+            var checkboxes = document.querySelectorAll('input[type="checkbox"][name="' + coeffName + '"]');
+            
+            checkboxes.forEach(function (checkbox) {
+                checkbox.addEventListener('change', function () {
+                    if (checkbox.checked) {
+                        var  typecritere = trouverObjetParTypeCritere(listeJson, checkbox.name.split('-')[0]);
+                         var arg1 = checkbox.className; 
+                        var arg2 = typecritere.idTypeCritere; 
+                        console.log('La case à cocher a été cochée pour idTypeCritere : '+checkbox.className );
+                        var checkboxes = document.querySelectorAll('input[type="checkbox"][name="' + arg2 + '-choix"]');    
+                        checkboxes.forEach(function (checkbox) {
+                            // Récupérez la classe en tant que nombre
+                            var classe = parseInt(checkbox.className);
+                            if (!isNaN(classe) && classe > arg1) {
+                                checkbox.checked = true; // Cochez la case à cocher
+                            }
+                        });
+                    }
+                });
+            });
+        }
+    });
+
+</script>
+

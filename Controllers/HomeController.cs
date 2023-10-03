@@ -26,6 +26,7 @@ public class HomeController : Controller
 
     public ActionResult GetBesoin(int idService)
     {
+    
         Console.WriteLine("vit");
         Besoin[] besoins = Besoin.GetAll(null, idService);
         // Console.WriteLine(besoins[0].accompli + " ok");

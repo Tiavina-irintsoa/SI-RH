@@ -11,7 +11,7 @@ VALUES
     ;
 
 -- Insertion dans la table choix
-INSERT INTO choix (idtypecritere, intitulechoix)
+INSERT INTO choix (idtypecritere, intitulechoix , valeurchoix)
 VALUES
     (1, 'homme' , 1),
     (1, 'femme' , 1),
@@ -146,10 +146,10 @@ INSERT INTO poste (idservice, nomposte) values
     (9, 'Responsable du Marketing Produit')
     ;
 
--- Insertion de données dans la table "besoin"
-INSERT INTO besoin (idposte, heurepersonne , heuresemaine , accompli)
-VALUES
-    (1, 40.0, 100.0, now()),
-    (1, 35.0, 90.0, now()),
-    (2, 38.0, 110.0, null),
-    (3, 30.0, 80.0, null);
+-- -- Insertion de données dans la table "besoin"
+-- INSERT INTO besoin (idposte, heurepersonne , heuresemaine , accompli)
+-- VALUES
+--     (1, 40.0, 100.0, now()),
+--     (1, 35.0, 90.0, now()),
+--     (2, 38.0, 110.0, null),
+--     (3, 30.0, 80.0, null);

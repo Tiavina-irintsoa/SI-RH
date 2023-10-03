@@ -63,11 +63,12 @@ namespace RH.Models{
 
                                 int idchoix = reader.GetInt32(2);
                                 string intitulechoix = reader.GetString(3);
-
+                                int valeur = reader.GetInt32( 4 );
                                 currentTypeCritere.listeChoix.Add(new Choix
                                 {
                                     idChoix = idchoix,
-                                    intitule = intitulechoix
+                                    intitule = intitulechoix,
+                                    valeurchoix = valeur
                                 });
                             }
                         }

@@ -80,6 +80,7 @@ namespace RH.Models
         try
         {
             string sql = "SELECT * FROM v_critere_service WHERE idbesoin = @idbesoin";
+            Console.WriteLine( " typecritere :  "+sql );
             using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))
             {
                 command.Parameters.AddWithValue("@idbesoin", besoinId);
@@ -88,33 +89,51 @@ namespace RH.Models
                 {
                     while (reader.Read())
                     {
-                        int idCritere = reader.GetInt32(4);
-                        string intituleTypeCritere = reader.GetString(7);
-
+                        int idServiceIndex = 0;
+                        int nomServiceIndex = 1;
+                        int iconservice = 2;
+                        int idTypeCritereIndex = 3;
+                        int idCritereIndex = 4;
+                        int idChoixIndex = 5;
+                        int intituleChoixIndex = 6;
+                        int valeurChoixIndex = 7;
+                        int nomTypeCritereIndex =8;
+                        int idBesoinIndex = 9;
+                        int idPosteIndex = 10;
+                        int nomPosteIndex = 11;
+                        int heureSemaineIndex = 12;
+                        int heurePersonneIndex = 13;
+                        int accompliIndex = 14;
+                        int nbPersonneIndex = 15;
+                        int coefficientIndex = 16;
+                        int idCritere = reader.GetInt32(idCritereIndex);
+                        string intituleTypeCritere = reader.GetString(nomTypeCritereIndex);
+                        Console.WriteLine( " typecritere :  "+intituleTypeCritere );
                         if (!critereMap.ContainsKey(intituleTypeCritere))
                         {
                             Critere critere = new Critere
                             {
-                                idcritere = idCritere,
+                                idcritere = reader.GetInt32(idCritereIndex),
                                 besoin = new Besoin
                                 {
-                                    idBesoin = reader.GetInt32(8),
-                                    poste = new Poste{
-                                        nomPoste = reader.GetString(10),
-                                        service = new Service{
-                                            nomService = reader.GetString(1)
+                                    idBesoin = reader.GetInt32(idBesoinIndex),
+                                    poste = new Poste
+                                    {
+                                        nomPoste = reader.GetString(nomPosteIndex),
+                                        service = new Service
+                                        {
+                                            nomService = reader.GetString(nomServiceIndex)
                                         }
                                     }
                                 },
                                 typeCritere = new TypeCritere
                                 {
-                                    idTypeCritere = reader.GetInt32(3),
-                                    nomcritere = reader.GetString(7),
+                                    idTypeCritere = reader.GetInt32(idTypeCritereIndex),
+                                    nomcritere = reader.GetString(nomTypeCritereIndex),
                                     listeChoix = new List<Choix>()
                                 },
                                 listeChoix = new List<Choix>()
                             };
-
                             critereMap[intituleTypeCritere] = critere;
                         }
 
