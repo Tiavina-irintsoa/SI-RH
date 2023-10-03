@@ -67,7 +67,7 @@ create table candidature(
     datecandidature timestamp default now(),
     validation int,
     code varchar,
-    idbesoin
+    idbesoin int references besoin(idbesoin)
 );
 
 create table choixcandidat(
