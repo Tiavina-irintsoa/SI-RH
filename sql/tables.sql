@@ -70,11 +70,11 @@ create table candidature(
     idbesoin int references besoin(idbesoin)
 );
 
-create table choixcandidat(
+create table choixcandidature(
     idcanditature int references candidat(idcandidat),
     idchoix int references choix(idchoix)
 );
-
+  
 create table fichier(
     idcanditature int references candidature(idcanditature),
     lienfichierdiplome varchar,

@@ -50,7 +50,7 @@
             data-wow-duration="0.5s"
             data-wow-delay="0.25s"
           >
-            <form id="contact" action="" method="post">
+            <form id="contact"  enctype="multipart/form-data" action="" method="post">
               <div class="row">
                 <div class="col-lg-12">
                   <div class="contact-dec">
@@ -65,21 +65,21 @@
                 <div class="col-lg-7">
                   <div class="fill-form">
                     <div class="row">
-                      <div class="col-lg-6">
+                      <div class="col-lg-6 mb-4">
                         <fieldset class="checkbox" >
                             <span class="gras" >Genre :</span>
                             <div class="row-radio"><input type="radio" name="genre"  > Homme</div> 
                             <div class="row-radio"><input type="radio" name="genre"  > Femme </div>
                         </fieldset>
                       </div>
-                      <div class="col-lg-6">
+                      <div class="col-lg-6 mb-4">
                         <fieldset class="checkbox" >
                             <span class="gras" >Nationalité :</span>
                             <div class="row-radio"><input type="radio" name="genre"  > Malagasy</div> 
                             <div class="row-radio"><input type="radio" name="genre"  > Etrangé(é) </div>
                         </fieldset>
                       </div>
-                      <div class="col-lg-6">
+                      <div class="col-lg-6 mb-4">
                         <fieldset class="checkbox" >
                             <span class="gras" >Diplome :</span>
                             <div class="row-radio"><input type="radio" name="genre"  > CEPE</div> 
@@ -90,7 +90,13 @@
                             <div class="row-radio"><input type="radio" name="genre"  > Doctorat </div>
                         </fieldset>
                       </div>
-                      <div class="col-lg-6">
+                      <div class="col-lg-6 mb-4">
+                        <fieldset class="checkbox" >
+                            <span class="gras" >Fichier diplome</span>
+                           <input type="file" name="file" id="file">
+                        </fieldset>
+                      </div>
+                      <div class="col-lg-6 mb-4">
                         <fieldset class="checkbox" >
                             <span class="gras" >Experience :</span>
                             <div class="row-radio"><input type="radio" name="genre"  > moins de 2 ans </div> 
@@ -99,7 +105,13 @@
                             <div class="row-radio"><input type="radio" name="genre"  > 7 ans + </div>
                         </fieldset>
                       </div>
-                      <div class="col-lg-6">
+                      <div class="col-lg-6 mb-4">
+                        <fieldset class="checkbox" >
+                            <span class="gras" >Fichier expérience</span>
+                           <input type="file" name="file" id="file">
+                      </fieldset>
+                      </div>
+                      <div class="col-lg-6 mb-4">
                         <fieldset class="checkbox" >
                             <span class="gras" >Situation matrimoniale :</span>
                             <div class="row-radio"><input type="radio" name="genre"  > En couple </div> 
