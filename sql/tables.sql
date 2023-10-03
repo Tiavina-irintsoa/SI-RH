@@ -49,3 +49,34 @@ create table criterechoix(
     idcritere int references critere(idcritere),
     idchoix int references choix(idchoix)
 );
+
+
+-- vaovao
+create table candidat(
+    idcandidat serial primary key,
+    nomcandidat varchar,
+    prenomcandidat varchar,
+    dtn date,
+    mail varchar,
+    contact int 
+);
+
+create table candidature(
+    idcanditature serial primary key,
+    idcandidat int references candidat(idcandidat),
+    datecandidature timestamp default now(),
+    validation int,
+    code varchar,
+    idbesoin
+);
+
+create table choixcandidat(
+    idcanditature int references candidat(idcandidat),
+    idchoix int references choix(idchoix)
+);
+
+create table fichier(
+    idcanditature int references candidature(idcanditature),
+    lienfichierdiplome varchar,
+    lienfichierexperience varchar
+);

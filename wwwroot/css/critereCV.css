@@ -18,12 +18,12 @@ select{
 
 .checkbox{
     display: flex;
-    flex-direction: row;
-    flex-wrap: nowrap;
+    flex-direction: column;
 }
 .checkbox input[type="radio"]{
     height: 20px !important;
     margin-top: 0px !important;
+    width: 5% !important;
 }
 
 .row-radio{
@@ -31,7 +31,12 @@ select{
     align-items: center;
     flex-direction: row;
     margin-left: 5px;
+    justify-content: flex-start;
 }
 .row-radio input[type="radio"]{
     margin-right: 5px;
+}
+
+.gras{
+    font-weight: 600;
 }
