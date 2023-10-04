@@ -2,9 +2,11 @@ using Microsoft.AspNetCore.Mvc;
 using RH.Models;
 
 namespace RH.Controllers{
-    public class ServiceController : Controller{
+    public class ServiceController : SessionController{
         public IActionResult Liste()
         {
+            if(!CookieIdAdminExists())
+                return  RedirectToAction( "admin" , "login" );  
             int idadmin = int.Parse(Request.Cookies["idadmin"]);
             Service[] liste = Service.GetAll(null , idadmin);
             foreach (var s in liste)
