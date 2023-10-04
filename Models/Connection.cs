@@ -7,7 +7,7 @@ public class Connection {
         NpgsqlConnection connection = null;
         try
         {
-            string connectionString = "Host=localhost;Port=5432;Database=rh;Username=postgres;Password=root";
+            string connectionString = "Host=localhost;Port=5432;Database=rh;Username=postgres;Password=postgres";
             connection = new NpgsqlConnection(connectionString);
             connection.Open();
             Console.WriteLine("Connexion à PostgreSQL réussie !");

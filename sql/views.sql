@@ -33,6 +33,24 @@ create or replace view v_critere_service as
     from service as s 
         natural join v_critere_details as cd;
 
+
+
+create or replace view v_choix_candidature as 
+    select * 
+    from candidature as c 
+        natural join choixcandidature as cd;
+
+create or replace view v_choix_candidature_type as 
+    select * 
+    from v_choix_candidature as vc 
+        natural join v_choix_type as ct;
+
+create or replace view v_candidat_candidature as
+    select * from candidat as c 
+        natural join candidature as cd
+        natural join v_poste_besoin as pb ;
+
+
 -- vaovao ralph
 create or replace view v_all_annonce as(
     select

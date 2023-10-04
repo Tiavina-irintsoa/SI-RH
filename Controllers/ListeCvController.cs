@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-// using RH.Models;
+using RH.Models;
 
 namespace RH.Controllers;
 
@@ -12,7 +12,8 @@ public class ListeCvController : Controller
     }
     public IActionResult Liste()
     {
-        return View("Views/Home/listeCv.cshtml");        
+        FicheCandidat[] fiches = FicheCandidat.GetAll(null, 1);
+        return View("Views/Home/listeCv.cshtml", fiches);        
     }
 
     public IActionResult Details()

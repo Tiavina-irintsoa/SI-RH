@@ -1,3 +1,4 @@
+@model FicheCandidat[]
 <div class="table-data">
           <div class="order">
             <div class="head">
@@ -8,6 +9,7 @@
             <table>
               <thead>
                 <tr>
+                  <th>Poste</th>
                   <th>Nom</th>
                   <th>Points</th>
                   <th>Date</th>
@@ -15,12 +17,16 @@
                 </tr>
               </thead>
               <tbody>
+                @foreach (var fiche in Model)
+                {
                 <tr>
-                  <td> Rakoto Jean </td>
-                  <td> 18 </td>
-                  <td> 2023-04-12 </td>
-                  <td> <a href='@Url.Action("Details","ListeCv")'>Voir</a> </td>
+                  <td> @fiche.candidat.nomposte</td>
+                  <td> @fiche.candidat.nom @fiche.candidat.prenom </td>
+                  <td> @fiche.point </td>
+                  <td> @fiche.candidat.datecandidature </td>
+                  <td> <a href='@Url.Action("Details","ListeCv", @fiche)'>Voir</a> </td>
                 </tr>
+                }
               </tbody>
             </table>
           </div>

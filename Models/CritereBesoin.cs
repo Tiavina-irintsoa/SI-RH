@@ -14,6 +14,40 @@ public class CritereBesoin : Critere {
         _coefficient = value;
     }
 
+    public static int getCoefficient(NpgsqlConnection npg, int idbesoin, int? idcritere){
+        int coeff = 0;
+        bool estOuvert = false;
+        
+        if (npg == null)        {
+            estOuvert = true;
+            Connection connexion = new Connection();
+            npg = connexion.ConnectSante();
+        }        
+        try        {
+            string sql = "SELECT coefficient FROM v_critere_service WHERE idbesoin = @idbesoin and idcritere = @idcritere";
+            Console.WriteLine( " sql :  "+sql );
+            using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))            {
+                command.Parameters.AddWithValue("@idbesoin", idbesoin);
+                command.Parameters.AddWithValue("@idcritere", idcritere);
+
+                using (NpgsqlDataReader reader = command.ExecuteReader())                {
+                    if (reader.Read())                    {
+                        coeff = reader.GetInt32(0);
+                    }
+                }
+            }
+        }
+        catch (Exception e)        {
+            Console.WriteLine(e.ToString());
+        }
+        finally        {
+            if (estOuvert)            {
+                npg.Close();
+            }
+        }    
+        return coeff;
+    }
+
     public void InsertChoixCritere(NpgsqlConnection npg) {
         bool estOuvert = false;
         string sql = "";

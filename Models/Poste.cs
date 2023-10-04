@@ -63,9 +63,9 @@ public class Poste{
         this._service = serv;
         this._nomPoste = np;
     }   
-    
+
     public Poste(Service serv, string np){
-    this._service = serv;
-    this._nomPoste = np;
-} 
+        this._service = serv;
+        this._nomPoste = np;
+    } 
 }
