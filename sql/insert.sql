@@ -10,6 +10,12 @@ VALUES
     ('situation matrimoniale')
     ;
 
+insert into type_contrat ( nomtype_contrat )
+values( 'contrat  a duree determinee' ),
+('contrat a  duree indeterminee'),
+('contrat temporaire')
+;
+
 -- Insertion dans la table choix
 INSERT INTO choix (idtypecritere, intitulechoix , valeurchoix)
 VALUES
@@ -153,3 +159,23 @@ INSERT INTO poste (idservice, nomposte) values
 --     (1, 35.0, 90.0, now()),
 --     (2, 38.0, 110.0, null),
 --     (3, 30.0, 80.0, null);
+
+insert into typeuser( description )
+values( 'directeur' ),
+('finance'),
+('informatique')
+;
+
+insert into useradmin ( nom , mdp , idtypeuser )
+values( 'directeur' , 'directeur' , 1 ),
+( 'finance' , 'finance' , 2 ),
+( 'info' , 'info' , 3 );
+
+insert into  admin_service
+values( 1 , 1 ),
+(1,2),
+(2,1),
+(2,2),
+(2,3),
+(3,4),
+(3,5);

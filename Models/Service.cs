@@ -29,6 +29,53 @@ public class Service
         this._idService = id;
     }  
     
+    
+    public static Service[] GetAll(NpgsqlConnection npg , int user) {
+        Service[] services = null;
+        bool estOuvert = false;
+        
+        if (npg == null)        {
+            estOuvert = true;
+            Connection connexion = new Connection();
+            npg = connexion.ConnectSante();
+        }        
+        try
+        {
+            string sql = "SELECT * FROM v_admin_service where idadmin = @idamin ";
+            Console.WriteLine(sql);            
+            using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))           
+            {
+
+                command.Parameters.AddWithValue("@idamin", user);
+                using (NpgsqlDataReader reader = command.ExecuteReader())                {
+                    List<Service> serviceList = new List<Service>();
+                    while (reader.Read())                    
+                    {
+                        int  idadmin      = reader.GetInt32(0);
+                        int idtypeuser    = reader.GetInt32(1);
+                        string description   = reader.GetString(2);
+                        string nom           = reader.GetString(3);
+                        string mdp           = reader.GetString(4);
+                        int idservice     = reader.GetInt32(5);
+                        string nomservice    = reader.GetString(6);
+                        string iconeservice  = reader.GetString(7);
+                        Service service = new Service(idservice, nom, iconeservice);
+                        serviceList.Add(service);
+                    }
+                    services = serviceList.ToArray();
+                }
+            }
+        }
+        catch (Exception e)        {
+            Console.WriteLine(e.ToString());
+        }
+        finally        {
+            if (estOuvert)            {
+                npg.Close();
+            }
+        }        
+        return services;
+    }
       
 
     public static Service[] GetAll(NpgsqlConnection npg) {

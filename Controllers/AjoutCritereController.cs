@@ -6,21 +6,27 @@ using Npgsql;
 
 namespace RH.Controllers;
 
-public class AjoutCritereController : Controller
+public class AjoutCritereController : SessionController
 {
     public IActionResult save()
     {
+        if(!CookieIdAdminExists())
+            return  RedirectToAction( "admin" , "login" ); 
         Connection connexion = new Connection();
         NpgsqlConnection npg = connexion.ConnectSante();
         List<CritereBesoin> l_c = new List<CritereBesoin>();
         var idposte = Request.Cookies["idposte"];
         var heuresemaine = Request.Cookies["heuresemaine"];
         var heuremploye = Request.Cookies["heuremploye"];
+        var idtypecontrat = Request.Cookies["typecontrat"];
         Besoin  ajoutBesoin = new Besoin{
             idBesoin = Utilitaire.GetNextSerialValue( npg , "besoin_idbesoin_seq" ),
             poste = new Poste{ idPoste = int.Parse(idposte) },
             heurePersonne = int.Parse(heuremploye),
-            heureSemaine = int.Parse(heuresemaine)
+            heureSemaine = int.Parse(heuresemaine),
+            Type_contrat = new TypeContrat{
+                Idtypecontrat = int.Parse(idtypecontrat)
+            }
         };
         ajoutBesoin.Insert(npg);
         Console.WriteLine(" idposte : "+idposte);

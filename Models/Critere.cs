@@ -121,7 +121,7 @@ namespace RH.Models
                                     {
                                         nomPoste = reader.GetString(nomPosteIndex),
                                         service = new Service
-                                        {
+                                            {
                                             nomService = reader.GetString(nomServiceIndex)
                                         }
                                     }

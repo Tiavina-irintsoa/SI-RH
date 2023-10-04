@@ -1,0 +1,29 @@
+@{
+    Layout = "_form"; 
+}
+      <div id="div">
+        <div id="form-title">
+            <h1>
+                Se connecter en tant qu'admin
+            </h1>
+        </div>
+        <form action='@Url.Action("connexionAdmin","login")' method="post">
+          <div class="">
+           <div class="my-input-group">
+             <label for="">
+                Nom : 
+            </label>
+            <input type="text" value="directeur" name="nom" required>
+           </div>
+           <div class="my-input-group">
+             <label for="">
+              Mot de passe
+            </label>
+            <input type="password" value="directeur" name="mdp"  required>
+           </div>
+            <div class="my-input-group">
+                <input type="submit" value="Connexion">
+            </div>
+          </div>
+        </form>        
+      </div>

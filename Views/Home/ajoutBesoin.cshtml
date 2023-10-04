@@ -23,15 +23,26 @@
                 }
             </select>
            </div>
+            <div class="my-input-group">
+             <label for="">
+                Type de contrat : 
+            </label>
+            <select name="idtypecontrat">
+                @foreach (var contrat in @ViewBag.TypeContrat)
+                {
+                    <option value="@contrat.Idtypecontrat">@contrat.Nomtypecontrat</option>
+                }
+            </select>
+           </div>
            <div class="my-input-group">
              <label for="">
-                Nombre d'heures/semaine : 
+                Nombre d'heures/mois : 
             </label>
             <input type="number" name="heuresemaine" required>
            </div>
            <div class="my-input-group">
              <label for="">
-                Nombre d'heures/employé : 
+                Nombre d'heures/employé/mois : 
             </label>
             <input type="number" name="heuremploye" value="40" required>
            </div>

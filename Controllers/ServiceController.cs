@@ -5,7 +5,8 @@ namespace RH.Controllers{
     public class ServiceController : Controller{
         public IActionResult Liste()
         {
-            Service[] liste = Service.GetAll(null);
+            int idadmin = int.Parse(Request.Cookies["idadmin"]);
+            Service[] liste = Service.GetAll(null , idadmin);
             foreach (var s in liste)
             {
                 Console.WriteLine(s.IconeService);

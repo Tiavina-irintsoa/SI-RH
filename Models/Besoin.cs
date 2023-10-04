@@ -11,6 +11,7 @@ public class Besoin{
     DateTime? _accompli;
     string _stringaccompli;
     int _nbpersonne;
+    TypeContrat type_contrat;
     
     public int nbpersonne {
         get { return _nbpersonne; }
@@ -40,6 +41,9 @@ public class Besoin{
         set { _accompli = value; }
     }
 
+    public TypeContrat Type_contrat { get => type_contrat; set => type_contrat = value; }
+
+
     public Besoin() {}
 
 
@@ -51,12 +55,19 @@ public class Besoin{
         this._accompli = ac;
         this.nbpersonne = nbp;
     }   
+    public int IntAccompli(){
+        if (accompli == null)
+        {
+            return 0;
+        }
+        return 1;
+    }
     public string StringAccompli(){
         if (accompli == null)
         {
-            return "completed";
+            return "not-completed";
         }
-        return "not-completed";
+        return "completed";
     }
     public Besoin(int idbesoin, Poste poste){
         _idBesoin = idbesoin;
@@ -72,14 +83,14 @@ public class Besoin{
             Connection connexion = new Connection();
             npg = connexion.ConnectSante();
         }        
-        try        {
+        try{
             string sql = "SELECT * FROM v_poste_besoin where idservice=" + ids;
             Console.WriteLine(sql);         
             Service service = new(ids);
             using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))            {
                 using (NpgsqlDataReader reader = command.ExecuteReader())                {
                     List<Besoin> besoinList = new List<Besoin>();
-                    while (reader.Read())                    {
+                    while (reader.Read()){
                         int idBesoin = reader.GetInt32(3);
                         Poste poste = new(reader.GetInt32(0), service, reader.GetString(2));
                         double heureSemaine = reader.GetInt32(4);
@@ -109,6 +120,51 @@ public class Besoin{
         return besoins;
     }
     
+public static void Update(int idbesoin, NpgsqlConnection npg)
+{
+    bool estOuvert = false;
+
+    if (npg == null)
+    {
+        estOuvert = true;
+        Connection connexion = new Connection();
+        npg = connexion.ConnectSante();
+    }
+
+    try
+    {
+        string sql = "UPDATE besoin SET accompli = NOW() WHERE idbesoin = @idbesoin";
+
+        using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))
+        {
+            command.Parameters.AddWithValue("@idbesoin", idbesoin);
+
+            int rowsAffected = command.ExecuteNonQuery();
+
+            if (rowsAffected > 0)
+            {
+                Console.WriteLine("Mise à jour réussie.");
+            }
+            else
+            {
+                Console.WriteLine("Aucune ligne mise à jour.");
+            }
+        }
+    }
+    catch (Exception e)
+    {
+        Console.WriteLine(e.ToString());
+    }
+    finally
+    {
+        if (estOuvert)
+        {
+            npg.Close();
+        }
+    }
+}
+
+
     public void Insert(NpgsqlConnection npg) {
     bool estOuvert = false;
     
@@ -119,11 +175,11 @@ public class Besoin{
     }        
 
     try {
-        string sql = "INSERT INTO besoin (idposte, heurepersonne, heuresemaine";
+        string sql = "INSERT INTO besoin (idposte, heurepersonne, heuresemaine , idtypecontrat ";
         if (this.idBesoin != 0) { // Vérifiez si idbesoin n'est pas égal à la valeur par défaut (0 pour int)
             sql += ", idbesoin";
         }
-        sql += ") VALUES (@idPoste, @heurePersonne, @heureSemaine";
+        sql += ") VALUES (@idPoste, @heurePersonne, @heureSemaine , @idtypecontrat";
         if (this.idBesoin != 0) { // Vérifiez à nouveau ici
             sql += ", @idBesoin";
         }
@@ -134,6 +190,8 @@ public class Besoin{
             command.Parameters.AddWithValue("@idPoste", poste.idPoste);
             command.Parameters.AddWithValue("@heurePersonne", heurePersonne);
             command.Parameters.AddWithValue("@heureSemaine", heureSemaine);
+            command.Parameters.AddWithValue("@idtypecontrat", this.type_contrat.Idtypecontrat);
+
 
             if (this.idBesoin != 0) {
                 command.Parameters.AddWithValue("@idBesoin", this.idBesoin);

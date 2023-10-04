@@ -4,7 +4,7 @@ using RH.Models;
 
 namespace RH.Controllers;
 
-public class CritereController : Controller
+public class CritereController : SessionController
 {
     private readonly ILogger<CritereController> _logger;
 
@@ -13,6 +13,8 @@ public class CritereController : Controller
     }
     public IActionResult Edit()
     {
+        if(!CookieIdAdminExists())
+            return  RedirectToAction( "admin" , "login" );  
         var idposte = Request.Cookies["idposte"];
         var heuresemaine = Request.Cookies["heuresemaine"];
         var heuremploye = Request.Cookies["heuremploye"];

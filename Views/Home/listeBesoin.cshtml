@@ -12,9 +12,52 @@
         {
              <li class="@b.StringAccompli()">
                 <p>@b.poste.nomPoste (@b.nbpersonne)</p>
-                <i class='bx bx-dots-vertical-rounded' ></i>
+                <a href="" onclick="return  confirmDelete( @b.idBesoin , @ViewBag.IdService , @b.IntAccompli()) "><i class='bx bx-dots-vertical-rounded' ></i></a>
             </li> 
         }
         </ul>
     </div>
 </div>
+<script>
+    function confirmDelete(itemId , idservice,accompli) {
+        var confirmBox = document.createElement('div');
+        confirmBox.classList.add('confirm-box');
+        var message = document.createElement('p');
+        message.textContent = 'quelle action voulez vous faire?';
+        confirmBox.appendChild(message);
+        
+        // Create the confirm and cancel buttons
+        var confirmButton = document.createElement('button');
+        confirmButton.textContent = 'Terminer l\'annonce';
+        confirmButton.classList.add('confirm-button');
+        if( accompli == 1 ){
+            confirmButton.disabled = true;
+            confirmButton.style.backgroundColor = '#ccc'; // Définit la couleur de fond en gris
+            confirmButton.style.cursor = 'not-allowed';
+        }
+        confirmButton.onclick = function() {
+            // Redirect to the delete URL with the item ID
+            window.location.href = '@Url.Action("Accompli", "besoin")' + '?idbesoin=' + itemId+'&idservice='+idservice;
+        };
+        
+        var cancelButton = document.createElement('button');
+        cancelButton.textContent = 'Voir détails';
+        cancelButton.classList.add('cancel-button');
+        cancelButton.onclick = function() {
+            
+            // Remove the confirmation message box and unblur the page
+            window.location.href = '@Url.Action("detailsOffre", "welcome")?besoin='+itemId;
+        };
+        var buttonWrapper = document.createElement('div');
+        buttonWrapper.classList.add('button-wrapper');
+        buttonWrapper.appendChild(confirmButton);
+        buttonWrapper.appendChild(cancelButton);
+        confirmBox.appendChild(buttonWrapper);
+        confirmBox.style.opacity='inherit';
+        // Add the confirmation message box to the page
+        document.body.appendChild(confirmBox);
+        
+        // Prevent the link from redirecting automatically
+        return false;
+    }
+</script>

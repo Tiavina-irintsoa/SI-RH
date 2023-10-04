@@ -4,7 +4,7 @@ using RH.Models;
 
 namespace RH.Controllers;
 
-public class HomeController : Controller
+public class HomeController : SessionController
 {
     private readonly ILogger<HomeController> _logger;
 
@@ -15,9 +15,10 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
+        if(!CookieIdAdminExists())
+          return  RedirectToAction( "admin" , "login" );            
         return View();
     }
-
     public ActionResult Test()
     {
         Service[] services = Service.GetAll(null);
@@ -26,8 +27,8 @@ public class HomeController : Controller
 
     public ActionResult GetBesoin(int idService)
     {
-    
-        Console.WriteLine("vit");
+        if(!CookieIdAdminExists())
+          return  RedirectToAction( "admin" , "login" );  
         Besoin[] besoins = Besoin.GetAll(null, idService);
         // Console.WriteLine(besoins[0].accompli + " ok");
         ViewBag.IdService = idService;

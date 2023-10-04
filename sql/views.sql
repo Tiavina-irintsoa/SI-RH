@@ -8,17 +8,6 @@ create or replace view v_criter_choix as
     from typecritere as t
         natural join choix;
 
-create or replace view v_annonce as(
-    select
-    besoin.idbesoin, besoin.nb_personne, service.nomService, service.iconeService, poste.nomPoste
-    from 
-    v_poste_besoin as besoin 
-    join poste 
-        on besoin.idPoste = poste.idPoste
-    join service on service.idService = poste.idService
-);
-
--- vaovao ralph
 create or replace view v_choix_type as 
     select * 
     from choix as c 
@@ -43,3 +32,40 @@ create or replace view v_critere_service as
     select * 
     from service as s 
         natural join v_critere_details as cd;
+
+-- vaovao ralph
+create or replace view v_all_annonce as(
+    select
+    besoin.idbesoin, besoin.nb_personne, service.nomService, service.iconeService, poste.nomPoste
+    from 
+    v_poste_besoin as besoin 
+    join poste 
+        on besoin.idPoste = poste.idPoste
+    join service on service.idService = poste.idService
+);
+
+create or replace view v_annonce as(
+    select
+    besoin.idbesoin, besoin.nb_personne, service.nomService, service.iconeService, poste.nomPoste
+    from 
+    v_poste_besoin as besoin 
+    join poste 
+        on besoin.idPoste = poste.idPoste
+    join service on service.idService = poste.idService
+    where accompli is null
+);
+
+create or replace view v_admin_typeuser as 
+    select * 
+    from typeuser as t 
+        natural join useradmin as a;
+
+create or replace view v_assiociation_admin_service as 
+    select * 
+    from admin_service as a 
+        natural join service as  s ;
+
+create or replace view v_admin_service as 
+    select * 
+    from v_admin_typeuser 
+        natural join v_assiociation_admin_service;
