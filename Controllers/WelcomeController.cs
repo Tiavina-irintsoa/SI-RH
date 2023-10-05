@@ -4,7 +4,6 @@ using RH.Models;
 namespace RH.Controllers{
     public class WelcomeController : Controller{
         public ActionResult Index(){
-            Response.Cookies.Delete("idadmin");
             Console.WriteLine(" requeste : "+Request.Cookies.ContainsKey("idadmin"));
             Annonce[] annonces = Annonce.GetAllAnnonces(null);
             return View("~/Views/Home/Annonces.cshtml", annonces);
