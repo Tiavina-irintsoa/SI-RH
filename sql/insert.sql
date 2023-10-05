@@ -29,7 +29,10 @@ VALUES
     (3, 'Licence', 4 ),
     (3, 'Master' , 5),    
     (3, 'Doctorat' , 6),
-    (4, 'moins de 2 ans' , 1 ) , (4, 'entre 2 a 4 ans' , 2  ) , (4, 'entre 4 a 7 ans' , 3 ), (4, '7ans et plus', 4 ),
+    (4, 'moins de 2 ans' , 1 ) , 
+    (4, 'entre 2 a 4 ans' , 2  ) , 
+    (4, 'entre 4 a 7 ans' , 3 ), 
+    (4, '7ans et plus', 4 ),
     (5, 'marie(e)',1 ),           
     (5, 'divorce(e)',1 ),
     (5, 'en couple',1 )
@@ -152,7 +155,7 @@ INSERT INTO poste (idservice, nomposte) values
     (9, 'Responsable du Marketing Produit')
     ;
 
--- -- Insertion de données dans la table "besoin"
+-- Insertion de données dans la table "besoin"
 -- INSERT INTO besoin (idposte, heurepersonne , heuresemaine , accompli)
 -- VALUES
 --     (1, 40.0, 100.0, now()),
@@ -179,3 +182,29 @@ values( 1 , 1 ),
 (2,3),
 (3,4),
 (3,5);
+
+insert into candidat( nomcandidat, prenomcandidat , dtn, mail, contact) values
+    ('Razafindrakoto', 'Tsiory', '2003-04-19', 'tsiorySrbd@gmail.com', 0328645925),
+    ('Andrianatoandro', 'Soahery', '2003-09-12', 'herysoa@gmail.com', 3884),
+    ('Rajaonasitera', 'Mihaja', '2004-06-10', 'mihajaraj@gmail.com', 74512),
+    ('Rasoavololona', 'Tiana', '2005-01-07', 'soatiana@gmail.com', 5471),
+    ('Andriantefy', 'Hasina', '2006-08-21', 'hasina@gmail.com', 8521);
+
+insert into candidature( idcandidat, datecandidature, validation, code, idbesoin) values
+    (1, '2023-02-16', '0', 'C00-001', 1),
+    (2, '2023-05-06', '1', 'C00-002', 2),
+    (3, '2023-07-15', '0', 'C00-003', 1),
+    (4, '2023-01-03', '1', 'C00-004', 3),
+    (5, '2023-09-01', '0', 'C00-005', 4);
+
+insert into choixcandidature( idcanditature, idchoix) values
+    (1, 1), (1, 3), (1,7), (1, 12), (1, 16),
+    (2, 2), (2, 4), (2,8), (2, 13), (2, 15),
+    (3, 2), (3, 3), (3,10), (3, 11), (3, 17),
+    (4, 1), (4, 4), (4,9), (4, 11), (4, 15),
+    (5, 2), (5, 3), (5,8), (5, 14), (5, 16);
+  
+insert into fichier( idcanditature, lienfichierdiplome, lienfichierexperience) values
+    (1, 'fichier1', 'fichier2'),
+    (3, 'fichier3', 'fichier4'),
+    (5, 'fichier5', 'fichier6');

@@ -9,6 +9,10 @@ delete from type_contrat;
 delete from admin_service;
 delete from useradmin;
 delete from typeuser;
+delete from fichier;
+delete from choixcandidature;
+delete from candidature;
+delete from candidat;
 
 
 alter sequence besoin_idbesoin_seq           restart with 1;
@@ -20,7 +24,8 @@ alter sequence typecritere_idtypecritere_seq restart with 1;
 alter sequence type_contrat_idtypecontrat_seq restart with 1;
 alter sequence typeuser_idtypeuser_seq restart with 1;
 alter sequence useradmin_idadmin_seq restart with 1;
-alter sequence useradmin_idadmin_seq restart with 1;
+alter sequence candidature_idcanditature_seq restart with 1;
+alter sequence candidat_idcandidat_seq restart with 1;
 
 
 DO $$ 
