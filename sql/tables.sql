@@ -114,3 +114,19 @@ create table admin_service(
 -- vaovao
 alter table candidat 
     alter column contact type varchar;
+
+create table questionnaire(
+    idquestionnaire serial primary key, 
+    idbesoin integer references besoin(idbesoin)
+);
+
+create table question(
+    idquestion serial primary key, 
+    idquestionnaire integer references questionnaire(idquestionnaire), 
+    question varchar
+);
+create table option(
+    idoption serial primary key, 
+    idquestion integer references question(idquestion) , 
+    option varchar
+);
