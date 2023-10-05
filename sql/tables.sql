@@ -81,7 +81,6 @@ create table fichier(
     lienfichierexperience varchar
 );
 
--- vaovao
 create table type_contrat(
     idtypecontrat serial primary key,
     nomtype_contrat varchar
@@ -112,4 +111,6 @@ create table admin_service(
     idservice int references service(idservice)
 );
 
-=
+-- vaovao
+alter table candidat 
+    alter column contact type varchar;
