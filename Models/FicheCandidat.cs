@@ -46,11 +46,9 @@ public class FicheCandidat{
             npg = connexion.ConnectSante();
         }        
         try        {
-            string sql = "SELECT * FROM v_choix_candidature_type WHERE idbesoin = @idbesoin and idcandidat = @idcandidat";
-            Console.WriteLine( " typecritere :  "+sql );
+            string sql = "SELECT * FROM v_choix_candidature_type WHERE idbesoin=" + idbesoin+ " and idcandidat= " + idcandidat;
+            Console.WriteLine( sql );
             using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))            {
-                command.Parameters.AddWithValue("@idbesoin", idbesoin);
-                command.Parameters.AddWithValue("@idcandidat", idcandidat);
 
                 using (NpgsqlDataReader reader = command.ExecuteReader())                {
                     while (reader.Read())                    {
@@ -68,7 +66,6 @@ public class FicheCandidat{
                         
                         int idCritere = reader.GetInt32(idtypecritere);
                         string intituleTypeCritere = reader.GetString(nomtypecritere);
-                        Console.WriteLine( " typecritere :  "+intituleTypeCritere );
 
                         if (!choix.ContainsKey(intituleTypeCritere))
                         {
@@ -76,6 +73,7 @@ public class FicheCandidat{
                             choix[intituleTypeCritere] = listeChoix;
                         }
                         List<Choix> l_choix = choix[intituleTypeCritere];
+                        // Console.WriteLine(intituleTypeCritere + ": " + reader.GetString(intitulechoix));
                         l_choix.Add(new Choix{
                             idChoix = reader.GetInt32(idchoixindex),
                             intitule = reader.GetString(intitulechoix)
@@ -111,13 +109,24 @@ public class FicheCandidat{
             
             foreach (var kvp in choix) {
                 string cleCritere = kvp.Key;
-                Critere critere = criteres[cleCritere];
+                Console.WriteLine($"Clé : {cleCritere}");
 
-                if (Enumerable.SequenceEqual(kvp.Value, critere.listeChoix)) {
-                    coefficient = CritereBesoin.getCoefficient(npg, idbesoin, critere.idcritere);
-                    point = point + 1 * coefficient;
+                if (criteres.TryGetValue(cleCritere, out var critere))
+                {
+                    Console.WriteLine("Candidat");
+                    foreach (var choixItem in kvp.Value)
+                    {
+                        Console.WriteLine($"  Élément de la liste : {choixItem.intitule}");
+                        if (critere.listeChoix.Any(c => c.intitule == choixItem.intitule))
+                        {
+                            Console.WriteLine("  Élément correspondant trouvé dans le critère.");
+                            coefficient = CritereBesoin.getCoefficient(npg, idbesoin, critere.idcritere);
+                            point = point + 1 * coefficient;
+                        }
+                    }
                 }
             }
+            Console.WriteLine(point);
         }
         catch (Exception e)        {
             Console.WriteLine(e.ToString());

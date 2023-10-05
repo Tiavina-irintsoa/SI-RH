@@ -1,0 +1,34 @@
+@model Besoin[]
+
+<main>
+    <div class="table-data">
+        <div class="order">
+            <div class="head">
+                <h3>Liste des besoins</h3>
+                <i class="bx bx-list-ul"></i>
+            </div>
+            <table>
+                <thead>
+                <tr>
+                    <th>Heure/semaine</th>
+                    <th>Nb pers.</th>
+                    <th>Liste des CV</th>
+                </tr>
+                </thead>
+                <tbody>
+                    @foreach (var b in Model)
+                    {
+                        <tr>
+                            <td>
+                                <img src="img/people.png" />
+                                <p> @b.heurePersonne </p>
+                            </td>
+                            <td> @b.nbpersonne </td>
+                            <td> <a href='@Url.Action("Liste","ListeCv", new{idbesoin=@b.idBesoin})'>Voir</a> </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</main>

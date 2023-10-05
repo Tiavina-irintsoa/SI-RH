@@ -41,7 +41,7 @@ namespace RH.Models
             critere._typeCritere = critereData._typeCritere;
             critere.besoin = critereData.besoin;
             critereDictionary[critereType] = critere;
-            Console.WriteLine( "type : "+critereDictionary[critereType].GetType()+"  "+critereDictionary[critereType].getStringDetails()   );
+            // Console.WriteLine( "type : "+critereDictionary[critereType].GetType()+"  "+critereDictionary[critereType].getStringDetails()   );
         }
 
         return critereDictionary;
@@ -79,11 +79,10 @@ namespace RH.Models
 
         try
         {
-            string sql = "SELECT * FROM v_critere_service WHERE idbesoin = @idbesoin";
-            Console.WriteLine( " typecritere :  "+sql );
+            string sql = "SELECT * FROM v_critere_service WHERE idbesoin =" + besoinId;
+            Console.WriteLine( sql );
             using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))
             {
-                command.Parameters.AddWithValue("@idbesoin", besoinId);
 
                 using (NpgsqlDataReader reader = command.ExecuteReader())
                 {
@@ -108,7 +107,7 @@ namespace RH.Models
                         int coefficientIndex = 16;
                         int idCritere = reader.GetInt32(idCritereIndex);
                         string intituleTypeCritere = reader.GetString(nomTypeCritereIndex);
-                        Console.WriteLine( " typecritere :  "+intituleTypeCritere );
+                        // Console.WriteLine( " typecritere :  "+intituleTypeCritere );
                         if (!critereMap.ContainsKey(intituleTypeCritere))
                         {
                             Critere critere = new Critere

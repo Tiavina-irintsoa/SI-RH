@@ -75,18 +75,17 @@ public class Candidat{
                 using (NpgsqlDataReader reader = command.ExecuteReader())                {
                     List<Candidat> candidatList = new List<Candidat>();
                     while (reader.Read())                    {
-                        int idcandidat = reader.GetInt32(0);
-                        string nom = reader.GetString(1);
-                        string prenom = reader.GetString(2);
-                        string mail = reader.GetString(4);
-                        string contact = reader.GetString(5);
-                        DateTime dtn = reader.GetDateTime(3);
+                        int idcandidat = reader.GetInt32(1);
+                        string nom = reader.GetString(2);
+                        string prenom = reader.GetString(3);
+                        string mail = reader.GetString(5);
+                        string contact = reader.GetString(6);
+                        DateTime dtn = reader.GetDateTime(4);
                         DateTime datecandidature = reader.GetDateTime(8);
                         string nomposte = reader.GetString(13);
                         
                         Candidat candidat = new Candidat(idcandidat, nom, prenom, mail, contact, dtn, datecandidature, nomposte);
                         candidatList.Add(candidat);
-                        Console.WriteLine("vita");
                     }
                     candidats = candidatList.ToArray();
                 }
@@ -101,7 +100,6 @@ public class Candidat{
                 npg.Close();
             }
         }      
-       Console.WriteLine(candidats.Length); 
         return candidats;
     }
 }

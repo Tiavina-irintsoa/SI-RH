@@ -10,9 +10,17 @@ public class ListeCvController : Controller
     public ListeCvController(ILogger<ListeCvController> logger){
         _logger = logger;
     }
-    public IActionResult Liste()
+
+    public IActionResult BesoinListe()
     {
-        FicheCandidat[] fiches = FicheCandidat.GetAll(null, 1);
+        Besoin[] besoins = Besoin.GetAll(null, 1);
+        return View("Views/Home/besoinListe.cshtml", besoins);        
+    }
+
+    public IActionResult Liste(int idbesoin)
+    {
+        Console.WriteLine(idbesoin);
+        FicheCandidat[] fiches = FicheCandidat.GetAll(null, idbesoin);
         return View("Views/Home/listeCv.cshtml", fiches);        
     }
 

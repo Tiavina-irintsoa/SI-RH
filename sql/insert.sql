@@ -192,6 +192,10 @@ insert into candidat( nomcandidat, prenomcandidat , dtn, mail, contact) values
     ('Rasoavololona', 'Tiana', '2005-01-07', 'soatiana@gmail.com', '034 86 439 25'),
     ('Andriantefy', 'Hasina', '2006-08-21', 'hasina@gmail.com', '032 86 459 13');
 
+
+
+
+-- 
 insert into candidature( idcandidat, datecandidature, validation, code, idbesoin) values
     (1, '2023-02-16', '0', 'C00-001', 1),
     (2, '2023-05-06', '1', 'C00-002', 2),

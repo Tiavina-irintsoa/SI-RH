@@ -17,8 +17,6 @@ public class Besoin{
         get { return _nbpersonne; }
         set { _nbpersonne = value; }
     }
-
-
     public int idBesoin {
         get { return _idBesoin; }
         set { _idBesoin = value; }
@@ -90,20 +88,18 @@ public class Besoin{
             using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))            {
                 using (NpgsqlDataReader reader = command.ExecuteReader())                {
                     List<Besoin> besoinList = new List<Besoin>();
-                    while (reader.Read()){
+                    while (reader.Read()) {
                         int idBesoin = reader.GetInt32(3);
                         Poste poste = new(reader.GetInt32(0), service, reader.GetString(2));
                         double heureSemaine = reader.GetInt32(4);
                         double heurePersonne = reader.GetInt32(5);
                         DateTime? accompli = reader.IsDBNull(6) ? (DateTime?)null : reader.GetDateTime(6);
-                        int nbp = reader.GetInt32(7);
+                        int nbp = reader.GetInt32(8);
                        
                         Besoin besoin = new Besoin(idBesoin, poste, heureSemaine, heurePersonne, accompli , nbp );
                         besoinList.Add(besoin);
-                        Console.WriteLine("vita");
                     }
                     besoins = besoinList.ToArray();
-                        Console.WriteLine("vita1");
                 }
             }
         }
@@ -163,7 +159,6 @@ public static void Update(int idbesoin, NpgsqlConnection npg)
         }
     }
 }
-
 
     public void Insert(NpgsqlConnection npg) {
     bool estOuvert = false;
