@@ -130,3 +130,15 @@ create table option(
     idquestion integer references question(idquestion) , 
     option varchar
 );
+
+ALTER TABLE candidature RENAME COLUMN idcanditature TO idcandidature;
+
+ALTER TABLE choixcandidature RENAME COLUMN idcanditature TO idcandidature;
+
+ALTER TABLE fichier RENAME COLUMN idcanditature TO idcandidature;
+
+-- vaovao 2
+ALTER TABLE choixcandidature DROP CONSTRAINT choixcandidature_idcanditature_fkey;
+
+ALTER TABLE choixcandidature
+ADD CONSTRAINT choixcandidature_idcanditature_fkey FOREIGN KEY (idcandidature) REFERENCES candidature(idcandidature);
