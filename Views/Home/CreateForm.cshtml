@@ -1,5 +1,7 @@
 <div class="formcreator">
-            
+          <h1>
+            Formulaire de test
+          </h1>
           <div id="questions">
             <div id="submitted">
                
@@ -19,9 +21,25 @@
               </div>
             </form>
           </div>
-          <div id="add">+ Ajouter une question</div>
+          <div class="mybutton" id="add">Sauvegarder la question</div>
+          <a id="terminer" class="mybutton" href='@Url.Action("save","test")'>
+            <div ">Terminer</div>
+          </a>
+
         </div>
         <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '@Url.Action("GetAll", "test")', true);
+            xhr.onreadystatechange = function() {
+                if (xhr.readyState === 4 && xhr.status === 200) {
+                    const response = JSON.parse(xhr.responseText);
+                    afficherQuestionnaire(response);
+                }
+            };          
+            xhr.send();
+        });
+
           function reinit(){
         
             const parentElement = document.getElementById('questions');
