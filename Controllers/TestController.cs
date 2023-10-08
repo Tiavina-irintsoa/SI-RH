@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
-using RH.Models; 
+using RH.Models;
 namespace RH.Controllers{
     public class TestController : Controller{
         
@@ -52,7 +52,25 @@ namespace RH.Controllers{
             }
         }
 
-        
+        public IActionResult Save(){
+
+            var idbesoin = Request.Cookies["idbesoin"];
+            var existingCookie = Request.Cookies["questionDataList"];
+            List<QuestionData> questionDataList;
+            if (string.IsNullOrEmpty(existingCookie))
+            {
+                return RedirectToAction("createform");
+            }
+            questionDataList = JsonConvert.DeserializeObject<List<QuestionData>>(existingCookie);
+            Questionnaire q = new Questionnaire(); 
+            q.questions = questionDataList; 
+            try{
+                q.Insert(null);
+            }
+            catch(Exception e){
+                Console.WriteLine(e.ToString());
+            }
+        }
         [HttpGet]
         public async Task<string> GetAll(){
             try
