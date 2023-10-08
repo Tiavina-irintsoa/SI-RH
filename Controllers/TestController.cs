@@ -6,6 +6,11 @@ namespace RH.Controllers{
         
         public IActionResult createform()
         {
+            string idParam = Request.Query["idbesoin"];
+            Response.Cookies.Append("idbesoin-test", idParam, new CookieOptions
+            {
+                Expires = DateTime.Now.AddDays(1)
+            });
             return View( "Views/Home/CreateForm.cshtml" );
         }
 
@@ -47,18 +52,7 @@ namespace RH.Controllers{
             }
         }
 
-        public IActionResult Save(){
-            var existingCookie = Request.Cookies["questionDataList"];
-            List<QuestionData> questionDataList;
-            if (string.IsNullOrEmpty(existingCookie))
-            {
-                return RedirectToAction("createform");
-            }
-            questionDataList = JsonConvert.DeserializeObject<List<QuestionData>>(existingCookie);
-            
-            
-
-        }
+        
         [HttpGet]
         public async Task<string> GetAll(){
             try
