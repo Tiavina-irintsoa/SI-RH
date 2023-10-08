@@ -66,9 +66,12 @@ namespace RH.Controllers{
             q.questions = questionDataList; 
             try{
                 q.Insert(null);
+                
+                return RedirectToAction("detailsOffre","welcome",new{besoin=idbesoin});
             }
             catch(Exception e){
                 Console.WriteLine(e.ToString());
+                return RedirectToAction("createform");
             }
         }
         [HttpGet]
