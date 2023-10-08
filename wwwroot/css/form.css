@@ -83,10 +83,14 @@
 }
 .question-submitted {
   font-size: 14px;
-  height: 4vh;
-  border-bottom: solid black 1px;
+  height: 100%;
   padding-left: 2vh;
   width: 100%;
+}
+.question-title {
+  border-bottom: solid black 1px;
+  width: 100%;
+  padding-left: 2vh;
 }
 
 .options-submitted {

@@ -53,7 +53,12 @@
 
                 const questionContainer = document.createElement('div');
                 questionContainer.className = 'question-submitted';
-                questionContainer.textContent = questionData.Question;
+
+                const titre = document.createElement('div');
+                titre.className = 'question-title';
+                titre.textContent = questionData.Question;
+
+                questionContainer.appendChild(titre) ;
 
                 const optionsContainer = document.createElement('div');
                 optionsContainer.className = 'options-submitted-container';
