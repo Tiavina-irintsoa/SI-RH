@@ -29,7 +29,9 @@ namespace RH.Models
             UserAdmin user = null;
             bool estOuvert = false;
             
-            if (npg == null)        {
+            if (npg == null)        
+            {
+                Console.WriteLine( "miditra connexion" );
                 estOuvert = true;
                 Connection connexion = new Connection();
                 npg = connexion.ConnectSante();
@@ -61,6 +63,7 @@ namespace RH.Models
             catch (Exception e)
             {
                 Console.WriteLine(e.ToString());
+                throw e;
             }
             finally{
                 if (estOuvert)

@@ -77,6 +77,7 @@ namespace RH.Models{
                 catch (Exception e)
                 {
                     Console.WriteLine(e.ToString());
+                    throw e;
                 }
                 finally
                 {

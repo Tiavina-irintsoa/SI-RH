@@ -46,7 +46,7 @@
         cancelButton.onclick = function() {
             
             // Remove the confirmation message box and unblur the page
-            window.location.href = '@Url.Action("detailsOffre", "welcome")?besoin='+itemId;
+            window.location.href = '@Url.Action("detailsOffre", "welcome")?besoin='+itemId+'&idservice='+idservice+'&estadmin=0';
         };
         var buttonWrapper = document.createElement('div');
         buttonWrapper.classList.add('button-wrapper');

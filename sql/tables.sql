@@ -142,3 +142,6 @@ ALTER TABLE choixcandidature DROP CONSTRAINT choixcandidature_idcanditature_fkey
 
 ALTER TABLE choixcandidature
 ADD CONSTRAINT choixcandidature_idcanditature_fkey FOREIGN KEY (idcandidature) REFERENCES candidature(idcandidature);
+
+ALTER TABLE candidature
+ALTER COLUMN validation SET DEFAULT 0;

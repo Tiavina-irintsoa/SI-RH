@@ -87,10 +87,18 @@
                     </li>
                   </ul>
                 </div>
-                <div style="margin-top: 3vh;" class="border-first-button">
-                    <a href="@Url.Action( "index" , "cv")" >Postuler</a>
-                </div>
-                
+                @if( @ViewBag.est_admin != true ){
+                  <div style="margin-top: 3vh;" class="border-first-button">
+                      <a href='@Url.Action( "index" , "cv")?idbesoin=@ViewData["idbesoin"]' >Postuler</a>
+                  </div>
+                }else{
+                  <div style="margin-top: 3vh;" class="border-first-button">
+                      <a href='@Url.Action( "GetBesoin" , "Home")?idService=@ViewBag.idservice' >Retour</a>
+                  </div>
+                  <div style="margin-top: 3vh;" class="border-first-button">
+                      <a href='@Url.Action( "GetBesoin" , "Home")?idService=@ViewBag.idservice' >Retour</a>
+                  </div>
+                }
               </div>
               
             </div>
