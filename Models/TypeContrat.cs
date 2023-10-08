@@ -51,6 +51,7 @@ public class TypeContrat
         catch (Exception e)
         {
             Console.WriteLine("Erreur : " + e.ToString());
+            throw e;
         }
         finally
         {

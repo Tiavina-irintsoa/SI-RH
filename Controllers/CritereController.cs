@@ -7,7 +7,6 @@ namespace RH.Controllers;
 public class CritereController : SessionController
 {
     private readonly ILogger<CritereController> _logger;
-
     public CritereController(ILogger<CritereController> logger){
         _logger = logger;
     }

@@ -103,7 +103,8 @@ public class Besoin{
                 }
             }
         }
-        catch (Exception e)        {
+        catch (Exception e)        
+        {
         Console.WriteLine("erreurrrr");
             Console.WriteLine(e.ToString());
         }
@@ -116,49 +117,49 @@ public class Besoin{
         return besoins;
     }
     
-public static void Update(int idbesoin, NpgsqlConnection npg)
-{
-    bool estOuvert = false;
-
-    if (npg == null)
+    public static void Update(int idbesoin, NpgsqlConnection npg)
     {
-        estOuvert = true;
-        Connection connexion = new Connection();
-        npg = connexion.ConnectSante();
-    }
+        bool estOuvert = false;
 
-    try
-    {
-        string sql = "UPDATE besoin SET accompli = NOW() WHERE idbesoin = @idbesoin";
-
-        using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))
+        if (npg == null)
         {
-            command.Parameters.AddWithValue("@idbesoin", idbesoin);
+            estOuvert = true;
+            Connection connexion = new Connection();
+            npg = connexion.ConnectSante();
+        }
 
-            int rowsAffected = command.ExecuteNonQuery();
+        try
+        {
+            string sql = "UPDATE besoin SET accompli = NOW() WHERE idbesoin = @idbesoin";
 
-            if (rowsAffected > 0)
+            using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))
             {
-                Console.WriteLine("Mise à jour réussie.");
+                command.Parameters.AddWithValue("@idbesoin", idbesoin);
+
+                    int rowsAffected = command.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
+                {
+                    Console.WriteLine("Mise à jour réussie.");
+                }
+                else
+                {
+                    Console.WriteLine("Aucune ligne mise à jour.");
+                }
             }
-            else
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.ToString());
+        }
+        finally
+        {
+            if (estOuvert)
             {
-                Console.WriteLine("Aucune ligne mise à jour.");
+                npg.Close();
             }
         }
     }
-    catch (Exception e)
-    {
-        Console.WriteLine(e.ToString());
-    }
-    finally
-    {
-        if (estOuvert)
-        {
-            npg.Close();
-        }
-    }
-}
 
     public void Insert(NpgsqlConnection npg) {
     bool estOuvert = false;

@@ -5,3 +5,21 @@
     height: 80vh;
     font-size: 2em;
 }
+#ok-button{
+    display:flex; align-items:center; justify-content:center; border:1px solid var(--pink); 
+    color: #ffff ;
+    height: 40px;
+    background: var(--pink);
+    border-radius: 25px;
+    width: 30%;
+    transition:0.5s ease-in-out;
+}
+
+#ok-button:hover{
+    display:flex; align-items:center; justify-content:center; border:1px solid var(--pink); 
+    color: var(--pink) ;
+    background: transparent;
+    height: 40px;
+    border-radius: 25px;
+    width: 30%;
+}

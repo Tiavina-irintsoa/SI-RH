@@ -1,0 +1,110 @@
+@{
+    Layout = "_NoLayout"; 
+}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, shrink-to-fit=no"
+    />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap"
+      rel="stylesheet"
+    />
+
+    <title>Miraculous</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/style.css" />
+    <link rel="stylesheet" href="~/css/ajout.css" />
+    <link rel="stylesheet" href="~/css/nav.css" />
+    <link rel="stylesheet" href="~/css/critere.css" />
+    <link rel="stylesheet" href="~/css/main.css" />
+    <link rel="stylesheet" href="~/css/confirmbox.css" />
+    <!-- Additional CSS Files -->
+    <link rel="stylesheet" href="~/css/main.css" />
+    <link rel="stylesheet" href="~/css/fontawesome.css" />
+    <link rel="stylesheet" href="~/css/templatemo-digimedia-v1.css" />
+    <link rel="stylesheet" href="~/css/animated.css" />
+    <link rel="stylesheet" href="~/css/owl.css" />
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <!--
+
+TemplateMo 568 Dimpex
+
+https://templatemo.com/tm-568-digimedia
+
+-->
+  </head>
+
+  <body style="height:100vh !important;" >
+    <div
+      style="padding:0 !important;"
+      class="main-banner wow fadeIn"
+      id="top"
+    >
+      <div class="container">
+        <div class="row">
+          <div class="col-lg-12">
+            <div class="row">
+              <div class="col-lg-6 align-self-center">
+                <div
+                  class="left-content show-up header-text wow fadeInLeft"
+                >
+                  <div class="row">
+                    <div class="col-lg-12"
+                      data-aos="fade-right"
+                      data-aos-duration="800"
+                    >
+                      <h6>Miraculous.</h6>
+                      <h2>Dommage</h2>
+                      <p style="opacity: 100%; color:grey; font-size:15px;">
+                        Nous sommes navrés de vous annoncer que vous n'êtes pas sélectionné, mais vous pouvez consulter les résultats des autres demandes.
+                      </p>
+                      <div class="row">
+                            <a id="ok-button" class="col-lg-6" style="    display:flex; align-items:center; justify-content:center; border:1px solid var(--pink); 
+                            color: var(--pink) ;
+                            background: transparent;
+                            height: 40px;
+                            border-radius: 25px;
+                            width: 30%;" href='@Url.Action("index","welcome")'  >
+                                Retour
+                            </a>
+                            <a id="ok-button" class="col-lg-6" style="margin-left:20px!important;" href='@Url.Action("code" , "resultat")'  >
+                            résultats
+                            </a>
+                        </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-6"
+                data-aos="fade-up"
+                data-aos-duration="800"
+              >
+                <div
+                  class="right-image wow fadeInRight"
+                  data-wow-duration="1s"
+                  data-wow-delay="0.5s"
+                >
+                  <img src="~/images/refus.png"  alt="" />
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</body>
+<script>
+  AOS.init();
+</script>

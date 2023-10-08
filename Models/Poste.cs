@@ -46,6 +46,7 @@ public class Poste{
         }
         catch (Exception e)        {
             Console.WriteLine(e.ToString());
+            throw e;
         }
         finally        {
             if (estOuvert)            {

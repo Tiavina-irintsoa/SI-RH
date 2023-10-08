@@ -2,64 +2,107 @@ using Microsoft.AspNetCore.Mvc;
 using RH.Models;
 using System.Collections.Generic;
 using System.Web;
-
+using Npgsql;
 namespace RH.Controllers{
     public class CVController : Controller{
         public ActionResult Index(){
+            var cookieOptions = new CookieOptions
+            {
+                Expires = DateTime.Now.AddDays(1)
+            };
+            Response.Cookies.Append("idbesoincv",HttpContext.Request.Query["idbesoin"] , cookieOptions);
             return View("~/Views/Home/CV.cshtml");
         }
-
-        // [HttpPost] 
-        // public ActionResult Postuler(){
-        //     int genre = int.Parse(HttpContext.Request.Form["genre"]);
-        //     int nationalite = int.Parse(HttpContext.Request.Form["nationalite"]);
-        //     int diplome = int.Parse(HttpContext.Request.Form["diplome"]);
-        //     int experience = int.Parse(HttpContext.Request.Form["experience"]);
-        //     int sm = int.Parse(HttpContext.Request.Form["sm"]);
-  
-        //     if (file != null && file.Length > 0)
-        //         {
-        //             var fileName = Path.GetFileName(file.FileName);
-        //             var path = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/uploads", fileName);
-
-        //             using (var fileStream = new FileStream(path, FileMode.Create))
-        //             {
-        //                 await file.CopyToAsync(fileStream);
-        //             }
-        //         }
-
-
-        //     return View("~/Views/Home/CV_critere.cshtml");
-        // }
-
-         [HttpPost]
-        public async Task<IActionResult> Postuler(IFormFile fichierTelecharge)
+    
+        [HttpPost]
+        public IActionResult Postuler(IFormFile file_diplome , IFormFile file_experience ) 
         {
-            if (fichierTelecharge != null && fichierTelecharge.Length > 0)
-            {
-                // Vous pouvez accéder aux propriétés du fichier comme son nom, sa taille, etc.
-                string nomFichier = fichierTelecharge.FileName;
-                long tailleFichier = fichierTelecharge.Length;
+            Upload.save(file_diplome);
+            Upload.save(file_experience);
+            int genre = int.Parse(HttpContext.Request.Form["genre"]);
+            int nationalite = int.Parse(HttpContext.Request.Form["nationalite"]);
+            int diplome = int.Parse(HttpContext.Request.Form["diplome"]);
+            int experience = int.Parse(HttpContext.Request.Form["experience"]);
+            int sm = int.Parse(HttpContext.Request.Form["sm"]);
 
-                Console.WriteLine("Nom du fichier : " + nomFichier);
-                Console.WriteLine("Taille du fichier : " + tailleFichier);
+            string nomcv = (Request.Cookies["nomCV"]);  
+            string prenomcv = (Request.Cookies["prenomCV"]);
+            string dtncv = (Request.Cookies["dtnCV"]);
+            string contactcv = (Request.Cookies["contactCV"]);
+            string emailcv = (Request.Cookies["emailCV"]);
+            Console.WriteLine( "idbesoin : "+int.Parse( Request.Cookies["idbesoincv"]  ));
+            Connection connexion = new Connection();
+            NpgsqlConnection npg = connexion.ConnectSante();
+            try{
+                Candidat c = Candidat.GetByName( npg , nomcv , prenomcv , emailcv );
+                Boolean new_candidat = false;
+                if( c == null ){
+                    c = new Candidat{
+                    idcandidat = Utilitaire.GetNextSerialValue( npg  , "candidat_idcandidat_seq" ),
+                    nom = nomcv,
+                    prenom = prenomcv , 
+                    mail = emailcv , 
+                    contact =  contactcv , 
+                    dtn = DateTime.Parse(dtncv)
+                    };
+                    new_candidat = true;
+                }        
+            
+                Console.WriteLine( " insertion candidat " );
+                if( new_candidat == true )
+                    c.insert( npg );
+                Console.WriteLine( " insertion candidat fin" );
+                Candidature candidature = new Candidature{
+                    idcandidature = Utilitaire.GetNextSerialValue( npg  , "candidature_idcanditature_seq" ),
+                    idcandidat = c.idcandidat,
+                    idbesoin = int.Parse( Request.Cookies["idbesoincv"] )
+                };
 
-                // Vous pouvez également enregistrer le fichier sur le serveur si nécessaire
-                string cheminDeDestination = "chemin/vers/le/dossier/de/destination/" + nomFichier;
-                using (var stream = new FileStream(cheminDeDestination, FileMode.Create))
-                {
-                    await fichierTelecharge.CopyToAsync(stream);
-                }
+                Fichier fichier = new Fichier{
+                    idcandidature = candidature.idcandidature,
+                    fichier_diplome = file_diplome.FileName,
+                    fichier_experience = file_experience.FileName                    
+                };
+                candidature.fichier = fichier;
 
-                // Traitez le fichier téléchargé comme nécessaire
-                // ...
-                
-                return RedirectToAction("ActionSuivante");
+                candidature.code = Candidature.GenerateRandomCode( candidature.idcandidat );
+                Console.WriteLine( " insertion candidature" );
+                candidature.Insert( npg );
+                Console.WriteLine( " insertion candidature fin " );
+                choixCandidat choixCandidat = new choixCandidat{
+                    Idchoix = genre ,
+                    Idcandidature =  candidature.idcandidature            
+                };
+                Console.WriteLine( " insertion choixcandidat" );
+                choixCandidat.Insert( npg );
+                Console.WriteLine( " insertion nationalité" );                
+                choixCandidat.Idchoix = nationalite;
+                choixCandidat.Insert( npg );
+                Console.WriteLine( " insertion diplome" );
+                choixCandidat.Idchoix = diplome;
+                choixCandidat.Insert( npg );
+                Console.WriteLine( " insertion experience" );
+                choixCandidat.Idchoix = experience;
+                choixCandidat.Insert( npg ); 
+                Console.WriteLine( " insertion SM" );
+                choixCandidat.Idchoix = sm;
+                choixCandidat.Insert( npg );
+                Console.WriteLine( " insertion code" );
+                ViewBag.code_cv =  candidature.code;
+                npg.Close();
+            }catch( Exception ex ){
+                Console.WriteLine(ex.ToString()); 
+                Console.WriteLine("Type d'exception : " + ex.GetType().Name);
+                Console.WriteLine("Message : " + ex.Message);
+                Console.WriteLine("Pile d'appels : " + ex.StackTrace);
+                npg.Close();
+                throw;
             }
-
-            return View();
+            return View("~/Views/Home/finpostule.cshtml");
         }
-
+        public ActionResult test(){
+            return View("~/Views/Home/finpostule.cshtml");
+        }
 
         [HttpPost] 
         public ActionResult critere(){
