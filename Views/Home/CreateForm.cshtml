@@ -1,0 +1,147 @@
+<div class="formcreator">
+            
+          <div id="questions">
+            <div id="submitted">
+                @* <div class="questionnaire-submitted">
+                   <div class="question-submitted">
+                      Question
+                  </div>
+                  <div class="options-submitted-container">
+                      <div class="options-submitted">
+                        <i class="fa fa-circle-o"></i>
+                        <div class="option-value">Option 1</div>
+                      </div>
+                      <div class="options-submitted">
+                        <i class="fa fa-circle-o"></i>
+                        <div class="option-value">Option 1</div>
+                      </div>
+                      <div class="options-submitted">
+                        <i class="fa fa-circle-o"></i>
+                        <div class="option-value">Option 1</div>
+                      </div>
+                      <div class="options-submitted">
+                        <i class="fa fa-circle-o"></i>
+                        <div class="option-value">Option 1</div>
+                      </div>
+                  </div>
+                </div> *@
+            </div>
+            <form id="newform">
+              <input type="text" placeholder="Question" id="question" />
+              <div class="options-container">
+                <div class="options">
+                    <i class="fa fa-circle-o"></i>
+                    <input type="text" class="option" placeholder="Option 1">
+                </div>
+              </div>
+              
+              <div class="options" id="add-option-container">
+                <i class="fa fa-circle-o"></i>
+                <input type="text" id="add-option" class="option" placeholder="Ajouter une option">
+              </div>
+            </form>
+          </div>
+          <div id="add">+ Ajouter une question</div>
+        </div>
+        <script>
+          function afficherQuestionnaire(questions) {
+            const container = document.getElementById('submitted');
+
+            questions.forEach((questionData, index) => {
+                const questionnaireContainer = document.createElement('div');
+                questionnaireContainer.className = 'questionnaire-submitted';
+
+                const questionContainer = document.createElement('div');
+                questionContainer.className = 'question-submitted';
+                questionContainer.textContent = questionData.Question;
+
+                const optionsContainer = document.createElement('div');
+                optionsContainer.className = 'options-submitted-container';
+
+                questionData.Options.forEach((optionText, optionIndex) => {
+                    const optionContainer = document.createElement('div');
+                    optionContainer.className = 'options-submitted';
+
+                    const icon = document.createElement('i');
+                    icon.className = 'fa fa-circle-o';
+
+                    const optionValue = document.createElement('div');
+                    optionValue.className = 'option-value';
+                    optionValue.textContent = 'Option ' + (optionIndex + 1) + ': ' + optionText;
+
+                    optionContainer.appendChild(icon);
+                    optionContainer.appendChild(optionValue);
+
+                    optionsContainer.appendChild(optionContainer);
+                });
+
+                questionContainer.appendChild(optionsContainer);
+                questionnaireContainer.appendChild(questionContainer);
+
+                container.appendChild(questionnaireContainer);
+            });
+        }
+            const optionsContainer = document.querySelector('.options-container');
+            const addOptionInput = document.getElementById('add-option');
+
+            // Fonction pour créer un nouvel élément "options" et l'insérer dans "options-container"
+            function createNewOptionInContainer() {
+              const newOptionDiv = document.createElement('div');
+              newOptionDiv.className = 'options';
+              const icon = document.createElement('i');
+              icon.className = 'fa fa-circle-o';
+              const newInput = document.createElement('input');
+              newInput.type = 'text';
+              newInput.className = 'option';
+              newInput.placeholder = 'Option ' + document.querySelectorAll('.options-container .options').length;
+              newOptionDiv.appendChild(icon);
+              newOptionDiv.appendChild(newInput);
+
+              optionsContainer.appendChild(newOptionDiv);
+              newInput.focus();
+              optionsContainer.scrollIntoView({ behavior: "smooth" });
+
+            }
+
+            // Ajoutez un gestionnaire d'événements pour créer un nouvel élément "options" dans "options-container" lors du focus
+            addOptionInput.addEventListener('focus', createNewOptionInContainer);
+
+
+            // Sélectionnez l'élément "questions" par son ID
+            const questionsDiv = document.getElementById("questions");
+            var addButton = document.getElementById('add');
+            var questionInput = document.getElementById('question');
+       
+
+          addButton.addEventListener('click', function() {
+              // Récupérer la valeur de la question
+              var questionValue = questionInput.value;
+
+              // Récupérer les valeurs des options
+              var options = [];
+              var optionInputs = optionsContainer.querySelectorAll('.options .option');
+              optionInputs.forEach(function(optionInput) {
+                  options.push(optionInput.value);
+              });
+
+              // Créer un objet avec les données à envoyer
+              var postData = {
+                  question: questionValue,
+                  options: options
+              };
+              console.log(postData);
+              // Effectuer une requête Ajax (XHR)
+              var xhr = new XMLHttpRequest();
+              xhr.open('POST', '@Url.Action("addQuestion", "test")', true);
+              xhr.setRequestHeader('Content-Type', 'application/json');
+              xhr.onreadystatechange = function() {
+                  if (xhr.readyState === 4 && xhr.status === 200) {
+                     
+                      console.log(xhr.responseText);
+                      const response = JSON.parse(xhr.responseText);
+                      afficherQuestionnaire(response);
+                  }
+              };
+              xhr.send(JSON.stringify(postData));
+          });
+        </script>
