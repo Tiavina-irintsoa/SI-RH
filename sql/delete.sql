@@ -17,8 +17,13 @@ delete from fichier;
 delete from choixcandidature;
 delete from candidature;
 delete from candidat;
+delete from option; 
+delete from question; 
+delete from questionnaire; 
 
-
+alter sequence questionnaire_idquestionnaire_seq restart with 1;
+alter sequence question_idquestion_seq restart with 1;
+alter sequence option_idoption_seq restart with 1;
 alter sequence besoin_idbesoin_seq           restart with 1;
 alter sequence choix_idchoix_seq             restart with 1;
 alter sequence critere_idcritere_seq         restart with 1;
