@@ -1,18 +1,19 @@
+@model FicheCandidat
 <div class="detail-cv">
     <div class="head">
         <h3>Détails du CV</h3>
     </div>
     <div class="a_propos">
         <div class="gauche">
-            <p> <label for="">Nom:</label> Rakoto</p>
-            <p> <label for="">Prénom:</label> Rakoto</p>
-            <p> <label for="">Date de naissance:</label> 2023-12-01</p>
-            <p> <label for="">Genre:</label> Lelahy</p>
-            <p> <label for="">Nationalité:</label> Malagasy</p>
+            <p> <label for="">Nom:</label> @Model.candidat.nom</p>
+            <p> <label for="">Prénom:</label> @Model.candidat.prenom</p>
+            <p> <label for="">Date de naissance:</label> @Model.candidat.dtn</p>
+            <p> <label for="">Genre:</label> @foreach (var genre in Model.choixCandidat["genre"]){ @genre.intitule } </p>
+            <p> <label for="">Nationalité:</label> @foreach (var nationalite in Model.choixCandidat["nationalite"]){ @nationalite.intitule } </p>
         </div>
         <div class="droite">
-            <p> <label for="">Contact:</label> 0340254062</p>
-            <p> <label for="">Mail:</label> Rakoto@gmail.com </p>
+            <p> <label for="">Contact:</label> @Model.candidat.contact</p>
+            <p> <label for="">Mail:</label> @Model.candidat.mail </p>
         </div>
     </div>
     <div class="infos">
@@ -26,9 +27,9 @@
             </div>
             <div class="info_">
                 <ul>
-                    <li><i class="bx bxs-checkbox-checked"></i>Bac</li>
-                    <li><i class="bx bxs-checkbox-checked"></i>Licence</li>
-                    <li><i class="bx bxs-checkbox-checked"></i>Licence</li>
+                    @foreach (var diplome in Model.choixCandidat["diplome"]){
+                        <li><i class="bx bxs-checkbox-checked"></i> @diplome.intitule </li>
+                    }
                 </ul>
             </div>
         </div>
@@ -42,9 +43,9 @@
             </div>
             <div class="info_">
                 <ul>
-                    <li><i class="bx bxs-checkbox-checked"></i>Bac</li>
-                    <li><i class="bx bxs-checkbox-checked"></i>Licence</li>
-                    <li><i class="bx bxs-checkbox-checked"></i>Licence</li>
+                    @foreach (var experience in Model.choixCandidat["experience"]){
+                        <li><i class="bx bxs-checkbox-checked"></i> @experience.intitule </li>
+                    }
                 </ul>
             </div>
         </div>
@@ -54,12 +55,12 @@
             </div>
             <div class="info_">
                 <ul>
-                    <li><i class="bx bxs-checkbox-checked"></i>Maty vady</li>
-                    <li><i class="bx bxs-checkbox-checked"></i>Nisara bady</li>
-                    <li><i class="bx bxs-checkbox-checked"></i>Sitrany solo</li>
+                    @foreach (var situation in Model.choixCandidat["situation matrimoniale"]){
+                        <li><i class="bx bxs-checkbox-checked"></i> @situation.intitule </li>
+                    }
                 </ul>
             </div>
         </div>
     </div>
-    <div class="retour"><a href='@Url.Action("Liste","ListeCv")'>Retour</a></div>
+    <div class="retour"><a href='@Url.Action("Liste","ListeCv", new{idbesoin=@Model.besoin.idBesoin})'>Retour</a></div>
 </div>

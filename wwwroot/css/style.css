@@ -329,6 +329,18 @@ body {
 /* NAVBAR */
 
 /* MAIN */
+.liste_besoin{
+  padding: 24px;
+  background: var(--light);
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+}
+.liste_besoin .tete{
+  display: flex;
+  flex-direction: row;
+  margin: auto;
+}
 #content main {
   width: 100%;
   padding: 36px 24px;
@@ -494,7 +506,7 @@ body {
   grid-gap: 24px;
   margin: auto;
   margin-top: 24px;
-  width: 50%;
+  /* width: 50%; */
   color: var(--dark);
 }
 #content main .table-data > div {

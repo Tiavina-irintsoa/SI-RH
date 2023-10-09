@@ -102,4 +102,45 @@ public class Candidat{
         }      
         return candidats;
     }
+
+    public static Candidat GetCandidat(NpgsqlConnection npg, int idbesoin, int idcandidat) {
+        Candidat candidat = null;
+        bool estOuvert = false;
+        
+        if (npg == null)        {
+            estOuvert = true;
+            Connection connexion = new Connection();
+            npg = connexion.ConnectSante();
+        }        
+        try        {
+            string sql = "SELECT * FROM v_candidat_candidature where idbesoin=" + idbesoin + " and idcandidat=" + idcandidat;
+            Console.WriteLine(sql);         
+            using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))            {
+                using (NpgsqlDataReader reader = command.ExecuteReader())                {
+                    while (reader.Read())                    {
+                        int idcand = reader.GetInt32(1);
+                        string nom = reader.GetString(2);
+                        string prenom = reader.GetString(3);
+                        string mail = reader.GetString(5);
+                        string contact = reader.GetString(6);
+                        DateTime dtn = reader.GetDateTime(4);
+                        DateTime datecandidature = reader.GetDateTime(8);
+                        string nomposte = reader.GetString(13);
+                        
+                        candidat = new Candidat(idcand, nom, prenom, mail, contact, dtn, datecandidature, nomposte);
+                    }
+                }
+            }
+        }
+        catch (Exception e)        {
+            Console.WriteLine("erreurrrr");
+            Console.WriteLine(e.ToString());
+        }
+        finally        {
+            if (estOuvert)            {
+                npg.Close();
+            }
+        }      
+        return candidat;
+    }
 }
