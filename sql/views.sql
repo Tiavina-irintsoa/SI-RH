@@ -48,7 +48,7 @@ create or replace view v_choix_candidature_type as
 create or replace view v_candidat_candidature as
     select * from candidat as c 
         natural join candidature as cd
-        join v_poste_besoin as pb ;
+        natural join v_poste_besoin as pb ;
 
 -- vaovao ralph
 create or replace view v_all_annonce as(
@@ -86,3 +86,4 @@ create or replace view v_admin_service as
     select * 
     from v_admin_typeuser 
         natural join v_assiociation_admin_service;
+
