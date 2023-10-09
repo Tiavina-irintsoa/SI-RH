@@ -24,10 +24,11 @@
                   <td> @fiche.candidat.nom @fiche.candidat.prenom </td>
                   <td> @fiche.point </td>
                   <td> @fiche.candidat.datecandidature </td>
-                  <td> <a href='@Url.Action("Details","ListeCv", @fiche)'>Voir</a> </td>
+                  <td> <a href='@Url.Action("Details","ListeCv", new{idbesoin=@fiche.besoin.idBesoin, idcandidat=@fiche.candidat.idcandidat})'>Voir</a> </td>
                 </tr>
                 }
               </tbody>
             </table>
+            <div class="retour"><a href='@Url.Action("BesoinListe","ListeCv")'>Retour</a></div>
           </div>
 </div>
