@@ -169,7 +169,6 @@ public class Candidat{
         }
     }
 
-
     public Candidat(int idcandidat, string nom, string prenom, string mail, string contact, DateTime dtn, DateTime dtm, string nomp){
         this._idcandidat = idcandidat;
         this._nom = nom;

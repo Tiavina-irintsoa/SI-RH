@@ -59,7 +59,7 @@ public class Service
                         int idservice     = reader.GetInt32(5);
                         string nomservice    = reader.GetString(6);
                         string iconeservice  = reader.GetString(7);
-                        Service service = new Service(idservice, nom, iconeservice);
+                        Service service = new Service(idservice, nomservice, iconeservice);
                         serviceList.Add(service);
                     }
                     services = serviceList.ToArray();

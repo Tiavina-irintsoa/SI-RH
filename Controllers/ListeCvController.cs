@@ -14,19 +14,22 @@ public class ListeCvController : Controller
 
     public IActionResult BesoinListe()
     {
-        Besoin[] besoins = Besoin.GetAll(null, 1);
+        Besoin[] besoins = Besoin.GetAll(null, 0);
         return View("Views/Home/besoinListe.cshtml", besoins);        
     }
 
     public IActionResult Liste(int idbesoin)
     {
+        ViewData["page"] = "cv";
         Console.WriteLine(idbesoin);
         FicheCandidat[] fiches = FicheCandidat.GetAll(null, idbesoin);
+        ViewData["page"] = "cv";
         return View("Views/Home/listeCv.cshtml", fiches);        
     }
 
     public IActionResult Details(int idbesoin, int idcandidat)
     {
+        ViewData["page"] = "cv";
         Console.WriteLine(idbesoin + " " + idcandidat);
         Connection connexion = new Connection();
         NpgsqlConnection npg = connexion.ConnectSante();
@@ -40,7 +43,7 @@ public class ListeCvController : Controller
         FicheCandidat fiche = new FicheCandidat(candidat, choix, besoin, point);
 
         npg.Close();
-
+        ViewData["page"] = "cv";
         return View("Views/Home/detailsCv.cshtml", fiche);        
     }
 }
