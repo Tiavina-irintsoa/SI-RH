@@ -193,24 +193,3 @@ insert into candidat( nomcandidat, prenomcandidat , dtn, mail, contact) values
     ('Andriantefy', 'Hasina', '2006-08-21', 'hasina@gmail.com', '032 86 459 13');
 
 
-
-
--- 
-insert into candidature( idcandidat, datecandidature, validation, code, idbesoin) values
-    (1, '2023-02-16', '0', 'C00-001', 1),
-    (2, '2023-05-06', '1', 'C00-002', 2),
-    (3, '2023-07-15', '0', 'C00-003', 1),
-    (4, '2023-01-03', '1', 'C00-004', 3),
-    (5, '2023-09-01', '0', 'C00-005', 4);
-
-insert into choixcandidature( idcanditature, idchoix) values
-    (1, 1), (1, 3), (1,7), (1, 12), (1, 16),
-    (2, 2), (2, 4), (2,8), (2, 13), (2, 15),
-    (3, 2), (3, 3), (3,10), (3, 11), (3, 17),
-    (4, 1), (4, 4), (4,9), (4, 11), (4, 15),
-    (5, 2), (5, 3), (5,8), (5, 14), (5, 16);
-  
-insert into fichier( idcanditature, lienfichierdiplome, lienfichierexperience) values
-    (1, 'fichier1', 'fichier2'),
-    (3, 'fichier3', 'fichier4'),
-    (5, 'fichier5', 'fichier6');
