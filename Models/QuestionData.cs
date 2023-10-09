@@ -8,6 +8,7 @@ public class QuestionData
     public int? idQuestion { get; set; }
 
         public void Insert(NpgsqlConnection npg,int? idQuestionnaire){
+            Console.WriteLine("insert questiondata");
             bool estOuvert = false;
             if (npg == null)        {
                 estOuvert = true;
@@ -31,6 +32,7 @@ public class QuestionData
             }   
         }
       public void InsertQuestion(NpgsqlConnection npg, int?idquestionnaire) {
+            Console.WriteLine("insert question");
             bool estOuvert = false;
             string sql = "";
             if (npg == null)        {
@@ -39,7 +41,7 @@ public class QuestionData
                 npg = connexion.ConnectSante();
             }        
             try{
-                sql = "INSERT INTO question (idquestionnaire, question) VALUES (@idquestionnaire, '@question') returning idquestion";                
+                sql = "INSERT INTO question (idquestionnaire, question) VALUES (@idquestionnaire, @question) returning idquestion";                
                 using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))
                 {
                     command.Parameters.AddWithValue("@idquestionnaire", idquestionnaire);
@@ -58,6 +60,7 @@ public class QuestionData
             }      
         }
         public void InsertOption(NpgsqlConnection npg, int? idquestion,string option) {
+            Console.WriteLine("insert option");
             bool estOuvert = false;
             string sql = "";
             if (npg == null)        {
@@ -66,7 +69,7 @@ public class QuestionData
                 npg = connexion.ConnectSante();
             }        
             try{
-                sql = "INSERT INTO option (idquestion, option) VALUES (@idquestion, '@option') ";                
+                sql = "INSERT INTO option (idquestion, option) VALUES (@idquestion, @option) ";                
                 using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))
                 {
                     command.Parameters.AddWithValue("@idquestion", idquestion);

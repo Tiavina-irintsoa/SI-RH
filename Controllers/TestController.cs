@@ -6,6 +6,7 @@ namespace RH.Controllers{
         
         public IActionResult createform()
         {
+            // string idParam = "1"; 
             string idParam = Request.Query["idbesoin"];
             Response.Cookies.Append("idbesoin-test", idParam, new CookieOptions
             {
@@ -53,8 +54,7 @@ namespace RH.Controllers{
         }
 
         public IActionResult Save(){
-
-            var idbesoin = Request.Cookies["idbesoin"];
+            int idbesoin = int.Parse(Request.Cookies["idbesoin-test"]);
             var existingCookie = Request.Cookies["questionDataList"];
             List<QuestionData> questionDataList;
             if (string.IsNullOrEmpty(existingCookie))
@@ -64,14 +64,20 @@ namespace RH.Controllers{
             questionDataList = JsonConvert.DeserializeObject<List<QuestionData>>(existingCookie);
             Questionnaire q = new Questionnaire(); 
             q.questions = questionDataList; 
+            Besoin besoin = new Besoin(); 
+            besoin.idBesoin = idbesoin;
+            q.Besoin = besoin; 
             try{
                 q.Insert(null);
-                
+                Response.Cookies.Delete("idbesoin-test");
+                Response.Cookies.Delete("questionDataList");
+
                 return RedirectToAction("detailsOffre","welcome",new{besoin=idbesoin});
             }
             catch(Exception e){
                 Console.WriteLine(e.ToString());
-                return RedirectToAction("createform");
+                throw e;
+                // return RedirectToAction("createform");
             }
         }
         [HttpGet]
