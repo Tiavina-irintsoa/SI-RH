@@ -6,6 +6,7 @@ namespace RH.Controllers{
         public ActionResult Index(){
             string code = HttpContext.Request.Form["code"];
               Candidature candidature = Candidature.GetByCode( null , code );
+              Console.WriteLine( "page candidature "+candidature.getPage() );
               return View( candidature.getPage() );
         }
 

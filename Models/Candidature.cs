@@ -76,7 +76,7 @@ public class Candidature
                             prenom = prenomcandidat
                         };
                         Candidature candidature = new Candidature{
-                            idcandidature = Convert.ToInt32(reader["idcanditature"]),
+                            idcandidature = Convert.ToInt32(reader["idcandidature"]),
                             validation = Convert.ToInt32(reader["validation"]),
                             Candidat = c
                         };
