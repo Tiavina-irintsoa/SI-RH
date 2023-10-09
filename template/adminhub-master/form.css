@@ -1,0 +1,72 @@
+.formcreator {
+  width: 100%;
+}
+.formcreator .body {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.formcreator #add {
+  background-color: var(--pink);
+  border-radius: 10px;
+  width: 50%;
+  height: 6vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  margin-top: 6vh;
+}
+#questions {
+  display: flex;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+#newform{
+    margin-top: 6vh;
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    background-color: white;
+    width: 50%;
+    padding: 6vh;
+}
+#question{
+    height: 5vh;
+    border: none;
+    border-bottom: solid black 1px;
+    transition: 100ms ease-in-out;
+}
+
+#question:focus-visible{
+    outline: none;
+    border-bottom: solid var(--pink) 2px;
+    height:6vh ;
+    font-size: 15px;
+}
+
+.option{
+    border: none;
+}
+.option:focus-visible{
+    border: none;
+    outline: none;
+    border-bottom: solid var(--pink) 1px;
+    height: 4vh;
+}
+.options i{
+    font-size: larger;
+}
+
+.options{
+    margin-top: 3vh;
+    display: grid;
+    grid-template-columns: 1fr 15fr;
+}

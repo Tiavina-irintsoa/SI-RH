@@ -114,3 +114,34 @@ create table admin_service(
 -- vaovao
 alter table candidat 
     alter column contact type varchar;
+
+create table questionnaire(
+    idquestionnaire serial primary key, 
+    idbesoin integer references besoin(idbesoin)
+);
+
+create table question(
+    idquestion serial primary key, 
+    idquestionnaire integer references questionnaire(idquestionnaire), 
+    question varchar
+);
+create table option(
+    idoption serial primary key, 
+    idquestion integer references question(idquestion) , 
+    option varchar
+);
+
+ALTER TABLE candidature RENAME COLUMN idcanditature TO idcandidature;
+
+ALTER TABLE choixcandidature RENAME COLUMN idcanditature TO idcandidature;
+
+ALTER TABLE fichier RENAME COLUMN idcanditature TO idcandidature;
+
+-- vaovao 2
+ALTER TABLE choixcandidature DROP CONSTRAINT choixcandidature_idcanditature_fkey;
+
+ALTER TABLE choixcandidature
+ADD CONSTRAINT choixcandidature_idcanditature_fkey FOREIGN KEY (idcandidature) REFERENCES candidature(idcandidature);
+
+ALTER TABLE candidature
+ALTER COLUMN validation SET DEFAULT 0;

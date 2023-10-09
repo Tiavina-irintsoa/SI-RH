@@ -1,0 +1,23 @@
+#profile .profile {
+    border: 2px solid var(--pink) !important;
+    box-sizing: border-box;
+    color: var(--pink);
+    font-weight: 600;
+    padding: 10px;
+    border-radius: 25px;
+    transition: 1s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+#profile .profile:hover {
+    border: 3px solid var(--pink) !important;
+    box-sizing: border-box;
+    padding: 10px;
+    color: #fff;
+    font-weight: 600;
+    background: var(--pink);
+    border-radius: 25px;
+}

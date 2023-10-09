@@ -106,6 +106,7 @@ public class Service
         }
         catch (Exception e)        {
             Console.WriteLine(e.ToString());
+            throw e;
         }
         finally        {
             if (estOuvert)            {

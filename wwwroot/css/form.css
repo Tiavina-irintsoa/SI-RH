@@ -1,0 +1,133 @@
+.formcreator {
+  width: 100%;
+}
+.formcreator {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.formcreator .mybutton{
+  border-radius: 10px;
+  width: 50%;
+  height: 6vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  margin-top: 6vh;
+}
+.formcreator #add {
+  background-color: var(--pink);
+}
+.formcreator #terminer{
+  background-color: var(--blue);
+}
+.formcreator #questions {
+  display: flex;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+
+.formcreator #newform {
+  margin-top: 6vh;
+  border-radius: 10px;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  background-color: white;
+  width: 50%;
+  padding: 6vh;
+}
+.formcreator #question {
+  font-family: "Poppins", sans-serif;
+  height: 5vh;
+  border: none;
+  border-radius: 0px;
+  border-bottom: solid black 1px;
+  transition: 100ms ease-in-out;
+  background-color: transparent;
+}
+
+.formcreator #question:focus-visible {
+  outline: none;
+  border-bottom: solid var(--pink) 2px;
+  height: 6vh;
+  font-size: 15px;
+  background-color: transparent;
+}
+
+.formcreator .option {
+  border: none;
+  background-color: transparent;
+  border-radius: 0px;
+  height: 3vh;
+  font-family: "Poppins", sans-serif;
+  font-size: 12px;
+}
+.formcreator .option:focus-visible {
+  border: none;
+  outline: none;
+  border-bottom: solid var(--pink) 1px;
+  height: 4vh;
+  background-color: transparent;
+}
+.options-submitted-container {
+  margin-top: 3vh;
+}
+#submitted {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+}
+.question-submitted {
+  font-size: 14px;
+  height: 100%;
+  padding-left: 2vh;
+  width: 100%;
+}
+.question-title {
+  border-bottom: solid black 1px;
+  width: 100%;
+  padding-left: 2vh;
+}
+
+.options-submitted {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  height: 5vh;
+}
+.options-submitted {
+  font-size: 12px;
+}
+.questionnaire-submitted {
+  background-color: white;
+  width: 50%;
+  padding: 6vh 6vh 6vh 6vh;
+  margin-top: 6vh;
+  border-radius: 10px;
+  /* min-height: 30vh;
+  height: auto; */
+}
+.formcreator .options {
+  margin-top: 3vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.option-value {
+  margin-left: 1vw;
+}
+i {
+  font-size: 13px !important;
+}
+#termin-lien{
+  width: 100%;
+}

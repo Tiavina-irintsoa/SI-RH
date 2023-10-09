@@ -13,6 +13,10 @@ delete from candidat;
 delete from choix;
 delete from typecritere;
 delete from service;
+delete from fichier;
+delete from choixcandidature;
+delete from candidature;
+delete from candidat;
 
 
 alter sequence besoin_idbesoin_seq           restart with 1;
@@ -27,6 +31,7 @@ alter sequence useradmin_idadmin_seq restart with 1;
 alter sequence typeuser_idtypeuser_seq restart with 1;
 alter sequence candidature_idcanditature_seq restart with 1;
 alter sequence candidat_idcandidat_seq restart with 1;
+
 
 DO $$ 
 DECLARE 
