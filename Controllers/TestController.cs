@@ -71,7 +71,7 @@ namespace RH.Controllers{
                 q.Insert(null);
                 Response.Cookies.Delete("idbesoin-test");
                 Response.Cookies.Delete("questionDataList");
-
+                ViewBag.est_admin = true; 
                 return RedirectToAction("detailsOffre","welcome",new{besoin=idbesoin});
             }
             catch(Exception e){
