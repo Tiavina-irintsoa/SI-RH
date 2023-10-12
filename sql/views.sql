@@ -87,3 +87,28 @@ create or replace view v_admin_service as
     from v_admin_typeuser 
         natural join v_assiociation_admin_service;
 
+
+-- vaovao ralph 
+create or replace view v_personnel_poste_association as 
+    select * 
+    from personnel_poste as pp 
+        natural join poste as p;
+
+
+create or replace view v_personnel_poste as 
+    select * 
+    from v_personnel_poste_association as ppa 
+        natural join personnel;
+
+create or replace view v_personnel_information as 
+    SELECT
+        vpp.*,
+        ((get_latest_salary(vpp.idpersonnel))).salaire_brut AS latest_salary_brut,
+        ((get_latest_salary(vpp.idpersonnel))).salaire_net AS latest_salary_net,
+        ((get_latest_salary(vpp.idpersonnel))).date_insert AS latest_salary_date,
+        get_latest_hire_date(vpp.idpersonnel) AS latest_hire_date,
+        extract ( year from age( now() , vpp.dtn )  ) as age
+    FROM
+        v_personnel_poste AS vpp;
+
+

@@ -145,3 +145,41 @@ ADD CONSTRAINT choixcandidature_idcanditature_fkey FOREIGN KEY (idcandidature) R
 
 ALTER TABLE candidature
 ALTER COLUMN validation SET DEFAULT 0;
+
+
+-- vaovao ralph
+create table personnel(
+    idpersonnel serial primary key,
+    nom varchar,
+    prenom varchar,
+    mail varchar,
+    matricule varchar,
+    nationalite int,
+    adresse text,
+    genre int,
+    travailleur int,
+    dtn date
+);
+
+create table personnel_poste(
+    idposte int references poste(idposte),
+    idpersonnel int references personnel(idpersonnel)
+);
+
+create table personnel_salaire(
+    idpersonnel_salaire serial primary key,
+    idpersonnel int references personnel(idpersonnel),
+    salaire_brut numeric,
+    salaire_net numeric,
+    date_insert date default now()
+);
+
+
+create table personnel_embauche(
+    idpersonnel_embauche serial primary key,
+    idpersonnel int references personnel(idpersonnel),
+    date_embauche date
+);
+
+alter table personnel 
+add column  contact varchar;
