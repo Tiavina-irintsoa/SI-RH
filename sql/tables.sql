@@ -145,3 +145,7 @@ ADD CONSTRAINT choixcandidature_idcanditature_fkey FOREIGN KEY (idcandidature) R
 
 ALTER TABLE candidature
 ALTER COLUMN validation SET DEFAULT 0;
+
+alter table question add column points integer; 
+alter table option add column points integer;
+------------ Test et entretien 

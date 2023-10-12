@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://unpkg.com/boxicons@2.0.9/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <!-- My CSS -->
+    <link rel="stylesheet" href="../../wwwroot/css/style.css" />
+    <link rel="stylesheet" href="../../wwwroot/css/ajout.css" />
+    <link rel="stylesheet" href="../../wwwroot/css/nav.css" />
+    <link rel="stylesheet" href="../../wwwroot/css/critere.css" />
+    <link rel="stylesheet" href="../../wwwroot/css/main.css" />
+    <link rel="stylesheet" href="../../wwwroot/css/form.css" />
+    <link rel="stylesheet" href="../../wwwroot/css/confirmbox.css" />
+    <link
+      rel="stylesheet"
+      href="../../wwwroot/fontawesome/css/font-awesome.css"
+    />
+    <title>@ViewData["Title"] - RH</title>
+  </head>
+  <body>
+    <!-- SIDEBAR -->
+    <section id="sidebar">@await Html.PartialAsync("Slide")</section>
+    <!-- SIDEBAR -->
+
+    <!-- CONTENT -->
+    <section id="content">
+      <!-- NAVBAR -->
+      <nav>@await Html.PartialAsync("NAv")</nav>
+      <!-- NAVBAR -->
+
+      <!-- MAIN -->
+      <main>
+        <div class="table-data">
+          <div class="order">
+            <div class="head">
+              <h3>Réponse</h3>
+              <i class="bx bx-search"></i>
+              <i class="bx bx-filter"></i>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Nom</th>
+                  <th></th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>@fiche.candidat.nomposte</td>
+                  <td>
+                    <a
+                      href='@Url.Action("Details","ListeCv", new{idbesoin=@fiche.besoin.idBesoin, idcandidat=@fiche.candidat.idcandidat})'
+                      >Voir les réponses</a
+                    >
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+            <div class="retour">
+              <a href='@Url.Action("BesoinListe","ListeCv")'>Retour</a>
+            </div>
+          </div>
+        </div>
+      </main>
+      <!-- MAIN -->
+    </section>
+    <!-- CONTENT -->
+    <script src="script.js"></script>
+  </body>
+</html>
