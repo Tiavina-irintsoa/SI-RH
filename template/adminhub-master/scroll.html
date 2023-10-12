@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .A {
+        height: 100vh;
+      }
+      .scroll-to-top {
+        background: red;
+        overflow: scroll;
+      }
+      .last{
+        background: blue;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="A">A</div>
+    <div class="A">A</div>
+    <div class="A">A</div>
+    <div class="A">A</div>
+    <div class="A scroll-to-top">
+      <div class="A">A</div>
+      <div class="A">A</div>
+      <div class="A">A</div>
+      <div class="A last">A</div>
+    </div>
+    <script>
+        // Sélectionnez le dernier div avec la classe "A" à l'intérieur du conteneur .scroll-to-top
+        const scrollButton = document.querySelector('.scroll-to-top .A:last-child');
+
+        // Ajoutez un gestionnaire d'événements au clic sur le div
+        scrollButton.addEventListener('click', function () {
+            // Faites défiler le conteneur .scroll-to-top vers le haut
+            const scrollContainer = document.querySelector('.scroll-to-top');
+            scrollContainer.scrollTo({
+                top: 0,
+                behavior: 'smooth' // Pour une animation de défilement en douceur
+            });
+        });
+    </script>
+  </body>
+</html>
