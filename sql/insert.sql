@@ -8,7 +8,7 @@ VALUES
     ('diplome'),
     ('experience'),
     ('situation matrimoniale')
-    ;
+;
 
 insert into type_contrat ( nomtype_contrat )
 values( 'contrat  a duree determinee' ),

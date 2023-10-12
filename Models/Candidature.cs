@@ -43,6 +43,7 @@ public class Candidature
         return path+"Accept.cshtml";
     }
 
+    
     public static Candidature GetByCode(NpgsqlConnection npg , string code ){
         bool estOuvert = false;
         

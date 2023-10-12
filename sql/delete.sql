@@ -37,13 +37,4 @@ alter sequence typeuser_idtypeuser_seq restart with 1;
 alter sequence candidature_idcanditature_seq restart with 1;
 alter sequence candidat_idcandidat_seq restart with 1;
 
-
-DO $$ 
-DECLARE 
-    view_name text;
-BEGIN
-    FOR view_name IN (SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' AND table_type = 'VIEW') 
-    LOOP
-        EXECUTE 'DROP VIEW IF EXISTS ' || view_name || ' CASCADE';
-    END LOOP;
-END $$;
+*

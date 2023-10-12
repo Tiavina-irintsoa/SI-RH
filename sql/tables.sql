@@ -146,6 +146,7 @@ ADD CONSTRAINT choixcandidature_idcanditature_fkey FOREIGN KEY (idcandidature) R
 ALTER TABLE candidature
 ALTER COLUMN validation SET DEFAULT 0;
 
+<<<<<<< HEAD
 
 -- vaovao ralph
 create table personnel(
@@ -183,3 +184,8 @@ create table personnel_embauche(
 
 alter table personnel 
 add column  contact varchar;
+=======
+alter table question add column points integer; 
+alter table option add column points integer;
+------------ Test et entretien 
+>>>>>>> 9611aabc19d400c902c62f25515e843b524534bf

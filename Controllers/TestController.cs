@@ -15,6 +15,7 @@ namespace RH.Controllers{
             return View( "Views/Home/CreateForm.cshtml" );
         }
 
+         
         [HttpPost]
         public async Task<string> AddQuestion()
         {
@@ -25,7 +26,7 @@ namespace RH.Controllers{
                     string jsonBody = await reader.ReadToEndAsync();
                     QuestionData newQuestionData = JsonConvert.DeserializeObject<QuestionData>(jsonBody);
                     string question = newQuestionData.Question;
-                    List<string> options = newQuestionData.Options;
+                    List<OptionTest> options = newQuestionData.Options;
                     var existingCookie = Request.Cookies["questionDataList"];
                     List<QuestionData> questionDataList;
                     if (string.IsNullOrEmpty(existingCookie))
