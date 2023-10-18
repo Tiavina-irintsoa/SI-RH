@@ -9,37 +9,141 @@ build_property.EnforceExtendedAnalyzerRules =
 build_property._SupportedPlatformList = Linux,macOS,Windows
 build_property.RootNamespace = RH
 build_property.RootNamespace = RH
-build_property.ProjectDir = D:\ralph\s5\Mr_Tovo\gestion_projet\test-git\SI-RH\
+build_property.ProjectDir = d:\ITU\S5\SI\RH\SI-RH\
 build_property.RazorLangVersion = 7.0
 build_property.SupportLocalizedComponentNames = 
 build_property.GenerateRazorMetadataSourceChecksumAttributes = 
-build_property.MSBuildProjectDirectory = D:\ralph\s5\Mr_Tovo\gestion_projet\test-git\SI-RH
+build_property.MSBuildProjectDirectory = d:\ITU\S5\SI\RH\SI-RH
 build_property._RazorSourceGeneratorDebug = 
 
-[D:/ralph/s5/Mr_Tovo/gestion_projet/test-git/SI-RH/Views/Home/Index.cshtml]
+[d:/ITU/S5/SI/RH/SI-RH/Views/Home/Accept.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBY2NlcHQuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/ITU/S5/SI/RH/SI-RH/Views/Home/adminEssai.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxhZG1pbkVzc2FpLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/ITU/S5/SI/RH/SI-RH/Views/Home/adminTravail.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxhZG1pblRyYXZhaWwuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/ITU/S5/SI/RH/SI-RH/Views/Home/ajoutBesoin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxham91dEJlc29pbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/ITU/S5/SI/RH/SI-RH/Views/Home/Annonces.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxBbm5vbmNlcy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/ITU/S5/SI/RH/SI-RH/Views/Home/besoinListe.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxiZXNvaW5MaXN0ZS5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/ITU/S5/SI/RH/SI-RH/Views/Home/code.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxjb2RlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/ITU/S5/SI/RH/SI-RH/Views/Home/contrat_essai.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxjb250cmF0X2Vzc2FpLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/ITU/S5/SI/RH/SI-RH/Views/Home/CreateForm.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDcmVhdGVGb3JtLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/ITU/S5/SI/RH/SI-RH/Views/Home/Critere.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDcml0ZXJlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/ITU/S5/SI/RH/SI-RH/Views/Home/CV.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDVi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/ITU/S5/SI/RH/SI-RH/Views/Home/CV_critere.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxDVl9jcml0ZXJlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/ITU/S5/SI/RH/SI-RH/Views/Home/detailsCv.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxkZXRhaWxzQ3YuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/ITU/S5/SI/RH/SI-RH/Views/Home/DetailsOffre.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxEZXRhaWxzT2ZmcmUuY3NodG1s
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/ITU/S5/SI/RH/SI-RH/Views/Home/Encours.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxFbmNvdXJzLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/ITU/S5/SI/RH/SI-RH/Views/Home/finpostule.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxmaW5wb3N0dWxlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/ITU/S5/SI/RH/SI-RH/Views/Home/Index.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxJbmRleC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ralph/s5/Mr_Tovo/gestion_projet/test-git/SI-RH/Views/Home/Privacy.cshtml]
+[d:/ITU/S5/SI/RH/SI-RH/Views/Home/listeBesoin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxsaXN0ZUJlc29pbi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/ITU/S5/SI/RH/SI-RH/Views/Home/listeCv.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxsaXN0ZUN2LmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/ITU/S5/SI/RH/SI-RH/Views/Home/liste_service.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxsaXN0ZV9zZXJ2aWNlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/ITU/S5/SI/RH/SI-RH/Views/Home/loginAdmin.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxsb2dpbkFkbWluLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/ITU/S5/SI/RH/SI-RH/Views/Home/Privacy.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxQcml2YWN5LmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ralph/s5/Mr_Tovo/gestion_projet/test-git/SI-RH/Views/Shared/Error.cshtml]
+[d:/ITU/S5/SI/RH/SI-RH/Views/Home/Refus.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcSG9tZVxSZWZ1cy5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/ITU/S5/SI/RH/SI-RH/Views/Shared/Error.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXEVycm9yLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ralph/s5/Mr_Tovo/gestion_projet/test-git/SI-RH/Views/Shared/_ValidationScriptsPartial.cshtml]
+[d:/ITU/S5/SI/RH/SI-RH/Views/Shared/Nav.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXE5hdi5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/ITU/S5/SI/RH/SI-RH/Views/Shared/Slide.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXFNsaWRlLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/ITU/S5/SI/RH/SI-RH/Views/Shared/_form.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9mb3JtLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/ITU/S5/SI/RH/SI-RH/Views/Shared/_Layout2.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQyLmNzaHRtbA==
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/ITU/S5/SI/RH/SI-RH/Views/Shared/_NoLayout.cshtml]
+build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9Ob0xheW91dC5jc2h0bWw=
+build_metadata.AdditionalFiles.CssScope = 
+
+[d:/ITU/S5/SI/RH/SI-RH/Views/Shared/_ValidationScriptsPartial.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9WYWxpZGF0aW9uU2NyaXB0c1BhcnRpYWwuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ralph/s5/Mr_Tovo/gestion_projet/test-git/SI-RH/Views/_ViewImports.cshtml]
+[d:/ITU/S5/SI/RH/SI-RH/Views/_ViewImports.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdJbXBvcnRzLmNzaHRtbA==
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ralph/s5/Mr_Tovo/gestion_projet/test-git/SI-RH/Views/_ViewStart.cshtml]
+[d:/ITU/S5/SI/RH/SI-RH/Views/_ViewStart.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcX1ZpZXdTdGFydC5jc2h0bWw=
 build_metadata.AdditionalFiles.CssScope = 
 
-[D:/ralph/s5/Mr_Tovo/gestion_projet/test-git/SI-RH/Views/Shared/_Layout.cshtml]
+[d:/ITU/S5/SI/RH/SI-RH/Views/Shared/_Layout.cshtml]
 build_metadata.AdditionalFiles.TargetPath = Vmlld3NcU2hhcmVkXF9MYXlvdXQuY3NodG1s
 build_metadata.AdditionalFiles.CssScope = b-n20kqrazqd
