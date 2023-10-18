@@ -11,6 +11,7 @@
                 <thead>
                 <tr>
                     <th>Heure/semaine</th>
+                    <th>Nom poste</th>
                     <th>Nb pers.</th>
                     <th>Liste des CV</th>
                 </tr>
@@ -23,6 +24,8 @@
                                 @* <img src="img/people.png" /> *@
                                 <p> @b.heurePersonne </p>
                             </td>
+
+                            <td>@b.poste.nomPoste</td>
                             <td> @b.nbpersonne </td>
                             <td> <a href='@Url.Action("Liste","ListeCv", new{idbesoin=@b.idBesoin})'>Voir</a> </td>
                         </tr>

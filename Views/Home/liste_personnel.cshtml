@@ -1,0 +1,342 @@
+    <div class="critere-liste" style="width: 100%">
+      <form action='@Url.Action( "search" , "personnel" )' method="post" id="form-personnel" class="form-liste row">
+        <div class="col-lg-12">
+          <div class="row flex-row">
+            <div class="col-lg-6">
+              <label for=""> Année </label>
+              <input type="number" placeholder="choisissez une année"
+               value="@ViewBag.Annee" 
+               name="annee" style="width: 200px" />
+            </div>
+            <div class="col-lg-6">
+              <label for=""> Genre : </label>
+              Homme
+              <input type="checkbox" @(ViewBag.Genre == "1" ? "checked" : "")  name="genre" value="1" />
+              Femme
+              <input type="checkbox" @(ViewBag.Genre == "2" ? "checked" : "") value="2" name="genre" />
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12">
+          <div class="row flex-row">
+            <div class="col-lg-6">
+              <label for=""> Nom et Prénom </label>
+              <input type="text" placeholder="nom ou prénom"
+               value="@ViewBag.nom_prenom" 
+               name="nom_prenom" style="width: 200px" />
+            </div>
+            <div class="col-lg-6">
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12">
+          <div class="row flex-row">
+            <div class="col-lg-6">
+              <label for=""> Age </label>
+              <input type="number" placeholder="min" name="min-age"  value="@ViewBag.MinAge" style="width: 70px" />
+              <input type="number" placeholder="max" name="max-age"  value="@ViewBag.MaxAge" style="width: 70px" />
+            </div>
+            <div class="col-lg-6">
+              <label for=""> Adresse </label>
+              <input type="text" placeholder="donnez une adresse" value="@ViewBag.Adresse"  name="adresse" style="width: 300px" />
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12">
+          <div class="row flex-row">
+            <div class="col-lg-6">
+              <label for=""> Nationalité : </label>
+              Malagasy
+              <input type="checkbox"  @(ViewBag.Nationalite == "1" ? "checked" : "")  name="nationalite"  value="0" />
+              Etrangé
+              <input type="checkbox"  @(ViewBag.Nationalite == "1" ? "checked" : "") name="nationalite" value="1" />
+            </div>
+            <div class="col-lg-6">
+              <label for=""> Matricule </label>
+              <input type="text" value="@ViewBag.Matricule"  name="matricule" style="width: 100px" />
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12">
+          <div class="row flex-row">
+            <div class="col-lg-6">
+              <label for=""> Service : </label>
+              <select name="idservice" id="">
+                <option value="0" >Tous</option> 
+                <option value="1">Achats</option>
+                <option value="2">Finance</option>
+                <option value="3">Informatique</option>
+                <option value="4">Logistique</option>
+                <option value="5">Production industrielle</option>
+                <option value="6">Recherche et developpement</option>
+                <option value="7">Ressources humaines </option>
+                <option value="8">Maintenance et Reparation </option>
+                <option value="9">Marketing </option>
+              </select>
+            </div>
+            <div class="col-lg-6">
+              <label for=""> Salaire Brut </label>
+              <input type="number" placeholder="min" value="@ViewBag.BrutMin"  name="brut-min" style="width: 200px" />
+              <input type="number" placeholder="max" value="@ViewBag.BrutMax" name="brut-max" style="width: 200px" />
+            </div>
+          </div>
+      </div>
+        <div class="col-lg-12">
+          <div class="row flex-row">
+            <div class="col-lg-6"></div>
+            <div class="col-lg-6">
+              <label for=""> Salaire Net </label>
+              <input type="number" placeholder="min"  name="net-min" value="@ViewBag.NetMin" style="width: 200px" />
+              <input type="number" placeholder="max" name="net-max" value="@ViewBag.NetMax" style="width: 200px" />
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-12">
+          <div class="row flex-row">
+            <div class="col-lg-6">
+            </div>
+            <div class="col-lg-6">
+                <input type="submit" value="Rechercher" />
+            </div>
+          </div>
+        </div>
+      </form>
+    </div>
+    <div class="table-data">
+      <div class="order">
+        <div class="head">
+          <h3>Liste des personnels</h3>
+          <i class="bx bx-search"></i>
+          <i class="bx bx-filter"></i>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Titre</th>
+              <th>Nom</th>
+              <th>Prénom</th>
+              <th>Mail</th>
+              <th>Détails</th>
+            </tr>
+          </thead>
+          <tbody>
+          @foreach( var p in @ViewBag.listePersonnel ){
+            <tr>
+              <td>@p.nomposte</td>
+              <td>@p.nom</td>
+              <td>@p.prenom</td>
+              <td>@p.mail</td>
+              <td>
+                <a class="details-personnel" onclick='afficherDetailsPersonnel( ("@p.nom"), ("@p.prenom"), ("@p.nomposte") , ("@p.matricule") , ("@p.nationalite") , ("@p.adresse") , (@p.genre) ,  ("@p.dtn") ,  (@p.latest_salary_brut) , (@p.latest_salary_net) , ("@p.latest_salary_date") , ("@p.latest_hire_date") , ("@p.contact") , ("@p.age") )' >Voir</a>
+              </td>
+            </tr>
+          }
+          </tbody>
+        </table>
+        <div class="retour">
+          <a href='@Url.Action("BesoinListe","ListeCv")'>Retour</a>
+        </div>
+      </div>
+    </div>
+    <div id="popup-personnel" class="popup">
+    <div  class="popup-content">
+      <div class="title-personnel-detail">
+        <h2>Fiche Personnel</h2>
+        <i  style="color:var(--red);" class="fa fa-times details-personnel-icon" onclick="fermer()" ></i>
+      </div>
+      <div id="liste_details" class="grid-container">
+          <div class="">
+            Nom et Prénom :
+          </div>
+          <div class="">
+            Salaire Brut :
+          </div>
+          <div class="">
+            Matricule :
+          </div>
+          <div class="">
+            Salaire Net :
+          </div>
+          <div class="">
+            Fonction  :
+          </div>
+          <div class="">
+            Taux journalierz  :
+          </div>
+          <div class="">
+            Taux horaires  :
+          </div>
+          <div class="">
+            N° Cnaps  :
+          </div>
+          <div class="">
+            Nationalité  :
+          </div>
+          <div class="">
+            Date embauche  :
+          </div>
+          <div class="">
+            Adresse  :
+          </div>
+          <div class="">
+            Ancienneté  :
+          </div>
+
+      </div>
+    </div>
+  </div>
+  <script>
+    function formaterNombre(chaineNombre, options = {}) {
+    const {
+      separateurMilliers = true,
+      separateurDecimal = '.',
+      symboleDevise = '',
+      decimal = 2
+    } = options;
+
+    const nombreSansSeparateurs = (chaineNombre.toString()).replace(/[^\d.,-]/g, '');
+
+    const nombre = parseFloat(nombreSansSeparateurs);
+
+    if (isNaN(nombre)) {
+      return 'Nombre invalide';
+    }
+
+    const nombreFormate = nombre.toLocaleString(undefined, {
+      style: 'decimal',
+      minimumFractionDigits: decimal,
+      maximumFractionDigits: decimal
+    });
+
+    return `${symboleDevise}${nombreFormate}`;
+  }
+
+  function getGenre( str ){
+    if( str == '2' ){
+      return 'Femme';
+    }
+    return 'Homme'
+  }
+  function getNationalite( str , genre ){
+    if( str == '1' ){
+      if( genre == '2' )
+        return 'Etrangère';
+      return 'Etranger'
+    }
+    return 'Malagasy';
+  }
+  function extraireDate(str) {
+    const date = str;
+    const jour = date.getDate();
+    const mois = date.getMonth() + 1; 
+    const annee = date.getFullYear();
+
+    const dateFormatee = `${jour}/${mois}/${annee}`;
+
+    return dateFormatee;
+  }  
+  
+  function differenceEnAnneesMoisJours(dateReference) {
+    const dateActuelle = new Date();
+
+    const differenceEnMillisecondes = dateActuelle - dateReference;
+
+    const millisecondesDansUneJournee = 24 * 60 * 60 * 1000;
+    const millisecondesDansUnMois = 30.44 * millisecondesDansUneJournee;
+    const millisecondesDansUneAnnee = 365.25 * millisecondesDansUneJournee;
+
+    const annees = Math.floor(differenceEnMillisecondes / millisecondesDansUneAnnee);
+    const resteEnAnnees = differenceEnMillisecondes % millisecondesDansUneAnnee;
+    const mois = Math.floor(resteEnAnnees / millisecondesDansUnMois);
+    const jours = Math.floor((resteEnAnnees % millisecondesDansUnMois) / millisecondesDansUneJournee);
+
+    return `${annees} an(s) ${mois} mois et ${jours} jour(s)`;
+  }
+  function escapeHtml(unsafe) {
+      var unsafeStr = unsafe.toString();
+      let unsafeStrnew =  unsafeStr
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#039;");
+          console.log( unsafeStrnew );
+          return unsafeStrnew;
+  }
+    function fermer(){
+      const popup = document.getElementById('popup-personnel');
+      popup.style.top = '-35%';
+      popup.style.opacity = '0';
+    }
+    function afficherDetailsPersonnel(nom, prenom, nomposte , matricule , nationalite , adresse , genre ,  dtn ,  latest_salary_brut , latest_salary_net , latest_salary_date , latest_hire_date , contact , age ) {
+    // Défilement vers le haut de la page
+    const scrollContainer = document.getElementById('form-personnel');
+    scrollContainer.scrollIntoView({
+      top: 0,
+      behavior: 'smooth'
+    });
+    // Modification des propriétés de #popup-personnel
+    const popup = document.getElementById('popup-personnel');
+    popup.style.top = '50%';
+    popup.style.opacity = '1';
+    @* const dateReference = new Date(latest_hire_date.toString()); *@
+    var dateString = latest_hire_date;
+    var dateParts = dateString.split(" "); // Sépare la date et l'heure
+    var date = dateParts[0].split("/"); // Sépare le jour, le mois et l'année
+    var time = dateParts[1].split(":"); // Sépare l'heure, les minutes et les secondes
+
+    // Crée un objet Date avec les composants extraits
+    var jsDate = new Date(
+      parseInt(date[2]), // année
+      parseInt(date[1]) - 1, // mois (n'oubliez pas que les mois en JavaScript sont 0-indexés)
+      parseInt(date[0]), // jour
+      parseInt(time[0]), // heure
+      parseInt(time[1]), // minutes
+      parseInt(time[2]) // secondes
+    );
+
+    console.log(jsDate);
+    const difference = differenceEnAnneesMoisJours(jsDate);
+    const details = document.getElementById( "liste_details" );
+    details.innerHTML = 
+    '<div class="">\
+            <span class="gras">Nom et Prénom :</span> '+nom +' '+ prenom +' \
+          </div>\
+          <div class="">\
+            <span class="gras">Salaire Brut :</span> '+ formaterNombre(latest_salary_brut) +' \
+          </div>\
+          <div class="">\
+            <span class="gras">Genre :</span>  '+getGenre(genre)+'  \
+          </div>\
+          <div class="">\
+            <span class="gras">Contact :</span>  '+contact+'  \
+          </div>\
+            </div>\
+          <div class="">\
+            <span class="gras">Age :</span>  '+age+'  \
+          </div>\
+          <div class="">\
+            <span class="gras">Matricule :</span>  '+matricule+'  \
+          </div>\
+          <div class="">\
+            <span class="gras">Salaire Net :</span> '+formaterNombre(latest_salary_net)+' \
+          </div>\
+          <div class="">\
+            <span class="gras">Fonction  :</span> '+nomposte+' \
+          </div>\
+          <div class="">\
+            <span class="gras">Nationalité  :</span> '+getNationalite(nationalite , genre)+' \
+          </div>\
+          <div class="">\
+            <span class="gras">Date embauche  :</span> '+extraireDate(jsDate)+'\
+          </div>\
+          <div class="">\
+            <span class="gras">Adresse  :</span> '+adresse+' \
+          </div>\
+          <div class="">\
+            <span class="gras">Ancienneté  :</span> '+difference+' \
+          </div>'
+    ;    
+  }
+
+  </script>

@@ -83,10 +83,14 @@ public class Besoin{
         }        
         try{
             string sql = "SELECT * FROM v_poste_besoin where idservice=" + ids;
-            Console.WriteLine(sql);         
+            if( ids == 0 ){
+                sql = "SELECT * FROM v_poste_besoin";
+            }
+            Console.WriteLine(sql);
             Service service = new(ids);
             using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))            {
-                using (NpgsqlDataReader reader = command.ExecuteReader())                {
+                using (NpgsqlDataReader reader = command.ExecuteReader())   
+                {
                     List<Besoin> besoinList = new List<Besoin>();
                     while (reader.Read()) {
                         int idBesoin = reader.GetInt32(3);

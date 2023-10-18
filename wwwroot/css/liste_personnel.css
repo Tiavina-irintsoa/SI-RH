@@ -1,0 +1,117 @@
+#content main .table-data {
+  width: 100% !important;
+}
+
+.flex-row {
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: space-between !important;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
+.critere-liste {
+  height: 290px !important;
+}
+
+.critere-liste > .row {
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: space-between !important;
+    height: 100% !important;
+}
+
+.critere-liste input,
+select {
+  outline: none !important;
+  border: 1px solid var(--pink) !important;
+  border-radius: 5px !important;
+  padding: 5px !important;
+  background: #fff;
+}
+
+.critere-liste input[type="number"],
+input[type="text"] {
+  height: 25px;
+}
+
+.critere-liste select {
+  font-family: var(--poppins) !important;
+  font-size: 13px !important;
+  border-radius: 5px !important;
+}
+
+.critere-liste input[type="submit"] {
+  background-color: var(--pink) !important;
+  color: #ffff !important;
+  cursor: pointer !important;
+  font-family: var(--poppins) !important;
+  font-weight: 600 !important;
+  font-size: 15px !important;
+  transition: 0.5s !important;
+  border: 1px solid var(--pink) !important;
+}
+.critere-liste input[type="submit"]:hover {
+  background-color: #fff !important;
+  color: var(--pink) !important;
+}
+.details-personnel {
+  cursor: pointer;
+}
+#popup-personnel {
+    position: absolute;
+    z-index: 100;
+    top: -35%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background: var(--light);
+    padding: 30px;
+    box-sizing: border-box;
+    box-shadow: 6px 7px 11px #4e4e4e4d;
+    width: 80%;
+    opacity: 0;
+    transition: 0.5s;
+}
+
+.grid-container {
+  display: grid;
+  gap: 30px;
+  grid-template-columns: repeat(2, 1fr); /* Deux colonnes de largeur égale */
+  grid-gap: 10px; /* Espacement entre les éléments */
+}
+
+.title-personnel-detail {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.title-personnel-detail i {
+  font-size: 30px !important;
+  cursor: pointer;
+}
+.gras {
+  font-weight: 600;
+  color: var(--pink);
+}
+
+.filtrage-person {
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--pink);
+  width: 20%;
+  border-radius: 25px;
+  color: #fff;
+  margin: auto !important;
+  transition: 0.5s !important;
+  border: var(--pink) 1px solid !important;
+  cursor:pointer !important;
+}
+
+.filtrage-person:hover{
+    background: #fff !important;
+    color: var(--pink) !important;
+}

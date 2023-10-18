@@ -43,6 +43,7 @@ public class Candidature
         return path+"Accept.cshtml";
     }
 
+    
     public static Candidature GetByCode(NpgsqlConnection npg , string code ){
         bool estOuvert = false;
         
@@ -58,15 +59,18 @@ public class Candidature
             using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))           
             {
 
-                command.Parameters.AddWithValue("@code", code);
+                command.Parameters.AddWithValue("@code", code.Trim());
                 string sqlWithValues = command.CommandText;
                 foreach (NpgsqlParameter parameter in command.Parameters)
                 {
-                    sqlWithValues = sqlWithValues.Replace(parameter.ParameterName, parameter.Value.ToString());
+                  sqlWithValues = sqlWithValues.Replace(parameter.ParameterName, parameter.Value.ToString());
                 }
+                Console.WriteLine( sqlWithValues );
+                Console.WriteLine( " niditra 1" );
                 using (NpgsqlDataReader reader = command.ExecuteReader())                {
                     while (reader.Read())                    
                     {
+                        Console.WriteLine( " niditra " );
                         int idcandidat = Convert.ToInt32(reader["idcandidat"]);
                         string nomcandidat = reader["nomcandidat"].ToString();
                         string prenomcandidat = reader["prenomcandidat"].ToString();
@@ -76,7 +80,7 @@ public class Candidature
                             prenom = prenomcandidat
                         };
                         Candidature candidature = new Candidature{
-                            idcandidature = Convert.ToInt32(reader["idcanditature"]),
+                            idcandidature = Convert.ToInt32(reader["idcandidature"]),
                             validation = Convert.ToInt32(reader["validation"]),
                             Candidat = c
                         };

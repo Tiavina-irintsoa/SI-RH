@@ -4,17 +4,19 @@
           </h1>
           <div id="questions">
             <div id="submitted">
-               
             </div>
             <form id="newform">
-              <input type="text" placeholder="Question" id="question" />
+              <div id="question-container">
+                <input type="text" placeholder="Question" id="question" />
+                <input type="text" name="" id="note" placeholder="points">
+              </div>
               <div class="options-container">
                 <div class="options">
                     <i class="fa fa-circle-o"></i>
                     <input type="text" class="option" placeholder="Option 1">
+                    <input type="number" class="note-option" placeholder="Note"> pts
                 </div>
               </div>
-              
               <div class="options" id="add-option-container">
                 <i class="fa fa-circle-o"></i>
                 <input type="text" id="add-option" class="option" placeholder="Ajouter une option">
@@ -25,7 +27,6 @@
           <a id="terminer" class="mybutton" href='@Url.Action("save","test")'>
             <div ">Terminer</div>
           </a>
-
         </div>
         <script>
           document.addEventListener('DOMContentLoaded', function() {
@@ -40,8 +41,7 @@
             xhr.send();
         });
 
-          function reinit(){
-        
+          function reinit() {        
             const parentElement = document.getElementById('questions');
             parentElement.innerHTML = ''; 
             // Créez et ajoutez l'élément <div id="submitted"></div> à l'élément parent
@@ -54,11 +54,24 @@
             newForm.id = 'newform';
             parentElement.appendChild(newForm);
 
+            const questionContainer = document.createElement('div');
+            questionContainer.id = 'question-container';
+
+            // Créez l'élément input pour la question
             const questionInput = document.createElement('input');
             questionInput.type = 'text';
             questionInput.placeholder = 'Question';
             questionInput.id = 'question';
-            newForm.appendChild(questionInput);
+
+            // Créez l'élément input pour les points
+            const noteInput = document.createElement('input');
+            noteInput.type = 'text'; // Vous pouvez également utiliser "number" pour les nombres
+            noteInput.placeholder = 'points';
+            noteInput.id = 'note';
+            questionContainer.appendChild(questionInput);
+            questionContainer.appendChild(noteInput); 
+
+            newForm.appendChild(questionContainer);
 
             const optionsContainer = document.createElement('div');
             optionsContainer.className = 'options-container';
@@ -78,6 +91,14 @@
             optionInput1.placeholder = 'Option 1';
             optionsDiv.appendChild(optionInput1);
 
+            const note =  document.createElement('input');
+            note.type = 'number';
+            note.className="note-option";
+            note.placeholder="Note";
+            optionsDiv.appendChild(note);
+            const pts = document.createElement('span');
+            pts.innerHTML = 'pts';
+            optionsDiv.appendChild(pts);
             const addOptionContainer = document.createElement('div');
             addOptionContainer.className = 'options';
             addOptionContainer.id = 'add-option-container';
@@ -86,7 +107,7 @@
             const addOptionIcon = document.createElement('i');
             addOptionIcon.className = 'fa fa-circle-o';
             addOptionContainer.appendChild(addOptionIcon);
-
+           
             const addOptionInput = document.createElement('input');
             addOptionInput.type = 'text';
             addOptionInput.id = 'add-option';
@@ -94,27 +115,33 @@
             addOptionInput.placeholder = 'Ajouter une option';
             addOptionContainer.appendChild(addOptionInput);
           }
-          function afficherQuestionnaire(questions) {
-     
+        function afficherQuestionnaire(questions) {
             const container = document.getElementById('submitted');
             container.innerHTML = '';
             questions.forEach((questionData, index) => {
                 const questionnaireContainer = document.createElement('div');
                 questionnaireContainer.className = 'questionnaire-submitted';
-
+                const head = document.createElement('div');
+                head.className = "head-submitted";
                 const questionContainer = document.createElement('div');
                 questionContainer.className = 'question-submitted';
 
                 const titre = document.createElement('div');
                 titre.className = 'question-title';
                 titre.textContent = questionData.Question;
+                head.appendChild(titre);
 
-                questionContainer.appendChild(titre) ;
+                const note = document.createElement('div');
+                note.className = "submitted-note";
+                note.textContent = questionData.note;
+                head.appendChild(note);
+                questionContainer.appendChild(head) ;
 
                 const optionsContainer = document.createElement('div');
                 optionsContainer.className = 'options-submitted-container';
 
                 questionData.Options.forEach((optionText, optionIndex) => {
+                    console.log(optionText);
                     const optionContainer = document.createElement('div');
                     optionContainer.className = 'options-submitted';
 
@@ -123,10 +150,13 @@
 
                     const optionValue = document.createElement('div');
                     optionValue.className = 'option-value';
-                    optionValue.textContent = 'Option ' + (optionIndex + 1) + ': ' + optionText;
-
+                    optionValue.textContent = optionText.option;
+                    const noteOption = document.createElement('div');
+                    noteOption.className = 'note-option-value';
+                    noteOption.textContent = optionText.note+"pts";
                     optionContainer.appendChild(icon);
                     optionContainer.appendChild(optionValue);
+                    optionContainer.appendChild(noteOption);
 
                     optionsContainer.appendChild(optionContainer);
                 });
@@ -149,14 +179,20 @@
               const newInput = document.createElement('input');
               newInput.type = 'text';
               newInput.className = 'option';
-              newInput.placeholder = 'Option ' + document.querySelectorAll('.options-container .options').length;
+              const note =  document.createElement('input');
+              note.type = 'number';
+              note.className="note-option";
+              note.placeholder="Note";
+              const pts = document.createElement('span');
+              pts.innerHTML = 'pts';
               newOptionDiv.appendChild(icon);
               newOptionDiv.appendChild(newInput);
-
+              newOptionDiv.appendChild(note);
+              newOptionDiv.appendChild(pts);
               optionsContainer.appendChild(newOptionDiv);
               newInput.focus();
               optionsContainer.scrollIntoView({ behavior: "smooth" });
-
+              newInput.placeholder = 'Option ' + document.querySelectorAll('.options-container .option').length;
             }
 
             // Ajoutez un gestionnaire d'événements pour créer un nouvel élément "options" dans "options-container" lors du focus
@@ -172,21 +208,34 @@
           addButton.addEventListener('click', function() {
               // Récupérer la valeur de la question
               var questionValue = questionInput.value;
-
+              var noteQuestionValue = document.getElementById("note").value;
+            
               // Récupérer les valeurs des options
               var options = [];
-              var optionInputs = optionsContainer.querySelectorAll('.options .option');
-              optionInputs.forEach(function(optionInput) {
-                  options.push(optionInput.value);
+              const optionContainer = document.getElementsByClassName("options-container")[0];
+              const optionsDivs = optionContainer.querySelectorAll('.options');
+              const optionsArray = [];
+              optionsDivs.forEach((optionDiv) => {
+                  const optionInput = optionDiv.querySelector('input.option');
+                  const noteInput = optionDiv.querySelector('input.note-option');
+                  const ni = optionDiv.getElementsByClassName('note-option');
+                  const optionValue = optionInput.value;
+                  const noteValue = ni[0].value;
+                  const optionObject = {
+                      option: optionValue,
+                      note: noteValue
+                  };
+                  optionsArray.push(optionObject);
+                  console.log(optionObject);
               });
-
-              // Créer un objet avec les données à envoyer
               var postData = {
+                  note: noteQuestionValue,
                   question: questionValue,
-                  options: options
+                  options: optionsArray
               };
               console.log(postData);
               // Effectuer une requête Ajax (XHR)
+
               var xhr = new XMLHttpRequest();
               xhr.open('POST', '@Url.Action("addQuestion", "test")', true);
               xhr.setRequestHeader('Content-Type', 'application/json');

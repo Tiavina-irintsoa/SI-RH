@@ -185,11 +185,48 @@ values( 1 , 1 ),
 (3,4),
 (3,5);
 
-insert into candidat( nomcandidat, prenomcandidat , dtn, mail, contact) values
-    ('Razafindrakoto', 'Tsiory', '2003-04-19', 'tsiorySrbd@gmail.com', '032 86 459 68'),
-    ('Andrianatoandro', 'Soahery', '2003-09-12', 'herysoa@gmail.com', '032 86 359 48'),
-    ('Rajaonasitera', 'Mihaja', '2004-06-10', 'mihajaraj@gmail.com', '033 86 672 11'),
-    ('Rasoavololona', 'Tiana', '2005-01-07', 'soatiana@gmail.com', '034 86 439 25'),
-    ('Andriantefy', 'Hasina', '2006-08-21', 'hasina@gmail.com', '032 86 459 13');
+-- insert into candidat( nomcandidat, prenomcandidat , dtn, mail, contact) values
+--     ('Razafindrakoto', 'Tsiory', '2003-04-19', 'tsiorySrbd@gmail.com', '032 86 459 68'),
+--     ('Andrianatoandro', 'Soahery', '2003-09-12', 'herysoa@gmail.com', '032 86 359 48'),
+--     ('Rajaonasitera', 'Mihaja', '2004-06-10', 'mihajaraj@gmail.com', '033 86 672 11'),
+--     ('Rasoavololona', 'Tiana', '2005-01-07', 'soatiana@gmail.com', '034 86 439 25'),
+--     ('Andriantefy', 'Hasina', '2006-08-21', 'hasina@gmail.com', '032 86 459 13');
 
 
+
+
+-- vaovao ralph 
+-- Insertion de données dans la table "personnel"
+INSERT INTO personnel (nom, prenom, mail, matricule, nationalite, adresse, genre, travailleur, dtn)
+VALUES
+    ('Doe', 'John', 'john.doe@email.com', '12345', 1, '123 Main St', 1, 1, '1990-01-01'),
+    ('Smith', 'Jane', 'jane.smith@email.com', '67890', 2, '456 Elm St', 2, 1, '1995-03-15'),
+    ('Johnson', 'Robert', 'robert.johnson@email.com', '54321', 3, '789 Oak St', 1, 0, '1985-07-10'),
+    -- Ajoutez ici d'autres lignes d'insertion pour un total d'au moins 20 lignes
+    ('Brown', 'Sarah', 'sarah.brown@email.com', '98765', 1, '567 Pine St', 2, 1, '1988-11-20'),
+    ('Garcia', 'Carlos', 'carlos.garcia@email.com', '13579', 2, '890 Maple St', 1, 1, '1998-04-25'),
+    ('Wilson', 'Emily', 'emily.wilson@email.com', '24680', 3, '234 Birch St', 2, 0, '1993-09-05'),
+    ('Chen', 'Wei', 'wei.chen@email.com', '10101', 1, '345 Cedar St', 1, 1, '1992-12-12'),
+    ('Martinez', 'Luis', 'luis.martinez@email.com', '11223', 2, '456 Oak St', 1, 1, '1989-06-30'),
+    ('Davis', 'Susan', 'susan.davis@email.com', '22222', 3, '567 Elm St', 2, 1, '1987-03-07'),
+    ('Kim', 'Min-Ji', 'minji.kim@email.com', '33333', 1, '678 Pine St', 2, 1, '1991-08-14'),
+    ('Nguyen', 'Thi', 'thi.nguyen@email.com', '44444', 2, '789 Cedar St', 2, 0, '1986-02-19'),
+    ('Jackson', 'William', 'william.jackson@email.com', '55555', 3, '890 Birch St', 1, 1, '1984-05-28');
+
+-- Insertion de données aléatoires dans la table "personnel_poste" avec des idposte aléatoires entre 1 et 180
+INSERT INTO personnel_poste (idposte, idpersonnel)
+SELECT floor(random() * 180) + 1, idpersonnel
+FROM personnel;
+
+-- Insertion de données aléatoires dans la table "personnel_salaire"
+INSERT INTO personnel_salaire (idpersonnel, salaire_brut, salaire_net)
+SELECT idpersonnel, random() * 10000, random() * 8000
+FROM personnel;
+
+-- Insertion de données aléatoires dans la table "personnel_embauche"
+INSERT INTO personnel_embauche (idpersonnel, date_embauche)
+SELECT idpersonnel, CURRENT_DATE - (floor(random() * 365) + 1)::integer * interval '1 day'
+FROM personnel;
+
+update personnel 
+set contact = '032 46 234 43';

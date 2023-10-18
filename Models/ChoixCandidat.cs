@@ -29,7 +29,7 @@ namespace RH.Models
                 Connection connexion = new Connection(); // Remplacez par votre logique de connexion
                 npg = connexion.ConnectSante();
             }
-
+            
             try
             {
                 string sql = "INSERT INTO choixcandidature (idcandidature, idchoix) VALUES (@idcandidature, @idchoix)";

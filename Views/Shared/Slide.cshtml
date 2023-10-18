@@ -10,6 +10,12 @@
                 <span class="text">Service</span>
             </a>
         </li>
+        <li class="@(ViewData["page"] != null && ViewData["page"] == "cv" ? "active" : "")">
+            <a href="@Url.Action("BesoinListe","ListeCv")">
+                <i class="bx bxs-dashboard"></i>
+                <span class="text">CV  </span>
+            </a>
+        </li>
         <li class="">
           <a href="#">
             <i class="bx bxs-dashboard"></i>

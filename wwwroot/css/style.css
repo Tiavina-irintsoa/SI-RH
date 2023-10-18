@@ -670,3 +670,6 @@ body {
     min-width: 420px;
   }
 }
+.option-value{
+  width: 90%;
+}
