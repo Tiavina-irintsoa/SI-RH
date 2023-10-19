@@ -50,7 +50,6 @@ create or replace view v_candidat_candidature as
         natural join candidature as cd
         natural join v_poste_besoin as pb ;
 
--- vaovao ralph
 create or replace view v_all_annonce as(
     select
     besoin.idbesoin, besoin.nb_personne, service.nomService, service.iconeService, poste.nomPoste
@@ -87,8 +86,6 @@ create or replace view v_admin_service as
     from v_admin_typeuser 
         natural join v_assiociation_admin_service;
 
-
--- vaovao ralph 
 create or replace view v_personnel_poste_association as 
     select * 
     from personnel_poste as pp 
@@ -112,7 +109,6 @@ create or replace view v_personnel_information as
         v_personnel_poste AS vpp;
 
 
--- vaovao ralph 2
 create or replace view v_nbjours_personnel as  
     SELECT
     CASE
@@ -146,3 +142,10 @@ create or replace view v_nbj_conge_personnel as
 create or replace view v_nbheure_conge_personnel as 
     select difference * 0.67 as nbheure , idpersonnel
         from v_nbj_conge_personnel;
+
+
+-- ralph
+create or replace view v_conge_service as 
+    SELECT *
+    from v_personnel_poste_association 
+        natural join conge;

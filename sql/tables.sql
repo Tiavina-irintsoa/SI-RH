@@ -353,4 +353,26 @@ ALTER COLUMN accepte SET DEFAULT 1;
 
 alter table useradmin 
 add column idpersonnel int REFERENCES personnel(idpersonnel);
+<<<<<<< HEAD
 
+=======
+alter table personnel_poste
+add column date_embauche date ;
+
+alter table service
+add column superieur integer REFERENCES personnel(idpersonnel);
+
+update service set superieur = 6;
+
+ALTER TABLE admin_service
+DROP CONSTRAINT admin_service_idadmin_fkey;
+
+ALTER TABLE admin_service
+RENAME COLUMN idadmin TO idtypeuser;
+
+
+ALTER TABLE admin_service
+ADD CONSTRAINT admin_service_idadmin_fkey2
+FOREIGN KEY (idtypeuser)
+REFERENCES service(idservice);
+>>>>>>> a87f48d10ce22acc333c0ab8b47519335830f336
