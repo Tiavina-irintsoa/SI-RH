@@ -372,3 +372,16 @@ ALTER TABLE admin_service
 ADD CONSTRAINT admin_service_idadmin_fkey2
 FOREIGN KEY (idtypeuser)
 REFERENCES service(idservice);
+
+
+create table question_entretien(
+    idquestion_entretien serial primary key,
+    question varchar,
+    coeff numeric,
+    idbesoin integer references besoin(idbesoin)
+);
+create table note_entretien (
+    idquestion_entretien integer references question_entretien(idquestion_entretien),
+    idcandidature integer references candidature(idcandidature),
+    note numeric 
+);
