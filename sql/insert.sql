@@ -250,3 +250,5 @@ VALUES
 
 insert into useradmin(nom,mdp,idtypeuser,idpersonnel)
 values ( 'Garcia' , '12345' , 3 , 5 );
+
+update service set superieur = 6;
