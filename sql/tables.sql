@@ -353,5 +353,4 @@ ALTER COLUMN accepte SET DEFAULT 1;
 
 alter table useradmin 
 add column idpersonnel int REFERENCES personnel(idpersonnel);
-alter table personnel_poste
-add column date_embauche date ;
+
