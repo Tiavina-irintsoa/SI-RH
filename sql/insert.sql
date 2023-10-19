@@ -164,15 +164,20 @@ INSERT INTO poste (idservice, nomposte) values
 --     (3, 30.0, 80.0, null);
 
 
-
-insert into typeuser( description )
-values( 'directeur' ),
-('finance'),
-('informatique')
-;
+insert into typeuser values
+        ( 1 , 'Achats' ) ,                  
+        ( 2 , 'Finance' ),                  
+        ( 3 , 'Informatique'),              
+        ( 4 , 'Logistique'    ),            
+        ( 5 , 'Production industrielle' ),  
+        ( 6 , 'Recherche et developpement'),
+        ( 7 , 'Ressources humaines'     ),  
+        ( 8 , 'Maintenance et Reparation'), 
+        (9 , 'Marketing'),
+        ( 10 , 'directeur' );
 
 insert into useradmin ( nom , mdp , idtypeuser )
-values( 'directeur' , 'directeur' , 1 ),
+values( 'directeur' , 'directeur' , 10 ),
 ( 'finance' , 'finance' , 2 ),
 ( 'info' , 'info' , 3 );
 
@@ -230,3 +235,21 @@ FROM personnel;
 
 update personnel 
 set contact = '032 46 234 43';
+
+alter table useradmin 
+add column idpersonnel int REFERENCES personnel(idpersonnel);
+
+--c ralph encore 
+insert into raison ( nomraison )
+values ( 'maternite' ) , ('paternite') , ('maladie') ;
+
+INSERT INTO conge (idpersonnel, datedebut, datefin, reeldatefin, accepte, idraison)
+VALUES
+  (5, '2023-03-22 08:00:00', '2023-03-25 12:00:00', '2023-03-25 12:00:00', 3, null),
+  (5, '2023-03-23 09:30:00', '2023-03-26 15:45:00', '2023-03-26 15:45:00', 3, 1),
+  (5, '2023-03-24 10:15:00', '2023-03-27 11:30:00', '2023-03-27 11:30:00', 3, null),
+  (5, '2023-03-25 12:30:00', '2023-03-28 14:15:00', '2023-03-28 14:15:00', 3, 1),
+  (5, '2023-03-26 16:00:00', '2023-03-29 16:30:00', '2023-03-29 16:30:00', 3, 3);
+
+insert into useradmin(nom,mdp,idtypeuser,idpersonnel)
+values ( 'Garcia' , '12345' , 3 , 5 );

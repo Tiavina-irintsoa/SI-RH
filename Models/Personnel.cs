@@ -24,7 +24,6 @@ public class Personnel{
     public DateTime ? latest_salary_date { get; set; }
     public DateTime ? latest_hire_date { get; set; }
 
-
     public static List<Personnel> GetAll( NpgsqlConnection npg, string sql  ){
         bool estOuvert = false;
         List<Personnel> PersonnelList = new List<Personnel>();

@@ -25,6 +25,7 @@ a {
   --light-purple: #d896e0;
   --blue: #38b5fd;
   --light-blue: #d3f5ff;
+  --green: rgb(21, 196, 21);
 }
 
 .liste_carre_text{
@@ -669,7 +670,4 @@ body {
   #content main .table-data .todo .todo-list {
     min-width: 420px;
   }
-}
-.option-value{
-  width: 90%;
 }

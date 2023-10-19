@@ -6,7 +6,8 @@ namespace RH.Models
         int? _idadmin;
         string? _nom;
         string? _mdp;
-        TypeUSer _type; 
+        TypeUSer? _type; 
+        Personnel ? _personnel;
         public int? Idadmin
         {
             get { return _idadmin; }
@@ -20,9 +21,9 @@ namespace RH.Models
             get{ return _mdp; }
             set{  _mdp = value; }
         }
-        
-        public TypeUSer type { get => type; set => type = value; }
 
+        public TypeUSer? type { get => _type; set => _type = value; }
+        public Personnel? Personnel { get => _personnel; set => _personnel = value; }
 
         public static UserAdmin GetUser(string nom, string mdp, NpgsqlConnection npg)
         {
@@ -55,6 +56,12 @@ namespace RH.Models
                                 Idadmin = reader.IsDBNull(0) ? (int?)null : reader.GetInt32(0),
                                 Nom = reader.IsDBNull(1) ? null : reader.GetString(1),
                                 Mdp = reader.IsDBNull(2) ? null : reader.GetString(2),
+                                type = new TypeUSer{
+                                    idtypeuser =  reader.GetInt32(3)
+                                },
+                                Personnel = new Personnel{
+                                    idpersonnel = reader.IsDBNull(4) ?  0 : reader.GetInt32(4)
+                                }
                             };
                         }
                     }

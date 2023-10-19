@@ -112,3 +112,37 @@ create or replace view v_personnel_information as
         v_personnel_poste AS vpp;
 
 
+-- vaovao ralph 2
+create or replace view v_nbjours_personnel as  
+    SELECT
+    CASE
+        WHEN EXTRACT(day FROM (now() - latest_hire_date)) > 90 THEN 90
+        ELSE EXTRACT(day FROM (now() - latest_hire_date))
+    END AS nbjours,
+    idpersonnel
+    FROM v_personnel_information;
+
+
+create or replace view v_diff_conge as 
+    select sum( extract (day from  (reeldatefin - datedebut)) ) as nbconge , idpersonnel
+    from conge 
+    where accepte = 3 
+    and idraison is null
+    group by idpersonnel;
+
+create or replace view v_all_diff_conge as 
+    SELECT p.idpersonnel,COALESCE(dc.nbconge, 0) AS nbconge
+    FROM personnel p
+    LEFT JOIN v_diff_conge dc ON p.idpersonnel = dc.idpersonnel;
+
+
+create or replace view v_nbj_conge_personnel as 
+    SELECT
+        nbj.idpersonnel,
+        (nbj.nbjours - dc.nbconge) AS difference
+    FROM v_nbjours_personnel nbj
+    LEFT JOIN v_all_diff_conge dc ON nbj.idpersonnel = dc.idpersonnel;
+
+create or replace view v_nbheure_conge_personnel as 
+    select difference * 0.67 as nbheure , idpersonnel
+        from v_nbj_conge_personnel;

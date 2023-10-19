@@ -15,10 +15,10 @@
 }
 
 .critere-liste > .row {
-    display: flex !important;
-    flex-direction: column !important;
-    justify-content: space-between !important;
-    height: 100% !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: space-between !important;
+  height: 100% !important;
 }
 
 .critere-liste input,
@@ -59,18 +59,18 @@ input[type="text"] {
   cursor: pointer;
 }
 #popup-personnel {
-    position: absolute;
-    z-index: 100;
-    top: -35%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    background: var(--light);
-    padding: 30px;
-    box-sizing: border-box;
-    box-shadow: 6px 7px 11px #4e4e4e4d;
-    width: 80%;
-    opacity: 0;
-    transition: 0.5s;
+  position: absolute;
+  z-index: 100;
+  top: -35%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: var(--light);
+  padding: 30px;
+  box-sizing: border-box;
+  box-shadow: 6px 7px 11px #4e4e4e4d;
+  width: 80%;
+  opacity: 0;
+  transition: 0.5s;
 }
 
 .grid-container {
@@ -108,10 +108,10 @@ input[type="text"] {
   margin: auto !important;
   transition: 0.5s !important;
   border: var(--pink) 1px solid !important;
-  cursor:pointer !important;
+  cursor: pointer !important;
 }
 
-.filtrage-person:hover{
-    background: #fff !important;
-    color: var(--pink) !important;
+.filtrage-person:hover {
+  background: #fff !important;
+  color: var(--pink) !important;
 }

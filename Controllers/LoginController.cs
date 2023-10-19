@@ -31,8 +31,12 @@ public class LoginController : Controller
         {
             Expires = DateTime.Now.AddDays(1)
         };
+        Response.Cookies.Append("idpersonnel" , admin.Personnel.idpersonnel
+        .ToString() , cookieOptions );
+        Console.WriteLine( " idpersonnel login  : "+admin.Personnel.idpersonnel );
         Response.Cookies.Append("idadmin",  admin.Idadmin.ToString()  , cookieOptions);
         Response.Cookies.Append("nomadmin", nom  , cookieOptions);
+        Response.Cookies.Append("idtypeuser", admin.type.idtypeuser.ToString()  , cookieOptions);
         return RedirectToAction("liste", "service");
     }
 }

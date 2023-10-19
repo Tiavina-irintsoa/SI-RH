@@ -4,9 +4,8 @@ namespace RH.Models{
 public class QuestionData
 {
     public string? Question { get; set; }
-    public List<OptionTest>? Options { get; set; }
+    public List<string>? Options { get; set; }
     public int? idQuestion { get; set; }
-    public int? note { get; set; }
 
         public void Insert(NpgsqlConnection npg,int? idQuestionnaire){
             Console.WriteLine("insert questiondata");
@@ -19,7 +18,7 @@ public class QuestionData
             try{
                 this.InsertQuestion(npg,idQuestionnaire);
                 foreach(var option in Options){
-                    option.InsertOption(npg,idQuestion);
+                    InsertOption(npg,idQuestion,option);
                 }
             }   
             catch (Exception e){
@@ -42,12 +41,11 @@ public class QuestionData
                 npg = connexion.ConnectSante();
             }        
             try{
-                sql = "INSERT INTO question (idquestionnaire, question,points) VALUES (@idquestionnaire, @question,@points) returning idquestion";                
+                sql = "INSERT INTO question (idquestionnaire, question) VALUES (@idquestionnaire, @question) returning idquestion";                
                 using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))
                 {
                     command.Parameters.AddWithValue("@idquestionnaire", idquestionnaire);
                     command.Parameters.AddWithValue("@question",Question);
-                    command.Parameters.AddWithValue("@points",note);
                     idQuestion = (int)command.ExecuteScalar();
                 }
             }
