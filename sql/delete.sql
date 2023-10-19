@@ -1,6 +1,7 @@
 delete from criterechoix;
 delete from critere;
 delete from besoin;
+delete from personnel_poste;
 delete from poste;
 delete from type_contrat;
 delete from admin_service;
@@ -20,6 +21,7 @@ delete from candidat;
 delete from option; 
 delete from question; 
 delete from questionnaire; 
+delete from conge;
 delete from raison;
 
 alter sequence questionnaire_idquestionnaire_seq restart with 1;
@@ -36,6 +38,8 @@ alter sequence typeuser_idtypeuser_seq restart with 1;
 alter sequence useradmin_idadmin_seq restart with 1;
 alter sequence candidature_idcanditature_seq restart with 1;
 alter sequence candidat_idcandidat_seq restart with 1;
+alter sequence conge_idconge_seq restart with 1;
+alter sequence personnel_poste_idpersonnel_poste_seq restart with 1;
 
 alter sequence raison_idraison_seq restart with 1;
 

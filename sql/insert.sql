@@ -220,7 +220,7 @@ VALUES
 
 -- Insertion de données aléatoires dans la table "personnel_poste" avec des idposte aléatoires entre 1 et 180
 INSERT INTO personnel_poste (idposte, idpersonnel)
-SELECT floor(random() * 180) + 1, idpersonnel
+SELECT floor(random() * 90) + 1, idpersonnel
 FROM personnel;
 
 -- Insertion de données aléatoires dans la table "personnel_salaire"
@@ -235,9 +235,6 @@ FROM personnel;
 
 update personnel 
 set contact = '032 46 234 43';
-
-alter table useradmin 
-add column idpersonnel int REFERENCES personnel(idpersonnel);
 
 --c ralph encore 
 insert into raison ( nomraison )

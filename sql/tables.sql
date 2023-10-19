@@ -183,10 +183,7 @@ create table personnel_embauche(
 
 alter table personnel 
 add column  contact varchar;
-\c  postgres
-drop database rh;
-create database rh ; 
-\c rh
+
 create table service(
     idService serial primary key, 
     nomService varchar, 
@@ -353,5 +350,8 @@ create table conge(
 ALTER TABLE conge
 ALTER COLUMN accepte SET DEFAULT 1;
 
+
 alter table useradmin 
-add column idpersonnel int references personnel ;
+add column idpersonnel int REFERENCES personnel(idpersonnel);
+alter table personnel_poste
+add column date_embauche date ;
