@@ -1,23 +1,35 @@
+@model Avantage[]
+
 <div class="essai">
-    <form action="">
+    <form action='@Url.Action("saveEssai", "Contrat")' method="get">
         <h1>Contrat d'essai</h1>
-        <div>
-            <label for="">Candidat :</label>
-            <select name="idcandidat" id="">
-                <option value="">Candidat</option>
-            </select>
+        <div class="candidat">
+            <label for="">Candidat :</label> @ViewBag.nom @ViewBag.prenom
+            <input type="hidden" name="idcandidat" value="@ViewBag.id" >
+            <input type="hidden" name="idbesoin" value="@ViewBag.idbesoin" >
         </div>
         <div>
             <label for="">Durée :</label>
-            <input type="number" name="duree" placeholder="en mois">
+            <input type="number" step="0.1" name="duree" placeholder="en mois">
         </div>
         <div>
             <label for="">Date de début :</label>
             <input type="date" name="debut" id="">
         </div>
         <div>
+            <label for="">Avantage :</label>
+        </div>
+        <div id="checkbox">
+            @foreach (var avantage in Model)
+            {
+                <div>
+                    <input type="checkbox" name="avantage" value="@avantage.idavantage"> @avantage.nomavantage
+                </div>
+            }
+        </div>
+        <div class="salaire">
             <label for="">Salaire brut :</label>
-            <input type="number" name="brut" placeholder="Brut">
+            <input type="number" step="0.1" name="brut" placeholder="Brut">
         </div>
         <div>
             <input type="submit" value="Valider">

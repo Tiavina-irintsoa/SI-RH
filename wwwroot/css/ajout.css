@@ -1,3 +1,41 @@
+.essai{
+    background: var(--light);
+    padding: 0vh 0vh 0vh 25vh;
+    margin: auto;
+    width: 50%;
+    font-family: var(--lato);
+    display: flex;
+    /* justify-content: space-around; */
+    align-items: flex-start;
+    flex-direction: column;
+    border-radius: 10px;
+    /* height: 100vh;     */
+}
+.essai h1{
+    text-align: center;
+    margin-bottom: 5vh;
+}
+.candidat{
+    margin-bottom: 5vh;
+}
+.essai label{
+    font-weight: bold;
+}
+.essai input, .essai select{
+    margin-bottom: 5vh;
+}
+#checkbox{
+    display: flex;
+    flex-direction: column;
+    /* padding-right: -5vw; */ */
+}
+#checkbox input{
+    margin-left: 2vw;
+    margin-bottom: 1vh;
+}
+.salaire{
+    margin-top: 4vh;
+}
 #main_form{
     display: grid;
     grid-template-columns: 1fr 1fr
@@ -18,7 +56,7 @@
 #div form{
     width: 100%;
 }
-select, input[type=number] , input[type=text] , input[type=password],input[type=submit]{
+select, input[type=number] , input[type=text] , input[type=date] , input[type=password],input[type=submit]{
     width: 100%;
     height:6vh;
     border-radius:10px;
