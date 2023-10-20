@@ -251,18 +251,11 @@ VALUES
 insert into useradmin(nom,mdp,idtypeuser,idpersonnel)
 values ( 'Garcia' , '12345' , 3 , 5 );
 
-update service set superieur = 6;
-
--- Insertion de données de test dans la table question_entretien
-INSERT INTO question_entretien (question, coeff,idbesoin)
-VALUES
-    ('Quelles sont vos compétences en programmation?', 1.5,2),
-    ('Parlez-moi de votre expérience précédente en gestion de projets.', 2.0,2),
-    ('Comment gérez-vous les situations de conflit au sein de l''équipe?', 1.8,2);
-
--- Insertion de données de test dans la table reponse_entretien
-INSERT INTO note_entretien (idquestion_entretien, idcandidature, note)
-VALUES
-    (1, 1, 4.0),
-    (2, 1, 3.5),
-    (3, 1, 4.2);
+insert into  admin_service
+values( 1 , 1 ),
+(1,2),
+(2,1),
+(2,2),
+(2,3),
+(3,4),
+(3,5);

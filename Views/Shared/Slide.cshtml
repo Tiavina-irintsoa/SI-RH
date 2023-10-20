@@ -1,3 +1,6 @@
+@{
+  var superieur = Context.Request.Cookies["superieur"] ;
+}
 <a href="#" class="brand">
   <i class="bx bxs-smile"></i>
   <span class="text">RH - DIMPEX </span>
@@ -15,6 +18,18 @@
                 <span class="text">CV  </span>
             </a>
         </li>
+        
+                @if( superieur != null ){
+          <li class="">
+            <a href="#">
+              <i class="bx bxs-dashboard"></i>
+              <span class="text">
+                  Liste Congés
+              </span>
+            </a>
+          </li>
+        }
+
         <li class="">
           <a href="#">
             <i class="bx bxs-dashboard"></i>
