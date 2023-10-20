@@ -15,7 +15,13 @@ public class Candidature
     public Candidat Candidat { get; set; }
 
     private static Random random = new Random();
+     public Candidature(int candidature,string nomCandidat,string prenomCandidat){
+        this.idcandidature = idcandidature;
+        this.Candidat = new Candidat(nomCandidat,prenomCandidat);
+    }
+    public Candidature(){
 
+    }
     public static string GenerateRandomCode(int id)
     {
         const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";

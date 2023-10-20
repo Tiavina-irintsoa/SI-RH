@@ -1,8 +1,7 @@
 <a href="#" class="brand">
-        <i class="bx bxs-smile"></i>
-        <span class="text">RH - DIMPEX </span>
-      </a>
-
+  <i class="bx bxs-smile"></i>
+  <span class="text">RH - DIMPEX </span>
+</a>
       <ul class="side-menu top">
         <li class="@(ViewData["page"] != null && ViewData["page"] == "service" ? "active" : "")">
             <a href="@Url.Action("liste","service")">
@@ -16,7 +15,6 @@
                 <span class="text">CV  </span>
             </a>
         </li>
-
         <li class="">
           <a href="#">
             <i class="bx bxs-dashboard"></i>
@@ -24,7 +22,7 @@
           </a>
         </li>
         <li>
-          <a href='@Url.Action("BesoinListe","ListeEntretien")'>
+          <a href='@Url.Action("BesoinListe","Entretien")'>
             <i class="bx bxs-shopping-bag-alt"></i>
             <span class="text">Entretien</span>
           </a>

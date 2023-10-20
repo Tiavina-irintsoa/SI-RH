@@ -44,7 +44,9 @@ public class Besoin{
 
     public Besoin() {}
 
-
+    public Besoin(int idbesoin){
+        this._idBesoin = idbesoin;
+    }
     public Besoin(int id, Poste post, double hs, double hp, DateTime? ac , int nbp ) {
         this._idBesoin = id;
         this._poste = post;
@@ -72,6 +74,27 @@ public class Besoin{
         this._poste = poste;
     }
 
+    public void complete(){    
+        try{
+            string sql= "SELECT * FROM v_poste_besoin where idservice = @idservice";
+            Connection connect  = new Connection();
+            NpgsqlConnection connection = connect.ConnectSante();
+            var cmd = new NpgsqlCommand(sql, connection);
+            cmd.Parameters.AddWithValue("BesoinId",idBesoin);
+            var reader = cmd.ExecuteReader();
+            reader.Read();
+            Service service = new Service(reader.GetInt32(1));
+            poste = new(reader.GetInt32(0), service, reader.GetString(2));
+            heureSemaine = reader.GetInt32(4);
+            heurePersonne = reader.GetInt32(5);
+            accompli = reader.IsDBNull(6) ? (DateTime?)null : reader.GetDateTime(6);
+            nbpersonne = reader.GetInt32(8);
+            connection.Close();
+        }
+        catch(Exception e){
+            throw e;
+        }
+    }
     public static Besoin[] GetAll(NpgsqlConnection npg, int ids) {
         Besoin[] besoins = null;
         bool estOuvert = false;
