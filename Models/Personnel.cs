@@ -6,6 +6,7 @@ using Npgsql;
 public class Personnel{
     public int idpersonnel { get; set; } 
     public int idposte { get; set; }
+    public Service ? service{ get;  set; }
     public int idservice { get; set; }
     public string ? nomposte { get; set; }
     public string ? nom { get; set; }
@@ -35,7 +36,7 @@ public class Personnel{
         }
         try
         {
-            string sql = "SELECT * FROM personnel WHERE idpersonnel = @idpersonnel";
+            string sql = "SELECT * FROM v_personnel_information WHERE idpersonnel = @idpersonnel";
             Console.WriteLine(sql);
             using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))
             {
@@ -44,6 +45,12 @@ public class Personnel{
                 {
                     if (reader.Read())
                     {
+                        Service service = new Service{
+                            IdService = Convert.ToInt32(reader["idservice"])
+                        };
+
+                        service = service.GetById( null );
+
                         Personnel personnel = new Personnel
                         {
                             idpersonnel = Convert.ToInt32(reader["idpersonnel"]),
@@ -64,7 +71,8 @@ public class Personnel{
                             latest_salary_brut = 0, // Récupérer le dernier salaire brut
                             latest_salary_net = 0, // Récupérer le dernier salaire net
                             latest_salary_date = null, // Récupérer la date du dernier salaire
-                            latest_hire_date = null // Récupérer la date d'embauche la plus récente
+                            latest_hire_date = null, // Récupérer la date d'embauche la plus récente
+                            service = service
                         };
                         return personnel;
                     }

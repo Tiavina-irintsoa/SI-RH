@@ -250,12 +250,46 @@ VALUES
 
 insert into useradmin(nom,mdp,idtypeuser,idpersonnel)
 values ( 'Garcia' , '12345' , 3 , 5 );
+update service set superieur = 6;
+
+-- -- Insertion de données de test dans la table question_entretien
+-- INSERT INTO question_entretien (question, coeff,idbesoin)
+-- VALUES
+--     ('Quelles sont vos compétences en programmation?', 1.5,2),
+--     ('Parlez-moi de votre expérience précédente en gestion de projets.', 2.0,2),
+--     ('Comment gérez-vous les situations de conflit au sein de l''équipe?', 1.8,2);
+
+-- -- Insertion de données de test dans la table reponse_entretien
+-- INSERT INTO note_entretien (idquestion_entretien, idcandidature, note)
+-- VALUES
+--     (1, 1, 4.0),
+--     (2, 1, 3.5),
+--     (3, 1, 4.2
+
+INSERT INTO personnel (nom, prenom, mail, matricule, nationalite, adresse, genre, travailleur, dtn)
+VALUES
+    ('Ralph', 'Yoan', 'ralph.doe@email.com', '12345', 1, '123 Main St', 1, 1, '1992-01-01'),
+    ('Rebeka', 'Ravalison', 'Rebeka.smith@email.com', '67890', 2, '456 Elm St', 2, 1, '1991-03-15'),
+    ('Tita', 'Goore', 'tita.johnson@email.com', '54321', 3, '789 Oak St', 1, 0, '1985-07-10');
+
+INSERT INTO personnel_poste (idposte, idpersonnel)
+values ( 76 , 13 ),
+( 77 , 14 ),
+( 78 , 15 );
+
+
+update service 
+set superieur = 13
+where idservice = 7;
+
+insert into useradmin ( nom,mdp,idtypeuser,idpersonnel )
+values( 'Ralph' , '12345' , 7 , 13 );
 
 insert into  admin_service
-values( 1 , 1 ),
-(1,2),
-(2,1),
-(2,2),
-(2,3),
-(3,4),
-(3,5);
+values( 7 , 1 ),
+(7,2),
+(7,3),
+(7,4),
+(7,5),
+(7,6),
+(7,7);
