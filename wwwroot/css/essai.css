@@ -1,0 +1,54 @@
+.form_essai{
+    background: var(--light);
+    width: 50vw;
+    padding-left: 8vw;
+}
+h1{
+    margin-left: 7vw;
+    margin-bottom:2vh;
+}
+.haut{
+    margin-bottom: 1vh;
+}
+.info{
+    width: 10vw;
+    font-weight: bold;
+}
+.formulaire{
+    margin-top: 3vh;
+    display: flex;
+    flex-direction: row;
+}
+.formulaire label{
+    width: 10vw;
+    font-weight: bold;
+}
+.formulaire input, .formulaire select{
+    width: 20vw;
+    height:4vh;
+    border-radius:10px;
+    border:none; 
+    background-color: var(--grey);
+}
+#radio{
+    display: flex;
+    flex-direction: column;
+}
+.formulaire input[type=radio]{
+    height:1.5vh;
+    width: 2vw;
+    background-color: var(--grey);
+}
+.formulaire button{
+    height:4vh;
+    border-radius:10px;
+    border:none; 
+    background-color: var(--grey);
+    margin-bottom: 3vh;
+}
+
+/* #img-form{
+    background-position:center; 
+    background-size:cover;
+    background-image: url('/images/curved1.jpg');
+} */

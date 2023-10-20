@@ -15,7 +15,13 @@ public class Candidature
     public Candidat Candidat { get; set; }
 
     private static Random random = new Random();
+     public Candidature(int candidature,string nomCandidat,string prenomCandidat){
+        this.idcandidature = idcandidature;
+        this.Candidat = new Candidat(nomCandidat,prenomCandidat);
+    }
+    public Candidature(){
 
+    }
     public static string GenerateRandomCode(int id)
     {
         const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -33,6 +39,58 @@ public class Candidature
     public void setCode( int id ){
         this.code  = GenerateRandomCode( id );
     }
+
+    public static Candidature GetCandidature(NpgsqlConnection npg , int idcandidature ){
+        bool estOuvert = false;
+        
+        if (npg == null)        {
+            estOuvert = true;
+            Connection connexion = new Connection();
+            npg = connexion.ConnectSante();
+        }        
+        try
+        {
+            string sql = "SELECT * FROM candidature where idcandidature = @idc ";
+            Console.WriteLine(sql);            
+            using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))           
+            {
+
+                command.Parameters.AddWithValue("@idc", idcandidature);
+                string sqlWithValues = command.CommandText;
+                foreach (NpgsqlParameter parameter in command.Parameters)
+                {
+                  sqlWithValues = sqlWithValues.Replace(parameter.ParameterName, parameter.Value.ToString());
+                }
+                Console.WriteLine( sqlWithValues );
+                
+                using (NpgsqlDataReader reader = command.ExecuteReader())                {
+                    if (reader.Read())                    
+                    {
+                        Candidature candidature = new Candidature{
+                            idcandidature = idcandidature,
+                            idcandidat = Convert.ToInt32(reader["idcandidat"]),
+                            validation = Convert.ToInt32(reader["validation"]),
+                            code = Convert.ToString( reader["code"] ),
+                            idbesoin = Convert.ToInt32(reader["idbesoin"]),
+                        };
+                        return candidature;
+                    }
+                }
+            }
+        }
+        catch (Exception e)        {
+            Console.WriteLine(e.ToString());
+            throw;
+        }
+        finally        {
+            if (estOuvert)
+            {
+                npg.Close();
+            }
+        }        
+        return null;
+    }
+
 
     public string getPage(){
         string path = "~/Views/Home/";

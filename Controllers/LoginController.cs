@@ -31,13 +31,6 @@ public class LoginController : Controller
         {
             Expires = DateTime.Now.AddDays(1)
         };
-        Service service = new Service{
-            IdService = admin.type.idtypeuser
-        };
-        service = service.GetById(null);
-        if( service.Superieur.idpersonnel == admin.Personnel.idpersonnel  ){
-            Response.Cookies.Append("superieur" , true.ToString() , cookieOptions );
-        }
         Response.Cookies.Append("idpersonnel" , admin.Personnel.idpersonnel
         .ToString() , cookieOptions );
         Console.WriteLine( " idpersonnel login  : "+admin.Personnel.idpersonnel );

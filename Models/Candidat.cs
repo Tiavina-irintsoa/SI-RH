@@ -18,6 +18,7 @@ public class Candidat{
         set { _nomposte = value; }
     }
 
+   
     public DateTime datecandidature {
         get { return _datecandidature; }
         set { _datecandidature = value; }
@@ -48,6 +49,71 @@ public class Candidat{
     }
 
     public Candidat() {}
+
+    public Candidat(string nomCandidat){
+        nom = nomCandidat;
+    }
+    public Candidat(string nomCandidat,string prenomCandidat){
+        nom = nomCandidat;
+        prenom = prenomCandidat;
+    }
+    
+
+    public static Candidat GetById(NpgsqlConnection npg , int idcand ){
+        bool estOuvert = false;
+        
+        if (npg == null)        {
+            estOuvert = true;
+            Connection connexion = new Connection();
+            npg = connexion.ConnectSante();
+        }        
+        try
+        {
+            string sql = "SELECT * FROM candidat where idcandidat = @idcand";
+            Console.WriteLine(sql);            
+            using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))           
+            {
+
+                command.Parameters.AddWithValue("@idcand", idcand);
+                string sqlWithValues = command.CommandText;
+                foreach (NpgsqlParameter parameter in command.Parameters)
+                {
+                    sqlWithValues = sqlWithValues.Replace(parameter.ParameterName, parameter.Value.ToString());
+                }
+                using (NpgsqlDataReader reader = command.ExecuteReader())                {
+                    while (reader.Read())                    
+                    {
+                        int idcandidat = reader.GetInt32(0);
+                        string nomcandidat = reader.GetString(1);
+                        string prenomcandidat = reader.GetString(2);
+                        DateTime dtn = reader.GetDateTime(3);
+                        string mailcandidat = reader.GetString(4);  
+                        string contact = reader.GetString(5);  
+                        Candidat c = new Candidat{
+                            idcandidat = idcandidat,
+                            nom = nomcandidat,
+                            prenom = prenomcandidat,
+                            dtn = dtn,
+                            mail = mailcandidat,
+                            contact = contact
+                        };
+                        return c;
+                    }
+                }
+            }
+        }
+        catch (Exception e)        {
+            Console.WriteLine(e.ToString());
+            throw;
+        }
+        finally        {
+            if (estOuvert)
+            {
+                npg.Close();
+            }
+        }        
+        return null;
+    }
 
     public static Candidat GetByName(NpgsqlConnection npg , string nom , string prenom , string mail ){
         bool estOuvert = false;
