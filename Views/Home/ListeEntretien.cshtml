@@ -1,0 +1,34 @@
+@model FicheCandidat[]
+<div class="table-data">
+          <div class="order">
+            <div class="head">
+              <h3>Analyse des CV</h3>
+              <i class="bx bx-search"></i>
+              <i class="bx bx-filter"></i>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Poste</th>
+                  <th>Nom</th>
+                  <th>Points</th>
+                  <th>Date</th>
+                  <th>Détails</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach (var fiche in Model)
+                {
+                <tr>
+                  <td> @fiche.candidat.nomposte</td>
+                  <td> @fiche.candidat.nom @fiche.candidat.prenom </td>
+                  <td> @fiche.point </td>
+                  <td> @fiche.candidat.datecandidature </td>
+                  <td> <a href='@Url.Action("Details","ListeEntretien", new{idbesoin=@fiche.besoin.idBesoin, idcandidat=@fiche.candidat.idcandidat})'>Voir</a> </td>
+                </tr>
+                }
+              </tbody>
+            </table>
+            <div class="retour"><a href='@Url.Action("BesoinListe","ListeCv")'>Retour</a></div>
+          </div>
+</div>

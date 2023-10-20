@@ -353,16 +353,13 @@ ALTER COLUMN accepte SET DEFAULT 1;
 
 alter table useradmin 
 add column idpersonnel int REFERENCES personnel(idpersonnel);
-<<<<<<< HEAD
 
-=======
 alter table personnel_poste
 add column date_embauche date ;
 
 alter table service
 add column superieur integer REFERENCES personnel(idpersonnel);
 
-update service set superieur = 6;
 
 ALTER TABLE admin_service
 DROP CONSTRAINT admin_service_idadmin_fkey;
@@ -377,6 +374,17 @@ FOREIGN KEY (idtypeuser)
 REFERENCES service(idservice);
 >>>>>>> a87f48d10ce22acc333c0ab8b47519335830f336
 
+create table question_entretien(
+    idquestion_entretien serial primary key,
+    question varchar,
+    coeff numeric,
+    idbesoin integer references besoin(idbesoin)
+);
+create table note_entretien (
+    idquestion_entretien integer references question_entretien(idquestion_entretien),
+    idcandidature integer references candidature(idcandidature),
+    note numeric 
+);
 
 create table refus(
     idrefus serial primary key,
