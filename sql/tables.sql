@@ -372,7 +372,6 @@ ALTER TABLE admin_service
 ADD CONSTRAINT admin_service_idadmin_fkey2
 FOREIGN KEY (idtypeuser)
 REFERENCES service(idservice);
->>>>>>> a87f48d10ce22acc333c0ab8b47519335830f336
 
 create table question_entretien(
     idquestion_entretien serial primary key,
@@ -391,3 +390,19 @@ create table refus(
     idconge int references conge(idconge),
     raison_refus text
 );
+
+
+-- ralph
+ALTER TABLE admin_service
+DROP CONSTRAINT admin_service_idadmin_fkey;
+
+ALTER TABLE useradmin
+ADD CONSTRAINT admin_service_idadmin_fkey
+FOREIGN KEY (idtypeuser)
+REFERENCES typeuser(idtypeuser);
+
+ALTER TABLE public.conge
+ALTER COLUMN reeldatefin SET DEFAULT default_reeldatefin();
+
+insert into conge ( idpersonnel ,datedebut, reeldatefin ,  datefin, accepte  )
+values(5,'2023-12-14 08:00:00' , '2023-12-15 17:00:00' , '2023-12-15 17:00:00',2  );

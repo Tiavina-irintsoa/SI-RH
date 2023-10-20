@@ -1,0 +1,82 @@
+    <div class="table-data" id="table_conge" >
+      <div class="order">
+        <div class="head">
+          <h3>Liste des personnels</h3>
+          <i class="bx bx-search"></i>
+          <i class="bx bx-filter"></i>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Titre</th>
+              <th>Nom</th>
+              <th>Prénom</th>
+              <th>Date début congé</th>
+                <th>Date fin congé</th>
+              <th></th>
+                <th></th>
+            </tr>
+          </thead>
+          <tbody>
+          @foreach( var c in @ViewBag.l_conge ){
+            <tr>
+              <td>@c.Personnel.service.nomService</td>
+              <td>@c.Personnel.nom</td>
+              <td>@c.Personnel.prenom</td>
+              <td>@c.DateDebut</td>
+            <td>@c.ReelDateFin</td>
+              <td>
+                <form style="width: 75% ; " action="@Url.Action( "accept" , "conge" )" method="post" >
+                    <input type="hidden" name="idconge" value="@c.IdConge" >
+                    <input type="submit" style="cursor:pointer;" value="Accepter" >
+                </form>
+              </td>
+                <td>
+                    <a style="cursor:pointer;" onclick="afficherDetailsPersonnel(  @c.IdConge )" >  Refuser </a>
+                </td>
+            </tr>
+          }
+          </tbody>
+        </table>
+        <div class="retour">
+          <a href='@Url.Action("BesoinListe","ListeCv")'>Retour</a>
+        </div>
+      </div>
+    </div>
+ <div id="popup-personnel" class="popup">
+      <div  class="popup-content">
+            <div class="title-personnel-detail">
+              <h2>Donnez la raison du refus  : </h2>
+              <i  style="color:var(--red);" class="fa fa-times details-personnel-icon" onclick="fermer()" ></i>
+            </div>
+            <div id="liste_details" class="grid-container">
+                <form action='@Url.Action( "refusSuperieur" ,  "conge" )' method="post" >
+                    <div style="margin-bottom:20px;"   class="">
+                        <textarea name="raison" id="" cols="50" rows="2"></textarea> 
+                    </div>
+                    <input id="idconge" type="hidden" name="idconge" >
+                    <input type="submit"  value="Envoyer" >
+                </form>
+            </div>
+      </div>
+  </div>
+  <script>
+    function fermer(){
+      const popup = document.getElementById('popup-personnel');
+      popup.style.top = '-35%';
+      popup.style.opacity = '0';
+    }
+    function afficherDetailsPersonnel( idconge ){
+        const scrollContainer = document.getElementById('table_conge');
+        scrollContainer.scrollIntoView({
+        top: 0,
+        behavior: 'smooth'
+        });
+        const popup = document.getElementById('popup-personnel');
+        popup.style.top = '50%';
+        popup.style.opacity = '1';
+        
+        const inputIdConge = document.getElementById('idconge');
+        inputIdConge.value = idconge;
+    }
+  </script>

@@ -23,3 +23,10 @@ BEGIN
     RETURN latest_hire_date;
 END;
 $$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION default_reeldatefin() RETURNS timestamp without time zone AS $$
+BEGIN
+  RETURN NEW.datefin::timestamp;
+END;
+$$ LANGUAGE plpgsql;
