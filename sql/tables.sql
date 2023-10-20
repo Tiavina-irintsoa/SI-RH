@@ -401,9 +401,6 @@ ADD CONSTRAINT admin_service_idadmin_fkey
 FOREIGN KEY (idtypeuser)
 REFERENCES typeuser(idtypeuser);
 
-ALTER TABLE public.conge
-ALTER COLUMN reeldatefin SET DEFAULT default_reeldatefin();
-
 create table avantage(
     idavantage serial primary key,
     nomavantage varchar
