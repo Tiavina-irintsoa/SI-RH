@@ -11,6 +11,92 @@ public class Conge{
     public Personnel? Personnel { get; set; } 
     public Raison ? Raison { get; set; }
 
+    public static void UpdateAccepte(int idConge, int accepte)
+    {
+        Connection connexion = new Connection();
+        using (NpgsqlConnection connection = connexion.ConnectSante())
+        {
+            using (NpgsqlCommand cmd = new NpgsqlCommand())
+            {
+                cmd.Connection = connection;
+
+                cmd.CommandText = "UPDATE conge SET accepte = @accepte WHERE idconge = @idconge";
+                cmd.Parameters.AddWithValue("@accepte", accepte);
+                cmd.Parameters.AddWithValue("@idconge", idConge);
+                Console.WriteLine( cmd.CommandText );
+                try
+                {
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    Console.WriteLine($"{rowsAffected} ligne(s) mise(s) à jour avec succès.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Erreur lors de la mise à jour : " + ex.Message);
+                }
+            }
+            connection.Close();
+        }
+    }
+
+    public static List<Conge> GetCongesSuperieur(NpgsqlConnection npg , int  idservice , int accepte )
+    {
+        bool estOuvert = false;
+        if (npg == null)
+        {
+            estOuvert = true;
+            Connection connexion = new Connection();
+            npg = connexion.ConnectSante();
+        }
+        try
+        {
+            string sql = "select * from v_conge_service  where idservice = "+idservice+" and accepte  = "+accepte;
+            if( idservice == 7 ){
+                sql = "select * from v_conge_service  where  accepte  = "+accepte;
+            }
+            Console.WriteLine(sql);
+            List<Conge> conges = new List<Conge>();
+            using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))
+            {
+                using (NpgsqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Conge conge = new Conge
+                        {
+                            IdConge =  Convert.IsDBNull(reader["idconge"]) ? 0 : Convert.ToInt32(reader["idconge"]),
+                            DateDebut = Convert.ToDateTime(reader["datedebut"]),
+                            DateFin = Convert.ToDateTime(reader["datefin"]),
+                            ReelDateFin =  Convert.IsDBNull(reader["reeldatefin"]) ? DateTime.MinValue : Convert.ToDateTime(reader["reeldatefin"]),
+                            Accepte = Convert.ToInt32(reader["accepte"]),
+                            Personnel = Personnel.GetPersonnelByID( null ,  Convert.ToInt32(reader["idpersonnel"]) )
+                            ,
+                            Raison = new Raison
+                            {
+                                idraison = Convert.IsDBNull(reader["idraison"]) ? 0 : Convert.ToInt32(reader["idraison"]),
+                            }
+                        };
+                        
+                        conges.Add(conge);
+                    }
+                }
+            }
+            return conges;
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine( e.StackTrace );
+            throw e;
+        }
+        finally
+        {
+            if (estOuvert)
+            {
+                npg.Close();
+            }
+        }
+    }
+
+
 
     public void InsertConge()
     {
@@ -21,9 +107,9 @@ public class Conge{
             {
                 cmd.Connection = connection;
 
-                cmd.CommandText = "INSERT INTO conge (idpersonnel, datedebut, datefin , idraison) VALUES (@idpersonnel, @datedebut, @datefin , @idraison)";
+                cmd.CommandText = "INSERT INTO conge (idpersonnel, datedebut, datefin , reeldatefin , idraison) VALUES (@idpersonnel, @datedebut, @datefin , @datefin , @idraison)";
                 if(  Raison.idraison == 0 ){
-                    cmd.CommandText = "INSERT INTO conge (idpersonnel, datedebut, datefin ) VALUES (@idpersonnel, @datedebut, @datefin )";
+                    cmd.CommandText = "INSERT INTO conge (idpersonnel, datedebut, datefin , reeldatefin ) VALUES (@idpersonnel, @datedebut, @datefin , @datefin )";
                 }
 
                 Console.WriteLine( cmd.CommandText );
@@ -44,6 +130,7 @@ public class Conge{
                     Console.WriteLine("Erreur lors de l'insertion : " + ex.Message);
                 }
             }
+            connection.Close();
         }
     }
 
