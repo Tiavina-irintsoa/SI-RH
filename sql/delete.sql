@@ -1,6 +1,7 @@
 delete from criterechoix;
 delete from critere;
 delete from besoin;
+delete from personnel_poste;
 delete from poste;
 delete from type_contrat;
 delete from admin_service;
@@ -20,21 +21,39 @@ delete from candidat;
 delete from option; 
 delete from question; 
 delete from questionnaire; 
+delete from conge;
+delete from raison;
+delete from note_entretien;
+delete from question_entretien;
 
-alter sequence questionnaire_idquestionnaire_seq restart with 1;
-alter sequence question_idquestion_seq restart with 1;
-alter sequence option_idoption_seq restart with 1;
-alter sequence besoin_idbesoin_seq           restart with 1;
-alter sequence choix_idchoix_seq             restart with 1;
-alter sequence critere_idcritere_seq         restart with 1;
-alter sequence poste_idposte_seq             restart with 1;
-alter sequence service_idservice_seq         restart with 1;
-alter sequence typecritere_idtypecritere_seq restart with 1;
-alter sequence type_contrat_idtypecontrat_seq restart with 1;
-alter sequence typeuser_idtypeuser_seq restart with 1;
-alter sequence useradmin_idadmin_seq restart with 1;
-alter sequence typeuser_idtypeuser_seq restart with 1;
-alter sequence candidature_idcanditature_seq restart with 1;
-alter sequence candidat_idcandidat_seq restart with 1;
+-- Réinitialisation individuelle de chaque séquence à 1
+ALTER SEQUENCE besoin_idbesoin_seq RESTART WITH 1;
+ALTER SEQUENCE candidat_idcandidat_seq RESTART WITH 1;
+ALTER SEQUENCE candidature_idcanditature_seq RESTART WITH 1;
+ALTER SEQUENCE choix_idchoix_seq RESTART WITH 1;
+ALTER SEQUENCE conge_idconge_seq RESTART WITH 1;
+ALTER SEQUENCE critere_idcritere_seq RESTART WITH 1;
+ALTER SEQUENCE option_idoption_seq RESTART WITH 1;
+ALTER SEQUENCE personnel_embauche_idpersonnel_embauche_seq RESTART WITH 1;
+ALTER SEQUENCE personnel_idpersonnel_seq RESTART WITH 1;
+ALTER SEQUENCE personnel_salaire_idpersonnel_salaire_seq RESTART WITH 1;
+ALTER SEQUENCE poste_idposte_seq RESTART WITH 1;
+ALTER SEQUENCE question_entretien_idquestion_entretien_seq RESTART WITH 1;
+ALTER SEQUENCE question_idquestion_seq RESTART WITH 1;
+ALTER SEQUENCE questionnaire_idquestionnaire_seq RESTART WITH 1;
+ALTER SEQUENCE raison_idraison_seq RESTART WITH 1;
+ALTER SEQUENCE service_idservice_seq RESTART WITH 1;
+ALTER SEQUENCE type_contrat_idtypecontrat_seq RESTART WITH 1;
+ALTER SEQUENCE typecritere_idtypecritere_seq RESTART WITH 1;
+ALTER SEQUENCE typeuser_idtypeuser_seq RESTART WITH 1;
+ALTER SEQUENCE useradmin_idadmin_seq RESTART WITH 1;
 
-*
+-- DO $$ 
+-- DECLARE 
+--     view_name text;
+-- BEGIN
+--     FOR view_name IN (SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' AND table_type = 'VIEW') 
+--     LOOP
+--         EXECUTE 'DROP VIEW IF EXISTS ' || view_name || ' CASCADE';
+--     END LOOP;
+-- END $$;

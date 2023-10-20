@@ -39,8 +39,11 @@
 #main_form{
     display: grid;
     grid-template-columns: 1fr 1fr
+#main_form {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
 }
-#div{
+#div {
   background: var(--light);
   padding: 20vh 30vh 20vh 20vh;
   margin: auto;
@@ -53,9 +56,32 @@
   border-radius: 10px;
   height: 100vh;
 }
-#div form{
-    width: 100%;
+#div form {
+  width: 100%;
 }
+select,
+input[type="number"],
+input[type="text"],
+input[type="password"],
+input[type="submit"],
+input[type="date"] {
+  width: 100%;
+  height: 6vh;
+  border-radius: 10px;
+  border: none;
+  background-color: var(--grey);
+  padding-left: 1vw;
+  padding-right: 1vw;
+}
+
+input[type="time"]{
+    width: 30%;
+    height: 6vh;
+    border-radius: 10px;
+    border: none;
+    background-color: var(--grey);
+    padding-left: 1vw;
+    padding-right: 1vw;
 select, input[type=number] , input[type=text] , input[type=date] , input[type=password],input[type=submit]{
     width: 100%;
     height:6vh;
@@ -66,27 +92,28 @@ select, input[type=number] , input[type=text] , input[type=date] , input[type=pa
     padding-right:1vw;
 
 }
-#form-title{
-    color: var(--pink);
+#form-title {
+  color: var(--pink);
 }
-select,input:focus-visible{
-    outline:none;
+select,
+input:focus-visible {
+  outline: none;
 }
-input[type=submit]{
-background-color: var(--pink);
-color: white;
+input[type="submit"] {
+  background-color: var(--pink);
+  color: white;
 }
-.my-input-group{
-    display: flex;
-    justify-content: space-around;
-    flex-direction: column;
-    height: 12vh;
-    margin-top: 3vh;
+.my-input-group {
+  display: flex;
+  justify-content: space-around;
+  flex-direction: column;
+  height: 12vh;
+  margin-top: 3vh;
 }
-#img-form{
-    background-image: url('/images/curved1.jpg');
+#img-form {
+  background-image: url("/images/curved1.jpg");
 }
 
 #content main .table-data .todo .todo-list li {
-    width: 100%;
+  width: 100%;
 }

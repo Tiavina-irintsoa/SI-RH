@@ -91,22 +91,24 @@ namespace RH.Models
                         int idServiceIndex = 0;
                         int nomServiceIndex = 1;
                         int iconservice = 2;
-                        int idTypeCritereIndex = 3;
-                        int idCritereIndex = 4;
-                        int idChoixIndex = 5;
-                        int intituleChoixIndex = 6;
-                        int valeurChoixIndex = 7;
-                        int nomTypeCritereIndex =8;
-                        int idBesoinIndex = 9;
-                        int idPosteIndex = 10;
-                        int nomPosteIndex = 11;
-                        int heureSemaineIndex = 12;
-                        int heurePersonneIndex = 13;
-                        int accompliIndex = 14;
-                        int nbPersonneIndex = 15;
-                        int coefficientIndex = 16;
+                        int superieur = 3;
+                        int idTypeCritereIndex = 4;
+                        int idCritereIndex = 5;
+                        int idChoixIndex = 6;
+                        int intituleChoixIndex = 7;
+                        int valeurChoixIndex = 8;
+                        int nomTypeCritereIndex =9;
+                        int idBesoinIndex = 10;
+                        int idPosteIndex = 11;
+                        int nomPosteIndex = 12;
+                        int heureSemaineIndex = 13;
+                        int heurePersonneIndex = 14;
+                        int accompliIndex = 15;
+                        int nbPersonneIndex = 16;
+                        int coefficientIndex = 17;
                         int idCritere = reader.GetInt32(idCritereIndex);
                         string intituleTypeCritere = reader.GetString(nomTypeCritereIndex);
+                        Console.WriteLine( " huhu "+intituleTypeCritere );
                         // Console.WriteLine( " typecritere :  "+intituleTypeCritere );
                         if (!critereMap.ContainsKey(intituleTypeCritere))
                         {
@@ -140,8 +142,8 @@ namespace RH.Models
                         Critere critereExist = critereMap[intituleTypeCritere];
                         critereExist.listeChoix.Add(new Choix
                         {
-                            idChoix = reader.GetInt32(5),
-                            intitule = reader.GetString(6)
+                            idChoix = reader.GetInt32(idChoixIndex),
+                            intitule = reader.GetString(intituleChoixIndex)
                         });
                     }
                 }
@@ -149,7 +151,8 @@ namespace RH.Models
         }
         catch (Exception e)
         {
-            Console.WriteLine(e.ToString());
+            Console.WriteLine(e.StackTrace);
+            throw e;
         }
         finally
         {

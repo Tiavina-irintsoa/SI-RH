@@ -1,0 +1,59 @@
+@{
+    Layout = "_form"; 
+}
+     <div id="div">
+        <div id="form-title">
+            <a href = '@Url.Action("")'> Retour </a>
+            <h1>
+              Demande de congé
+            </h1>
+            @if (!string.IsNullOrEmpty(ViewBag.ErreurMessage))
+            {
+                <div class="alert alert-danger"  style=" color: var(--red) ">
+                    @ViewBag.ErreurMessage ✘    
+                </div>
+            }
+            @if (!string.IsNullOrEmpty(ViewBag.Succes))
+            {
+                <div class="alert alert-danger"  style=" color: var(--green) ">
+                    @ViewBag.Succes ✔    
+                </div>
+            }
+        </div>
+        <form action='@Url.Action("demande" , "conge")' method="post">
+          <div class="">
+           <div class="my-input-group">
+             <label for="">
+              Date début congé
+            </label>
+            <input type="date" name="debut"  required>
+           </div>
+           <div class="">
+            <input type="time" name="debut_time" value="08:00"  required>
+           </div>
+            <div class="my-input-group">
+             <label for="">
+              Date fin congé
+            </label>
+            <input type="date" name="fin"  required>
+           </div>
+            <div class="">
+            <input type="time" name="fin_time"  value="17:00" required>
+           </div>
+            <div class="my-input-group">
+              <label for="">
+                  Raison : 
+              </label>
+              <select name="raison" id="">
+                  <option value="0"> Aucun </option>
+                  <option value="1">Maternité </option>
+                  <option value="2">Paternité </option>
+                  <option value="3">Maladie </option>
+              </select>
+           </div>
+            <div class="my-input-group">
+                <input type="submit" value="Connexion">
+            </div>
+          </div>
+        </form>        
+      </div>

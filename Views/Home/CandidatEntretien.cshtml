@@ -1,0 +1,26 @@
+<div class="table-data">
+    <div class="order">
+    <div class="head">
+        <h4>
+            Résultats d'entretien (@ViewBag.entretien.besoin.poste.nomPoste)
+        </h4>
+    </div>
+    <table>
+        <thead>
+        <tr>
+            <th>Nom</th>
+            <th>Points</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (CandidatEntretien c in ViewBag.entretien.candidats)
+        {
+        <tr>
+            <td> @c.candidature.Candidat.nom @c.candidature.Candidat.prenom </td>
+            <td> @c.points</td>
+        </tr>
+        }
+        </tbody>
+    </table>
+        <div class="retour"><a href='@Url.Action("Embauche","Entretien",new{idbesoin = @ViewBag.entretien.besoin.idBesoin })'>Embaucher les @ViewBag.entretien.besoin.nbpersonne premiers</a></div>
+</div>

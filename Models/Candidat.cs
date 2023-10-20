@@ -18,6 +18,7 @@ public class Candidat{
         set { _nomposte = value; }
     }
 
+   
     public DateTime datecandidature {
         get { return _datecandidature; }
         set { _datecandidature = value; }
@@ -48,6 +49,15 @@ public class Candidat{
     }
 
     public Candidat() {}
+
+    public Candidat(string nomCandidat){
+        nom = nomCandidat;
+    }
+    public Candidat(string nomCandidat,string prenomCandidat){
+        nom = nomCandidat;
+        prenom = prenomCandidat;
+    }
+    
 
     public static Candidat GetById(NpgsqlConnection npg , int idcand ){
         bool estOuvert = false;

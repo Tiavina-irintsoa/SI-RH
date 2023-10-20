@@ -50,7 +50,6 @@ create or replace view v_candidat_candidature as
         natural join candidature as cd
         natural join v_poste_besoin as pb ;
 
--- vaovao ralph
 create or replace view v_all_annonce as(
     select
     besoin.idbesoin, besoin.nb_personne, service.nomService, service.iconeService, poste.nomPoste
@@ -87,8 +86,6 @@ create or replace view v_admin_service as
     from v_admin_typeuser 
         natural join v_assiociation_admin_service;
 
-
--- vaovao ralph 
 create or replace view v_personnel_poste_association as 
     select * 
     from personnel_poste as pp 
@@ -112,3 +109,59 @@ create or replace view v_personnel_information as
         v_personnel_poste AS vpp;
 
 
+create or replace view v_nbjours_personnel as  
+    SELECT
+    CASE
+        WHEN EXTRACT(day FROM (now() - latest_hire_date)) > 90 THEN 90
+        ELSE EXTRACT(day FROM (now() - latest_hire_date))
+    END AS nbjours,
+    idpersonnel
+    FROM v_personnel_information;
+
+
+create or replace view v_diff_conge as 
+    select sum( extract (day from  (reeldatefin - datedebut)) ) as nbconge , idpersonnel
+    from conge 
+    where accepte = 3 
+    and idraison is null
+    group by idpersonnel;
+
+create or replace view v_all_diff_conge as 
+    SELECT p.idpersonnel,COALESCE(dc.nbconge, 0) AS nbconge
+    FROM personnel p
+    LEFT JOIN v_diff_conge dc ON p.idpersonnel = dc.idpersonnel;
+
+
+create or replace view v_nbj_conge_personnel as 
+    SELECT
+        nbj.idpersonnel,
+        (nbj.nbjours - dc.nbconge) AS difference
+    FROM v_nbjours_personnel nbj
+    LEFT JOIN v_all_diff_conge dc ON nbj.idpersonnel = dc.idpersonnel;
+
+create or replace view v_nbheure_conge_personnel as 
+    select difference * 0.67 as nbheure , idpersonnel
+        from v_nbj_conge_personnel;
+
+
+-- ralph
+create or replace view v_conge_service as 
+    SELECT *
+    from v_personnel_poste_association 
+        natural join conge;
+
+create or replace view v_points_entretien as 
+    select note_entretien.idcandidature,sum(note*coeff) as points 
+    from note_entretien
+    join question_entretien
+        on question_entretien.idquestion_entretien = note_entretien.idquestion_entretien
+    join candidature
+        on candidature.idcandidature = note_entretien.idcandidature
+    group by note_entretien.idcandidature;
+
+create or replace view v_points_entretien_candidat as 
+    select
+    v_candidat_candidature.*, v_points_entretien.points
+    from v_points_entretien
+    join v_candidat_candidature
+        on v_candidat_candidature.idcandidature = v_points_entretien.idcandidature;

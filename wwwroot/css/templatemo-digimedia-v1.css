@@ -97,9 +97,6 @@ figcaption {
   outline: 0;
 }
 
-:root {
-  --pink: #e63cad;
-}
 /* clear fix */
 .grid:after {
   content: "";
@@ -204,7 +201,7 @@ img {
   width: 100%;
   overflow: hidden;
 }
-#logo-container {
+#logo-container{
   width: 10vw;
 }
 /* 
@@ -473,7 +470,7 @@ header
   box-shadow: 0px 5px 8px rgba(0, 0, 0, 0.03);
 }
 
-.logo {
+.logo{
   width: 20vw;
 }
 .background-header .logo,
@@ -1641,7 +1638,7 @@ Free Quote
 offers
 --------------------------------------------- 
 */
-#critere {
+#critere{
   font-weight: bold;
 }
 
@@ -2276,31 +2273,4 @@ responsive
   form#contact {
     padding: 30px;
   }
-}
-
-#content-form-test {
-  margin-left: -20vw;
-  padding-top: 6vh;
-  padding-bottom: 6vh;
-  font-family: "Poppins", sans-serif;
-
-}
-#content-form-test .question {
-  display: flex !important;
-  flex-direction: column;
-}
-#content-form-test .option {
-  margin-top: -3vh !important;
-  min-height: 10px;
-  padding-left: 10vh;
-  position: relative;
-  height: auto;
-  font-size: smaller;
-}
-.option input[type="checkbox"] {
-  width: 10px !important;
-  height: inherit !important;
-}
-.question {
-  margin-top: 6vh;
 }

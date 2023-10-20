@@ -8,7 +8,7 @@
   justify-content: center;
   align-items: center;
 }
-.formcreator .mybutton {
+.formcreator .mybutton{
   border-radius: 10px;
   width: 50%;
   height: 6vh;
@@ -18,14 +18,10 @@
   color: white;
   margin-top: 6vh;
 }
-
-.formcreator #refuse {
-  background-color: var(--red);
-}
 .formcreator #add {
   background-color: var(--pink);
 }
-.formcreator #terminer {
+.formcreator #terminer{
   background-color: var(--blue);
 }
 .formcreator #questions {
@@ -56,24 +52,6 @@
   transition: 100ms ease-in-out;
   background-color: transparent;
 }
-#note {
-  font-family: "Poppins", sans-serif;
-  height: 5vh;
-  border: none;
-  border-radius: 0px;
-  border-bottom: solid black 1px;
-  transition: 100ms ease-in-out;
-  background-color: transparent;
-  width: 20%;
-  margin-left: 4vh;
-}
-#note:focus-visible {
-  outline: none;
-  border-bottom: solid var(--pink) 2px;
-  height: 6vh;
-  font-size: 15px;
-  background-color: transparent;
-}
 
 .formcreator #question:focus-visible {
   outline: none;
@@ -83,22 +61,6 @@
   background-color: transparent;
 }
 
-.formcreator .note-option {
-  width: 20% !important;
-  border: none;
-  background-color: transparent;
-  border-radius: 0px;
-  height: 3vh;
-  font-family: "Poppins", sans-serif;
-  font-size: 12px;
-}
-.formcreator .note-option:hover {
-  border: none;
-  outline: none;
-  border-bottom: solid var(--pink) 1px;
-  height: 4vh;
-  background-color: transparent;
-}
 .formcreator .option {
   border: none;
   background-color: transparent;
@@ -128,42 +90,14 @@
   font-size: 14px;
   height: 100%;
   padding-left: 2vh;
-  width: 90%;
+  width: 100%;
 }
 .question-title {
   border-bottom: solid black 1px;
   width: 100%;
   padding-left: 2vh;
 }
-.entretien .question-title {
-  width: 70%;
-}
-.note-submitted {
-  width: 10%;
-  font-family: "Poppins", sans-serif;
-  height: 5vh;
-  padding-left: 2vh;
-  border: none;
-  border-radius: 0px;
-  border-bottom: solid black 1px;
-  transition: 100ms ease-in-out;
-  background-color: transparent;
-  margin-left: 4vh;
-}
-#entretien-form {
-  display: flex;
-  flex-direction: column;
-  width: 100%;
-  justify-content: center;
-  align-items: center;
-}
-.head-submitted {
-  display: flex;
-}
-.submitted-note {
-  width: 10%;
-  margin-left: 4vh;
-}
+
 .options-submitted {
   display: flex;
   align-items: center;
@@ -183,41 +117,17 @@
   height: auto; */
 }
 .formcreator .options {
-  width: 100%;
   margin-top: 3vh;
   display: flex;
   justify-content: center;
   align-items: center;
-  font-size: 13px;
 }
 .option-value {
   margin-left: 1vw;
 }
-
 i {
   font-size: 13px !important;
 }
-#termin-lien {
+#termin-lien{
   width: 100%;
-}
-.entretien {
-  display: flex;
-  flex-direction: row;
-  margin-top: 6vh;
-  border-radius: 10px;
-  justify-content: center;
-  background-color: white;
-  width: 50%;
-  padding: 6vh;
-}
-.formcreator #accept {
-  background-color: var(--blue);
-}
-#question {
-  width: 70%;
-}
-
-#question-container {
-  display: flex;
-  flex-direction: row;
 }

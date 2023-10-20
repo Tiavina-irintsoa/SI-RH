@@ -1,8 +1,10 @@
+@{
+  var superieur = Context.Request.Cookies["superieur"] ;
+}
 <a href="#" class="brand">
-        <i class="bx bxs-smile"></i>
-        <span class="text">RH - DIMPEX </span>
-      </a>
-
+  <i class="bx bxs-smile"></i>
+  <span class="text">RH - DIMPEX </span>
+</a>
       <ul class="side-menu top">
         <li class="@(ViewData["page"] != null && ViewData["page"] == "service" ? "active" : "")">
             <a href="@Url.Action("liste","service")">
@@ -16,16 +18,28 @@
                 <span class="text">CV  </span>
             </a>
         </li>
+        
+                @if( superieur != null ){
+          <li class="">
+            <a href="#">
+              <i class="bx bxs-dashboard"></i>
+              <span class="text">
+                  Liste Congés
+              </span>
+            </a>
+          </li>
+        }
+
         <li class="">
           <a href="#">
             <i class="bx bxs-dashboard"></i>
-            <span class="text">Dashboard</span>
+            <span class="text">Test</span>
           </a>
         </li>
         <li>
-          <a href="#">
+          <a href='@Url.Action("BesoinListe","Entretien")'>
             <i class="bx bxs-shopping-bag-alt"></i>
-            <span class="text">My Store</span>
+            <span class="text">Entretien</span>
           </a>
         </li>
         <li>
