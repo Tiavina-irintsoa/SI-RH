@@ -250,3 +250,12 @@ VALUES
 
 insert into useradmin(nom,mdp,idtypeuser,idpersonnel)
 values ( 'Garcia' , '12345' , 3 , 5 );
+
+insert into  admin_service
+values( 1 , 1 ),
+(1,2),
+(2,1),
+(2,2),
+(2,3),
+(3,4),
+(3,5);

@@ -376,3 +376,10 @@ ADD CONSTRAINT admin_service_idadmin_fkey2
 FOREIGN KEY (idtypeuser)
 REFERENCES service(idservice);
 >>>>>>> a87f48d10ce22acc333c0ab8b47519335830f336
+
+
+create table refus(
+    idrefus serial primary key,
+    idconge int references conge(idconge),
+    raison_refus text
+);
