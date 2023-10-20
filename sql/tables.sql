@@ -404,5 +404,60 @@ REFERENCES typeuser(idtypeuser);
 ALTER TABLE public.conge
 ALTER COLUMN reeldatefin SET DEFAULT default_reeldatefin();
 
-insert into conge ( idpersonnel ,datedebut, reeldatefin ,  datefin, accepte  )
-values(5,'2023-12-14 08:00:00' , '2023-12-15 17:00:00' , '2023-12-15 17:00:00',2  );
+create table avantage(
+    idavantage serial primary key,
+    nomavantage varchar
+);
+
+create table sante(
+    idsante serial primary key,
+    nomsante varchar
+);
+
+create table essai(
+    idessai serial primary key,
+    idbesoin integer references besoin(idbesoin),
+    idcandidat integer references candidat(idcandidat),
+    duree real,
+    debut date,
+    salaire_base real
+);
+
+create table essai_avantage(
+    idessai integer references essai (idessai),
+    idavantage int references avantage (idavantage)
+);
+
+create table info(
+    idinfo serial primary key,
+    idcandidat integer references candidat(idcandidat),
+    cin varchar,
+    adresse varchar,
+    pere varchar,
+    mere varchar,
+    nbenfant int
+);
+
+create table contrat_essai(
+    idcontrat_essai serial primary key,
+    idessai int references essai(idessai),
+    signessai date
+);
+
+create table travail(
+    idtravail serial primary key,
+    idcontrat_essai integer references contrat_essai(idcontrat_essai),
+    duree real,
+    debut date
+);
+
+create table contrat_travail(
+    idcontrat_travail serial primary key,
+    idtravail int references travail(idtravail),
+    signetravail date
+);
+
+create table travail_sante(
+    idcontrat_travail integer references contrat_travail(idcontrat_travail),
+    idsante int references sante (idsante)
+);

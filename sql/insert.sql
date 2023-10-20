@@ -293,3 +293,24 @@ values( 7 , 1 ),
 (7,5),
 (7,6),
 (7,7);
+
+
+
+insert into conge ( idpersonnel ,datedebut, reeldatefin ,  datefin, accepte  )
+values(5,'2023-12-14 08:00:00' , '2023-12-15 17:00:00' , '2023-12-15 17:00:00',2  );
+
+insert into avantage (nomavantage) values
+    ('Voiture'), ('Maison'), ('Secretaire');
+
+insert into sante (nomsante) values
+    ('Funhece'), ('AMIT'), ('Ostie');
+
+insert into info (idcandidat, cin, adresse, pere, mere, nbenfant) values (@idcandidat, @cin, @adresse, @pere, @mere, @nbenfant)
+
+insert into contrat_essai (idessai, net, signessai) values (@idessai, @net, @signessai)
+
+insert into travail (idcontrat_essai, duree, debut) values (@idcontrat_essai, @duree, @debut)
+
+insert into contrat_travail (idtravail, signetravail) values (@idtravail, @signetravail)
+
+insert into travail_sante values (@idcontrat_travail, @idsante)
