@@ -42,6 +42,12 @@
             <span class="text">Entretien</span>
           </a>
         </li>
+        <li class="@(ViewData["page"] != null && ViewData["page"] == "NewContrat" ? "active" : "")">
+            <a href="@Url.Action("Index","NewContrat")">
+                <i class="bx bxs-dashboard"></i>
+                <span class="text">Contrats d'essai</span>
+            </a>
+        </li>
         <li>
           <a href="#">
             <i class="bx bxs-doughnut-chart"></i>

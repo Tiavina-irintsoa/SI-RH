@@ -57,6 +57,11 @@ public class Candidat{
         nom = nomCandidat;
         prenom = prenomCandidat;
     }
+    public Candidat(string nomCandidat,string prenomCandidat,string contact){
+        nom = nomCandidat;
+        prenom = prenomCandidat;
+        this.contact = contact;
+    }
     
 
     public static Candidat GetById(NpgsqlConnection npg , int idcand ){

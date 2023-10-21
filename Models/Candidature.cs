@@ -11,13 +11,22 @@ public class Candidature
     public string code { get; set; }
     public int idbesoin { get; set; }
     public Fichier fichier { get;set; }
-
+    public Besoin besoin {get;set;}
     public Candidat Candidat { get; set; }
 
     private static Random random = new Random();
      public Candidature(int candidature,string nomCandidat,string prenomCandidat){
         this.idcandidature = candidature;
         this.Candidat = new Candidat(nomCandidat,prenomCandidat);
+    }
+    public Candidature(int candidature,string nomCandidat,string prenomCandidat,string contact){
+        this.idcandidature = candidature;
+        this.Candidat = new Candidat(nomCandidat,prenomCandidat,contact);
+    }
+    public Candidature(int candidature,string nomCandidat,string prenomCandidat,string contact,string nomposte){
+        besoin = new Besoin(nomposte);
+        this.idcandidature = candidature;
+        this.Candidat = new Candidat(nomCandidat,prenomCandidat,contact);
     }
     public Candidature(){
 
@@ -43,6 +52,45 @@ public class Candidature
 
     public void Embaucher(NpgsqlConnection npg){
         UpdateCandidatureValidation(npg,3);
+    }
+    public static List<Candidature> getAll(int validation, NpgsqlConnection connection){
+        List<Candidature> candidats = new List<Candidature>();
+        Boolean estOuvert = false;
+        if(connection == null){
+            estOuvert = true;
+            Connection connexion = new Connection();
+            connection = connexion.ConnectSante();
+        }
+        try
+        {
+            string sql = "select * from v_candidature_accepte";
+            using (NpgsqlCommand command = new NpgsqlCommand(sql, connection)){
+                using (NpgsqlDataReader reader = command.ExecuteReader())   
+                {
+                    while(reader.Read()){
+                        candidats.Add(
+                            new Candidature(
+                                Convert.ToInt32(reader["idcandidature"]),
+                                Convert.ToString(reader["nomcandidat"]),
+                                Convert.ToString(reader["prenomcandidat"]),
+                                Convert.ToString(reader["contact"]),
+                                Convert.ToString(reader["nomposte"])
+                            )
+                        );
+                    }
+                }
+            }
+        }
+        catch(Exception e){
+            throw e;
+        }
+        finally
+        {
+            if(estOuvert){
+                connection.Close();
+            }
+        }
+        return candidats;
     }
     public  void UpdateCandidatureValidation(NpgsqlConnection npg, int newValidation)
     {

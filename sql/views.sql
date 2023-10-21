@@ -175,3 +175,8 @@ create or replace view v_besoin_accompli as (
     from v_poste_besoin
     where accompli is null
 );
+create or replace view v_candidature_accepte as (
+    select * from
+    v_candidat_candidature as candidature
+    where validation = 3
+);
