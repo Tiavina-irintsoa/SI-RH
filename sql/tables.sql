@@ -316,3 +316,9 @@ create table travail_sante(
     idcontrat_travail integer references contrat_travail(idcontrat_travail),
     idsante int references sante (idsante)
 );
+
+
+alter table refus 
+add column idservice int REFERENCES service;
+
+

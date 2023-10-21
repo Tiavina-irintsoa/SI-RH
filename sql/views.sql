@@ -165,3 +165,14 @@ create or replace view v_points_entretien_candidat as
     from v_points_entretien
     join v_candidat_candidature
         on v_candidat_candidature.idcandidature = v_points_entretien.idcandidature;
+
+
+-- vaovao 
+create or replace view v_conge_refus as 
+    select cs.idconge , idpersonnel , idposte , date_embauche , cs.idservice , nomposte , datedebut , datefin , reeldatefin , accepte , cs.idraison , ra.nomraison  , idrefus , raison_refus  , r.idservice as superieur 
+    from v_conge_service as cs 
+        left  join refus as r
+        on cs.idconge = r.idconge 
+        left join raison as ra 
+        on ra.idraison = cs.idraison
+        ;
