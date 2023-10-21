@@ -150,12 +150,16 @@ create or replace view v_conge_service as
     from v_personnel_poste_association 
         natural join conge;
 
+create or replace view v_candidat_entretien as(
+    select * from candidature 
+    where validation = 2
+);
 create or replace view v_points_entretien as 
     select note_entretien.idcandidature,sum(note*coeff) as points 
     from note_entretien
     join question_entretien
         on question_entretien.idquestion_entretien = note_entretien.idquestion_entretien
-    join candidature
+    join v_candidat_entretien as candidature
         on candidature.idcandidature = note_entretien.idcandidature
     group by note_entretien.idcandidature;
 
@@ -165,3 +169,9 @@ create or replace view v_points_entretien_candidat as
     from v_points_entretien
     join v_candidat_candidature
         on v_candidat_candidature.idcandidature = v_points_entretien.idcandidature;
+create or replace view v_besoin_accompli as (
+    select 
+    * 
+    from v_poste_besoin
+    where accompli is null
+);

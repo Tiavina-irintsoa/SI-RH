@@ -41,7 +41,62 @@ public class Besoin{
 
     public TypeContrat Type_contrat { get => type_contrat; set => type_contrat = value; }
 
+    public void Terminer(NpgsqlConnection connection)
+    {   
+        Boolean estOuvert = false;
+        if(connection==null){
+            estOuvert = true;
+            Connection c = new Connection();
+            connection = c.ConnectSante();
+            connection.Open();
+        }
+        try{
+            using (NpgsqlCommand cmd = new NpgsqlCommand())
+        {
+            cmd.Connection = connection;
+            cmd.CommandText = "UPDATE besoin SET accompli = NOW() WHERE idbesoin = @idbesoin";
+            cmd.Parameters.AddWithValue("BesoinId",idBesoin);
 
+
+            cmd.ExecuteNonQuery();
+        }
+        }
+        catch(Exception e ){
+            throw e;
+        }
+        finally{
+            if(estOuvert){
+                connection.Close();
+            }
+        }
+        
+    }
+
+    public void EmbaucherPremiers(){
+        Entretien entretien =  new Entretien(this.idBesoin);
+        Connection connection = new Connection();
+        NpgsqlConnection npg = connection.ConnectSante();
+        try{
+            this.complete(npg);
+            List<CandidatEntretien> candidats = entretien.GetCandidatEntretienList(npg);
+            
+            if(candidats.Count < nbpersonne){
+                throw new Exception("Le nombre de personnes requis n'est pas encore atteint.");
+            }
+            for (int i = 0; i < nbpersonne; i++)
+            {
+                Console.WriteLine(candidats[i].candidature.idcandidature);
+                candidats[i].candidature.Embaucher(npg);
+            }
+            this.Terminer(npg);
+        }
+        catch(Exception e ){
+            throw e;
+        }
+        finally{
+            npg.Close();
+        }
+    }
     public Besoin() {}
 
     public Besoin(int idbesoin){
@@ -74,25 +129,42 @@ public class Besoin{
         this._poste = poste;
     }
 
-    public void complete(){    
+    public void complete(NpgsqlConnection connection){  
+        Console.WriteLine("opened1");
+        Boolean estOuvert = false;  
+        if(connection == null){
+            Console.WriteLine("opened");
+            Connection connect  = new Connection(); 
+            connection = connect.ConnectSante();
+            estOuvert=true;
+        }
         try{
             string sql= "SELECT * FROM v_poste_besoin where idservice = @idservice";
-            Connection connect  = new Connection();
-            NpgsqlConnection connection = connect.ConnectSante();
-            var cmd = new NpgsqlCommand(sql, connection);
-            cmd.Parameters.AddWithValue("BesoinId",idBesoin);
-            var reader = cmd.ExecuteReader();
-            reader.Read();
-            Service service = new Service(reader.GetInt32(1));
-            poste = new(reader.GetInt32(0), service, reader.GetString(2));
-            heureSemaine = reader.GetInt32(4);
-            heurePersonne = reader.GetInt32(5);
-            accompli = reader.IsDBNull(6) ? (DateTime?)null : reader.GetDateTime(6);
-            nbpersonne = reader.GetInt32(8);
-            connection.Close();
+            
+            using(var cmd = new NpgsqlCommand(sql, connection)){
+                cmd.Parameters.AddWithValue("BesoinId",idBesoin);
+                using (NpgsqlDataReader reader = cmd.ExecuteReader())
+                {
+                    reader.Read();
+                    Service service = new Service(reader.GetInt32(1));
+                    poste = new(reader.GetInt32(0), service, reader.GetString(2));
+                    heureSemaine = reader.GetInt32(4);
+                    heurePersonne = reader.GetInt32(5);
+                    accompli = reader.IsDBNull(6) ? (DateTime?)null : reader.GetDateTime(6);
+                    nbpersonne = reader.GetInt32(8);
+                }
+            }
+            
         }
         catch(Exception e){
             throw e;
+        }
+        finally{
+
+            if(estOuvert){
+                Console.WriteLine("closd");
+                connection.Close();
+            }
         }
     }
     public static Besoin[] GetAll(NpgsqlConnection npg, int ids) {
@@ -108,6 +180,54 @@ public class Besoin{
             string sql = "SELECT * FROM v_poste_besoin where idservice=" + ids;
             if( ids == 0 ){
                 sql = "SELECT * FROM v_poste_besoin";
+            }
+            Console.WriteLine(sql);
+            Service service = new(ids);
+            using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))            {
+                using (NpgsqlDataReader reader = command.ExecuteReader())   
+                {
+                    List<Besoin> besoinList = new List<Besoin>();
+                    while (reader.Read()) {
+                        int idBesoin = reader.GetInt32(3);
+                        Poste poste = new(reader.GetInt32(0), service, reader.GetString(2));
+                        double heureSemaine = reader.GetInt32(4);
+                        double heurePersonne = reader.GetInt32(5);
+                        DateTime? accompli = reader.IsDBNull(6) ? (DateTime?)null : reader.GetDateTime(6);
+                        int nbp = reader.GetInt32(8);
+                       
+                        Besoin besoin = new Besoin(idBesoin, poste, heureSemaine, heurePersonne, accompli , nbp );
+                        besoinList.Add(besoin);
+                    }
+                    besoins = besoinList.ToArray();
+                }
+            }
+        }
+        catch (Exception e)        
+        {
+        Console.WriteLine("erreurrrr");
+            Console.WriteLine(e.ToString());
+        }
+        finally        {
+            if (estOuvert)            {
+                npg.Close();
+            }
+        }      
+       Console.WriteLine(besoins.Length); 
+        return besoins;
+    }
+    public static Besoin[] GetAllAccompli(NpgsqlConnection npg, int ids) {
+        Besoin[] besoins = null;
+        bool estOuvert = false;
+        
+        if (npg == null)        {
+            estOuvert = true;
+            Connection connexion = new Connection();
+            npg = connexion.ConnectSante();
+        }        
+        try{
+            string sql = "SELECT * FROM v_besoin_accompli where idservice=" + ids;
+            if( ids == 0 ){
+                sql = "SELECT * FROM v_besoin_accompli";
             }
             Console.WriteLine(sql);
             Service service = new(ids);
