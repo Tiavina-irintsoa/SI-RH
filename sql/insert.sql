@@ -1,6 +1,6 @@
 
 -- ito ny vaovao
--- Insertion dans la table typecritere
+-- Insertion dans la table typecriterno
 INSERT INTO typecritere (nomtypecritere)
 VALUES
     ('genre'),
