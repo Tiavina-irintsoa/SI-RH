@@ -5,6 +5,7 @@ namespace RH.Models{
 
         public CandidatEntretien(int idcandidature,double points,string nomCandidat,string prenomcandidat){
             this.points = points;
+            Console.WriteLine("idcan"+idcandidature);
             this.candidature = new Candidature(idcandidature,nomCandidat,prenomcandidat);
         }
     }

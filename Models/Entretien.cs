@@ -10,35 +10,49 @@ namespace RH.Models{
         }
 
         
-        public List<CandidatEntretien> GetCandidatEntretienList(){
-            try{
-                var candidatEntretiens = new List<CandidatEntretien>();
-                Connection connect  = new Connection();
-                NpgsqlConnection connection = connect.ConnectSante();
+        public List<CandidatEntretien> GetCandidatEntretienList(NpgsqlConnection connection)
+        {
+            Boolean estOuvert = false;
+            try
+            {
                 
-                besoin.complete();
-                using (var cmd = new NpgsqlCommand("SELECT * FROM v_points_entretien_candidat WHERE idbesoin = @BesoinId order by points", connection))
+                var candidatEntretiens = new List<CandidatEntretien>();
+                if (connection == null)
+                {
+                    Connection connect = new Connection();
+                    connection = connect.ConnectSante();
+                    estOuvert = true;
+                }
+
+                besoin.complete(connection);
+
+                using (var cmd = new NpgsqlCommand("SELECT * FROM v_points_entretien_candidat WHERE idbesoin = @BesoinId order by points desc", connection))
                 {
                     cmd.Parameters.AddWithValue("BesoinId", besoin.idBesoin);
                     using (var reader = cmd.ExecuteReader())
                     {
                         while (reader.Read())
                         {
-                            var candidatEntretien = new CandidatEntretien(Convert.ToInt32(reader["idcandidature"]),Convert.ToDouble(reader["points"]),Convert.ToString(reader["nomcandidat"]),Convert.ToString(reader["prenomcandidat"]));
+                            var candidatEntretien = new CandidatEntretien(Convert.ToInt32(reader["idcandidature"]), Convert.ToDouble(reader["points"]), Convert.ToString(reader["nomcandidat"]), Convert.ToString(reader["prenomcandidat"]));
                             candidatEntretiens.Add(candidatEntretien);
+                           
                         }
                     }
-                connection.Close();
                 }
 
-
-            return candidatEntretiens;
+                return candidatEntretiens;
             }
-            catch(Exception e){
+            catch (Exception e)
+            {
                 Console.WriteLine(e.StackTrace);
                 throw e;
-
+            }
+            finally{
+                if(estOuvert){
+                    connection.Close();
+                }
             }
         }
+
     }
 }

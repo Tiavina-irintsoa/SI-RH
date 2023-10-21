@@ -16,7 +16,7 @@ public class Candidature
 
     private static Random random = new Random();
      public Candidature(int candidature,string nomCandidat,string prenomCandidat){
-        this.idcandidature = idcandidature;
+        this.idcandidature = candidature;
         this.Candidat = new Candidat(nomCandidat,prenomCandidat);
     }
     public Candidature(){
@@ -38,6 +38,50 @@ public class Candidature
 
     public void setCode( int id ){
         this.code  = GenerateRandomCode( id );
+    }
+
+
+    public void Embaucher(NpgsqlConnection npg){
+        UpdateCandidatureValidation(npg,3);
+    }
+    public  void UpdateCandidatureValidation(NpgsqlConnection npg, int newValidation)
+    {
+        bool estOuvert = false;
+
+        if (npg == null)
+        {
+            estOuvert = true;
+            Connection connexion = new Connection();
+            npg = connexion.ConnectSante();
+        }
+        try
+        {
+            string sql = "UPDATE candidature SET validation = @newValidation WHERE idcandidature = @idc";
+            Console.WriteLine(sql);
+            using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))
+            {
+                string sqlWithValues = command.CommandText;
+                
+                Console.WriteLine(sqlWithValues);
+                command.Parameters.AddWithValue("@newValidation", newValidation);
+                command.Parameters.AddWithValue("@idc", this.idcandidature);
+                Console.WriteLine(idcandidature+"idcan");
+                int row = command.ExecuteNonQuery();
+                Console.WriteLine(row);
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.ToString());
+            throw;
+        }
+        finally
+        {
+            if (estOuvert)
+            {
+                npg.Close();
+            }
+        }
     }
 
     public static Candidature GetCandidature(NpgsqlConnection npg , int idcandidature ){

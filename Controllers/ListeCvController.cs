@@ -15,7 +15,7 @@ public class ListeCvController : Controller
     
     public IActionResult BesoinListe()
     {
-        Besoin[] besoins = Besoin.GetAll(null, 0);
+        Besoin[] besoins = Besoin.GetAllAccompli(null, 0);
         return View("Views/Home/besoinListe.cshtml", besoins);        
     }
 
