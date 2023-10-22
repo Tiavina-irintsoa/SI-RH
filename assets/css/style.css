@@ -28,6 +28,8 @@ li {
   --purple: #ae6bb6;
   --light-purple: #d896e0;
   --blue: #38b5fd;
+  --yellow: #fffc33;
+  --green: #46d341;
   --light-blue: #d3f5ff;
 }
 
@@ -554,3 +556,5 @@ body {
     min-width: 420px;
   }
 }
+
+

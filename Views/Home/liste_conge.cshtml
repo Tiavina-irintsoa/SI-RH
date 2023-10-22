@@ -1,7 +1,7 @@
     <div class="table-data" id="table_conge" >
       <div class="order">
         <div class="head">
-          <h3>Liste des personnels</h3>
+          <h3>Liste des demandes de congés des personnels</h3>
           <i class="bx bx-search"></i>
           <i class="bx bx-filter"></i>
         </div>
@@ -19,12 +19,15 @@
           </thead>
           <tbody>
           @foreach( var c in @ViewBag.l_conge ){
-            <tr>
+              <tr  style="cursor:pointer;"  onclick="getRaison('@Html.Raw(
+                  string.IsNullOrEmpty(c.autre_raison) || c.autre_raison == "Aucune"  ? c.Raison.nomRaison : c.autre_raison
+              )')"
+              >
               <td>@c.Personnel.service.nomService</td>
               <td>@c.Personnel.nom</td>
               <td>@c.Personnel.prenom</td>
               <td>@c.DateDebut</td>
-            <td>@c.ReelDateFin</td>
+              <td>@c.ReelDateFin</td>
               <td>
                 <form style="width: 75% ; " action="@Url.Action( "accept" , "conge" )" method="post" >
                     <input type="hidden" name="idconge" value="@c.IdConge" >
@@ -60,11 +63,34 @@
             </div>
       </div>
   </div>
+
+   <div id="popup-personnel2" class="popup">
+      <div  class="popup-content">
+            <div class="title-personnel-detail">
+              <h2>Donnez la raison du refus  : </h2>
+              <i  style="color:var(--red);" class="fa fa-times details-personnel-icon" onclick="fermer2()" ></i>
+            </div>
+            <div id="liste_details2" class="grid-container">
+                
+            </div>
+      </div>
+  </div>
   <script>
     function fermer(){
       const popup = document.getElementById('popup-personnel');
       popup.style.top = '-35%';
       popup.style.opacity = '0';
+      const popup2 = document.getElementById('popup-personnel2');
+      popup2.style.top = '-35%';
+      popup2.style.opacity = '0';
+    }
+    function fermer2(){
+      const popup = document.getElementById('popup-personnel2');
+      popup.style.top = '-35%';
+      popup.style.opacity = '0';
+      const popup2 = document.getElementById('popup-personnel');
+      popup2.style.top = '-35%';
+      popup2.style.opacity = '0';
     }
     function afficherDetailsPersonnel( idconge ){
         const scrollContainer = document.getElementById('table_conge');
@@ -78,5 +104,24 @@
         
         const inputIdConge = document.getElementById('idconge');
         inputIdConge.value = idconge;
+    }
+
+    function getRaison( autre_raison ){
+        const scrollContainer = document.getElementById('table_conge');
+        scrollContainer.scrollIntoView({
+        top: 0,
+        behavior: 'smooth'
+        });
+
+        const popup = document.getElementById('popup-personnel2');
+        popup.style.top = '50%';
+        popup.style.opacity = '1';
+
+        const title = document.querySelector('.title-personnel-detail');
+
+        title.innerHTML = "<h2>La raison de la demande : </h2>\
+              <i  style='color:var(--red);' class='fa fa-times\ details-personnel-icon' onclick='fermer()' ></i>";
+        const inputIdConge = document.getElementById('liste_details2');
+        inputIdConge.innerHTML =  autre_raison ;
     }
   </script>

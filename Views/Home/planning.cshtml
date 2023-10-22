@@ -1,0 +1,27 @@
+<script>
+   var evenements = JSON.parse('@Html.Raw(ViewBag.Evenements)');
+    var ressources = JSON.parse('@Html.Raw(ViewBag.Ressources)');
+</script>
+    <div class="table-data timeline-calendar"  >
+        <div id="demo-month-view">
+
+        </div>
+    </div>
+  <script>
+    mobiscroll.setOptions({
+    theme: 'ios',
+    themeVariant: 'light'
+});
+
+mobiscroll.eventcalendar('#demo-month-view', {
+    view: {
+        timeline: {
+            type: 'month'
+        }
+    },
+    data:  evenements ,
+
+    resources: ressources
+});
+  </script>
+</html>

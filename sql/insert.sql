@@ -218,15 +218,30 @@ VALUES
     ('Nguyen', 'Thi', 'thi.nguyen@email.com', '44444', 2, '789 Cedar St', 2, 0, '1986-02-19'),
     ('Jackson', 'William', 'william.jackson@email.com', '55555', 3, '890 Birch St', 1, 1, '1984-05-28');
 
+
+
 -- Insertion de données aléatoires dans la table "personnel_poste" avec des idposte aléatoires entre 1 et 180
 INSERT INTO personnel_poste (idposte, idpersonnel)
 SELECT floor(random() * 90) + 1, idpersonnel
 FROM personnel;
 
+INSERT INTO personnel (nom, prenom, mail, matricule, nationalite, adresse, genre, travailleur, dtn)
+VALUES
+    ('Ralph', 'Yoan', 'ralph.doe@email.com', '12345', 1, '123 Main St', 1, 1, '1992-01-01'),
+    ('Rebeka', 'Ravalison', 'Rebeka.smith@email.com', '67890', 2, '456 Elm St', 2, 1, '1991-03-15'),
+    ('Tita', 'Goore', 'tita.johnson@email.com', '54321', 3, '789 Oak St', 1, 0, '1985-07-10');
+
+INSERT INTO personnel_poste (idposte, idpersonnel)
+values ( 76 , 13 ),
+( 77 , 14 ),
+( 78 , 15 );
+
 -- Insertion de données aléatoires dans la table "personnel_salaire"
 INSERT INTO personnel_salaire (idpersonnel, salaire_brut, salaire_net)
 SELECT idpersonnel, random() * 10000, random() * 8000
 FROM personnel;
+
+
 
 -- Insertion de données aléatoires dans la table "personnel_embauche"
 INSERT INTO personnel_embauche (idpersonnel, date_embauche)
@@ -266,18 +281,6 @@ update service set superieur = 6;
 --     (2, 5, 1.5),
 --     (3, 5, 1.2);
 
-INSERT INTO personnel (nom, prenom, mail, matricule, nationalite, adresse, genre, travailleur, dtn)
-VALUES
-    ('Ralph', 'Yoan', 'ralph.doe@email.com', '12345', 1, '123 Main St', 1, 1, '1992-01-01'),
-    ('Rebeka', 'Ravalison', 'Rebeka.smith@email.com', '67890', 2, '456 Elm St', 2, 1, '1991-03-15'),
-    ('Tita', 'Goore', 'tita.johnson@email.com', '54321', 3, '789 Oak St', 1, 0, '1985-07-10');
-
-INSERT INTO personnel_poste (idposte, idpersonnel)
-values ( 76 , 13 ),
-( 77 , 14 ),
-( 78 , 15 );
-
-
 update service 
 set superieur = 13
 where idservice = 7;
@@ -314,3 +317,42 @@ insert into travail (idcontrat_essai, duree, debut) values (@idcontrat_essai, @d
 insert into contrat_travail (idtravail, signetravail) values (@idtravail, @signetravail)
 
 insert into travail_sante values (@idcontrat_travail, @idsante)
+
+-- vaovao ralph
+update personnel_poste set idposte = 41
+where idpersonnel = 5;
+
+insert into useradmin  (nom,mdp,idtypeuser,idpersonnel)
+values( 'Wilson' , '12345' , 5 , 6 );
+
+insert into admin_service ( idtypeuser , idservice )
+values( 5 , 2 ),
+( 5 , 3 )
+;
+
+update useradmin 
+set idpersonnel = 2
+where idadmin = 3;
+
+insert into planning_visible( idservice , idvisible )
+values
+( 1 , 1  ),
+( 2 , 1  ),
+( 2 , 2  ),
+( 3 , 3  ),
+( 3 , 2  ),
+( 4 , 1  ),
+( 4 , 3  ),
+( 4 , 4  ),
+( 5 , 1  ),
+( 5 , 2  ),
+( 5 , 3  ),
+( 6 , 1  ),
+( 7 , 1  ),
+( 7 , 2  ),
+( 7 , 3  ),
+( 7 , 4  ),
+( 7 , 5  ),
+( 7 , 6  ),
+( 7 , 7  )
+;

@@ -25,6 +25,76 @@ public class Personnel{
     public DateTime ? latest_salary_date { get; set; }
     public DateTime ? latest_hire_date { get; set; }
 
+    public static List<Personnel> GetPersonnelByService(NpgsqlConnection npg, int idservice)
+    {
+        List<Personnel> l_personnel = new List<Personnel>();
+        bool estOuvert = false;
+        if (npg == null)
+        {
+            estOuvert = true;
+            Connection connexion = new Connection();
+            npg = connexion.ConnectSante();
+        }
+        try
+        {
+            string sql = "SELECT * FROM v_personnel_information WHERE idservice  in "+
+            "(  select idvisible from planning_visible as pv where idservice = "+idservice+"   )";
+            Console.WriteLine(sql);
+            using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))
+            {
+                using (NpgsqlDataReader reader = command.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        Service service = new Service{
+                            IdService = Convert.ToInt32(reader["idservice"])
+                        };
+
+                        // service = service.GetById( null );
+
+                        Personnel personnel = new Personnel
+                        {
+                            idpersonnel = Convert.ToInt32(reader["idpersonnel"]),
+                            idposte = Convert.ToInt32(reader["idposte"]),
+                            idservice = Convert.ToInt32(reader["idservice"]),
+                            nomposte = reader["nomposte"] != DBNull.Value ? reader["nomposte"].ToString() : null,
+                            nom = reader["nom"] != DBNull.Value ? reader["nom"].ToString() : null,
+                            prenom = reader["prenom"] != DBNull.Value ? reader["prenom"].ToString() : null,
+                            mail = reader["mail"] != DBNull.Value ? reader["mail"].ToString() : null,
+                            matricule = reader["matricule"] != DBNull.Value ? reader["matricule"].ToString() : null,
+                            nationalite = Convert.ToInt32(reader["nationalite"]),
+                            adresse = reader["adresse"] != DBNull.Value ? reader["adresse"].ToString() : null,
+                            genre = Convert.ToInt32(reader["genre"]),
+                            travailleur = Convert.ToInt32(reader["travailleur"]),
+                            contact = reader["contact"] != DBNull.Value ? reader["contact"].ToString() : null,
+                            dtn = reader["dtn"] != DBNull.Value ? Convert.ToDateTime(reader["dtn"]) : (DateTime?)null,
+                            age = 0, // Calculer l'âge en fonction de la date de naissance
+                            latest_salary_brut = 0, // Récupérer le dernier salaire brut
+                            latest_salary_net = 0, // Récupérer le dernier salaire net
+                            latest_salary_date = null, // Récupérer la date du dernier salaire
+                            latest_hire_date = null, // Récupérer la date d'embauche la plus récente
+                            service = service
+                        };
+                        l_personnel.Add( personnel );
+                    }
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.StackTrace);
+            throw e;
+        }
+        finally
+        {
+            if (estOuvert)
+            {
+                npg.Close();
+            }
+        }
+        return l_personnel;
+    }
+
     public static Personnel GetPersonnelByID(NpgsqlConnection npg, int idpersonnel)
     {
         bool estOuvert = false;

@@ -1,8 +1,36 @@
+using System.Text.Json;
 using Microsoft.AspNetCore.Mvc;
 using RH.Models;
 
 namespace RH.Controllers{
     public class CongeController : SessionController{
+
+        public IActionResult planning(){
+            int idservice = Convert.ToInt32(Request.Cookies["idpersonnel"]);
+
+            List<Conge> l_conge  =  Conge.getPlanning( null , idservice );
+            List<Personnel> l_personnel = Personnel.GetPersonnelByService(null , idservice);
+
+            List<Event> events = l_conge.Select((conge, index) => Utilitaire.ConvertCongeToEvent(conge, index)).ToList();
+
+            List<Ressource> ressources = l_personnel.Select((p, index) => Utilitaire.ConvertCongeToRessource(p, index)).ToList();
+
+            string evenement = JsonSerializer.Serialize(events);
+            string ressource = JsonSerializer.Serialize( ressources ) ;
+
+            Console.WriteLine( evenement );
+
+            Console.WriteLine( ressource );
+
+            ViewBag.conges = l_conge;
+            ViewBag.Evenements = evenement;
+            ViewBag.Ressources = ressource;
+            return View("~/Views/Home/planning.cshtml"); 
+        }
+
+        public IActionResult Categorie(){
+            return View("~/Views/Home/conge_categorie.cshtml"); 
+        }
 
         public IActionResult accept(){
             if(!CookieIdAdminExists())
@@ -21,6 +49,18 @@ namespace RH.Controllers{
                 Console.WriteLine( e.StackTrace );
                 throw e;
             }
+        }
+
+
+        public IActionResult listeDemande(){
+            if(!CookieIdAdminExists())
+                return  RedirectToAction( "admin" , "login" );
+            int idpersonnel =   Convert.ToInt32(Request.Cookies["idpersonnel"]);
+            List<Conge> l_conge = Conge.GetCongesSuperieur( null , 0 , 0 , idpersonnel );
+
+            ViewBag.l_conge = l_conge;
+
+            return View("~/Views/Home/liste_demande.cshtml"); 
         }
 
         public IActionResult refusSuperieur(){
@@ -42,7 +82,10 @@ namespace RH.Controllers{
 
                 Refus refus = new Refus{
                     IdConge = idconge,
-                    RaisonRefus = raison
+                    RaisonRefus = raison , 
+                    service = new Service{
+                        IdService = idservice
+                    }
                 };
 
                 Conge.UpdateAccepte( idconge , accepte );  
@@ -67,7 +110,7 @@ namespace RH.Controllers{
                 accepte = 2;
             }
 
-            List<Conge> l_conge = Conge.GetCongesSuperieur( null , idservice , accepte );
+            List<Conge> l_conge = Conge.GetCongesSuperieur( null , idservice , accepte  );
 
             ViewBag.l_conge = l_conge;
 
@@ -83,20 +126,25 @@ namespace RH.Controllers{
             ViewBag.personnel =  liste_personnel; 
             return View("~/Views/Home/congeAjout.cshtml");
         }
+
         public IActionResult Demande()
         {
             if (!CookieIdAdminExists())
                 return RedirectToAction("admin", "login");
 
-                // Récupérez les valeurs du formulaire ici
             string personnelId = Request.Cookies["idpersonnel"];
             string debut = Request.Form["debut"];
             string debutTime = Request.Form["debut_time"];
             string fin = Request.Form["fin"];
             string finTime = Request.Form["fin_time"];
             string raison = Request.Form["raison"];
-
-            Console.WriteLine( " personnal id :  " + personnelId );
+            string raison_autre = Request.Form["raison_autre"];
+            Console.WriteLine( " personnal id :  " + raison+ "  "+string.IsNullOrEmpty( raison_autre.Trim() ) );
+            if( string.IsNullOrEmpty( raison_autre.Trim() ) == false ){
+                Console.WriteLine("mankato");
+                raison = "0";
+                raison_autre = raison_autre.Trim();
+            }            
 
             // Utilisez la fonction toDateTime pour créer les objets DateTime
             DateTime debutDateTime = Utilitaire.toDateTime(debut, debutTime);
@@ -112,7 +160,8 @@ namespace RH.Controllers{
                 },
                 Raison = new Raison{
                     idraison = Convert.ToInt32(raison)
-                }
+                },
+                autre_raison = raison_autre
             };
 
             Console.WriteLine( debut  + "  " +debutTime );
@@ -124,7 +173,7 @@ namespace RH.Controllers{
             ViewBag.personnel =  liste_personnel; 
             try{
                 Console.WriteLine( "insert" );
-                Conge.isValid( personnelId , debut , debutTime , fin , finTime );
+                Conge.isValid( personnelId , debut , debutTime , fin , finTime , raison );
                 ViewBag.Succes =  "votre demande a été envoyé" ;
                 conge.InsertConge();
             }catch( Exception e ){

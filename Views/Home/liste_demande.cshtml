@@ -1,0 +1,77 @@
+
+    <div class="table-data" id="table_conge" >
+      <div class="order">
+        <div class="head">
+          <h3>Liste de mes demandes de congé</h3>
+            <div class="div-parent">
+                <div class="div-enfant yellow-td">Refus supérieur</div>
+                <div class="div-enfant red-td">Refus DRH</div>
+                <div class="div-enfant blue-td">En cours</div>
+                <div class="div-enfant green-td">Accepté</div>
+            </div>
+          <i class="bx bx-search"></i>
+          <i class="bx bx-filter"></i>
+        </div>
+        <table>
+          <thead>
+            <tr>
+                <th>Date début congé</th>
+                <th>Date fin congé</th>
+                <th>Raison</th>
+                <th> Etat demande </th>
+                <th> Raison (si Refus) </th>
+            </tr>
+          </thead>
+          <tbody>
+          @foreach( var c in @ViewBag.l_conge ){
+            <tr>
+                <td>@c.DateDebut</td>
+                <td>@c.ReelDateFin</td>
+                <td>@c.Raison.nomRaison</td>
+                <td class=" @c.getColor()"></td>
+                <td style="padding-left:60px; cursor:pointer; " > 
+                    @if (!string.IsNullOrEmpty(c.Refus.RaisonRefus))
+                    {
+                        <a onclick="details('@c.Refus.RaisonRefus')">Voir</a>
+                    }
+                </td>
+            </tr>
+          }
+          </tbody>
+        </table>
+        <div class="retour">
+          <a href='@Url.Action("BesoinListe","ListeCv")'>Retour</a>
+        </div>
+      </div>
+    </div>
+    <div id="popup-personnel" class="popup">
+        <div  class="popup-content">
+                <div class="title-personnel-detail">
+                <h2>La raison du refus  : </h2>
+                <i  style="color:var(--red);" class="fa fa-times details-personnel-icon" onclick="fermer()" ></i>
+                </div>
+                <div id="liste_details" class="grid-container">
+                   
+                </div>
+        </div>
+    </div>
+    <script>
+    function fermer(){
+      const popup = document.getElementById('popup-personnel');
+      popup.style.top = '-35%';
+      popup.style.opacity = '0';
+    }
+    function details( refus ){
+        const scrollContainer = document.getElementById('table_conge');
+        scrollContainer.scrollIntoView({
+        top: 0,
+        behavior: 'smooth'
+        });
+        const popup = document.getElementById('popup-personnel');
+        popup.style.top = '50%';
+        popup.style.opacity = '1';
+        
+        const inputIdConge = document.getElementById('liste_details');
+        inputIdConge.innerHTML = refus;
+    }
+  </script>

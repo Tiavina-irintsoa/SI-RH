@@ -58,7 +58,7 @@ input[type="text"] {
 .details-personnel {
   cursor: pointer;
 }
-#popup-personnel {
+#popup-personnel , #popup-personnel2 {
   position: absolute;
   z-index: 100;
   top: -35%;
@@ -71,6 +71,10 @@ input[type="text"] {
   width: 80%;
   opacity: 0;
   transition: 0.5s;
+}
+#popup-personnel2{
+  position: absolute;
+  z-index: 99;
 }
 
 .grid-container {
@@ -87,10 +91,11 @@ input[type="text"] {
   margin-bottom: 20px;
 }
 
-.title-personnel-detail i {
+.title-personnel-detail i  {
   font-size: 30px !important;
   cursor: pointer;
 }
+
 .gras {
   font-weight: 600;
   color: var(--pink);

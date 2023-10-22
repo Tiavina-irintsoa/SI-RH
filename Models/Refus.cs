@@ -6,8 +6,9 @@ public class Refus
 {
     public int IdRefus { get; set; }
     public int IdConge { get; set; }
-    public string RaisonRefus { get; set; }
+    public string ? RaisonRefus { get; set; }
 
+    public Service ? service {get;set;}
     public void InsertRefus()
     {
         Connection connexion = new Connection();
@@ -17,9 +18,10 @@ public class Refus
             {
                 cmd.Connection = connection;
 
-                cmd.CommandText = "INSERT INTO refus (idconge, raison_refus) VALUES (@idconge, @raison_refus)";
+                cmd.CommandText = "INSERT INTO refus (idconge, raison_refus , idservice) VALUES (@idconge, @raison_refus)";
                 cmd.Parameters.AddWithValue("@idconge", IdConge);
                 cmd.Parameters.AddWithValue("@raison_refus", RaisonRefus);
+                cmd.Parameters.AddWithValue("@raison_refus", service.IdService);
                 Console.WriteLine( cmd.CommandText );
                 try
                 {

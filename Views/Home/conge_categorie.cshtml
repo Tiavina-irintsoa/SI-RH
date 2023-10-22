@@ -1,0 +1,68 @@
+@{
+    var superieur = Context.Request.Cookies["superieur"] ;
+}      
+      <main b-k28e4kksdc>
+              <main>
+        <div class="head-title">
+          <div class="left">
+            <h1>Congé</h1>
+            <ul class="breadcrumb">
+              <li>
+                <a href="#">Liste</a>
+              </li>
+              <li><i class="bx bx-chevron-right"></i></li>
+              <li>
+                <a class="active" href="#">Home</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <ul  style="margin-bottom: 30px ; display: grid;grid-template-columns: repeat(auto-fit, minmax(190px, 280px));" class="box-info" id="liste_carre_container">
+          <li >
+            <a href='@Url.Action( "index" , "conge" )'>
+              <div class="liste_carre">
+                <img src="/images/ajout_conge.png" height="200" alt="" />
+                <span class="text liste_carre_text liste_carre_text">
+                  <h4>Ajout congé  @superieur</h4>
+                </span>
+              </div>
+            </a>
+          </li>
+
+          @if (superieur != null)
+            {
+                <li>
+                    <a href='@Url.Action( "liste" , "conge" )'>
+                        <div class="liste_carre">
+                            <img src="/images/production.png" alt="" />
+                            <span class="text liste_carre_text liste_carre_text">
+                                <h4>Listes Congés</h4>
+                            </span>
+                        </div>
+                    </a>
+                </li>
+            }
+        <li>
+            <a href='@Url.Action( "listeDemande" , "conge" )'>
+              <div class="liste_carre">
+                <img src="/images/production.png" alt="" />
+                <span class="text liste_carre_text liste_carre_text">
+                  <h4>Mes demandes de congés</h4>
+                </span>
+              </div>
+            </a>
+          </li>
+            <li>
+            <a href='@Url.Action("planning" , "conge")'>
+              <div class="liste_carre">
+                <img src="/images/production.png" alt="" />
+                <span class="text liste_carre_text liste_carre_text">
+                  <h4>Planning congé</h4>
+                </span>
+              </div>
+            </a>
+          </li>
+        </ul>
+      </main>
+      </main>

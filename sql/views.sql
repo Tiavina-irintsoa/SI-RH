@@ -99,14 +99,16 @@ create or replace view v_personnel_poste as
 
 create or replace view v_personnel_information as 
     SELECT
-        vpp.*,
-        ((get_latest_salary(vpp.idpersonnel))).salaire_brut AS latest_salary_brut,
-        ((get_latest_salary(vpp.idpersonnel))).salaire_net AS latest_salary_net,
-        ((get_latest_salary(vpp.idpersonnel))).date_insert AS latest_salary_date,
-        get_latest_hire_date(vpp.idpersonnel) AS latest_hire_date,
-        extract ( year from age( now() , vpp.dtn )  ) as age
+    vpp.*,
+    latest_salary.salaire_brut AS latest_salary_brut,
+    latest_salary.salaire_net AS latest_salary_net,
+    latest_salary.date_insert AS latest_salary_date,
+    COALESCE(get_latest_hire_date(vpp.idpersonnel), '1970-01-01') AS latest_hire_date,
+        EXTRACT(YEAR FROM AGE(NOW(), vpp.dtn)) AS age
     FROM
-        v_personnel_poste AS vpp;
+        v_personnel_poste AS vpp
+    LEFT JOIN LATERAL (SELECT * FROM get_latest_salary(vpp.idpersonnel)) AS latest_salary ON true;
+
 
 
 create or replace view v_nbjours_personnel as  
@@ -177,10 +179,14 @@ create or replace view v_besoin_accompli as (
 );
 
 create or replace view v_conge_refus as 
-    select cs.idconge , idpersonnel , idposte , date_embauche , cs.idservice , nomposte , datedebut , datefin , reeldatefin , accepte , cs.idraison , ra.nomraison  , idrefus , raison_refus  , r.idservice as superieur 
+    select cs.idconge , idpersonnel , idposte , date_embauche , cs.idservice , nomposte , datedebut , datefin ,  reeldatefin , accepte , cs.idraison , ra.nomraison  , idrefus , raison_refus  , r.idservice as superieur , autre_raison
     from v_conge_service as cs 
         left  join refus as r
         on cs.idconge = r.idconge 
         left join raison as ra 
         on ra.idraison = cs.idraison
         ;
+
+    
+
+

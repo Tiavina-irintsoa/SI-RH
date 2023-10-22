@@ -2,6 +2,36 @@ using Npgsql;
 namespace RH.Models
 {
     public class Utilitaire{
+
+
+        static List<string> colors = new List<string>
+        {
+            "#e20000",
+            "#e63cad",
+            "#ffcff9",
+            "#ae6bb6",
+            "#d896e0",
+            "#38b5fd"
+        };
+
+        public static Ressource ConvertCongeToRessource( Personnel p , int index ){
+            return new Ressource{
+                id = p.idpersonnel ,
+                name = p.nom + " " +p.prenom ,
+                color = colors[index % colors.Count]
+            };
+        }
+        public static Event ConvertCongeToEvent(Conge conge , int index )
+        {
+            return new Event
+            {
+                start = conge.DateDebut,
+                end = conge.DateFin,
+                title =  "Congé" + conge.Raison == "Aucune" ? conge.autre_raison : conge.Raison.nomRaison ,
+                resource = conge.Personnel.idpersonnel,
+            };
+        }
+
         public static double  CalculateHoursDifference( string dt1 , string tm1 , string dt2 , string tm2 ){
             return CalculateHoursDifference( toDateTime( dt1 , tm1 ) , toDateTime( dt2 , tm2 )  );
         }

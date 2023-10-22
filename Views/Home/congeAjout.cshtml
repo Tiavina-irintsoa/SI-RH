@@ -3,7 +3,7 @@
 }
      <div id="div">
         <div id="form-title">
-            <a href = '@Url.Action("")'> Retour </a>
+            <a href = '@Url.Action("liste" , "service" )'> Retour </i> </a>
             <h1>
               Demande de congé
             </h1>
@@ -42,7 +42,7 @@
            </div>
             <div class="my-input-group">
               <label for="">
-                  Raison : 
+                  Raison spéciales : 
               </label>
               <select name="raison" id="">
                   <option value="0"> Aucun </option>
@@ -50,6 +50,13 @@
                   <option value="2">Paternité </option>
                   <option value="3">Maladie </option>
               </select>
+           </div>
+           <div class="my-input-group">
+             <label for="">
+              Autre Raison :
+            </label>
+              <textarea style="background: var(--grey) ; border: none;  outline:none;  padding:20px;" name="raison_autre" cols="50" rows="2">
+              </textarea>
            </div>
             <div class="my-input-group">
                 <input type="submit" value="Connexion">
