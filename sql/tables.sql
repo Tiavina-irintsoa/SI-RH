@@ -338,3 +338,16 @@ create table prime_anciennete(
 );
 alter table conge 
 add column autre_raison varchar ;
+
+create table demande_heure_sup(
+    iddemande_heure_sup serial primary key,
+    date_heure_sup date,
+    heure_debut time,
+    heure_fin time,
+    idservice integer references service(idservice),
+    validation integer default 0
+);
+create table employe_heure_sup (
+    iddemande_heure_sup integer references demande_heure_sup(iddemande_heure_sup),
+    idemploye integer references personnel(idpersonnel)
+);
