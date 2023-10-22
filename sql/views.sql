@@ -175,8 +175,12 @@ create or replace view v_besoin_accompli as (
     from v_poste_besoin
     where accompli is null
 );
-create or replace view v_candidature_accepte as (
-    select * from
-    v_candidat_candidature as candidature
-    where validation = 3
-);
+
+create or replace view v_conge_refus as 
+    select cs.idconge , idpersonnel , idposte , date_embauche , cs.idservice , nomposte , datedebut , datefin , reeldatefin , accepte , cs.idraison , ra.nomraison  , idrefus , raison_refus  , r.idservice as superieur 
+    from v_conge_service as cs 
+        left  join refus as r
+        on cs.idconge = r.idconge 
+        left join raison as ra 
+        on ra.idraison = cs.idraison
+        ;
