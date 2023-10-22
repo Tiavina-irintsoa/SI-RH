@@ -10,6 +10,12 @@ a {
   text-decoration: none;
 }
 
+#head_with_link{
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
 :root {
   --poppins: "Poppins", sans-serif;
   --lato: "Lato", sans-serif;
@@ -28,6 +34,7 @@ a {
   --light-blue: #d3f5ff;
   --green: rgb(21, 196, 21);
 }
+
 
 .liste_carre_text {
   margin-top: 5vh;

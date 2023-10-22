@@ -1,0 +1,35 @@
+<div class="table-data">
+    <div class="order">
+    <div class="head">
+        <div id="head_with_link">
+            <h4>
+                Primes d'anciennete
+            </h4>
+            <a href="@Url.Action("Ajout","PrimeAnciennete")" style="margin-right:0px;">
+                Ajouter <i class="fa fa-plus"></i>
+            </a>
+        </div>
+    </div>
+    @* <p style="font-size: smaller;color:red;margin-bottom:4vh;margin-top:1vh;">
+        @ViewBag.erreur
+    </p> *@
+    <table>
+        <thead>
+        <tr>
+            <th>Pourcentage</th>
+            <th>Annee d'anciennete</th>
+            <th>Debut d'application</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (PrimeAnciennete p in ViewBag.liste)
+        {
+        <tr>
+            <td style="text-align: left;"> @p.Pourcentage %</td>
+            <td> @p.Min - @p.Max</td>
+            <td>@p.Date</td>
+        </tr>
+        }
+        </tbody>
+    </table>
+</div>

@@ -1,0 +1,36 @@
+@{
+    Layout = "_form"; 
+}
+ <div id="div">
+<form action='@Url.Action("Submit" , "PrimeAnciennete")' method="post">
+    <div class="">
+    <div class="my-input-group">
+        <label for="">
+        Pourcentage de majoration
+    </label>
+    <input type="text" name="pourcentage" required>
+    </div>
+    <div class="my-input-group">
+        <label for="">
+        Minimum d'annees d'anciennete:
+    </label>
+        <input type="number" name="min"  required>
+    </div>
+    <div class="my-input-group">
+        <label for="">
+        Maximum d'annees d'anciennete:
+    </label>
+        <input type="number" name="max"  required>
+    </div>
+    <div class="my-input-group">
+        <label for="">
+        Debut de la date d'application:
+    </label>
+        <input type="date" name="date"  required>
+    </div>
+    <div class="my-input-group">
+        <input type="submit" value="Ajouter">
+    </div>
+    </div>
+</form>        
+</div>

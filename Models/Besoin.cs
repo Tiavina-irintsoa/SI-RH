@@ -102,6 +102,9 @@ public class Besoin{
     public Besoin(int idbesoin){
         this._idBesoin = idbesoin;
     }
+    public Besoin(string nomposte){
+        this.poste = new Poste(nomposte);
+    }
     public Besoin(int id, Poste post, double hs, double hp, DateTime? ac , int nbp ) {
         this._idBesoin = id;
         this._poste = post;

@@ -19,6 +19,9 @@ public class Poste{
         get { return _nomPoste; }
         set { _nomPoste = value; }
     }
+    public Poste(string nom){
+        nomPoste = nom;
+    }
 
     public static Poste[] GetAll(NpgsqlConnection npg, int ids) {
         Poste[] postes = null;
