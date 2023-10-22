@@ -2,7 +2,8 @@ using Microsoft.AspNetCore.Mvc;
 using RH.Models;
 
 namespace RH.Controllers{
-    public class ServiceController : SessionController{
+public class ServiceController : SessionController {
+
         public IActionResult Liste()
         {
             if(!CookieIdAdminExists())

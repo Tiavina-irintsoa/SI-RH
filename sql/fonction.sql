@@ -23,3 +23,19 @@ BEGIN
     RETURN latest_hire_date;
 END;
 $$ LANGUAGE plpgsql;
+
+
+CREATE OR REPLACE FUNCTION getService(idpersonnel_param int)
+RETURNS int AS $$
+DECLARE
+    idservice int;
+BEGIN
+    execute 'select idservice
+        from v_service_poste
+        natural join personnel_poste 
+        where idpersonnel = ' || idpersonnel_param
+        into idservice;
+    RETURN idservice;
+END;
+$$ LANGUAGE plpgsql;
+

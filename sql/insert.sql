@@ -221,9 +221,25 @@ VALUES
 
 
 -- Insertion de données aléatoires dans la table "personnel_poste" avec des idposte aléatoires entre 1 et 180
-INSERT INTO personnel_poste (idposte, idpersonnel)
-SELECT floor(random() * 90) + 1, idpersonnel
-FROM personnel;
+-- INSERT INTO personnel_poste (idposte, idpersonnel)
+-- SELECT floor(random() * 90) + 1, idpersonnel
+-- FROM personnel;
+
+insert into personnel_poste 
+values 
+    (14, 1), 
+    (28, 2), 
+    (10, 3), 
+    (70, 4), 
+    (63, 6), 
+    (71, 7), 
+    (75, 8), 
+    (38, 9), 
+    (62,10), 
+    (10,11), 
+    (66,12), 
+    (41, 5), 
+    (92,16);
 
 INSERT INTO personnel (nom, prenom, mail, matricule, nationalite, adresse, genre, travailleur, dtn)
 VALUES
@@ -244,9 +260,38 @@ FROM personnel;
 
 
 -- Insertion de données aléatoires dans la table "personnel_embauche"
+-- INSERT INTO personnel_embauche (idpersonnel, date_embauche)
+-- SELECT idpersonnel, CURRENT_DATE - (floor(random() * 365) + 1)::integer * interval '1 day'
+-- FROM personnel;
+
 INSERT INTO personnel_embauche (idpersonnel, date_embauche)
-SELECT idpersonnel, CURRENT_DATE - (floor(random() * 365) + 1)::integer * interval '1 day'
-FROM personnel;
+    ( 1 , '2023-03-01'),
+    ( 2 , '2023-02-09'),
+    ( 3 , '2023-03-08'),
+    ( 4 , '2022-12-31'),
+    ( 5 , '2023-07-03'),
+    ( 6 , '2023-09-16'),
+    ( 7 , '2023-06-20'),
+    ( 8 , '2022-11-07'),
+    ( 9 , '2023-09-07'),
+    (10 , '2023-09-25'),
+    (11 , '2023-10-03'),
+    (12 , '2023-01-06'),
+    ( 1 , '2023-02-20'),
+    ( 2 , '2023-03-28'),
+    ( 3 , '2022-11-08'),
+    ( 4 , '2023-08-03'),
+    ( 5 , '2023-05-24'),
+    ( 6 , '2023-05-01'),
+    ( 7 , '2023-05-06'),
+    ( 8 , '2023-05-08'),
+    ( 9 , '2023-10-11'),
+    (10 , '2023-10-09'),
+    (11 , '2023-09-07'),
+    (12 , '2022-11-05'),
+    (13 , '2023-01-24'),
+    (14 , '2022-10-27'),
+    (15 , '2023-04-25');
 
 update personnel 
 set contact = '032 46 234 43';
@@ -356,3 +401,242 @@ values
 ( 7 , 6  ),
 ( 7 , 7  )
 ;
+
+insert into personnel ( nom,prenom,mail,matricule,nationalite , adresse , genre , travailleur ,    dtn     ,    contact )
+values
+('Dupont', 'Jean', 'jean.dupont@example.com', '123456', 1 , '123 Rue de la Paix, Paris', 1 , 1 , '2022-10-22', '0612345678');
+
+insert into service ( nomservice  ,  iconeservice , superieur )
+values( 'direction' , 'recherche.png' ,  16 );
+
+INSERT INTO poste (idservice, nomposte) VALUES
+(10, 'Directeur Général'),
+(10, 'Directeur des Ventes');
+
+insert into personnel_poste ( idpersonnel , idposte )
+values ( 16 , 92 );
+
+insert into planning_visible( idservice , idvisible )
+values
+( 10 , 1  ),
+( 10 , 2  ),
+( 10 , 3  ),
+( 10 , 4  ),
+( 10 , 5  ),
+( 10 , 6  ),
+( 10 , 7  ),
+( 10 , 8  ),
+( 10 , 9  ),
+( 10 , 10  )
+;
+
+insert into admin_service( idtypeuser , idservice )
+values
+( 10 , 1  ),
+( 10 , 2  ),
+( 10 , 3  ),
+( 10 , 4  ),
+( 10 , 5  ),
+( 10 , 6  ),
+( 10 , 7  ),
+( 10 , 8  ),
+( 10 , 9  ),
+( 10 , 10  )
+;
+
+update useradmin 
+set idpersonnel = 16 
+where idadmin = 1;
+
+update personnel set contact = '032 46 234 43';
+
+update useradmin set idpersonnel = 1
+where idadmin = 2;
+
+insert into useradmin(nom,mdp ,idtypeuser,idpersonnel)
+values ( 'John' , '12345'  , 2 , 1 ),
+((select prenom from personnel where idpersonnel =  3) ,'12345', ( select idservice
+        from v_service_poste
+        natural join personnel_poste 
+        where idpersonnel = 3 )    ,3),
+((select prenom from personnel where idpersonnel =  4) ,'12345', ( select idservice
+        from v_service_poste
+        natural join personnel_poste 
+        where idpersonnel = 4 ) ,4),
+((select prenom from personnel where idpersonnel =  7) ,'12345', ( select idservice
+        from v_service_poste
+        natural join personnel_poste 
+        where idpersonnel = 7 ) ,7),
+((select prenom from personnel where idpersonnel =  8) ,'12345', ( select idservice
+        from v_service_poste
+        natural join personnel_poste 
+        where idpersonnel = 8 ) ,8),
+((select prenom from personnel where idpersonnel =  9) ,'12345', ( select idservice
+        from v_service_poste
+        natural join personnel_poste 
+        where idpersonnel = 9 ) ,9),
+((select prenom from personnel where idpersonnel = 10) ,'12345', ( select idservice
+        from v_service_poste
+        natural join personnel_poste 
+        where idpersonnel = 10 ) ,10),
+((select prenom from personnel where idpersonnel = 11) ,'12345', ( select idservice
+        from v_service_poste
+        natural join personnel_poste 
+        where idpersonnel = 11 ) ,11),
+((select prenom from personnel where idpersonnel = 12) ,'12345', ( select idservice
+        from v_service_poste
+        natural join personnel_poste 
+        where idpersonnel = 12 ) ,12),
+((select prenom from personnel where idpersonnel = 14) ,'12345', ( select idservice
+        from v_service_poste
+        natural join personnel_poste 
+        where idpersonnel = 14 ) ,14),
+((select prenom from personnel where idpersonnel = 15) ,'12345', ( select idservice
+        from v_service_poste
+        natural join personnel_poste 
+        where idpersonnel = 15 ) ,15)
+;
+
+insert into  admin_service
+values( 8 , 1 ),
+(8,2),
+(8,3)
+(8,8),
+(9,3),
+(9,2),
+(9,4),
+(9,5),
+(9,9)
+;
+insert into  planning_visible (idservice,idvisible)
+values( 8 , 1 ),
+(8,2),
+(8,3),
+(8,8),
+(9,3),
+(9,2),
+(9,4),
+(9,5),
+(9,9)
+;
+
+
+update  personnel_poste 
+set idposte = 1
+where idpersonnel = 4;
+
+update  personnel_poste 
+set idposte = 79
+where idpersonnel = 6;
+
+update  personnel_poste 
+set idposte = 86
+where idpersonnel = 7;
+
+
+update service set superieur = ( select max(idpersonnel)
+        from v_personnel_information
+        where idservice = 1 
+         )
+where idservice = 1;
+
+update service set superieur = ( select max(idpersonnel)
+        from v_personnel_information
+        where idservice = 2 
+         )
+where idservice = 2;
+
+update service set superieur = ( select max(idpersonnel)
+        from v_personnel_information
+        where idservice = 3 
+         )
+where idservice = 3;
+
+update service set superieur = ( select max(idpersonnel)
+        from v_personnel_information
+        where idservice = 4 
+         )
+where idservice = 4;
+
+update service set superieur = ( select max(idpersonnel)
+        from v_personnel_information
+        where idservice = 5 
+         )
+where idservice = 5;
+
+update service set superieur = ( select max(idpersonnel)
+        from v_personnel_information
+        where idservice = 6 
+         )
+where idservice = 6;
+
+update service set superieur = ( select max(idpersonnel)
+        from v_personnel_information
+        where idservice = 7 
+         )
+where idservice = 7;
+
+update service set superieur = ( select max(idpersonnel)
+        from v_personnel_information
+        where idservice = 8 
+         )
+where idservice = 8;
+
+update service set superieur = ( select max(idpersonnel)
+        from v_personnel_information
+        where idservice = 9 
+         )
+where idservice = 9;
+
+
+
+insert into conge (idpersonnel,datedebut,datefin,reeldatefin,accepte,idraison,autre_raison)
+values 
+    (19 , 1 ,'2023-09-01 08:00:00','2023-09-03 08:00:00','2023-09-03 08:00:00',-2 , null , 'Vacances entre famille'),         
+    (20 , 1 ,'2023-09-04 08:00:00','2023-09-06 08:00:00','2023-09-06 08:00:00',-1 ,1 , 'Vacances entre famille'),         
+    (21 , 1 ,'2023-09-07 08:00:00','2023-09-09 08:00:00','2023-09-09 08:00:00', 1 ,1 , 'Vacances entre famille'), 
+    (22 , 2 ,'2023-09-01 08:00:00','2023-09-03 08:00:00','2023-09-03 08:00:00', 2 , null , 'Vacances entre famille'),         
+    (23 , 2 ,'2023-09-04 08:00:00','2023-09-06 08:00:00','2023-09-06 08:00:00', 2 ,2 , 'Vacances entre famille'),             
+    (24 , 2 ,'2023-09-07 08:00:00','2023-09-09 08:00:00','2023-09-09 08:00:00', 1 ,1 , 'Vacances entre famille'),
+    (25 , 3 ,'2023-09-01 08:00:00','2023-09-03 08:00:00','2023-09-03 08:00:00', 2 ,1 , 'Visite chez ma grand-mère'),
+    (26 , 3 ,'2023-09-04 08:00:00','2023-09-06 08:00:00','2023-09-06 08:00:00',-2 ,1 , null ),
+    (27 , 3 ,'2023-09-07 08:00:00','2023-09-09 08:00:00','2023-09-09 08:00:00', 2 ,1 , 'Vacances entre famille'),
+    (28 , 4 ,'2023-09-01 08:00:00','2023-09-03 08:00:00','2023-09-03 08:00:00', 0 , null , 'Visite chez ma grand-mère'),
+    (29 , 4 ,'2023-09-04 08:00:00','2023-09-06 08:00:00','2023-09-06 08:00:00', 2 ,1 , 'Vacances entre famille'),
+    (30 , 4 ,'2023-09-07 08:00:00','2023-09-09 08:00:00','2023-09-09 08:00:00',-2 , null , 'Vacances entre famille'),
+    (31 , 5 ,'2023-09-01 08:00:00','2023-09-03 08:00:00','2023-09-03 08:00:00',-1 , null , 'Visite chez ma grand-mère'),
+    (32 , 5 ,'2023-09-04 08:00:00','2023-09-06 08:00:00','2023-09-06 08:00:00', 1 ,1 , null ),
+    (33 , 5 ,'2023-09-07 08:00:00','2023-09-09 08:00:00','2023-09-09 08:00:00', 2 , null , 'Visite chez ma grand-mère'),
+    (34 , 6 ,'2023-09-01 08:00:00','2023-09-03 08:00:00','2023-09-03 08:00:00',-1 ,1 , null ),
+    (35 , 6 ,'2023-09-04 08:00:00','2023-09-06 08:00:00','2023-09-06 08:00:00',-2 ,1 , null ),
+    (36 , 6 ,'2023-09-07 08:00:00','2023-09-09 08:00:00','2023-09-09 08:00:00', 1 ,3 , null ),
+    (37 , 7 ,'2023-09-01 08:00:00','2023-09-03 08:00:00','2023-09-03 08:00:00', 1 ,1 , 'Visite chez ma grand-mère'),
+    (38 , 7 ,'2023-09-04 08:00:00','2023-09-06 08:00:00','2023-09-06 08:00:00',-2 ,1 , null ),
+    (39 , 7 ,'2023-09-07 08:00:00','2023-09-09 08:00:00','2023-09-09 08:00:00', 1 ,1 , 'Visite chez ma grand-mère'),
+    (40 , 8 ,'2023-09-01 08:00:00','2023-09-03 08:00:00','2023-09-03 08:00:00', 0 ,2 , null ),
+    (41 , 8 ,'2023-09-04 08:00:00','2023-09-06 08:00:00','2023-09-06 08:00:00',-1 ,1 , null ),
+    (42 , 8 ,'2023-09-07 08:00:00','2023-09-09 08:00:00','2023-09-09 08:00:00', 0 , null , 'Visite chez ma grand-mère'),
+    (43 , 9 ,'2023-09-01 08:00:00','2023-09-03 08:00:00','2023-09-03 08:00:00', 2 , null , null ),
+    (44 , 9 ,'2023-09-04 08:00:00','2023-09-06 08:00:00','2023-09-06 08:00:00',-2 ,2 , 'Visite chez ma grand-mère'),
+    (45 , 9 ,'2023-09-07 08:00:00','2023-09-09 08:00:00','2023-09-09 08:00:00', 0 , null , 'Vacances entre famille'),
+    (46 ,10 ,'2023-09-01 08:00:00','2023-09-03 08:00:00','2023-09-03 08:00:00', 2 , null , null ),
+    (47 ,10 ,'2023-09-04 08:00:00','2023-09-06 08:00:00','2023-09-06 08:00:00', 2 ,1 , 'Visite chez ma grand-mère'),
+    (48 ,10 ,'2023-09-07 08:00:00','2023-09-09 08:00:00','2023-09-09 08:00:00', 2 , null , 'Vacances entre famille'),
+    (49 ,11 ,'2023-09-01 08:00:00','2023-09-03 08:00:00','2023-09-03 08:00:00', 2 , null ,
+    (50 ,11 ,'2023-09-04 08:00:00','2023-09-06 08:00:00','2023-09-06 08:00:00',-1 ,2 , 'Vacances entre famille'),
+    (51 ,11 ,'2023-09-07 08:00:00','2023-09-09 08:00:00','2023-09-09 08:00:00', 2 ,1 , 'Visite chez ma grand-mère'),
+    (52 ,12 ,'2023-09-01 08:00:00','2023-09-03 08:00:00','2023-09-03 08:00:00',-2 ,3 , 'Vacances entre famille'),
+    (53 ,12 ,'2023-09-04 08:00:00','2023-09-06 08:00:00','2023-09-06 08:00:00',-1 , null , null ),
+    (54 ,12 ,'2023-09-07 08:00:00','2023-09-09 08:00:00','2023-09-09 08:00:00', 0 ,2 , 'Visite chez ma grand-mère'),
+    (55 ,13 ,'2023-09-01 08:00:00','2023-09-03 08:00:00','2023-09-03 08:00:00',-2 , null , 'Visite chez ma grand-mère'),
+    (56 ,13 ,'2023-09-04 08:00:00','2023-09-06 08:00:00','2023-09-06 08:00:00',-2 ,1 , 'Visite chez ma grand-mère'),
+    (57 ,13 ,'2023-09-07 08:00:00','2023-09-09 08:00:00','2023-09-09 08:00:00', 1 ,2 , 'Visite chez ma grand-mère'),
+    (58 ,14 ,'2023-09-01 08:00:00','2023-09-03 08:00:00','2023-09-03 08:00:00', 0 ,1 , null ),
+    (59 ,14 ,'2023-09-04 08:00:00','2023-09-06 08:00:00','2023-09-06 08:00:00', 1 , null , 'Visite chez ma grand-mère'),
+    (60 ,14 ,'2023-09-07 08:00:00','2023-09-09 08:00:00','2023-09-09 08:00:00',-1 , null , 'Visite chez ma grand-mère'),
+    (61 ,15 ,'2023-09-01 08:00:00','2023-09-03 08:00:00','2023-09-03 08:00:00',-1 ,3 , 'Vacances entre famille'),
+    (62 ,15 ,'2023-09-04 08:00:00','2023-09-06 08:00:00','2023-09-06 08:00:00',-1 ,2 , 'Visite chez ma grand-mère'),
+    (63 ,15 ,'2023-09-07 08:00:00','2023-09-09 08:00:00','2023-09-09 08:00:00',-2 ,3 , null ),
+    (64 ,16 ,'2023-09-01 08:00:00','2023-09-03 08:00:00','2023-09-03 08:00:00', 0 ,2 , null ),
+    (65 ,16 ,'2023-09-04 08:00:00','2023-09-06 08:00:00','2023-09-06 08:00:00',-2 ,3 , 'Visite chez ma grand-mère'),
+    (66 ,16 ,'2023-09-07 08:00:00','2023-09-09 08:00:00','2023-09-09 08:00:00',-1 ,3 ,);

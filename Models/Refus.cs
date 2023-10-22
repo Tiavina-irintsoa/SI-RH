@@ -18,10 +18,10 @@ public class Refus
             {
                 cmd.Connection = connection;
 
-                cmd.CommandText = "INSERT INTO refus (idconge, raison_refus , idservice) VALUES (@idconge, @raison_refus)";
+                cmd.CommandText = "INSERT INTO refus (idconge, raison_refus , idservice) VALUES (@idconge, @raison_refus , @idservice)";
                 cmd.Parameters.AddWithValue("@idconge", IdConge);
                 cmd.Parameters.AddWithValue("@raison_refus", RaisonRefus);
-                cmd.Parameters.AddWithValue("@raison_refus", service.IdService);
+                cmd.Parameters.AddWithValue("@idservice", service.IdService);
                 Console.WriteLine( cmd.CommandText );
                 try
                 {

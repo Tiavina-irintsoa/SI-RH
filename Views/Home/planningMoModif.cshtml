@@ -1,0 +1,48 @@
+    <div>
+        <a href='@Url.Action( "planning" , "conge" )' >  Retour au planning </a>
+    </div>
+    <div class="table-data" id="table_conge" >
+      <div class="order">
+        <div class="head">
+          <h3>Liste des Congés</h3>
+          <i class="bx bx-search"></i>
+          <i class="bx bx-filter"></i>
+        </div>
+        <table>
+          <thead>
+            <tr>
+                <th>Titre</th>
+                <th>Nom</th>
+                <th>Prénom</th>
+                <th>Date début congé</th>
+                <th>Date fin congé</th>
+                <th></th>
+                <th></th>
+            </tr>
+          </thead>
+          <tbody>
+          @foreach( var c in @ViewBag.l_conge ){
+              <tr  style="cursor:pointer;" >
+                <form style="width: 75% ; " action="@Url.Action( "modif" , "conge" )" method="post" >
+                    <td>@c.Personnel.service.nomService</td>
+                    <td>@c.Personnel.nom</td>
+                    <td>@c.Personnel.prenom</td>
+                    <td>@c.DateDebut</td>
+                    <td>@c.ReelDateFin</td>
+                    <td>
+                        <input type="hidden" name="idconge"  value="@c.IdConge" id="">                        
+                        <input type="datetime-local" name="new_fin" id="" required >
+                    </td>
+                    <td>
+                        <input type="submit" style="cursor:pointer;" value="Modifier" >
+                    </td>
+                </form> 
+            </tr>
+          }
+          </tbody>
+        </table>
+        <div class="retour">
+          <a href='@Url.Action("BesoinListe","ListeCv")'>Retour</a>
+        </div>
+      </div>
+    </div>

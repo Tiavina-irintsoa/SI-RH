@@ -25,6 +25,8 @@ public class Personnel{
     public DateTime ? latest_salary_date { get; set; }
     public DateTime ? latest_hire_date { get; set; }
 
+    
+
     public static List<Personnel> GetPersonnelByService(NpgsqlConnection npg, int idservice)
     {
         List<Personnel> l_personnel = new List<Personnel>();
@@ -196,9 +198,9 @@ public class Personnel{
                             genre = Convert.ToInt32(reader["genre"]),
                             travailleur = Convert.ToInt32(reader["travailleur"]),
                             dtn =  Convert.ToDateTime(reader["dtn"]),
-                            latest_salary_brut = Convert.ToDouble(reader["latest_salary_brut"]),
-                            latest_salary_net = Convert.ToDouble(reader["latest_salary_net"]),
-                            latest_salary_date =  Convert.ToDateTime(reader["latest_salary_date"]),
+                            latest_salary_brut = 0,
+                            latest_salary_net = 0,
+                            latest_salary_date =  null,
                             latest_hire_date = Convert.ToDateTime(reader["latest_hire_date"]),
                             contact = reader["contact"].ToString(),
                             age = Convert.ToInt32(reader["age"])
@@ -210,6 +212,7 @@ public class Personnel{
             return PersonnelList;
         }catch (Exception e )
         {
+            Console.WriteLine( e.StackTrace );
             throw;
         }finally    
         {
