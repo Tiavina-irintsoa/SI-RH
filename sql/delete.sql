@@ -25,6 +25,9 @@ delete from conge;
 delete from raison;
 delete from note_entretien;
 delete from question_entretien;
+delete from prime_anciennete;
+delete from employe_heure_sup;
+delete from demande_heure_sup;
 
 -- Réinitialisation individuelle de chaque séquence à 1
 ALTER SEQUENCE besoin_idbesoin_seq RESTART WITH 1;
@@ -47,6 +50,9 @@ ALTER SEQUENCE type_contrat_idtypecontrat_seq RESTART WITH 1;
 ALTER SEQUENCE typecritere_idtypecritere_seq RESTART WITH 1;
 ALTER SEQUENCE typeuser_idtypeuser_seq RESTART WITH 1;
 ALTER SEQUENCE useradmin_idadmin_seq RESTART WITH 1;
+ALTER SEQUENCE demande_heure_sup_iddemande_heure_sup_seq RESTART WITH 1;
+ALTER SEQUENCE prime_anciennete_idprime_anciennete_seq RESTART WITH 1;
+
 
 -- DO $$ 
 -- DECLARE 
