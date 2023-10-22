@@ -15,6 +15,7 @@ a {
   justify-content: space-between;
   width: 100%;
 }
+
 :root {
   --poppins: "Poppins", sans-serif;
   --lato: "Lato", sans-serif;
@@ -28,20 +29,23 @@ a {
   --purple: #ae6bb6;
   --light-purple: #d896e0;
   --blue: #38b5fd;
+  --yellow: #fffc33;
+  --green: #46d341;
   --light-blue: #d3f5ff;
   --green: rgb(21, 196, 21);
 }
 
-.liste_carre_text{
+
+.liste_carre_text {
   margin-top: 5vh;
-  text-align:  center;
+  text-align: center;
 }
-#liste_carre_container{
+#liste_carre_container {
   display: flex;
   justify-content: center;
   align-items: center;
 }
-#liste_carre_container a{
+#liste_carre_container a {
   color: var(--dark);
 }
 .liste_carre {
@@ -58,13 +62,12 @@ a {
   flex-grow: 1;
   margin: 1vh;
   transition: transform 0.3s ease, box-shadow 0.3s ease; /* Ajout d'une transition pour l'animation */
-
 }
 #liste_carre_container li:hover {
   transform: scale(1.1); /* Agrandissement au survol (scale de 1.1) */
   box-shadow: 4px 4px 10px rgba(1, 1, 0, 0.3); /* Ombre au survol */
 }
-.liste_carre img{
+.liste_carre img {
   height: 100%;
 }
 li {
@@ -334,14 +337,14 @@ body {
 /* NAVBAR */
 
 /* MAIN */
-.liste_besoin{
+.liste_besoin {
   padding: 24px;
   background: var(--light);
   border-radius: 20px;
   display: flex;
   flex-direction: column;
 }
-.liste_besoin .tete{
+.liste_besoin .tete {
   display: flex;
   flex-direction: row;
   margin: auto;
@@ -436,65 +439,65 @@ body {
   color: var(--dark);
 }
 
-#content main .detail-cv{
+#content main .detail-cv {
   border-radius: 20px;
   background: var(--light);
   padding: 24px;
   overflow-x: auto;
 }
-#content main .detail-cv .head{
+#content main .detail-cv .head {
   display: flex;
   align-items: center;
   margin-bottom: 24px;
   margin-left: 40%;
   color: var(--pink);
 }
-#content main .detail-cv .a_propos{
+#content main .detail-cv .a_propos {
   display: flex;
   flex-direction: row;
 }
-#content main .detail-cv .a_propos label{
+#content main .detail-cv .a_propos label {
   font-weight: bold;
 }
-#content main .detail-cv .a_propos .gauche{
+#content main .detail-cv .a_propos .gauche {
   width: 67%;
 }
-.infos .inf{
+.infos .inf {
   margin-top: 24px;
 }
-.inf div{
+.inf div {
   display: flex;
   flex-direction: row;
 }
-.inf span{
+.inf span {
   text-decoration: underline;
 }
-.inf div label{
+.inf div label {
   font-weight: bold;
   width: 67%;
 }
-.inf .btn-download{
+.inf .btn-download {
   color: black;
 }
-.inf .btn-download:hover{
+.inf .btn-download:hover {
   font-weight: bold;
 }
-.inf .btn-download i:hover{
+.inf .btn-download i:hover {
   font-weight: bold;
   transform: rotate(360deg);
   transition: all 500ms ease-in-out;
 }
-.info_ li{
+.info_ li {
   margin-left: 50pt;
 }
-.retour{
+.retour {
   text-align: center;
 }
-.retour a{
+.retour a {
   text-decoration: none;
   color: var(--pink);
 }
-.retour a:hover{
+.retour a:hover {
   font-weight: bold;
 }
 
@@ -674,4 +677,48 @@ body {
   #content main .table-data .todo .todo-list {
     min-width: 420px;
   }
+}
+
+.red-td {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background-color: var(--red) !important ;
+}
+
+.green-td {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--green) !important ;
+  height: 100%;
+}
+
+.yellow-td {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--yellow) !important ;
+  height: 100%;
+}
+
+.blue-td {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--blue) !important ;
+  height: 100%;
+}
+
+.div-parent {
+  display: flex;
+  flex-direction: row; /* Alignement horizontal */
+}
+
+.div-enfant {
+  height: 50px;
+  margin: 10px;
+  padding: 10px;
+  border: 1px solid #000;
 }
