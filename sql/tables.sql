@@ -321,4 +321,12 @@ create table travail_sante(
 alter table refus 
 add column idservice int REFERENCES service;
 
+alter table conge 
+add column autre_raison varchar ;
 
+
+create table planning_visible (
+    idpv serial primary key,
+    idservice int references service,
+    idvisible int references service(idservice)
+);
