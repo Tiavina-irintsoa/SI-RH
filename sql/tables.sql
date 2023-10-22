@@ -351,3 +351,4 @@ create table employe_heure_sup (
     iddemande_heure_sup integer references demande_heure_sup(iddemande_heure_sup),
     idemploye integer references personnel(idpersonnel)
 );
+alter table demande_heure_sup add column raison text;

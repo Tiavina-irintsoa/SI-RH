@@ -1,0 +1,42 @@
+@{
+    Layout = "_form";
+}
+<div id="div">
+     <div id="form-title">
+        <h1>
+        Demander des heures supplementaires
+    </h1>
+     </div>
+    
+<form action='@Url.Action("SubmitFirst" , "HeureSupp")' method="post">
+    <div class="">
+    <div class="my-input-group">
+        <label for="">
+        Raison:
+    </label>
+    <input type="text" name="raison" required>
+    </div>
+    <div class="my-input-group">
+        <label for="">
+        Date:
+    </label>
+        <input type="date" name="date"  required>
+    </div>
+    <div class="my-input-group">
+        <label for="">
+        Heure de debut:
+    </label>
+        <input type="time" name="debut"  required>
+    </div>
+    <div class="my-input-group">
+        <label for="">
+        Heure de fin:
+    </label>
+        <input type="time" name="fin" required>
+    </div>
+    <div class="my-input-group">
+        <input type="submit" value="Continuer">
+    </div>
+    </div>
+</form>        
+</div>

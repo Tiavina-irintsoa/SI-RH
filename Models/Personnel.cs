@@ -25,8 +25,18 @@ public class Personnel{
     public DateTime ? latest_salary_date { get; set; }
     public DateTime ? latest_hire_date { get; set; }
 
-    
+    public Personnel(){
 
+    }
+    public Personnel(int id){
+        idpersonnel = id;
+    }
+    public Personnel(string nom, string prenom, int id, string nomposte){
+        this.nom = nom;
+        this.prenom = prenom;
+        idpersonnel = id;
+        this.nomposte = nomposte;
+    }
     public static List<Personnel> GetPersonnelByService(NpgsqlConnection npg, int idservice)
     {
         List<Personnel> l_personnel = new List<Personnel>();
