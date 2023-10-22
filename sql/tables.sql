@@ -321,4 +321,11 @@ create table travail_sante(
 alter table refus 
 add column idservice int REFERENCES service;
 
-
+-------fiche de paie 
+create table prime_anciennete(
+    idprime_anciennete serial primary key,
+    annee_min integer,
+    annee_max integer,
+    pourcentage numeric,
+    date_insertion date default now()
+);
