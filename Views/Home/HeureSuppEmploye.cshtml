@@ -1,0 +1,46 @@
+@{
+    Layout = "_form"; 
+}
+ <div id="div_without_padding">
+     <div id="form-title">
+        <h1>
+            Employes de l'heure supplementaire
+        </h1>
+     </div>
+     <form action="@Url.Action("Confirm","HeureSupp")" method="get">
+        <table border="1">
+            <thead>
+                <th>
+                    Employe
+                </th>
+                <th>
+                    Poste
+                </th>
+                <th>
+
+                </th>
+            </thead>
+            <tbody>
+                    
+                 @foreach (var personnel in ViewBag.liste){
+                    <tr>
+
+                        <td>
+                            @personnel.nom @personnel.prenom
+                        </td>
+                        <td>
+                            @personnel.nomposte
+                        </td>
+                        <td>
+                            <input type="checkbox" name="employe" value="@personnel.idpersonnel">
+                        </td>
+                    </tr>
+
+                 }
+            </tbody>
+        </table>
+        <div class="my-input-group">
+            <input type="submit" value="Envoyer la demande">
+        </div>
+     </form>
+ </div>

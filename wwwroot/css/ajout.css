@@ -106,3 +106,25 @@ input[type="submit"] {
 #content main .table-data .todo .todo-list li {
   width: 100%;
 }
+td,th{
+  height: 5vh;
+  margin-top: 6vh;
+  padding: 2vh;
+}
+table{
+  border-collapse: collapse;
+}
+#div_without_padding {
+  background: var(--light);
+  margin: auto;
+  padding-left: 9vh;
+  width: 100%;
+  font-family: var(--lato);
+  display: flex;
+  justify-content: space-evenly;
+  align-items: flex-start;
+  flex-direction: column;
+  border-radius: 10px;
+  height: 100vh;
+  overflow-y: scroll;
+}
