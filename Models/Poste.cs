@@ -23,6 +23,42 @@ public class Poste{
         nomPoste = nom;
     }
 
+    public static Service getService( NpgsqlConnection npg,  int id ){
+        bool estOuvert = false;
+        
+        if (npg == null)        {
+            estOuvert = true;
+            Connection connexion = new Connection();
+            npg = connexion.ConnectSante();
+        }        
+        try        {
+            string sql = "SELECT * FROM v_service_poste where idposte=" + id;
+            Console.WriteLine(sql);         
+            using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))            {
+                using (NpgsqlDataReader reader = command.ExecuteReader())                {
+                    List<Poste> posteList = new List<Poste>();
+                    if (reader.Read())                    {
+                        Service service = new Service {
+                            IdService = Convert.ToInt32( reader["idservice"] )  ,
+                            nomService =  Convert.ToString( reader["nomservice"] )
+                        };
+                        return service;
+                    }
+                }
+            }
+        }
+        catch (Exception e)        {
+            Console.WriteLine(e.ToString());
+            throw e;
+        }
+        finally        {
+            if (estOuvert)            {
+                npg.Close();
+            }
+        }   
+        return null;   
+    }
+
     public static Poste[] GetAll(NpgsqlConnection npg, int ids) {
         Poste[] postes = null;
         bool estOuvert = false;

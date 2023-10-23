@@ -26,7 +26,7 @@ public class LoginController : Controller
     {
         string nom = Request.Form["nom"];
         string mdp = Request.Form["mdp"];
-        UserAdmin admin = UserAdmin.GetUser( nom , mdp , null );
+        UserAdmin admin = UserAdmin.GetUser( nom.Trim() , mdp.Trim() , null );
         Service service = new Service{
             IdService = admin.type.idtypeuser
         };

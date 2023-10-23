@@ -187,6 +187,11 @@ create or replace view v_conge_refus as
         on ra.idraison = cs.idraison
         ;
 
+create or replace view v_service_poste as 
+    select * 
+    from poste as p
+        natural join service as  s;
+
     
 
 

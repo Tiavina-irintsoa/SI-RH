@@ -4,9 +4,29 @@ using RH.Models;
 
 namespace RH.Controllers{
     public class CongeController : SessionController{
+        public IActionResult modif(){
+            string idconge =  Request.Form["idconge"] ;
+            string new_fin = Request.Form["new_fin"];
+            Console.WriteLine( new_fin );
+            Conge conge = new Conge{
+                IdConge = Convert.ToInt32(idconge),
+                ReelDateFin = Convert.ToDateTime( new_fin )
+            };
 
+            Console.WriteLine( "tonga eto" );
+            conge.updateFin();
+
+            return RedirectToAction( "planningModif" , "conge" );
+        }
+
+        public IActionResult planningModif(){
+            int idservice = Convert.ToInt32(Request.Cookies["idtypeuser"]);
+            List<Conge> l_conge  =  Conge.getPlanning( null , idservice );
+           ViewBag.l_conge = l_conge;
+            return View("~/Views/Home/planningMoModif.cshtml"); 
+        }
         public IActionResult planning(){
-            int idservice = Convert.ToInt32(Request.Cookies["idpersonnel"]);
+            int idservice = Convert.ToInt32(Request.Cookies["idtypeuser"]);
 
             List<Conge> l_conge  =  Conge.getPlanning( null , idservice );
             List<Personnel> l_personnel = Personnel.GetPersonnelByService(null , idservice);
