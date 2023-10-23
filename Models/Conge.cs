@@ -254,8 +254,8 @@ public class Conge{
                 Console.WriteLine( cmd.CommandText );
                 try
                 {
-                    int rowsAffected = cmd.ExecuteNonQuery();
-                    Console.WriteLine($"{rowsAffected} ligne(s) insérée(s) avec succès.");
+                    // int rowsAffected = cmd.ExecuteNonQuery();
+                    // Console.WriteLine($"{rowsAffected} ligne(s) insérée(s) avec succès.");
                 }
                 catch (Exception ex)
                 {
@@ -314,8 +314,4 @@ public class Conge{
             throw new Exception( " vous n'avez pas assez de conge " );
         }
     }
-
-
 }
-
-

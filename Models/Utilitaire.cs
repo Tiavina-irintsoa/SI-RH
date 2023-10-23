@@ -39,8 +39,16 @@ namespace RH.Models
         public static double CalculateHoursDifference(DateTime dateTime1, DateTime dateTime2)
         {
             TimeSpan timeDifference = dateTime2 - dateTime1;
-            return timeDifference.TotalHours;
+
+            int days = timeDifference.Days;
+
+            int workHoursPerDay = 24 - 8; 
+
+            double hoursDifference = timeDifference.TotalHours - (days * workHoursPerDay);
+
+            return hoursDifference;
         }
+
         public static DateTime toDateTime( string dateStr1 , string timeStr1  )
         {
             DateTime dateTime1 = DateTime.Parse(dateStr1 + " " + timeStr1);
@@ -57,7 +65,7 @@ namespace RH.Models
                 if( difference.TotalDays < 0 ){
                     throw new Exception( " cette date n'est plus disponible " );
                 }
-                if (difference.TotalDays > 15)
+                if (difference.TotalDays >= 15)
                 {
                     return true;
                 }

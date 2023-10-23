@@ -1,12 +1,16 @@
 @{
     Layout = "_form"; 
+    var dateDans15Jours = ViewBag.DateDans15Jours as string;
+    var choix = ViewBag.choix  as List<Choix>;
 }
      <div id="div">
         <div id="form-title">
-            <a href = '@Url.Action("liste" , "service" )'> Retour </i> </a>
-            <h1>
-              Demande de congé
-            </h1>
+            <div style="display:flex; align-items:center; justify-content:space-between; width:300px;  " >
+              <a href = '@Url.Action("categorie" , "conge" )' " > <i  style="transform: rotate(180deg); color:var(--pink);  font-size:20px; " class="fa fa-arrow-right"></i> </a>
+              <h1>
+                Demande de congé
+              </h1>
+            </div>
             @if (!string.IsNullOrEmpty(ViewBag.ErreurMessage))
             {
                 <div class="alert alert-danger"  style=" color: var(--red) ">
@@ -26,7 +30,7 @@
              <label for="">
               Date début congé
             </label>
-            <input type="date" name="debut"  required>
+            <input type="date" name="debut" value="@dateDans15Jours" required>
            </div>
            <div class="">
             <input type="time" name="debut_time" value="08:00"  required>
@@ -35,7 +39,7 @@
              <label for="">
               Date fin congé
             </label>
-            <input type="date" name="fin"  required>
+            <input type="date" name="fin" value="@dateDans15Jours"  required>
            </div>
             <div class="">
             <input type="time" name="fin_time"  value="17:00" required>
@@ -45,10 +49,9 @@
                   Raison spéciales : 
               </label>
               <select name="raison" id="">
-                  <option value="0"> Aucun </option>
-                  <option value="1">Maternité </option>
-                  <option value="2">Paternité </option>
-                  <option value="3">Maladie </option>
+                  @foreach( var c in choix ){
+                    <option value="@c.idChoix"> @c.intitule </option>
+                  }
               </select>
            </div>
            <div class="my-input-group">
