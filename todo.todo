@@ -1,0 +1,23 @@
+ny resaka nationalité:
+    ☐ 4 = étranger 
+    ☐ tokony 3 ny Malagasy
+    
+genre: 
+    ☐ 2 femme 
+    ☐ 1 homme
+
+ny ilaiko:
+    ☐ personnel 
+    ☐ personnel_embauche
+    ☐ personnel_poste
+    ☐ useradmin
+
+
+pour le test:
+    ☐ employé tsotra : Garcia , 12345 , 5 (id)  , 3 ( info )
+    ☐ supérieur : Susan , 12345 , 9  (id) , 3 ( info )
+    ☐ DRH : Goore , 12345 , 15   (id) , 7 (RH)
+
+
+
+test : 

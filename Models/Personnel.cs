@@ -212,7 +212,7 @@ public class Personnel{
                             genre = Convert.ToInt32(reader["genre"]),
                             travailleur = Convert.ToInt32(reader["travailleur"]),
                             dtn =  Convert.ToDateTime(reader["dtn"]),
-                            latest_salary_base = 0,
+                            latest_salary_base = Convert.ToDouble(reader["latest_salary_base"]),
                             latest_salary_net = 0,
                             latest_salary_date =  null,
                             latest_hire_date = Convert.ToDateTime(reader["latest_hire_date"]),

@@ -13,7 +13,6 @@ namespace RH.Controllers{
                 ReelDateFin = Convert.ToDateTime( new_fin )
             };
 
-            Console.WriteLine( "tonga eto" );
             conge.updateFin();
 
             return RedirectToAction( "planningModif" , "conge" );
@@ -139,10 +138,28 @@ namespace RH.Controllers{
 
         public IActionResult Index(){
             if(!CookieIdAdminExists())
-                return  RedirectToAction( "admin" , "login" );  
+                return  RedirectToAction( "admin" , "login" );
+             
+            Personnel p = Personnel.GetPersonnelByID(null, Convert.ToInt32( Request.Cookies["idpersonnel"] ) );
+
+            List<Choix> choix =  new List<Choix>() ;
+
+            choix.Add( new Choix{ idChoix = 0 , intitule = "Aucun" } );
+
+            if( p.genre == 2 ){
+                choix.Add( new Choix{ idChoix = 1 , intitule = "Maternité" } );
+            }
+            else{
+            choix.Add( new Choix{ idChoix = 2 , intitule = "Paternité" } );
+            }
+            choix.Add( new Choix{ idChoix = 3 , intitule = "Maladie" } );
+            ViewBag.choix = choix;
             int idtypeuser =   Convert.ToInt32(Request.Cookies["idtypeuser"]);
             string sql = " select * from v_personnel_information where idservice = "+idtypeuser;
             List<Personnel> liste_personnel = Personnel.GetAll(null , sql );
+            DateTime dateDuJour = DateTime.Now;
+            DateTime dateDans15Jours = dateDuJour.AddDays(15);
+            ViewBag.DateDans15Jours = dateDans15Jours.ToString("yyyy-MM-dd"); 
             ViewBag.personnel =  liste_personnel; 
             return View("~/Views/Home/congeAjout.cshtml");
         }
@@ -200,6 +217,23 @@ namespace RH.Controllers{
                 Console.WriteLine( e.ToString() );
                 ViewBag.ErreurMessage = e.Message;          
             }
+            Personnel p = Personnel.GetPersonnelByID(null, Convert.ToInt32( Request.Cookies["idpersonnel"] ) );
+
+            List<Choix> choix =  new List<Choix>() ;
+            
+            choix.Add( new Choix{ idChoix = 0 , intitule = "Aucun" } );
+
+            if( p.genre == 2 ){
+                choix.Add( new Choix{ idChoix = 1 , intitule = "Maternité" } );
+            }
+            else{
+            choix.Add( new Choix{ idChoix = 2 , intitule = "Paternité" } );
+            }
+            choix.Add( new Choix{ idChoix = 3 , intitule = "Maladie" } );
+            ViewBag.choix = choix;
+            DateTime dateDuJour = DateTime.Now;
+            DateTime dateDans15Jours = dateDuJour.AddDays(15);
+            ViewBag.DateDans15Jours = dateDans15Jours.ToString("yyyy-MM-dd"); 
             return View("~/Views/Home/congeAjout.cshtml");  
         }
     }

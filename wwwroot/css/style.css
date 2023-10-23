@@ -6,16 +6,94 @@
   box-sizing: border-box;
 }
 
+#fichepaie .head_center {
+  display: flex;
+  justify-content: center !important;
+  align-items: center;
+  flex-direction: column;
+}
 a {
   text-decoration: none;
 }
-
-#head_with_link{
+#fichepaie #info {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: row;
+  margin-top: 6vh;
+}
+#fichepaie table {
+  margin-top: 8vh;
+  border-collapse: collapse;
+}
+#left,
+#right {
+  display: flex;
+}
+#fichepaie thead  td {
+  font-weight: bold;
+}
+#fichepaie tr td:last-child, #fichepaie tr td:nth-child(3){
+  text-align: right;
+}
+#fichepaie table td {
+  padding: 0px !important;
+  margin-top: 0px !important;
+  padding: 1vh !important;
+}
+#fichepaie table tr {
+  margin-top: 0px;
+}
+#values {
+  margin-left: 6vh;
+}
+#values_left {
+  margin-left: 6vh;
+  display: flex;
+  align-items: end;
+  flex-direction: column;
+}
+#head_with_link {
   display: flex;
   justify-content: space-between;
   width: 100%;
 }
-
+.mybutton {
+  border-radius: 10px;
+  width: 50%;
+  height: 6vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: white;
+  margin-top: 6vh;
+}
+.mybutton a {
+  color: white;
+}
+#accept {
+  background-color: var(--blue);
+}
+#buttons {
+  display: flex;
+  flex-direction: row;
+  padding-left: 30vh;
+  padding-right: 30vh;
+}
+#deny {
+  background-color: var(--red);
+  margin-left: 6vh;
+}
+#head_details {
+  display: inline;
+  width: 100%;
+}
+.bolder {
+  font-weight: bold;
+}
+.demande img {
+  height: 6vh;
+}
 :root {
   --poppins: "Poppins", sans-serif;
   --lato: "Lato", sans-serif;
@@ -34,7 +112,6 @@ a {
   --light-blue: #d3f5ff;
   --green: rgb(21, 196, 21);
 }
-
 
 .liste_carre_text {
   margin-top: 5vh;
@@ -368,6 +445,9 @@ body {
   margin-bottom: 10px;
   color: var(--dark);
 }
+.demande li {
+  margin-top: 5vh;
+}
 #content main .head-title .left .breadcrumb {
   display: flex;
   align-items: center;
@@ -555,12 +635,12 @@ body {
 #content main .table-data .order table td {
   padding: 16px 0;
 }
-#content main .table-data .order table tr td:first-child {
+/* #content main .table-data .order table tr td:first-child {
   display: flex;
   align-items: center;
   grid-gap: 12px;
   padding-left: 6px;
-}
+} */
 #content main .table-data .order table td img {
   width: 36px;
   height: 36px;

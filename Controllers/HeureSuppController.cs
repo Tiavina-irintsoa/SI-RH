@@ -6,6 +6,11 @@ namespace RH.Controllers{
         public IActionResult Demande(){
             return View("Views/Home/DemandeHeureSupp.cshtml");
         }
+        public IActionResult  Validation(int validation, int iddemande){
+            HeureSupp hs = new HeureSupp(iddemande);
+            hs.setValidation(validation,null);
+            return RedirectToAction("getNonConsulte","HeureSupp");
+        }
         [HttpGet]
         public IActionResult Confirm(List<int> employe){
             Console.WriteLine(employe.Count);
@@ -13,7 +18,18 @@ namespace RH.Controllers{
             HeureSupp heureSupp = JsonConvert.DeserializeObject<HeureSupp>(cookieValue);
             heureSupp.setPersonnels(employe);
             heureSupp.InsererHeureSup();
-            return RedirectToAction("","");
+            return RedirectToAction("Demande","HeureSupp");
+        }
+        [HttpGet]
+        public IActionResult details(int iddemande){
+            HeureSupp hs = new HeureSupp(iddemande);
+            hs.complete();
+            ViewBag.demande = hs;
+            return View("Views/Home/DetailsDemandeHeureSupp.cshtml");
+        }
+        public IActionResult getNonConsulte(){
+            ViewBag.liste = HeureSupp.getHeureSupp();
+            return View("Views/Home/ListeHeureSupp.cshtml");
         }
         [HttpPost]
         public IActionResult SubmitFirst(){
