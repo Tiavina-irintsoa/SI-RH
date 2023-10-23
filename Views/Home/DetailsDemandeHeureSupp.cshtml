@@ -1,0 +1,82 @@
+<div class="table-data">
+    <div id="head_details">
+        <h4>
+            Demande de conge du Service @ViewBag.demande.Service.nomService
+        </h4>
+        @* <a href="@Url.Action("Ajout","PrimeAnciennete")" style="margin-right:0px;">
+            Ajouter <i class="fa fa-plus"></i>
+        </a> *@
+        <br>
+            <p>
+                <span>
+                <span class="bolder">
+                    Date:
+                </span>
+            </span>@ViewBag.demande.getDate()
+            </p>
+            <p>
+                <span>
+                <span class="bolder">
+                    Heure de debut:
+                </span>
+            </span>@ViewBag.demande.getDebut()
+            </p>
+            <p>
+                <span>
+                <span class="bolder">
+                    Heure de fin:
+                </span>
+            </span>@ViewBag.demande.getFin()
+            </p>
+            <p>
+                <span>
+                <span class="bolder">
+                    Raison: 
+                </span>
+            </span>@ViewBag.demande.Raison
+            </p>
+        </div>
+            
+    </div>
+
+    
+</div>
+
+<div class="table-data">
+    <div class="order">
+    <div class="head">
+        <div id="head_with_link">
+            <h4>
+                Personnels participant aux heures supplementaires
+            </h4>
+            @* <a href="@Url.Action("Ajout","PrimeAnciennete")" style="margin-right:0px;">
+                Ajouter <i class="fa fa-plus"></i>
+            </a> *@
+        </div>
+    </div>
+    @* <p style="font-size: smaller;color:red;margin-bottom:4vh;margin-top:1vh;">
+        @ViewBag.erreur
+    </p> *@
+    <table>
+        <thead>
+        <tr>
+            <th>Employe</th>
+            <th>Poste</th>
+        </tr>
+        </thead>
+        <tbody>
+        @foreach (Personnel p in ViewBag.demande.Personnels)
+        {
+        <tr>
+            <td style="margin-top:10px!important;"> @p.nom @p.prenom </td>
+            <td> @p.nomposte</td>
+        </tr>
+        }
+        </tbody>
+    </table>
+</div>
+</div>
+<div id="buttons">
+        <div class="mybutton" id="accept"><a href="@Url.Action("Validation","HeureSupp",new{iddemande = @ViewBag.demande.IdHeureSup,validation = 1})">Accepter</a></div>
+        <div class="mybutton" id="deny"><a href="@Url.Action("Validation","HeureSupp",new{iddemande = @ViewBag.demande.IdHeureSup,validation = -1})">Refuser</a></div>
+</div>

@@ -1,0 +1,22 @@
+<div class="table-data">
+    <div class="todo">
+        <div class="head">
+            <h3>Liste des demandes d'heures supplementaires</h3>
+            @* <a href='@Url.Action("Liste","Besoin", new{idService=@ViewBag.IdService})'>Ajouter <i class='bx bx-plus' ></i> </a> *@
+            <!-- <i class='bx bx-filter' ></i> -->
+        </div>
+        <ul class="todo-list demande ">
+            
+        @foreach (var d in @ViewBag.liste)
+        {
+            <a href="@Url.Action("Details","HeureSupp",new{iddemande = @d.IdHeureSup})">
+                <li>
+                    <img src="/images/@d.Service.IconeService" alt="">
+                    <p>@d.Service.nomService</p>
+                    <p>@d.Raison</p>
+                </li> 
+            </a>
+        }
+        </ul>
+    </div>
+</div>
