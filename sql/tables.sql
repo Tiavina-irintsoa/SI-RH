@@ -351,8 +351,8 @@ create table employe_heure_sup (
     iddemande_heure_sup integer references demande_heure_sup(iddemande_heure_sup),
     idemploye integer references personnel(idpersonnel)
 );
-alter table demande_heure_sup add column raison text;
 
+alter table demande_heure_sup add column raison text;
 
 alter table personnel_salaire
 RENAME column salaire_brut to salaire_base;
