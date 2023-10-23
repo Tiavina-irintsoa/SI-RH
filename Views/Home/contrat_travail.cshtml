@@ -1,28 +1,16 @@
 @{
-    Layout = "_NoLayout";
+    Layout = "_form";
 }
 @model Sante[]
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
-    <meta name="description" content="" />
-    <meta name="author" content="" />
-    <title>Dimpex</title>
 
     <!-- Bootstrap core CSS -->
     <link href="~/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="~/css/templatemo-digimedia-v1.css" />
     <link rel="stylesheet" href="~/css/essai.css" />
     <link rel="stylesheet" href="~/css/style.css" />
-  </head>
-  <body>
     
-    <div class="form_essai">
+<div class="div" style="height: 100vh!important;">
+        <div class="form_essai" style="height: 100vh!important; padding-top:6vh;">
         <h1>CONTRAT DE TRAVAIL</h1>
         <div>
             <div class="haut">La société Miraculous</div>
@@ -30,11 +18,10 @@
             <div class="haut">Ci après dénommée "d'Employeur",</div>
             <div class="haut">D'une part;</div>
             <div class="haut">Et</div>
-            <div class="haut"> <label for="" class="info"> Mr (Mme) : </label> RAKOTO  Koto</div>
-            <div class="haut"> <label for="" class="info"> Né(e) le : </label> 29 Mai 1998 </div>
-            <div class="haut"> <label for="" class="info"> Mail : </label> koto@gmail.com </div>
-            <div class="haut"> <label for="" class="info"> Contact : </label> 034 32 232 12 </div>
-            <div class="haut"> <label for="" class="info"> Nationalité : </label> Malagasy </div>
+            <div class="haut"> <label for="" class="info"> Mr (Mme) : </label> @ViewBag.candidat.nom  @ViewBag.candidat.prenom</div>
+            <div class="haut"> <label for="" class="info"> Né(e) le : </label> @ViewBag.candidat.dtn </div>
+            <div class="haut"> <label for="" class="info"> Mail : </label> @ViewBag.candidat.mail </div>
+            <div class="haut"> <label for="" class="info"> Contact : </label> @ViewBag.candidat.contact </div>
         </div>
         <form action='@Url.Action("Save_Contrat","Contrat")' method="get">
             <input type="hidden" name="idtravail" value="@ViewBag.idt">
@@ -57,6 +44,5 @@
             </div>
         </form>
     </div>
-    
-  </body>
-</html>
+
+</div>

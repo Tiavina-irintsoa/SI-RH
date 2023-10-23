@@ -21,7 +21,7 @@ namespace RH.Controllers{
             ViewBag.nom = candidat.nom;
             ViewBag.prenom = candidat.prenom;
             ViewBag.id= candidat.idcandidat;
-            ViewBag.idbesoin= 1;
+            ViewBag.idbesoin= idbesoin;
             return View("Views/Home/adminEssai.cshtml", avantages);
         }
 
@@ -39,9 +39,13 @@ namespace RH.Controllers{
             int idessai = essai.InsertEssai(npg);
 
             string[] avantage = Request.Query["avantage"];
+
+            Console.WriteLine( "avantage  "  +avantage );
+
             foreach (string av in avantage)
             {
                 int idavantage = int.Parse(av);
+                Console.WriteLine( "id " + idavantage );
                 Avantage.InsertAvantage(npg, idessai, idavantage);
             }
 
@@ -117,6 +121,9 @@ namespace RH.Controllers{
             int idcontrat_essai = int.Parse(Request.Query["idcontrat_essai"]);
             double duree = double.Parse(Request.Query["duree"]);
             string debut = Request.Query["debut"];
+            int idcandidat  = int.Parse( Request.Cookies["idcandidat"] );
+            
+            Candidat candidat = Candidat.GetById(npg , idcandidat );
 
             Travail travail = new Travail(idcontrat_essai, duree, debut);
             travail.InsertTravail(npg);
@@ -125,7 +132,7 @@ namespace RH.Controllers{
 
             Sante[] santes = Sante.GetAllSantes(npg);
             ViewBag.idt = idtravail;
-
+            ViewBag.candidat = candidat;
             npg.Close();
 
             return View("Views/Home/contrat_travail.cshtml", santes);
@@ -138,20 +145,25 @@ namespace RH.Controllers{
             int sante = int.Parse(Request.Query["sante"]);
             string sign = Request.Query["sign"];
             int idtravail = int.Parse(Request.Query["idtravail"]);
-
+            Console.WriteLine( "ita 1" );
             Sante.InsertSante(npg, idtravail, sante);
-
+            Console.WriteLine( "ita 2" );
             Contrat contrat = new Contrat(idtravail, sign);
+            Console.WriteLine( "ita 3" );
             contrat.InsertContratTravail(npg);
-
+            Console.WriteLine( "ita 4" );
             int idcandidat = int.Parse( Request.Cookies["idcandidat"] );
+            Console.WriteLine( "ita 5" );
             double salaire = Essai.getSalaire(npg, idcandidat);
             Response.Cookies.Delete("idcandidat");
+            Console.WriteLine( "ita 6" );
             Candidat candidat = Candidat.GetById(npg , idcandidat );
-
+            Console.WriteLine( "ita 7" );
             int idbesoin = Essai.getIdbesoin(npg, idcandidat);
+            Console.WriteLine( "ita 8" );
             Dictionary< string, List<Choix> > choix = FicheCandidat.getChoixCandidat(npg, idbesoin, idcandidat);
-
+            Console.WriteLine( "ita 10" );
+            Console.WriteLine( "choix "+ choix["nationalite"] );
             int[] id = Essai.getIdservice_Idposte(npg, idbesoin);
             var cookieOptions = new CookieOptions
             {
@@ -190,8 +202,12 @@ namespace RH.Controllers{
             NpgsqlConnection npg = connexion.ConnectSante();
             string nom = Request.Form["nom"];
             string mdp = Request.Form["mdp"];
+
+            Console.WriteLine( "mdp : "+mdp );
             int idpersonnel = int.Parse( Request.Form["idperso"] );
-            int idtypeuser = int.Parse( Request.Cookies["idservice"] );
+            Console.WriteLine( "ato 1" ); 
+            int idtypeuser = int.Parse( Request.Cookies["idtypeuser"] );
+            Console.WriteLine( "ato 2" ); 
             Response.Cookies.Delete("idservice");
             User user = new User(nom, mdp, idtypeuser, idpersonnel);
             user.InsertUser(npg);

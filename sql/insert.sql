@@ -219,18 +219,6 @@ VALUES
     ('Kim', 'Min-Ji', 'minji.kim@email.com', ( 'PERS' || nextval('idpersonnel')), 1, '678 Pine St', 2, 1, '1991-08-14'),
     ('Nguyen', 'Thi', 'thi.nguyen@email.com', ( 'PERS' || nextval('idpersonnel')), 2, '789 Cedar St', 2, 0, '1986-02-19'),
     ('Jackson', 'William', 'william.jackson@email.com', ( 'PERS' || nextval('idpersonnel')), 3, '890 Birch St', 1, 1, '1984-05-28');
-    ('Doe', 'John', 'john.doe@email.com', '12345', 1 , '123 Main St', 1 , 1, '1990-01-01'),
-    ('Smith', 'Jane', 'jane.smith@email.com', '67890', 2, '456 Elm St', 2, 1, '1995-03-15'),
-    ('Johnson', 'Robert', 'robert.johnson@email.com', '54321', 3, '789 Oak St', 1, 0, '1985-07-10'),
-    ('Brown', 'Sarah', 'sarah.brown@email.com', '98765', 1, '567 Pine St', 2, 1, '1988-11-20'),
-    ('Garcia', 'Carlos', 'carlos.garcia@email.com', '13579', 2, '890 Maple St', 1, 1, '1998-04-25'),
-    ('Wilson', 'Emily', 'emily.wilson@email.com', '24680', 3, '234 Birch St', 2, 0, '1993-09-05'),
-    ('Chen', 'Wei', 'wei.chen@email.com', '10101', 1, '345 Cedar St', 1, 1, '1992-12-12'),
-    ('Martinez', 'Luis', 'luis.martinez@email.com', '11223', 2, '456 Oak St', 1, 1, '1989-06-30'),
-    ('Davis', 'Susan', 'susan.davis@email.com', '22222', 3, '567 Elm St', 2, 1, '1987-03-07'),
-    ('Kim', 'Min-Ji', 'minji.kim@email.com', '33333', 1, '678 Pine St', 2, 1, '1991-08-14'),
-    ('Nguyen', 'Thi', 'thi.nguyen@email.com', '44444', 2, '789 Cedar St', 2, 0, '1986-02-19'),
-    ('Jackson', 'William', 'william.jackson@email.com', '55555', 3, '890 Birch St', 1, 1, '1984-05-28');
 
 
 
@@ -238,22 +226,6 @@ VALUES
 -- INSERT INTO personnel_poste (idposte, idpersonnel)
 -- SELECT floor(random() * 90) + 1, idpersonnel
 -- FROM personnel;
-
-insert into personnel_poste 
-values 
-    (14, 1), 
-    (28, 2), 
-    (10, 3), 
-    (70, 4), 
-    (63, 6), 
-    (71, 7), 
-    (75, 8), 
-    (38, 9), 
-    (62,10), 
-    (10,11), 
-    (66,12), 
-    (41, 5), 
-    (92,16);
 
 INSERT INTO personnel (nom, prenom, mail, matricule, nationalite, adresse, genre, travailleur, dtn)
 VALUES
@@ -267,7 +239,7 @@ values ( 76 , 13 ),
 ( 78 , 15 );
 
 -- Insertion de donnees aleatoires dans la table "personnel_salaire"
-INSERT INTO personnel_salaire (idpersonnel, salaire_brut, salaire_net)
+INSERT INTO personnel_salaire (idpersonnel, salaire_base, salaire_net)
 SELECT idpersonnel, random() * 10000, random() * 8000
 FROM personnel;
 
@@ -279,6 +251,7 @@ FROM personnel;
 -- FROM personnel;
 
 INSERT INTO personnel_embauche (idpersonnel, date_embauche)
+values
     ( 1 , '2013-03-01'),
     ( 2 , '2013-02-09'),
     ( 3 , '2013-03-08'),
@@ -329,16 +302,15 @@ update service set superieur = 6;
 -- Insertion de donnees de test dans la table question_entretien
 -- INSERT INTO question_entretien (question, coeff,idbesoin)
 -- VALUES
---     ('Quelles sont vos competences en programmation?', 1.5,2),
---     ('Parlez-moi de votre experience precedente en gestion de projets.', 2.0,2),
---     ('Comment gerez-vous les situations de conflit au sein de l''equipe?', 1.8,2);
-
+--     ('Quelles sont vos competences en programmation?', 1.5,5),
+--     ('Parlez-moi de votre experience precedente en gestion de projets.', 2.0,5),
+--     ('Comment gerez-vous les situations de conflit au sein de l''equipe?', 1.8,5);
 -- Insertion de donnees de test dans la table reponse_entretien
 -- INSERT INTO note_entretien (idquestion_entretien, idcandidature, note)
 -- VALUES
---     (1, 5, 1.0),
---     (2, 5, 1.5),
---     (3, 5, 1.2);
+--     (10, 4, 1.0),
+--     (11, 4, 1.5),
+--     (12, 4, 5.2);
 
 update service 
 set superieur = 13
@@ -366,16 +338,6 @@ insert into avantage (nomavantage) values
 
 insert into sante (nomsante) values
     ('Funhece'), ('AMIT'), ('Ostie');
-
-insert into info (idcandidat, cin, adresse, pere, mere, nbenfant) values (@idcandidat, @cin, @adresse, @pere, @mere, @nbenfant)
-
-insert into contrat_essai (idessai, net, signessai) values (@idessai, @net, @signessai)
-
-insert into travail (idcontrat_essai, duree, debut) values (@idcontrat_essai, @duree, @debut)
-
-insert into contrat_travail (idtravail, signetravail) values (@idtravail, @signetravail)
-
-insert into travail_sante values (@idcontrat_travail, @idsante)
 
 -- vaovao ralph
 update personnel_poste set idposte = 41
@@ -513,10 +475,26 @@ values ( 'John' , '12345'  , 2 , 1 ),
         where idpersonnel = 15 ) ,15)
 ;
 
+insert into personnel_poste 
+values 
+    (14, 1), 
+    (28, 2), 
+    (10, 3), 
+    (70, 4), 
+    (63, 6), 
+    (71, 7), 
+    (75, 8), 
+    (38, 9), 
+    (62,10), 
+    (10,11), 
+    (66,12), 
+    (41, 5), 
+    (92,16);
+
 insert into  admin_service
 values( 8 , 1 ),
 (8,2),
-(8,3)
+(8,3),
 (8,8),
 (9,3),
 (9,2),
@@ -608,38 +586,38 @@ where idservice = 9;
 
 insert into conge (idpersonnel,datedebut,datefin,reeldatefin,accepte,idraison,autre_raison)
 values 
-    (19 , 1 ,'2023-10-01 08:00:00','2023-10-03 08:00:00','2023-10-03 08:00:00',-2 , null , 'Vacances entre famille'),         
-    (21 , 1 ,'2023-10-07 08:00:00','2023-10-09 08:00:00','2023-10-09 08:00:00', 1 ,1 , 'Vacances entre famille'), 
-    (23 , 2 ,'2023-10-04 08:00:00','2023-10-06 08:00:00','2023-10-06 08:00:00', 2 ,2 , 'Vacances entre famille'),             
-    (24 , 2 ,'2023-10-07 08:00:00','2023-10-09 08:00:00','2023-10-09 08:00:00', 1 ,1 , 'Vacances entre famille'),
-    (25 , 3 ,'2023-10-01 08:00:00','2023-10-03 08:00:00','2023-10-03 08:00:00', 2 ,1 , 'Visite chez ma grand-mere'),
-    (27 , 3 ,'2023-10-07 08:00:00','2023-10-09 08:00:00','2023-10-09 08:00:00', 2 ,1 , 'Vacances entre famille'),
-    (28 , 4 ,'2023-10-01 08:00:00','2023-10-03 08:00:00','2023-10-03 08:00:00', 0 , null , 'Visite chez ma grand-mere'),
-    (30 , 4 ,'2023-10-07 08:00:00','2023-10-09 08:00:00','2023-10-09 08:00:00',-2 , null , 'Vacances entre famille'),
-    (32 , 5 ,'2023-10-04 08:00:00','2023-10-06 08:00:00','2023-10-06 08:00:00', 1 ,1 , null ),
-    (33 , 5 ,'2023-10-07 08:00:00','2023-10-09 08:00:00','2023-10-09 08:00:00', 2 , null , 'Visite chez ma grand-mere'),
-    (35 , 6 ,'2023-10-04 08:00:00','2023-10-06 08:00:00','2023-10-06 08:00:00',-2 ,1 , null ),
-    (36 , 6 ,'2023-10-07 08:00:00','2023-10-09 08:00:00','2023-10-09 08:00:00', 1 ,3 , null ),
-    (37 , 7 ,'2023-10-01 08:00:00','2023-10-03 08:00:00','2023-10-03 08:00:00', 1 ,1 , 'Visite chez ma grand-mere'),
-    (38 , 7 ,'2023-10-04 08:00:00','2023-10-06 08:00:00','2023-10-06 08:00:00',-2 ,1 , null ),
-    (40 , 8 ,'2023-10-01 08:00:00','2023-10-03 08:00:00','2023-10-03 08:00:00', 0 ,2 , null ),
-    (42 , 8 ,'2023-10-07 08:00:00','2023-10-09 08:00:00','2023-10-09 08:00:00', 0 , null , 'Visite chez ma grand-mere'),
-    (43 , 9 ,'2023-10-01 08:00:00','2023-10-03 08:00:00','2023-10-03 08:00:00', 2 , null , null ),
-    (46 ,10 ,'2023-10-01 08:00:00','2023-10-03 08:00:00','2023-10-03 08:00:00', 2 , null , null ),
-    (48 ,10 ,'2023-10-07 08:00:00','2023-10-09 08:00:00','2023-10-09 08:00:00', 2 , null , 'Vacances entre famille'),
-    (49 ,11 ,'2023-10-01 08:00:00','2023-10-03 08:00:00','2023-10-03 08:00:00', 2 , null , null ),
-    (50 ,11 ,'2023-10-04 08:00:00','2023-10-06 08:00:00','2023-10-06 08:00:00',-1 ,2 , 'Vacances entre famille'),
-    (52 ,12 ,'2023-10-01 08:00:00','2023-10-03 08:00:00','2023-10-03 08:00:00',-2 ,3 , 'Vacances entre famille'),
-    (53 ,12 ,'2023-10-04 08:00:00','2023-10-06 08:00:00','2023-10-06 08:00:00',-1 , null , null ),
-    (54 ,12 ,'2023-10-07 08:00:00','2023-10-09 08:00:00','2023-10-09 08:00:00', 0 ,2 , 'Visite chez ma grand-mere'),
-    (55 ,13 ,'2023-10-01 08:00:00','2023-10-03 08:00:00','2023-10-03 08:00:00',-2 , null , 'Visite chez ma grand-mere'),
-    (57 ,13 ,'2023-10-07 08:00:00','2023-10-09 08:00:00','2023-10-09 08:00:00', 1 ,2 , 'Visite chez ma grand-mere'),
-    (59 ,14 ,'2023-10-04 08:00:00','2023-10-06 08:00:00','2023-10-06 08:00:00', 1 , null , 'Visite chez ma grand-mere'),
-    (60 ,14 ,'2023-10-07 08:00:00','2023-10-09 08:00:00','2023-10-09 08:00:00',-1 , null , 'Visite chez ma grand-mere'),
-    (61 ,15 ,'2023-10-01 08:00:00','2023-10-03 08:00:00','2023-10-03 08:00:00',-1 ,3 , 'Vacances entre famille'),
-    (63 ,15 ,'2023-10-07 08:00:00','2023-10-09 08:00:00','2023-10-09 08:00:00',-2 ,3 , null ),
-    (65 ,16 ,'2023-10-04 08:00:00','2023-10-06 08:00:00','2023-10-06 08:00:00',-2 ,3 , 'Visite chez ma grand-mere'),
-    (66 ,16 ,'2023-10-07 08:00:00','2023-10-09 08:00:00','2023-10-09 08:00:00',-1 ,3 , null );
+    ( 1 ,'2023-10-01 08:00:00','2023-10-03 08:00:00','2023-10-03 08:00:00',-2 , null , 'Vacances entre famille'),         
+    ( 1 ,'2023-10-07 08:00:00','2023-10-09 08:00:00','2023-10-09 08:00:00', 1 ,1 , 'Vacances entre famille'), 
+    ( 2 ,'2023-10-04 08:00:00','2023-10-06 08:00:00','2023-10-06 08:00:00', 2 ,2 , 'Vacances entre famille'),             
+    ( 2 ,'2023-10-07 08:00:00','2023-10-09 08:00:00','2023-10-09 08:00:00', 1 ,1 , 'Vacances entre famille'),
+    ( 3 ,'2023-10-01 08:00:00','2023-10-03 08:00:00','2023-10-03 08:00:00', 2 ,1 , 'Visite chez ma grand-mere'),
+    ( 3 ,'2023-10-07 08:00:00','2023-10-09 08:00:00','2023-10-09 08:00:00', 2 ,1 , 'Vacances entre famille'),
+    ( 4 ,'2023-10-01 08:00:00','2023-10-03 08:00:00','2023-10-03 08:00:00', 0 , null , 'Visite chez ma grand-mere'),
+    ( 4 ,'2023-10-07 08:00:00','2023-10-09 08:00:00','2023-10-09 08:00:00',-2 , null , 'Vacances entre famille'),
+    ( 5 ,'2023-10-04 08:00:00','2023-10-06 08:00:00','2023-10-06 08:00:00', 1 ,1 , null ),
+    ( 5 ,'2023-10-07 08:00:00','2023-10-09 08:00:00','2023-10-09 08:00:00', 2 , null , 'Visite chez ma grand-mere'),
+    ( 6 ,'2023-10-04 08:00:00','2023-10-06 08:00:00','2023-10-06 08:00:00',-2 ,1 , null ),
+    ( 6 ,'2023-10-07 08:00:00','2023-10-09 08:00:00','2023-10-09 08:00:00', 1 ,3 , null ),
+    ( 7 ,'2023-10-01 08:00:00','2023-10-03 08:00:00','2023-10-03 08:00:00', 1 ,1 , 'Visite chez ma grand-mere'),
+    ( 7 ,'2023-10-04 08:00:00','2023-10-06 08:00:00','2023-10-06 08:00:00',-2 ,1 , null ),
+    ( 8 ,'2023-10-01 08:00:00','2023-10-03 08:00:00','2023-10-03 08:00:00', 0 ,2 , null ),
+    ( 8 ,'2023-10-07 08:00:00','2023-10-09 08:00:00','2023-10-09 08:00:00', 0 , null , 'Visite chez ma grand-mere'),
+    ( 9 ,'2023-10-01 08:00:00','2023-10-03 08:00:00','2023-10-03 08:00:00', 2 , null , null ),
+    (10 ,'2023-10-01 08:00:00','2023-10-03 08:00:00','2023-10-03 08:00:00', 2 , null , null ),
+    (10 ,'2023-10-07 08:00:00','2023-10-09 08:00:00','2023-10-09 08:00:00', 2 , null , 'Vacances entre famille'),
+    (11 ,'2023-10-01 08:00:00','2023-10-03 08:00:00','2023-10-03 08:00:00', 2 , null , null ),
+    (11 ,'2023-10-04 08:00:00','2023-10-06 08:00:00','2023-10-06 08:00:00',-1 ,2 , 'Vacances entre famille'),
+    (12 ,'2023-10-01 08:00:00','2023-10-03 08:00:00','2023-10-03 08:00:00',-2 ,3 , 'Vacances entre famille'),
+    (12 ,'2023-10-04 08:00:00','2023-10-06 08:00:00','2023-10-06 08:00:00',-1 , null , null ),
+    (12 ,'2023-10-07 08:00:00','2023-10-09 08:00:00','2023-10-09 08:00:00', 0 ,2 , 'Visite chez ma grand-mere'),
+    (13 ,'2023-10-01 08:00:00','2023-10-03 08:00:00','2023-10-03 08:00:00',-2 , null , 'Visite chez ma grand-mere'),
+    (13 ,'2023-10-07 08:00:00','2023-10-09 08:00:00','2023-10-09 08:00:00', 1 ,2 , 'Visite chez ma grand-mere'),
+    (14 ,'2023-10-04 08:00:00','2023-10-06 08:00:00','2023-10-06 08:00:00', 1 , null , 'Visite chez ma grand-mere'),
+    (14 ,'2023-10-07 08:00:00','2023-10-09 08:00:00','2023-10-09 08:00:00',-1 , null , 'Visite chez ma grand-mere'),
+    (15 ,'2023-10-01 08:00:00','2023-10-03 08:00:00','2023-10-03 08:00:00',-1 ,3 , 'Vacances entre famille'),
+    (15 ,'2023-10-07 08:00:00','2023-10-09 08:00:00','2023-10-09 08:00:00',-2 ,3 , null ),
+    (16 ,'2023-10-04 08:00:00','2023-10-06 08:00:00','2023-10-06 08:00:00',-2 ,3 , 'Visite chez ma grand-mere'),
+    (16 ,'2023-10-07 08:00:00','2023-10-09 08:00:00','2023-10-09 08:00:00',-1 ,3 , null );
 
 
 update personnel 
@@ -649,10 +627,6 @@ where nationalite = 2;
 update personnel 
 set  nationalite = 3 
 where nationalite !=  4;
-
-update personnel 
-set  nationalite = 3
-where idpersonnel = ;
 
 
 update personnel 
@@ -801,3 +775,16 @@ INSERT INTO mission (idposte, intitulemission) VALUES
 (88, 'Gerer le developpement de produits et la strategie de marque.'),
 (89, 'Analyser le marche et les tendances pour developper des strategies marketing efficaces.'),
 (90, 'Gerer et superviser le marketing des produits de l''entreprise.');
+
+
+
+
+
+delete from useradmin where idadmin = 18;
+delete from personnel where idpersonnel >= 17;
+delete from contrat_travail ;
+delete from travail ;
+delete from info;
+delete from contrat_essai ;
+delete from essai_avantage ;
+delete from essai;

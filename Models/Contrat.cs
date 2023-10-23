@@ -34,7 +34,7 @@ namespace RH.Models
                 using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))
                 {
                     command.Parameters.AddWithValue("@idessai", this.id);
-                    command.Parameters.AddWithValue("@signessai", this.sign);
+                    command.Parameters.AddWithValue("@signessai", Convert.ToDateTime( this.sign));
                     int rowsAffected = command.ExecuteNonQuery();
 
                     if (rowsAffected > 0)
@@ -71,7 +71,7 @@ namespace RH.Models
                 using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))
                 {
                     command.Parameters.AddWithValue("@idtravail", this.id);
-                    command.Parameters.AddWithValue("@signetravail", this.sign);
+                    command.Parameters.AddWithValue("@signetravail", Convert.ToDateTime(this.sign));
                     int rowsAffected = command.ExecuteNonQuery();
 
                     if (rowsAffected > 0)

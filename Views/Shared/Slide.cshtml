@@ -1,5 +1,6 @@
 @{
   var superieur = Context.Request.Cookies["superieur"] ;
+  int idtypeuser = int.Parse(Context.Request.Cookies["idtypeuser"]) ;
 }
 <a href="#" class="brand">
   <i class="bx bxs-smile"></i>
@@ -12,12 +13,7 @@
                 <span class="text">Service</span>
             </a>
         </li>
-        <li class="@(ViewData["page"] != null && ViewData["page"] == "cv" ? "active" : "")">
-            <a href="@Url.Action("BesoinListe","ListeCv")">
-                <i class="bx bxs-dashboard"></i>
-                <span class="text">CV  </span>
-            </a>
-        </li>
+
           <li class="">
             <a href='@Url.Action(  "" , "personnel" )'>
               <i class="bx bxs-dashboard"></i>
@@ -41,24 +37,32 @@
             <span class="text">Demander des heures supplementaires</span>
           </a>
         </li>
+        @if (superieur != null && idtypeuser == 7){
+                  <li class="@(ViewData["page"] != null && ViewData["page"] == "cv" ? "active" : "")">
+            <a href="@Url.Action("BesoinListe","ListeCv")">
+                <i class="bx bxs-dashboard"></i>
+                <span class="text">CV  </span>
+            </a>
+        </li>
         <li>
           <a href='@Url.Action("BesoinListe","Entretien")'>
             <i class="bx bxs-shopping-bag-alt"></i>
             <span class="text">Entretien</span>
           </a>
         </li>
-        <li class="@(ViewData["page"] != null && ViewData["page"] == "NewContrat" ? "active" : "")">
-            <a href="@Url.Action("Index","NewContrat")">
-                <i class="bx bxs-dashboard"></i>
-                <span class="text">Contrats d'essai</span>
-            </a>
-        </li>
+          <li class="@(ViewData["page"] != null && ViewData["page"] == "NewContrat" ? "active" : "")">
+              <a href="@Url.Action("Index","NewContrat")">
+                  <i class="bx bxs-dashboard"></i>
+                  <span class="text">Contrats d'essai</span>
+              </a>
+          </li>
         <li>
           <a href='@Url.Action("Liste_essai","Contrat")'>
             <i class="bx bxs-doughnut-chart"></i>
             <span class="text">Contrat de travail</span>
           </a>
         </li>
+      }
         <li>
           <a href="#">
             <i class="bx bxs-message-dots"></i>
@@ -71,6 +75,15 @@
             <span class="text">Fiches de postes</span>
           </a>
         </li> *@
+         @if (superieur != null && idtypeuser == 7){
+        <li>
+          <a href="#">
+          <a href="@Url.Action("getNonConsulte","HeureSupp")">
+            <i class="bx bxs-group"></i>
+            <span class="text">Demandes d'heures supp</span>
+          </a>
+        </li>
+      }
       </ul>
       <ul class="side-menu">
         <li>

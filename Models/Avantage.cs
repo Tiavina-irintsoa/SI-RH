@@ -30,7 +30,7 @@ namespace RH.Models
             }        
             try{
                 string sql = "insert into essai_avantage values (@idessai, @idavantage)";
-                Console.WriteLine(sql);
+                Console.WriteLine("insert into essai_avantage values ( "+idessai+" , "+idavantage+")");
                 
                 using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))
                 {

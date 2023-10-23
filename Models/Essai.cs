@@ -46,15 +46,17 @@ namespace RH.Models
             _duree = duree;
             _debut = date;
             _salaire_base = salaire_base;
+            
         }
 
-        public Essai(int idb, int idc, double duree, string date, double salaire_base, Candidat candidat){
+        public Essai(int idb, int idc, double duree, string date, double salaire_base, Candidat candidat,int idessai){
             idbesoin = idb;
             idcandidat = idc;
             _duree = duree;
             _debut = date;
             _salaire_base = salaire_base;
             _candidat = candidat;
+            _idessai = idessai;
         }
 
         public static int getIdbesoin(NpgsqlConnection npg, int idc){
@@ -174,7 +176,7 @@ namespace RH.Models
                     command.Parameters.AddWithValue("@idbesoin", this.idbesoin);
                     command.Parameters.AddWithValue("@idcandidat", this.idcandidat);
                     command.Parameters.AddWithValue("@duree", this.duree);
-                    command.Parameters.AddWithValue("@debut", this.debut);
+                    command.Parameters.AddWithValue("@debut", Convert.ToDateTime(this.debut));
                     command.Parameters.AddWithValue("@salaire_base", this.salaire_base);
                     int rowsAffected = command.ExecuteNonQuery();
 
@@ -186,7 +188,7 @@ namespace RH.Models
                         {
                             using (NpgsqlDataReader reader = command2.ExecuteReader())
                             {
-                                while (reader.Read())
+                                if(reader.Read())
                                 {
                                     idessai = reader.GetInt32(0);
                                 }
@@ -251,7 +253,7 @@ namespace RH.Models
                             contact = Convert.ToString(reader["contact"])
                         };
                         
-                        Essai Essai = new  Essai(idbesoin, idcandidat, duree, datefin, salaire_base, candidat);
+                        Essai Essai = new  Essai(idbesoin, idcandidat, duree, datefin, salaire_base, candidat,idessai);
                         EssaiList.Add(Essai);
                     }
                     essais = EssaiList.ToArray();

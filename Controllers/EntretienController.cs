@@ -16,7 +16,7 @@ public class EntretienController : Controller
         try{
             Besoin besoin = new Besoin(idbesoin);
             besoin.EmbaucherPremiers();
-            return RedirectToAction("BesoinListe","entretien");
+            return RedirectToAction("","NewContrat");
         }
         catch(Exception e){
             return  RedirectToAction( "listeCandidat" , "entretien",new{

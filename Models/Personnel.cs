@@ -372,7 +372,7 @@ public class Personnel{
             using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))
             {
                 command.Parameters.AddWithValue("@idpersonnel", idpersonnel);
-                command.Parameters.AddWithValue("@date_embauche", date_embauche);
+                command.Parameters.AddWithValue("@date_embauche", Convert.ToDateTime(date_embauche));
 
                 string sqlWithValues = command.CommandText;
                 foreach (NpgsqlParameter parameter in command.Parameters)
@@ -418,7 +418,7 @@ public class Personnel{
         }
         try
         {
-            string sql = "INSERT INTO personnel_salaire (idpersonnel, salaire_brut) VALUES (@idpersonnel, @salaire_brut) " ;
+            string sql = "INSERT INTO personnel_salaire (idpersonnel, salaire_base) VALUES (@idpersonnel, @salaire_brut) " ;
             using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))
             {
                 command.Parameters.AddWithValue("@idpersonnel", idpersonnel);

@@ -251,11 +251,10 @@ public class Conge{
                 else{
                     cmd.Parameters.AddWithValue("@autre_raison", autre_raison); 
                 }
-                Console.WriteLine( cmd.CommandText );
                 try
                 {
-                    // int rowsAffected = cmd.ExecuteNonQuery();
-                    // Console.WriteLine($"{rowsAffected} ligne(s) insérée(s) avec succès.");
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    Console.WriteLine($"{rowsAffected} ligne(s) insérée(s) avec succès.");
                 }
                 catch (Exception ex)
                 {
@@ -302,8 +301,7 @@ public class Conge{
 
     public static void isValid(  string idpersonnel  , string dt1 , string tm1 , string dt2 , string tm2 , string raison ) {
         if (Utilitaire.IsDateGreaterThan15DaysFromToday( dt1 ) == false  ){
-            if( raison == "0" )
-                throw new Exception( " vous devez envoyer la demande 15 jours avant " );
+            throw new Exception( "vous devez envoyer la demande 15 jours avant " );
         }
 
         if( raison != "0" ) return ;

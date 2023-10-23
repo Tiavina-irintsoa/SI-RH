@@ -52,6 +52,7 @@ public class FicheCandidat{
 
                 using (NpgsqlDataReader reader = command.ExecuteReader())                {
                     while (reader.Read())                    {
+                        Console.WriteLine( "ato" );
                         int idchoixindex = 0;
                         int idcanditature  = 1;
                         int idcandidatindex = 2;
@@ -69,6 +70,7 @@ public class FicheCandidat{
 
                         if (!choix.ContainsKey(intituleTypeCritere))
                         {
+                            Console.WriteLine( "key : "+intituleTypeCritere );
                             List<Choix> listeChoix = new List<Choix>();
                             choix[intituleTypeCritere] = listeChoix;
                         }

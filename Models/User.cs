@@ -30,7 +30,7 @@ namespace RH.Models
             set { _idpersonnel = value; }
         }
 
-        public User(string nom, string prenom, int idtype, int idperso){
+        public User(string nom, string mdp, int idtype, int idperso){
             _nom = nom;
             _mdp = mdp;
             _idtypeuser =idtype;

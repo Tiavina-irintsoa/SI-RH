@@ -13,7 +13,7 @@
                   <th>Contact</th>
                   <th>Mail</th>
                   <th>Fin du contrat</th>
-                  <th>Détails</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
@@ -24,7 +24,7 @@
                   <td> @essai.candidat.contact </td>
                   <td> @essai.candidat.mail </td>
                   <td> @essai.debut </td>
-                  <td> <a href='@Url.Action("Travail","Contrat", new{id=@essai.idessai, idc=@essai.idcandidat, salaire=@essai.salaire_base})'>Voir</a> </td>
+                  <td> <a href='@Url.Action("Travail","Contrat", new{id=@essai.idessai, idc=@essai.idcandidat, salaire=@essai.salaire_base})'>Faire un contrat de travail</a> </td>
                 </tr>
                 }
               </tbody>

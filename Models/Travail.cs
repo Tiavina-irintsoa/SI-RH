@@ -41,13 +41,13 @@ namespace RH.Models
             }        
             try{
                 string sql = "insert into travail (idcontrat_essai, duree, debut) values (@idcontrat_essai, @duree, @debut)";
-                Console.WriteLine(sql);
+                Console.WriteLine("insert into travail (idcontrat_essai, duree, debut) values ("+idcontrat_essai+", "+@duree+", "+@debut+")");
                 
                 using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))
                 {
                     command.Parameters.AddWithValue("@idcontrat_essai", this.idcontrat_essai);
                     command.Parameters.AddWithValue("@duree", this.duree);
-                    command.Parameters.AddWithValue("@debut", this.debut);
+                    command.Parameters.AddWithValue("@debut", Convert.ToDateTime(this.debut));
                     int rowsAffected = command.ExecuteNonQuery();
 
                     if (rowsAffected > 0)
