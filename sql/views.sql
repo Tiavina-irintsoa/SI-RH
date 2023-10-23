@@ -194,6 +194,39 @@ create or replace view v_service_poste as
     from poste as p
         natural join service as  s;
 
-    
+---heure supp
+create or replace view v_heure_supp_non_consulte as (
+    select 
+    *
+    from demande_heure_sup
+    where validation = 0
+);
+create or replace view v_heure_supp_non_consulte_avec_service as (
+    select 
+    v_heure_supp_non_consulte.*, service.nomService ,service.iconeService
+    from v_heure_supp_non_consulte
+    join service 
+        on service.idservice = v_heure_supp_non_consulte.idservice
+);
+create or replace view v_essai_fin as(
+    SELECT *
+    FROM contrat_essai
+    NATURAL JOIN essai
+    NATURAL JOIN candidat
+    WHERE (debut::date + (duree || ' month')::interval) <= current_date
+    AND idcontrat_essai NOT IN (SELECT idcontrat_essai FROM travail)
+);
 
 
+create or replace view employe_demande_heure_sup as (
+    select 
+    employe_heure_sup.*, v_personnel_information.nomposte, v_personnel_information.nom,v_personnel_information.prenom
+    from employe_heure_sup
+    join v_personnel_information
+    on v_personnel_information.idpersonnel = employe_heure_sup.idemploye
+);
+create or replace view v_candidature_accepte as (
+    select * from
+    v_candidat_candidature as candidature
+    where validation = 3
+);
