@@ -1,6 +1,5 @@
 @{
   var superieur = Context.Request.Cookies["superieur"] ;
-  int idtypeuser = int.Parse(Context.Request.Cookies["idtypeuser"]) ;
 }
 <a href="#" class="brand">
   <i class="bx bxs-smile"></i>
@@ -54,29 +53,25 @@
                 <span class="text">Contrats d'essai</span>
             </a>
         </li>
-        @* <li>
-          <a href="#">
+        <li>
+          <a href='@Url.Action("Liste_essai","Contrat")'>
             <i class="bx bxs-doughnut-chart"></i>
-            <span class="text">Analytics</span>
+            <span class="text">Contrat de travail</span>
           </a>
-        </li> *@
-        @* <li>
+        </li>
+        <li>
           <a href="#">
             <i class="bx bxs-message-dots"></i>
             <span class="text">Message</span>
           </a>
-        </li> *@
-        
-        @if (superieur != null && idtypeuser == 7){
-        <li>
-          <a href="@Url.Action("getNonConsulte","HeureSupp")">
-            <i class="bx bxs-group"></i>
-            <span class="text">Demandes de congé</span>
-          </a>
         </li>
-      }
+        @* <li>
+          <a href='@Url.Action("Fiche","Contrat")'>
+            <i class="bx bxs-group"></i>
+            <span class="text">Fiches de postes</span>
+          </a>
+        </li> *@
       </ul>
-      
       <ul class="side-menu">
         <li>
           <a href="@Url.Action("Index","PrimeAnciennete")">
