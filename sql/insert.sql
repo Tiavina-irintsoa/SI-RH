@@ -670,3 +670,10 @@ where idpersonnel = 15;
 update personnel 
 set dtn = '1972-01-02'
 where idpersonnel = 16;
+
+
+INSERT INTO personnel_embauche (idpersonnel, date_embauche)
+values( 16 , '2010-10-23' );
+
+insert into personnel_salaire ( idpersonnel , salaire_base )
+values( 16 , 10023045.00 );
