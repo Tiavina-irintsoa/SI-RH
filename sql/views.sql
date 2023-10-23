@@ -194,6 +194,20 @@ create or replace view v_service_poste as
     from poste as p
         natural join service as  s;
 
+---heure supp
+create or replace view v_heure_supp_non_consulte as (
+    select 
+    *
+    from demande_heure_sup
+    where validation = 0
+);
+create or replace view v_heure_supp_non_consulte_avec_service as (
+    select 
+    v_heure_supp_non_consulte.*, service.nomService ,service.iconeService
+    from v_heure_supp_non_consulte
+    join service 
+        on service.idservice = v_heure_supp_non_consulte.idservice
+);
 create or replace view v_essai_fin as(
     SELECT *
     FROM contrat_essai
