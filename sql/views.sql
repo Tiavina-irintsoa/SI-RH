@@ -225,3 +225,8 @@ create or replace view employe_demande_heure_sup as (
     join v_personnel_information
     on v_personnel_information.idpersonnel = employe_heure_sup.idemploye
 );
+create or replace view v_candidature_accepte as (
+    select * from
+    v_candidat_candidature as candidature
+    where validation = 3
+);
