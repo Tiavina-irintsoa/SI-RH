@@ -200,6 +200,7 @@ values( 1 , 1 ),
 
 
 
+create sequence idpersonnel start with 1000;
 
 -- vaovao ralph 
 -- Insertion de données dans la table "personnel"
