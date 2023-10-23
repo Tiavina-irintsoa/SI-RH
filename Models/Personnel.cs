@@ -4,7 +4,12 @@ using System.Collections.Generic;
 using Npgsql;
 
 public class Personnel{
-    public int idpersonnel { get; set; } 
+    int _idpersonnel;
+    public int idpersonnel {
+        get { return _idpersonnel; }
+        set { _idpersonnel = value; }
+    }
+    public int date_embauche { get; set; } 
     public int idposte { get; set; }
     public Service ? service{ get;  set; }
     public int idservice { get; set; }
@@ -29,12 +34,12 @@ public class Personnel{
 
     }
     public Personnel(int id){
-        idpersonnel = id;
+        this.idpersonnel = id;
     }
     public Personnel(string nom, string prenom, int id, string nomposte){
         this.nom = nom;
         this.prenom = prenom;
-        idpersonnel = id;
+        this.idpersonnel = id;
         this.nomposte = nomposte;
     }
     public static List<Personnel> GetPersonnelByService(NpgsqlConnection npg, int idservice)
@@ -175,7 +180,6 @@ public class Personnel{
         }
     }
 
-
     public static List<Personnel> GetAll( NpgsqlConnection npg, string sql  ){
         bool estOuvert = false;
         List<Personnel> PersonnelList = new List<Personnel>();
@@ -304,6 +308,156 @@ public class Personnel{
         return idpersonnel;
     }
 
+    public static void insertPoste( NpgsqlConnection npg, int idposte, int idperso) {
+        bool estOuvert = false;
+        if (npg == null)
+        {
+            estOuvert = true;
+            Connection connexion = new Connection();
+            npg = connexion.ConnectSante();
+        }
+        try
+        {
+            string sql = "INSERT INTO personnel_poste (idposte, idpersonnel) VALUES (@idposte, @idpersonnel) " ;
+            using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))
+            {
+                command.Parameters.AddWithValue("@idposte", idposte);
+                command.Parameters.AddWithValue("@idpersonnel", idperso);
+
+                string sqlWithValues = command.CommandText;
+                foreach (NpgsqlParameter parameter in command.Parameters)
+                {
+                    sqlWithValues = sqlWithValues.Replace(parameter.ParameterName, parameter.Value.ToString());
+                }
+
+                Console.WriteLine(sqlWithValues);
+
+                int rowsAffected = command.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
+                {
+                    Console.WriteLine("Une ligne mise à jour.");
+                }
+                else
+                {
+                    Console.WriteLine("Aucune ligne mise à jour.");
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.ToString());
+            throw e;
+        }
+        finally
+        {
+            if (estOuvert)
+            {
+                npg.Close();
+            }
+        }
+    }
+
+    public static void insertEmbauche( NpgsqlConnection npg, int idpersonnel, string date_embauche) {
+        bool estOuvert = false;
+        if (npg == null)
+        {
+            estOuvert = true;
+            Connection connexion = new Connection();
+            npg = connexion.ConnectSante();
+        }
+        try
+        {
+            string sql = "INSERT INTO personnel_embauche (idpersonnel, date_embauche) VALUES (@idpersonnel, @date_embauche) " ;
+            using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))
+            {
+                command.Parameters.AddWithValue("@idpersonnel", idpersonnel);
+                command.Parameters.AddWithValue("@date_embauche", date_embauche);
+
+                string sqlWithValues = command.CommandText;
+                foreach (NpgsqlParameter parameter in command.Parameters)
+                {
+                    sqlWithValues = sqlWithValues.Replace(parameter.ParameterName, parameter.Value.ToString());
+                }
+
+                Console.WriteLine(sqlWithValues);
+
+                int rowsAffected = command.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
+                {
+                    Console.WriteLine("Une ligne mise à jour.");
+                }
+                else
+                {
+                    Console.WriteLine("Aucune ligne mise à jour.");
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.ToString());
+            throw e;
+        }
+        finally
+        {
+            if (estOuvert)
+            {
+                npg.Close();
+            }
+        }
+    }
+
+    public static void insertSalaire( NpgsqlConnection npg, int idpersonnel, double salaire_brut) {
+        bool estOuvert = false;
+        if (npg == null)
+        {
+            estOuvert = true;
+            Connection connexion = new Connection();
+            npg = connexion.ConnectSante();
+        }
+        try
+        {
+            string sql = "INSERT INTO personnel_salaire (idpersonnel, salaire_brut) VALUES (@idpersonnel, @salaire_brut) " ;
+            using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))
+            {
+                command.Parameters.AddWithValue("@idpersonnel", idpersonnel);
+                command.Parameters.AddWithValue("@salaire_brut", salaire_brut);
+
+                string sqlWithValues = command.CommandText;
+                foreach (NpgsqlParameter parameter in command.Parameters)
+                {
+                    sqlWithValues = sqlWithValues.Replace(parameter.ParameterName, parameter.Value.ToString());
+                }
+
+                Console.WriteLine(sqlWithValues);
+
+                int rowsAffected = command.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
+                {
+                    Console.WriteLine("Une ligne mise à jour.");
+                }
+                else
+                {
+                    Console.WriteLine("Aucune ligne mise à jour.");
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.ToString());
+            throw e;
+        }
+        finally
+        {
+            if (estOuvert)
+            {
+                npg.Close();
+            }
+        }
+    }
+
     public static string GetSql( string annee, string genre, string min_age, string max_age, string adresse, string nationalite, string matricule, string idservice, string brut_min, string brut_max, string net_min, string net_max , string nom_prenom){
             List<string> where = new();
             if(! string.IsNullOrEmpty( nom_prenom ) ){
@@ -375,4 +529,5 @@ public class Personnel{
             }
             return sql_result;
     }
+
 }

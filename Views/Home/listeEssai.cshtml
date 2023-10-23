@@ -1,0 +1,34 @@
+@model Essai[]
+<div class="table-data">
+          <div class="order">
+            <div class="head">
+              <h3>Liste des contrats d'essai terminés</h3>
+              <i class="bx bx-search"></i>
+              <i class="bx bx-filter"></i>
+            </div>
+            <table>
+              <thead>
+                <tr>
+                  <th>Nom</th>
+                  <th>Contact</th>
+                  <th>Mail</th>
+                  <th>Fin du contrat</th>
+                  <th>Détails</th>
+                </tr>
+              </thead>
+              <tbody>
+                @foreach (var essai in Model)
+                {
+                <tr>
+                  <td> @essai.candidat.nom @essai.candidat.prenom</td>
+                  <td> @essai.candidat.contact </td>
+                  <td> @essai.candidat.mail </td>
+                  <td> @essai.debut </td>
+                  <td> <a href='@Url.Action("Travail","Contrat", new{id=@essai.idessai, idc=@essai.idcandidat, salaire=@essai.salaire_base})'>Voir</a> </td>
+                </tr>
+                }
+              </tbody>
+            </table>
+            
+          </div>
+</div>

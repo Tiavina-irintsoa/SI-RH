@@ -4,42 +4,20 @@ using Npgsql.Replication;
 namespace RH.Models
 {
     public class Contrat{
-        int _idessai;
-        public int idessai {
-            get { return _idessai; }
-            set { _idessai = value; }
+        int _id;
+        public int id {
+            get { return _id; }
+            set { _id = value; }
         }
-        string _signessai;
-        public string signessai {
-            get { return _signessai; }
-            set { _signessai = value; }
-        }
-        double _net;
-        public double net {
-            get { return _net; }
-            set { _net = value; }
+        string _sign;
+        public string sign {
+            get { return _sign; }
+            set { _sign = value; }
         }
 
-        int _idtravail;
-        public int idtravail {
-            get { return _idtravail; }
-            set { _idtravail = value; }
-        }
-        string _signetravail;
-        public string signetravail {
-            get { return _signetravail; }
-            set { _signetravail = value; }
-        }
-
-        public Contrat(int idb, string date, double net){
-            _idessai = idb;
-            _signessai = date;
-            _net = net;
-        }
-
-        public Contrat(int idt, string signetravail){
-            _idtravail = idt;
-            _signetravail = signetravail;
+        public Contrat(int idb, string date){
+            _id = idb;
+            _sign = date;
         }
 
         public void InsertContratEssai(NpgsqlConnection npg) {
@@ -50,14 +28,13 @@ namespace RH.Models
                 npg = connexion.ConnectSante();
             }        
             try{
-                string sql = "insert into contrat_essai (idessai, net, signessai) values (@idessai, @net, @signessai)";
+                string sql = "insert into contrat_essai (idessai, signessai) values (@idessai, @signessai)";
                 Console.WriteLine(sql);
                 
                 using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))
                 {
-                    command.Parameters.AddWithValue("@idessai", this.idessai);
-                    command.Parameters.AddWithValue("@net", this.net);
-                    command.Parameters.AddWithValue("@signessai", this.signessai);
+                    command.Parameters.AddWithValue("@idessai", this.id);
+                    command.Parameters.AddWithValue("@signessai", this.sign);
                     int rowsAffected = command.ExecuteNonQuery();
 
                     if (rowsAffected > 0)
@@ -93,8 +70,8 @@ namespace RH.Models
                 
                 using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))
                 {
-                    command.Parameters.AddWithValue("@idtravail", this.idtravail);
-                    command.Parameters.AddWithValue("@signetravail", this.signetravail);
+                    command.Parameters.AddWithValue("@idtravail", this.id);
+                    command.Parameters.AddWithValue("@signetravail", this.sign);
                     int rowsAffected = command.ExecuteNonQuery();
 
                     if (rowsAffected > 0)

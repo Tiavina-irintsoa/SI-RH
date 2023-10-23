@@ -1,0 +1,30 @@
+@{
+    Layout = "_form"; 
+}
+      <div id="div">
+        <div id="form-title">
+            <h1>
+                S'inscrire
+            </h1>
+        </div>
+        <form action='@Url.Action("InsertUser","Contrat")' method="post">
+          <div class="">
+           <div class="my-input-group">
+             <label for="">
+                Nom : 
+            </label>
+            <input type="text" name="nom" required>
+            <input type="hidden" name="idperso" value="@ViewBag.idpersonnel">
+           </div>
+           <div class="my-input-group">
+             <label for="">
+              Mot de passe
+            </label>
+            <input type="password" name="mdp"  required>
+           </div>
+            <div class="my-input-group">
+                <input type="submit" value="Connexion">
+            </div>
+          </div>
+        </form>        
+      </div>

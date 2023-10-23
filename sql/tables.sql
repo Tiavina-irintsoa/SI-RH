@@ -356,3 +356,9 @@ alter table demande_heure_sup add column raison text;
 
 alter table personnel_salaire
 RENAME column salaire_brut to salaire_base;
+
+create table mission(
+    idmission serial primary key,
+    idposte integer references poste (idposte),
+    intitulemission varchar
+);

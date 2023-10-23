@@ -37,9 +37,9 @@
             <div class="col-lg-6">
                 <label for=""> Nationalité : </label>
                 Malagasy
-                <input type="checkbox"  @(ViewBag.Nationalite == "1" ? "checked" : "")  name="nationalite"  value="3" />
+                <input type="checkbox"  @(ViewBag.Nationalite == "1" ? "checked" : "")  name="nationalite"  value="0" />
                 Etrangé
-                <input type="checkbox"  @(ViewBag.Nationalite == "1" ? "checked" : "") name="nationalite" value="4" />
+                <input type="checkbox"  @(ViewBag.Nationalite == "1" ? "checked" : "") name="nationalite" value="1" />
             </div>
             <div class="col-lg-6">
               <label for=""> Adresse </label>
@@ -100,12 +100,12 @@
           <tbody>
           @foreach( var p in @ViewBag.listePersonnel ){
             <tr>
-              <td style="margin-top: 0px !important;" >@p.nomposte</td>
+              <td>@p.nomposte</td>
               <td>@p.nom</td>
               <td>@p.prenom</td>
-              <td>@p.mail </td>
+              <td>@p.mail</td>
               <td>
-                <a class="details-personnel" onclick='afficherDetailsPersonnel( ("@p.nom"), ("@p.prenom"), ("@p.nomposte") , ("@p.matricule") , ("@p.nationalite") , ("@p.adresse") , (@p.genre) ,  ("@p.dtn") ,  ("@p.latest_salary_base") , (@p.latest_salary_net) , ("@p.latest_salary_date") , ("@p.latest_hire_date") , ("@p.contact") , ("@p.age") )' >Voir</a>
+                <a class="details-personnel" onclick='afficherDetailsPersonnel( ("@p.nom"), ("@p.prenom"), ("@p.nomposte") , ("@p.matricule") , ("@p.nationalite") , ("@p.adresse") , (@p.genre) ,  ("@p.dtn") ,  ("@p.latest_salary_base") , ("@p.latest_salary_net") , ("@p.latest_salary_date") , ("@p.latest_hire_date") , ("@p.contact") , ("@p.age"), ("salaire"), ("mission") , ("nature") )' >Voir</a>
               </td>
             </tr>
           }
@@ -124,7 +124,7 @@
             </div>
             <div id="liste_details" class="grid-container">
               <div class="">
-                Nom et Prénom : 
+                Nom et Prénom :
               </div>
               <div class="">
                 Matricule :
@@ -172,38 +172,29 @@
     }
 
     function formaterNombre(chaineNombre, options = {}) {
-      const {
-        separateurMilliers = true,
-        separateurDecimal = '.',
-        symboleDevise = '',
-        decimal = 2
-      } = options;
+    const {
+      separateurMilliers = true,
+      separateurDecimal = '.',
+      symboleDevise = '',
+      decimal = 2
+    } = options;
 
-      const nombreSansSeparateurs = (chaineNombre.toString()).replace(/[^\d.,-]/g, '');
+    const nombreSansSeparateurs = (chaineNombre.toString()).replace(/[^\d.,-]/g, '');
 
-      const nombre = parseFloat(nombreSansSeparateurs);
+    const nombre = parseFloat(nombreSansSeparateurs);
 
-      if (isNaN(nombre)) {
-        return 'Nombre invalide';
-      }
-
-      const optionsFormatage = {
-        minimumFractionDigits: decimal,
-        maximumFractionDigits: decimal
-      };
-
-      // Vérifier si un séparateur de milliers est requis
-      if (separateurMilliers) {
-        optionsFormatage.useGrouping = true;
-      } else {
-        optionsFormatage.useGrouping = false;
-      }
-
-      const nombreFormate = nombre.toLocaleString(undefined, optionsFormatage);
-
-      return symboleDevise + nombreFormate;
+    if (isNaN(nombre)) {
+      return 'Nombre invalide';
     }
 
+    const nombreFormate = nombre.toLocaleString(undefined, {
+      style: 'decimal',
+      minimumFractionDigits: decimal,
+      maximumFractionDigits: decimal
+    });
+
+    return `${symboleDevise}${nombreFormate}`;
+  }
 
   function getGenre( str ){
     if( str == '2' ){
@@ -212,7 +203,7 @@
     return 'Homme'
   }
   function getNationalite( str , genre ){
-    if( str == '4' ){
+    if( str == '1' ){
       if( genre == '2' )
         return 'Etrangère';
       return 'Etranger'
@@ -262,7 +253,7 @@
       popup.style.top = '-35%';
       popup.style.opacity = '0';
     }
-    function afficherDetailsPersonnel(nom, prenom, nomposte , matricule , nationalite , adresse , genre ,  dtn ,  latest_salary_base , latest_salary_net , latest_salary_date , latest_hire_date , contact , age ) {
+    function afficherDetailsPersonnel(nom, prenom, nomposte , matricule , nationalite , adresse , genre ,  dtn ,  latest_salary_brut , latest_salary_net , latest_salary_date , latest_hire_date , contact , age , salaire, mission, nature ) {
     // Défilement vers le haut de la page
     const scrollContainer = document.getElementById('form-personnel');
     scrollContainer.scrollIntoView({
@@ -322,10 +313,16 @@
             <span class="gras">Adresse  :</span> '+adresse+' \
           </div>\
           <div class="">\
-            <span class="gras">Salaire de base  :</span> '+formaterNombre(latest_salary_base)+' Ar  \
+            <span class="gras">Ancienneté  :</span> '+difference+' \
           </div>\
           <div class="">\
-            <span class="gras">Ancienneté  :</span> '+difference+' \
+            <span class="gras">Mission  :</span> '+mission+' \
+          </div>\
+          <div class="">\
+            <span class="gras">Salaire de base  :</span> '+salaire+' \
+          </div>\
+          <div class="">\
+            <span class="gras">Nature  :</span> '+nature+' \
           </div>'
     ;    
   }

@@ -40,13 +40,59 @@ namespace RH.Models
             set { _nbenfant = value; }
         }
 
-        public Info(int idc, string cin, string adr, string pr, string mr, int nbe){
-            _idcandidat = idc;
+        public Info(int idcandidat, string cin, string adr, string pr, string mr, int nbe){
+            _idcandidat = idcandidat;
             _cin = cin;
             _adresse = adr;
             _pere = pr;
             _mere = mr;
             _nbenfant = nbe;
+        }
+
+        public static Info GetInfoId(NpgsqlConnection npg, int idcandidat)
+        {
+            bool estOuvert = false;
+            if (npg == null)
+            {
+                estOuvert = true;
+                Connection connexion = new Connection();
+                npg = connexion.ConnectSante();
+            }
+            try
+            {
+                string sql = "SELECT * FROM info where idcandidat=@idcandidat";
+                Console.WriteLine(sql);
+                using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))
+                {
+                    command.Parameters.AddWithValue("@idcandidat", idcandidat);
+                    using (NpgsqlDataReader reader = command.ExecuteReader())
+                    {
+                        if (reader.Read())
+                        {
+                            string cin = Convert.ToString(reader["cin"]);
+                            string adresse = Convert.ToString(reader["cin"]);
+                            string pere = Convert.ToString(reader["pere"]);
+                            string mere = Convert.ToString(reader["mere"]);
+                            int nbenfant = Convert.ToInt32(reader["nbenfant"]);
+                            
+                            Info info = new Info(idcandidat, cin, adresse, pere, mere, nbenfant);
+                            return info;
+                        }
+                    }
+                }
+                return null;
+            }
+            catch (Exception e)
+            {
+                throw e;
+            }
+            finally
+            {
+                if (estOuvert)
+                {
+                    npg.Close();
+                }
+            }
         }
 
         public void InsertInfo(NpgsqlConnection npg) {
