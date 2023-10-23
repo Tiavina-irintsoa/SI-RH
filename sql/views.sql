@@ -218,3 +218,10 @@ create or replace view v_essai_fin as(
 );
 
 
+create or replace view employe_demande_heure_sup as (
+    select 
+    employe_heure_sup.*, v_personnel_information.nomposte, v_personnel_information.nom,v_personnel_information.prenom
+    from employe_heure_sup
+    join v_personnel_information
+    on v_personnel_information.idpersonnel = employe_heure_sup.idemploye
+);
