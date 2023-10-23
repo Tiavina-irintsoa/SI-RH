@@ -205,6 +205,19 @@ values( 1 , 1 ),
 -- Insertion de données dans la table "personnel"
 INSERT INTO personnel (nom, prenom, mail, matricule, nationalite, adresse, genre, travailleur, dtn)
 VALUES
+    ('Doe', 'John', 'john.doe@email.com', ( 'PERS' || nextval('idpersonnel')), 1, '123 Main St', 1, 1, '1990-01-01'),
+    ('Smith', 'Jane', 'jane.smith@email.com', ( 'PERS' || nextval('idpersonnel')), 2, '456 Elm St', 2, 1, '1995-03-15'),
+    ('Johnson', 'Robert', 'robert.johnson@email.com', ( 'PERS' || nextval('idpersonnel')), 3, '789 Oak St', 1, 0, '1985-07-10'),
+    -- Ajoutez ici d'autres lignes d'insertion pour un total d'au moins 20 lignes
+    ('Brown', 'Sarah', 'sarah.brown@email.com', ( 'PERS' || nextval('idpersonnel')), 1, '567 Pine St', 2, 1, '1988-11-20'),
+    ('Garcia', 'Carlos', 'carlos.garcia@email.com', ( 'PERS' || nextval('idpersonnel')), 2, '890 Maple St', 1, 1, '1998-04-25'),
+    ('Wilson', 'Emily', 'emily.wilson@email.com', ( 'PERS' || nextval('idpersonnel')), 3, '234 Birch St', 2, 0, '1993-09-05'),
+    ('Chen', 'Wei', 'wei.chen@email.com', ( 'PERS' || nextval('idpersonnel')), 1, '345 Cedar St', 1, 1, '1992-12-12'),
+    ('Martinez', 'Luis', 'luis.martinez@email.com', ( 'PERS' || nextval('idpersonnel')), 2, '456 Oak St', 1, 1, '1989-06-30'),
+    ('Davis', 'Susan', 'susan.davis@email.com', ( 'PERS' || nextval('idpersonnel')), 3, '567 Elm St', 2, 1, '1987-03-07'),
+    ('Kim', 'Min-Ji', 'minji.kim@email.com', ( 'PERS' || nextval('idpersonnel')), 1, '678 Pine St', 2, 1, '1991-08-14'),
+    ('Nguyen', 'Thi', 'thi.nguyen@email.com', ( 'PERS' || nextval('idpersonnel')), 2, '789 Cedar St', 2, 0, '1986-02-19'),
+    ('Jackson', 'William', 'william.jackson@email.com', ( 'PERS' || nextval('idpersonnel')), 3, '890 Birch St', 1, 1, '1984-05-28');
     ('Doe', 'John', 'john.doe@email.com', '12345', 1 , '123 Main St', 1 , 1, '1990-01-01'),
     ('Smith', 'Jane', 'jane.smith@email.com', '67890', 2, '456 Elm St', 2, 1, '1995-03-15'),
     ('Johnson', 'Robert', 'robert.johnson@email.com', '54321', 3, '789 Oak St', 1, 0, '1985-07-10'),

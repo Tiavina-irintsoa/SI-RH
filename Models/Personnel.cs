@@ -233,6 +233,77 @@ public class Personnel{
         }     
     }
 
+    public int insert( NpgsqlConnection npg) {
+        bool estOuvert = false;
+
+        if (npg == null)
+        {
+            estOuvert = true;
+            Connection connexion = new Connection();
+            npg = connexion.ConnectSante();
+        }
+
+        try
+        {
+            string sql = "INSERT INTO personnel (nom, prenom, mail, matricule, nationalite, adresse, genre, travailleur, dtn) VALUES " + 
+            "(@nom, @prenom, @mail, ( 'PERS' || nextval('idpersonnel')), @nationalite, @adresse, @genre, @travailleur, @dtn)";
+            using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))
+            {
+                command.Parameters.AddWithValue("@nom", nom);
+                command.Parameters.AddWithValue("@prenom", prenom);
+                command.Parameters.AddWithValue("@mail", mail);
+                command.Parameters.AddWithValue("@nationalite", nationalite);
+                command.Parameters.AddWithValue("@adresse", adresse);
+                command.Parameters.AddWithValue("@genre", genre);
+                command.Parameters.AddWithValue("@travailleur", travailleur);
+                command.Parameters.AddWithValue("@dtn", dtn);
+
+                string sqlWithValues = command.CommandText;
+                foreach (NpgsqlParameter parameter in command.Parameters)
+                {
+                    sqlWithValues = sqlWithValues.Replace(parameter.ParameterName, parameter.Value.ToString());
+                }
+
+                Console.WriteLine(sqlWithValues);
+
+                int rowsAffected = command.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
+                {
+                    sql = "SELECT idpersonnel FROM personnel order by idpersonnel desc";
+                        Console.WriteLine( sql );
+                        using (NpgsqlCommand command2 = new NpgsqlCommand(sql, npg))
+                        {
+                            using (NpgsqlDataReader reader = command2.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    idpersonnel = reader.GetInt32(0);
+                                }
+                            }
+                        }
+                }
+                else
+                {
+                    Console.WriteLine("Aucune ligne mise à jour.");
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.ToString());
+            throw e;
+        }
+        finally
+        {
+            if (estOuvert)
+            {
+                npg.Close();
+            }
+        }
+        return idpersonnel;
+    }
+
     public static string GetSql( string annee, string genre, string min_age, string max_age, string adresse, string nationalite, string matricule, string idservice, string brut_min, string brut_max, string net_min, string net_max , string nom_prenom){
             List<string> where = new();
             if(! string.IsNullOrEmpty( nom_prenom ) ){
