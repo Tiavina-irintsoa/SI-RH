@@ -20,7 +20,7 @@ public class Personnel{
     public string ? contact { get ; set; }
     public DateTime ? dtn { get; set; }
     public int age { get;set; }
-    public double latest_salary_brut { get; set; }
+    public double latest_salary_base { get; set; }
     public double latest_salary_net { get; set; }
     public DateTime ? latest_salary_date { get; set; }
     public DateTime ? latest_hire_date { get; set; }
@@ -81,7 +81,7 @@ public class Personnel{
                             contact = reader["contact"] != DBNull.Value ? reader["contact"].ToString() : null,
                             dtn = reader["dtn"] != DBNull.Value ? Convert.ToDateTime(reader["dtn"]) : (DateTime?)null,
                             age = 0, // Calculer l'âge en fonction de la date de naissance
-                            latest_salary_brut = 0, // Récupérer le dernier salaire brut
+                            latest_salary_base = 0, // Récupérer le dernier salaire brut
                             latest_salary_net = 0, // Récupérer le dernier salaire net
                             latest_salary_date = null, // Récupérer la date du dernier salaire
                             latest_hire_date = null, // Récupérer la date d'embauche la plus récente
@@ -150,7 +150,7 @@ public class Personnel{
                             contact = reader["contact"] != DBNull.Value ? reader["contact"].ToString() : null,
                             dtn = reader["dtn"] != DBNull.Value ? Convert.ToDateTime(reader["dtn"]) : (DateTime?)null,
                             age = 0, // Calculer l'âge en fonction de la date de naissance
-                            latest_salary_brut = 0, // Récupérer le dernier salaire brut
+                            latest_salary_base = 0, // Récupérer le dernier salaire brut
                             latest_salary_net = 0, // Récupérer le dernier salaire net
                             latest_salary_date = null, // Récupérer la date du dernier salaire
                             latest_hire_date = null, // Récupérer la date d'embauche la plus récente
@@ -208,7 +208,7 @@ public class Personnel{
                             genre = Convert.ToInt32(reader["genre"]),
                             travailleur = Convert.ToInt32(reader["travailleur"]),
                             dtn =  Convert.ToDateTime(reader["dtn"]),
-                            latest_salary_brut = 0,
+                            latest_salary_base = 0,
                             latest_salary_net = 0,
                             latest_salary_date =  null,
                             latest_hire_date = Convert.ToDateTime(reader["latest_hire_date"]),
@@ -231,6 +231,77 @@ public class Personnel{
                 npg.Close();
             }
         }     
+    }
+
+    public int insert( NpgsqlConnection npg) {
+        bool estOuvert = false;
+
+        if (npg == null)
+        {
+            estOuvert = true;
+            Connection connexion = new Connection();
+            npg = connexion.ConnectSante();
+        }
+
+        try
+        {
+            string sql = "INSERT INTO personnel (nom, prenom, mail, matricule, nationalite, adresse, genre, travailleur, dtn) VALUES " + 
+            "(@nom, @prenom, @mail, ( 'PERS' || nextval('idpersonnel')), @nationalite, @adresse, @genre, @travailleur, @dtn)";
+            using (NpgsqlCommand command = new NpgsqlCommand(sql, npg))
+            {
+                command.Parameters.AddWithValue("@nom", nom);
+                command.Parameters.AddWithValue("@prenom", prenom);
+                command.Parameters.AddWithValue("@mail", mail);
+                command.Parameters.AddWithValue("@nationalite", nationalite);
+                command.Parameters.AddWithValue("@adresse", adresse);
+                command.Parameters.AddWithValue("@genre", genre);
+                command.Parameters.AddWithValue("@travailleur", travailleur);
+                command.Parameters.AddWithValue("@dtn", dtn);
+
+                string sqlWithValues = command.CommandText;
+                foreach (NpgsqlParameter parameter in command.Parameters)
+                {
+                    sqlWithValues = sqlWithValues.Replace(parameter.ParameterName, parameter.Value.ToString());
+                }
+
+                Console.WriteLine(sqlWithValues);
+
+                int rowsAffected = command.ExecuteNonQuery();
+
+                if (rowsAffected > 0)
+                {
+                    sql = "SELECT idpersonnel FROM personnel order by idpersonnel desc";
+                        Console.WriteLine( sql );
+                        using (NpgsqlCommand command2 = new NpgsqlCommand(sql, npg))
+                        {
+                            using (NpgsqlDataReader reader = command2.ExecuteReader())
+                            {
+                                while (reader.Read())
+                                {
+                                    idpersonnel = reader.GetInt32(0);
+                                }
+                            }
+                        }
+                }
+                else
+                {
+                    Console.WriteLine("Aucune ligne mise à jour.");
+                }
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.ToString());
+            throw e;
+        }
+        finally
+        {
+            if (estOuvert)
+            {
+                npg.Close();
+            }
+        }
+        return idpersonnel;
     }
 
     public static string GetSql( string annee, string genre, string min_age, string max_age, string adresse, string nationalite, string matricule, string idservice, string brut_min, string brut_max, string net_min, string net_max , string nom_prenom){
@@ -274,10 +345,10 @@ public class Personnel{
             if ( ! string.IsNullOrEmpty(brut_min) || ! string.IsNullOrEmpty(brut_max)  ){
                 List<string> brutsql = new();
                 if( ! string.IsNullOrEmpty(brut_min) ){
-                    brutsql.Add("latest_salary_brut >= "+brut_min);
+                    brutsql.Add("latest_salary_base >= "+brut_min);
                 } 
                 if( ! string.IsNullOrEmpty(brut_max) ){
-                   brutsql.Add("latest_salary_brut <= "+brut_max); 
+                   brutsql.Add("latest_salary_base <= "+brut_max); 
                 }
                 string joinedString = string.Join(" and ", brutsql);
                 string result = "( "+joinedString  +" )"  ;
