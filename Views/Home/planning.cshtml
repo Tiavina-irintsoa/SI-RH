@@ -1,8 +1,17 @@
+@{
+    var superieur = Context.Request.Cookies["superieur"] ;
+}    
 <script>
    var evenements = JSON.parse('@Html.Raw(ViewBag.Evenements)');
     var ressources = JSON.parse('@Html.Raw(ViewBag.Ressources)');
 </script>
     <div class="table-data timeline-calendar"  >
+        @if (superieur != null)
+        {
+                <div>
+                    <a href='@Url.Action( "planningModif" , "conge" )' > Modifier le planning </a>
+                </div>
+        }
         <div id="demo-month-view">
 
         </div>

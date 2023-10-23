@@ -26,15 +26,20 @@
                name="nom_prenom" style="width: 200px" />
             </div>
             <div class="col-lg-6">
+              <label for=""> Age </label>
+              <input type="number" placeholder="min" name="min-age"  value="@ViewBag.MinAge" style="width: 70px" />
+              <input type="number" placeholder="max" name="max-age"  value="@ViewBag.MaxAge" style="width: 70px" />
             </div>
           </div>
         </div>
         <div class="col-lg-12">
           <div class="row flex-row">
             <div class="col-lg-6">
-              <label for=""> Age </label>
-              <input type="number" placeholder="min" name="min-age"  value="@ViewBag.MinAge" style="width: 70px" />
-              <input type="number" placeholder="max" name="max-age"  value="@ViewBag.MaxAge" style="width: 70px" />
+                <label for=""> Nationalité : </label>
+                Malagasy
+                <input type="checkbox"  @(ViewBag.Nationalite == "1" ? "checked" : "")  name="nationalite"  value="0" />
+                Etrangé
+                <input type="checkbox"  @(ViewBag.Nationalite == "1" ? "checked" : "") name="nationalite" value="1" />
             </div>
             <div class="col-lg-6">
               <label for=""> Adresse </label>
@@ -45,20 +50,9 @@
         <div class="col-lg-12">
           <div class="row flex-row">
             <div class="col-lg-6">
-              <label for=""> Nationalité : </label>
-              Malagasy
-              <input type="checkbox"  @(ViewBag.Nationalite == "1" ? "checked" : "")  name="nationalite"  value="0" />
-              Etrangé
-              <input type="checkbox"  @(ViewBag.Nationalite == "1" ? "checked" : "") name="nationalite" value="1" />
-            </div>
-            <div class="col-lg-6">
               <label for=""> Matricule </label>
               <input type="text" value="@ViewBag.Matricule"  name="matricule" style="width: 100px" />
             </div>
-          </div>
-        </div>
-        <div class="col-lg-12">
-          <div class="row flex-row">
             <div class="col-lg-6">
               <label for=""> Service : </label>
               <select name="idservice" id="">
@@ -72,34 +66,18 @@
                 <option value="7">Ressources humaines </option>
                 <option value="8">Maintenance et Reparation </option>
                 <option value="9">Marketing </option>
+                <option value="10">Direction </option>
               </select>
-            </div>
-            <div class="col-lg-6">
-              <label for=""> Salaire Brut </label>
-              <input type="number" placeholder="min" value="@ViewBag.BrutMin"  name="brut-min" style="width: 200px" />
-              <input type="number" placeholder="max" value="@ViewBag.BrutMax" name="brut-max" style="width: 200px" />
-            </div>
-          </div>
-      </div>
-        <div class="col-lg-12">
-          <div class="row flex-row">
-            <div class="col-lg-6"></div>
-            <div class="col-lg-6">
-              <label for=""> Salaire Net </label>
-              <input type="number" placeholder="min"  name="net-min" value="@ViewBag.NetMin" style="width: 200px" />
-              <input type="number" placeholder="max" name="net-max" value="@ViewBag.NetMax" style="width: 200px" />
             </div>
           </div>
         </div>
         <div class="col-lg-12">
           <div class="row flex-row">
-            <div class="col-lg-6">
-            </div>
             <div class="col-lg-6">
                 <input type="submit" value="Rechercher" />
             </div>
           </div>
-        </div>
+      </div>
       </form>
     </div>
     <div class="table-data">
@@ -134,7 +112,7 @@
           </tbody>
         </table>
         <div class="retour">
-          <a href='@Url.Action("BesoinListe","ListeCv")'>Retour</a>
+          <a href='@Url.Action("liste","Service")'>Retour</a>
         </div>
       </div>
     </div>
@@ -149,22 +127,10 @@
                 Nom et Prénom :
               </div>
               <div class="">
-                Salaire Brut :
-              </div>
-              <div class="">
                 Matricule :
               </div>
               <div class="">
-                Salaire Net :
-              </div>
-              <div class="">
                 Fonction  :
-              </div>
-              <div class="">
-                Taux journalierz  :
-              </div>
-              <div class="">
-                Taux horaires  :
               </div>
               <div class="">
                 N° Cnaps  :
@@ -185,6 +151,26 @@
       </div>
   </div>
   <script>
+  function chargerDonnees(idposte) {
+        var xhr = new XMLHttpRequest();
+        var url = "Service.ashx?idposte=" + idposte; // Remplacez par l'URL de votre service web ASP.NET
+
+        xhr.open("GET", url, true);
+
+        xhr.onreadystatechange = function() {
+            if (xhr.readyState === 4 && xhr.status === 200) {
+                var response = JSON.parse(xhr.responseText);
+                // Traitement des données renvoyées par le service
+                document.getElementById("resultat").innerHTML = response.d;
+            }
+            else if (xhr.readyState === 4) {
+                console.log("Erreur : " + xhr.status);
+            }
+        };
+
+        xhr.send();
+    }
+
     function formaterNombre(chaineNombre, options = {}) {
     const {
       separateurMilliers = true,
@@ -302,9 +288,6 @@
             <span class="gras">Nom et Prénom :</span> '+nom +' '+ prenom +' \
           </div>\
           <div class="">\
-            <span class="gras">Salaire Brut :</span> '+ formaterNombre(latest_salary_brut) +' \
-          </div>\
-          <div class="">\
             <span class="gras">Genre :</span>  '+getGenre(genre)+'  \
           </div>\
           <div class="">\
@@ -316,9 +299,6 @@
           </div>\
           <div class="">\
             <span class="gras">Matricule :</span>  '+matricule+'  \
-          </div>\
-          <div class="">\
-            <span class="gras">Salaire Net :</span> '+formaterNombre(latest_salary_net)+' \
           </div>\
           <div class="">\
             <span class="gras">Fonction  :</span> '+nomposte+' \
@@ -339,3 +319,4 @@
   }
 
   </script>
+

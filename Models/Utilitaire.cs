@@ -26,7 +26,7 @@ namespace RH.Models
             return new Event
             {
                 start = conge.DateDebut,
-                end = conge.DateFin,
+                end = conge.ReelDateFin,
                 title =  "Congé" + conge.Raison == "Aucune" ? conge.autre_raison : conge.Raison.nomRaison ,
                 resource = conge.Personnel.idpersonnel,
             };

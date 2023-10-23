@@ -24,6 +24,34 @@ public class Conge{
         return "blue-td";
     }
 
+    public void updateFin()
+    {
+        Connection connexion = new Connection();
+        using (NpgsqlConnection connection = connexion.ConnectSante())
+        {
+            using (NpgsqlCommand cmd = new NpgsqlCommand())
+            {
+                cmd.Connection = connection;
+
+                cmd.CommandText = "update conge set  reeldatefin = @datefin where idconge = @idconge";
+
+                cmd.Parameters.AddWithValue("@datefin", ReelDateFin);
+                cmd.Parameters.AddWithValue("@idconge", IdConge); 
+                Console.WriteLine( cmd.CommandText );
+                try
+                {
+                    int rowsAffected = cmd.ExecuteNonQuery();
+                    Console.WriteLine($"{rowsAffected} ligne(s) insérée(s) avec succès.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine("Erreur lors de l'insertion : " + ex.Message);
+                }
+            }
+            connection.Close();
+        }
+    }
+
     public static List<Conge> getPlanning(NpgsqlConnection npg , int  idservice  )
     {
         bool estOuvert = false;

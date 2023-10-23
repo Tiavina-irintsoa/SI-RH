@@ -2,10 +2,13 @@ namespace RH.Models;
 using System;
 using System.Collections.Generic;
 using Npgsql;
+using Newtonsoft.Json;
 
 public class Service
 {
+    [JsonProperty("idService")]
     int ?  _idService;
+    [JsonProperty("NomService")]
     string _nomService ;
     string _iconeService;
 
