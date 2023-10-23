@@ -97,10 +97,12 @@ create or replace view v_personnel_poste as
     from v_personnel_poste_association as ppa 
         natural join personnel;
 
+
+
 create or replace view v_personnel_information as 
     SELECT
     vpp.*,
-    latest_salary.salaire_brut AS latest_salary_brut,
+    latest_salary.salaire_brut AS latest_salary_base,
     latest_salary.salaire_net AS latest_salary_net,
     latest_salary.date_insert AS latest_salary_date,
     COALESCE(get_latest_hire_date(vpp.idpersonnel), '1970-01-01') AS latest_hire_date,
